@@ -2,6 +2,8 @@ namespace Event_Portal.Models
 {
   public class Event
   {
+
+
     private int id { get; set; }
     public string location { get; set; }
 
