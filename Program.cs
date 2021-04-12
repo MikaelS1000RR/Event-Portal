@@ -28,13 +28,19 @@ namespace Event_Portal
                 {
                     webBuilder.UseStartup<Startup>();
                     
-                    User myUser = new User("Bob", "Rock", "bob.rock@gmail.com", "123",
+                    User newUser = new User("Bob", "Rock", "bob.rock@gmail.com", "123",
                     1
                     );
-                    
-                  Console.WriteLine(myUser.firstName);
-                    Console.WriteLine("Destination Reached");
 
+                  Event newEvent = new Event(2, "Köpenhamn", "2021-04-20", "2021-04-30",
+                  "08:00", "23:00", 1);
+
+
+
+                  Console.WriteLine(newUser.firstName + " " +  newUser.lastName);
+                  Console.WriteLine(newEvent.location + " " + newEvent.startDate);
+
+                  Console.WriteLine("Destination Reached");
 
 
 
