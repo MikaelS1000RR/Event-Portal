@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+using System.Collections;
 namespace Event_Portal
 {
     public class Program
@@ -40,9 +41,21 @@ namespace Event_Portal
                   Console.WriteLine(newUser.firstName + " " +  newUser.lastName);
                   Console.WriteLine(newEvent.location + " " + newEvent.startDate);
 
+                    
                   Console.WriteLine("Destination Reached");
 
+                  newEvent.invitedList.Add(newUser);
 
+
+                  Console.WriteLine("Invited new user: " + newUser.firstName);
+
+
+                  Console.WriteLine("Event list: " + newEvent.invitedList[0]);
+
+                  Console.WriteLine("End of the code");
+
+
+                  
 
                 });
     }

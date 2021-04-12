@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 namespace Event_Portal.Models
 {
   public class Event
@@ -16,7 +17,10 @@ namespace Event_Portal.Models
 
     private int hostId { get; set; }
 
-    public User[] userInvitedList { get; set; }
+    public List<User> invitedList = new List<User>();
+
+
+
 
     public Event(
         int id, string location, string startDate, string endDate,
