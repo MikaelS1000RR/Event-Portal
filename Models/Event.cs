@@ -14,7 +14,7 @@ namespace Event_Portal.Models
 
     private int hostId { get; set; }
 
-    // public User[] userInvitedList;
+    public User[] userInvitedList { get; set; }
 
     public Event(
         int id, string location, string startDate, string endDate,
