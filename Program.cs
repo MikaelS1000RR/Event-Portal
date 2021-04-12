@@ -13,8 +13,13 @@ namespace Event_Portal
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
-      Console.Write("Hello !");
+
+      CreateHostBuilder(args).Build().Run();
+
+      // System.Diagnostics.Debug.WriteLine("Destination reached");
+
+     
+
     }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -22,6 +27,8 @@ namespace Event_Portal
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    
+                    Console.WriteLine("Destination Reached");
                 });
     }
 }
