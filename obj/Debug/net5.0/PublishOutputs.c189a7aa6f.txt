@@ -1,0 +1,10 @@
+/Users/Mikael/Documents/GitHub/Event-Portal/bin/Debug/net5.0/publish/appsettings.Development.json
+/Users/Mikael/Documents/GitHub/Event-Portal/bin/Debug/net5.0/publish/appsettings.json
+/Users/Mikael/Documents/GitHub/Event-Portal/bin/Debug/net5.0/publish/Event-Portal.dll
+/Users/Mikael/Documents/GitHub/Event-Portal/bin/Debug/net5.0/publish/Event-Portal.deps.json
+/Users/Mikael/Documents/GitHub/Event-Portal/bin/Debug/net5.0/publish/Event-Portal.runtimeconfig.json
+/Users/Mikael/Documents/GitHub/Event-Portal/bin/Debug/net5.0/publish/Event-Portal.pdb
+/Users/Mikael/Documents/GitHub/Event-Portal/bin/Debug/net5.0/publish/Microsoft.OpenApi.dll
+/Users/Mikael/Documents/GitHub/Event-Portal/bin/Debug/net5.0/publish/Swashbuckle.AspNetCore.Swagger.dll
+/Users/Mikael/Documents/GitHub/Event-Portal/bin/Debug/net5.0/publish/Swashbuckle.AspNetCore.SwaggerGen.dll
+/Users/Mikael/Documents/GitHub/Event-Portal/bin/Debug/net5.0/publish/Swashbuckle.AspNetCore.SwaggerUI.dll
