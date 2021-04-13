@@ -1,19 +1,22 @@
+using System; 
 namespace Event_Portal.Models
 {
-  public class User
+  public record User
   {
-    public string firstName { get; set; }
 
-    public string lastName { get; set; }
+    public Guid Id { get;  init; }
+    public string FirstName { get; init; }
 
-    public string email { get; set; }
+    public string LastName { get; init; }
 
-    private string password { get; set; }
+    public string Email { get; init; }
 
-    private int id { get; set; }
+    private string Password { get; init; }
+
+    // private int Id { get; init; }
 
 
-    public User(
+    /*public User(
         string firstName, string lastName, string email, string password, int id
     )
     {
@@ -22,7 +25,7 @@ namespace Event_Portal.Models
       this.email = email;
       this.password = password;
       this.id = id;
-    }
+    } */
 
   }
 }
