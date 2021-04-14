@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Event_Portal.Dtos;
 using Event_Portal.Models;
 using Event_Portal.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -11,25 +13,25 @@ namespace Event_Portal.Controllers
     [Route("api/events")]
     public class EventController : ControllerBase
     {
-    private readonly EventRepo repository;
+    private readonly IEventRepo repository;
 
-    public EventController()
+    public EventController(IEventRepo repository)
     {
-      repository = new EventRepo();
+      this.repository = repository;
     }
 
     // GET /events
     [HttpGet]
-    public IEnumerable<Event> GetEvents() 
+    public IEnumerable<EventDto> GetEvents() 
     {
-      var events = repository.GetEvents();
+      var events = repository.GetEvents().Select( myEvent => myEvent.AsDto2());
       return events; 
     }
 
     // GET /events/{id}
     [HttpGet("{id}")]
 
-    public ActionResult<Event> GetEvent(Guid id) 
+    public ActionResult<EventDto> GetEvent(Guid id) 
     {
         var myEvent = repository.GetEvent(id);
 
@@ -38,7 +40,7 @@ namespace Event_Portal.Controllers
         return NotFound();
       }
 
-        return myEvent;
+        return myEvent.AsDto2();
     }
 
   }

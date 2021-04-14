@@ -18,5 +18,17 @@ namespace Event_Portal
         };
       }
     }
+
+    public static EventDto AsDto2(this Event myEvent) 
+    {
+      return new EventDto
+      {
+        Id = myEvent.Id,
+        Location = myEvent.Location,
+        StartDateTime = myEvent.StartDateTime,
+        EndDateTime = myEvent.EndDateTime,
+        HostId = myEvent.HostId
+      };
+    }
   }
 }

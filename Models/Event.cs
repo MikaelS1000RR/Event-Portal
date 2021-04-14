@@ -15,8 +15,8 @@ namespace Event_Portal.Models
     private string StartTime { get; init; }
     private string EndTime { get; init; } */
 
-      public DateTimeOffset StartDateTime { get; init; }
-    public DateTimeOffset EndDateTime { get; init; }
+      public DateTimeOffset StartDateTime { get; set; }
+    public DateTimeOffset EndDateTime { get; set; }
 
      public Guid  HostId { get; init; }   // if error occurs, change to int 
 
