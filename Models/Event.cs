@@ -1,40 +1,26 @@
-using System.Collections.Generic;
+using System;
 namespace Event_Portal.Models
 {
-  public class Event
+  public record Event
   {
 
 
-    private int id { get; set; }
-    public string location { get; set; }
+    public Guid Id { get; init; }
+    public string Location { get; init; }
 
-    public string startDate { get; set; }
+    /*public string StartDate { get; init; }
 
-    public string endDate { get; set; }
+    public string EndDate { get; init; }
 
-    private string startTime { get; set; }
-    private string endTime { get; set; }
+    private string StartTime { get; init; }
+    private string EndTime { get; init; } */
 
-    private int hostId { get; set; }
+      public DateTimeOffset StartDateTime { get; init; }
+    public DateTimeOffset EndDateTime { get; init; }
 
-    public List<User> invitedList = new List<User>();
+     public Guid  HostId { get; init; }   // if error occurs, change to int 
 
-
-
-
-    public Event(
-        int id, string location, string startDate, string endDate,
-        string startTime, string endTime, int hostId
-    )
-    {
-      this.id = id;
-      this.location = location;
-      this.startDate = startDate;
-      this.endDate = endDate;
-      this.startTime = startTime;
-      this.endTime = endTime;
-      this.hostId = hostId;
-    }
+    
 
   }
 }
