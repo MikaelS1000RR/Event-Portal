@@ -18,7 +18,7 @@ namespace Event_Portal.Controllers
 
     public UsersController(IUserRepo repository)
     {
-      this.repository = repository;
+      this.repository = repository; 
     }
 
     // GET /users
@@ -44,6 +44,24 @@ namespace Event_Portal.Controllers
       return user.AsDto();
     }
 
+      // POST /users
+     [HttpPost] 
+    public ActionResult<UserDto> CreateUser(CreateUserDto userDto)
+    {
+      User user = new()
+      {
+        Id = Guid.NewGuid(),
+        FirstName = userDto.FirstName,
+        LastName = userDto.LastName,
+        Email = userDto.Email,
+        Password = userDto.Password
+      };
+
+      repository.CreateUser(user);
+
+      return CreatedAtAction(nameof(GetUser), new { id = user.Id}, user.AsDto());
+
+    }
 
   }
  

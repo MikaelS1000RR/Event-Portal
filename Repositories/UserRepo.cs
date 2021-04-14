@@ -46,5 +46,10 @@ namespace Event_Portal.Repositories
       return users.Where(user => user.Id == id).SingleOrDefault();
 
     }
+
+    public void CreateUser(User user)
+    {
+      users.Add(user);
+    }
   }
 }

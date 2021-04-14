@@ -9,6 +9,8 @@ namespace Event_Portal.Repositories
   {
     User GetUser(Guid id);
     IEnumerable<User> GetUsers();
+
+    void CreateUser(User user);
   }
   
 }
