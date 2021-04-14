@@ -12,11 +12,11 @@ namespace Event_Portal.Controllers
   [Route("api/users")]
   public class UsersController : ControllerBase
   {
-    private readonly UserRepo repository;
+    private readonly IUserRepo repository;
 
-    public UsersController()
+    public UsersController(IUserRepo repository)
     {
-      repository = new UserRepo();
+      this.repository = repository;
     }
 
     // GET /users
@@ -29,12 +29,18 @@ namespace Event_Portal.Controllers
 
     // GET /users/{id}
     [HttpGet("{id}")]
-    public User GetUser(Guid id) 
+    public ActionResult<User> GetUser(Guid id) 
     {
       var user = repository.GetUser(id);
+
+      if(user is null) 
+      {
+        return NotFound();
+      }
+
       return user;
     }
 
   }
  
-}
+} 

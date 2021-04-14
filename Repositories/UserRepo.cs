@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Event_Portal.Models;
+using Event_Portal.Models; 
 
 namespace Event_Portal.Repositories
 
 {
-  public class UserRepo
+  
+
+  public class UserRepo : IUserRepo
   {
     private readonly List<User> users = new()
     {
@@ -21,7 +23,8 @@ namespace Event_Portal.Repositories
 
       },
 
-      new User {
+      new User
+      {
 
         Id = Guid.NewGuid(),
         FirstName = "Mr",
@@ -37,7 +40,8 @@ namespace Event_Portal.Repositories
       return users;
     }
 
-    public User GetUser(Guid id) {
+    public User GetUser(Guid id)
+    {
 
       return users.Where(user => user.Id == id).SingleOrDefault();
 
