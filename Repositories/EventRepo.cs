@@ -5,23 +5,22 @@ using System.Linq;
 
 namespace Event_Portal.Repositories
 {
-  
+    
 
-  public class EventRepo : IEventRepo
-  {
+        public class EventRepo
+        {
     private readonly List<Event> events = new()
     {
-      new Event
-      {
-        Id = Guid.NewGuid(),
-        Location = "Malmö",
-        StartDateTime = DateTimeOffset.UtcNow,
-        EndDateTime = DateTimeOffset.UtcNow,
-        HostId = Guid.NewGuid()
-      },
+        new Event 
+        { Id = Guid.NewGuid(), 
+          Location = "Malmö",
+          StartDateTime = DateTimeOffset.UtcNow,
+          EndDateTime = DateTimeOffset.UtcNow,
+          HostId = Guid.NewGuid()
+        },
 
-      new Event
-      {
+         new Event
+         {
         Id = Guid.NewGuid(),
         Location = "Köpenhamn",
         StartDateTime = DateTimeOffset.UtcNow,
@@ -30,16 +29,14 @@ namespace Event_Portal.Repositories
       }
     };
 
-    public IEnumerable<Event> GetEvents()
+    public IEnumerable<Event> GetEvents() 
     {
-      return events;
+      return events; 
     }
 
     public Event GetEvent(Guid id)
     {
-
-      return events.Where(myEvent => myEvent.Id == id).SingleOrDefault();
-
+        return events.Where(event => event.Id == id).SingleOrDefault();
     }
   }
 
