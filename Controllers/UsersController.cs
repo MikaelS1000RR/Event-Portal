@@ -63,6 +63,30 @@ namespace Event_Portal.Controllers
 
     }
 
+    // PUT /users/{id}
+    [HttpPut("{id}")]
+    public ActionResult UpdateUser(Guid id, UpdateUserDto userDto)
+    {
+      var existingUser = repository.GetUser(id);
+
+      if(existingUser is null)
+      {
+        return NotFound();
+      }
+
+      User updatedUser = existingUser with
+      {
+        FirstName = userDto.FirstName,
+        LastName = userDto.LastName,
+        Email = userDto.Email,
+        Password = userDto.Password,
+      };
+
+      repository.UpdateUser(updatedUser);
+
+      return NoContent();
+
+    }
   }
  
 } 

@@ -11,6 +11,8 @@ namespace Event_Portal.Repositories
     IEnumerable<User> GetUsers();
 
     void CreateUser(User user);
+
+    void UpdateUser(User user);
   }
   
 }

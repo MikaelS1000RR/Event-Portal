@@ -51,5 +51,11 @@ namespace Event_Portal.Repositories
     {
       users.Add(user);
     }
+
+    public void UpdateUser(User user)
+    {
+      var index = users.FindIndex(existingUser => existingUser.Id == user.Id);
+      users[index] = user; 
+    }
   }
 }
