@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using Event_Portal.Models;
 using Event_Portal.Repositories;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace Event_Portal.Controllers
 {
@@ -24,6 +26,15 @@ namespace Event_Portal.Controllers
       var users = repository.GetUsers();
       return users;
     }
-  }
 
+    // GET /users/{id}
+    [HttpGet("{id}")]
+    public User GetUser(Guid id) 
+    {
+      var user = repository.GetUser(id);
+      return user;
+    }
+
+  }
+ 
 }
