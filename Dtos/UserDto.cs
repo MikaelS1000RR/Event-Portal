@@ -1,7 +1,8 @@
 using System;
-namespace Event_Portal.Models
+
+namespace Event_Portal.Dtos
 {
-  public record User
+  public record UserDto
   {
 
     public Guid Id { get; init; }

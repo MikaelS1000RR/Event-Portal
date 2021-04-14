@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Event_Portal.Dtos;
 using Event_Portal.Models;
 using Event_Portal.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -21,15 +23,16 @@ namespace Event_Portal.Controllers
 
     // GET /users
     [HttpGet]
-    public IEnumerable<User> GetUsers()
+    public IEnumerable<UserDto> GetUsers()
     {
-      var users = repository.GetUsers();
-      return users;
+       var users = repository.GetUsers().Select(user => user.AsDto());
+       return users;
+    
     }
 
     // GET /users/{id}
     [HttpGet("{id}")]
-    public ActionResult<User> GetUser(Guid id) 
+    public ActionResult<UserDto> GetUser(Guid id) 
     {
       var user = repository.GetUser(id);
 
@@ -38,7 +41,7 @@ namespace Event_Portal.Controllers
         return NotFound();
       }
 
-      return user;
+      return user.AsDto();
     }
 
 
