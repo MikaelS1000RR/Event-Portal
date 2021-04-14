@@ -28,6 +28,7 @@ namespace Event_Portal
         public void ConfigureServices(IServiceCollection services)
         {
       services.AddSingleton<IUserRepo, UserRepo>();
+      services.AddSingleton<IEventRepo, EventRepo>();
       services.AddControllers();
             services.AddSwaggerGen(c =>
             {

@@ -1,0 +1,44 @@
+using Microsoft.AspNetCore.Mvc;
+using Event_Portal.Repositories;
+using System.Collections.Generic;
+using Event_Portal.Models;
+using System;
+
+namespace Event_Portal.Controllers
+{
+    [ApiController]
+    [Route("api/events")]
+    public class EventsController : ControllerBase
+    {
+    private readonly IEventRepo repository; 
+
+    public EventsController(IEventRepo repository) 
+    {
+      this.repository = repository;
+    }
+
+    // GET /items
+    [HttpGet]
+
+    public IEnumerable<Event> GetEvents() 
+    {
+      var events = repository.GetEvents();
+      return events; 
+    }  
+
+    // GET /items/{id}
+    [HttpGet("{id}")]
+
+    public ActionResult<Event> GetEvent(Guid id) 
+    {
+        var myEvent = repository.GetEvent(id);
+
+        if (myEvent is null)
+        {
+        return NotFound(); 
+      }
+        return myEvent; 
+    }
+
+  }
+}
