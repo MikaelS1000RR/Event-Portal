@@ -43,5 +43,45 @@ namespace Event_Portal.Controllers
         return myEvent.AsDto2();
     }
 
+    // POST /events
+    [HttpPost]
+
+    public ActionResult<EventDto> CreateEvent(CreateEventDto eventDto)
+
+    {
+      Event myEvent = new()
+      {
+        Id = Guid.NewGuid(),
+        Location = eventDto.Location
+      };
+
+      repository.CreateEvent(myEvent);
+
+      return CreatedAtAction(nameof(GetEvent), new { id = myEvent.Id }, myEvent.AsDto2());
+    }
+
+      // PUT /events/{id}
+
+      [HttpPut("{id}")]
+
+      public ActionResult UpdateEvent(Guid id, UpdateEventDto eventDto) 
+      {
+      var existingEvent = repository.GetEvent(id);
+
+      if (existingEvent is null) 
+      {
+        return NotFound();
+      }
+
+      Event updatedEvent = existingEvent with
+      {
+        Location = eventDto.Location
+      };
+
+      repository.UpdateEvent(updatedEvent);
+
+      return NoContent();
+    }
+
   }
 }

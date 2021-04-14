@@ -8,6 +8,10 @@ namespace Event_Portal.Repositories
   {
     Event GetEvent(Guid id);
     IEnumerable<Event> GetEvents();
+
+    void CreateEvent(Event myEvent);
+
+    void UpdateEvent(Event myEvent);
   }
   
 }

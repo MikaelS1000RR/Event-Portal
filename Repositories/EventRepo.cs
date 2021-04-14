@@ -47,5 +47,16 @@ namespace Event_Portal.Repositories
     {
       return events.Where(myEvent => myEvent.Id == id).SingleOrDefault();
     }
+
+    public void CreateEvent(Event myEvent)
+    {
+      events.Add(myEvent);
+    }
+
+    public void UpdateEvent(Event myEvent)
+    {
+      var index = events.FindIndex(existingEvent => existingEvent.Id == myEvent.Id);
+      events[index] = myEvent;
+    }
   }
 }
