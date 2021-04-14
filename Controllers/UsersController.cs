@@ -41,6 +41,19 @@ namespace Event_Portal.Controllers
       return user;
     }
 
+
+    public ActionResult<User> GetUserTest(Guid id)
+    {
+      var user = repository.GetUser(id);
+
+      if (user is null)
+      {
+        return NotFound();
+      }
+
+      return user;
+    }
+
   }
  
 } 
