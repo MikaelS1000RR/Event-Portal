@@ -13,6 +13,8 @@ namespace Event_Portal.Repositories
     void CreateUser(User user);
 
     void UpdateUser(User user);
+
+    void DeleteUser(Guid id);
   }
   
 }

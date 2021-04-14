@@ -87,6 +87,22 @@ namespace Event_Portal.Controllers
       return NoContent();
 
     }
+
+    // DELETE /users/{id}
+    [HttpDelete("{id}")]
+    public ActionResult DeleteUser(Guid id) {
+
+      var existingUser = repository.GetUser(id);
+
+      if (existingUser is null)
+      {
+        return NotFound();
+      }
+
+      repository.DeleteUser(id);
+
+      return NoContent();
+    }
   }
  
 } 

@@ -57,5 +57,11 @@ namespace Event_Portal.Repositories
       var index = users.FindIndex(existingUser => existingUser.Id == user.Id);
       users[index] = user; 
     }
+
+    public void DeleteUser(Guid id)
+    {
+      var index = users.FindIndex(existingUser => existingUser.Id == id);
+      users.RemoveAt(index);
+    }
   }
 }
