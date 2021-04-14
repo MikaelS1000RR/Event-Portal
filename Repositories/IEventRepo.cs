@@ -12,6 +12,8 @@ namespace Event_Portal.Repositories
     void CreateEvent(Event myEvent);
 
     void UpdateEvent(Event myEvent);
+
+    void DeleteItem(Guid id);
   }
   
 }

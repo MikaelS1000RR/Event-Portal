@@ -58,5 +58,11 @@ namespace Event_Portal.Repositories
       var index = events.FindIndex(existingEvent => existingEvent.Id == myEvent.Id);
       events[index] = myEvent;
     }
+
+    public void DeleteItem(Guid id)
+    {
+      var index = events.FindIndex(existingEvent => existingEvent.Id == id);
+      events.RemoveAt(index);
+    }
   }
 }

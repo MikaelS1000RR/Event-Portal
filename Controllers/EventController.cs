@@ -69,7 +69,7 @@ namespace Event_Portal.Controllers
       var existingEvent = repository.GetEvent(id);
 
       if (existingEvent is null) 
-      {
+      { 
         return NotFound();
       }
 
@@ -79,6 +79,22 @@ namespace Event_Portal.Controllers
       };
 
       repository.UpdateEvent(updatedEvent);
+
+      return NoContent();
+    }
+
+    // DELETE /events/{id}
+    [HttpDelete("{id}")]
+    public ActionResult DeleteEvent(Guid id)
+    {
+      var existingEvent = repository.GetEvent(id);
+
+      if (existingEvent is null)
+      {
+        return NotFound();
+      }
+
+      repository.DeleteItem(id);
 
       return NoContent();
     }
