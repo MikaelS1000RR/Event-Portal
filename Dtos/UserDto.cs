@@ -18,7 +18,7 @@ namespace Event_Portal.Dtos
 
     public List<Event> CreatedEvents { get; init; } = new();
 
-
+    public List<Event> JoinedEvents { get; init; } = new();
 
 
   }

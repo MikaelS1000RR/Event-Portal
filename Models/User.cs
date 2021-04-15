@@ -17,6 +17,8 @@ namespace Event_Portal.Models
 
     public List<Event> CreatedEvents { get; init; } = new();
 
+    public List<Event> JoinedEvents { get; init; } = new();
+
 
   }
 }

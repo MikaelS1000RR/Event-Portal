@@ -32,9 +32,20 @@ namespace Event_Portal.Repositories
       },
 
 
-       }
+       },
 
+      JoinedEvents = {
+          new Event
+      {
+        Id = Guid.NewGuid(),
+        Location = "Oslo",
+        StartDateTime = DateTimeOffset.UtcNow,
+        EndDateTime = DateTimeOffset.UtcNow,
+        HostId = Guid.NewGuid()
       },
+    }
+
+ },
 
       new User
       {
