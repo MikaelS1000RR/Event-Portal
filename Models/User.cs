@@ -13,5 +13,6 @@ namespace Event_Portal.Models
 
     public string Password { get; init; }
 
+
   }
 }
