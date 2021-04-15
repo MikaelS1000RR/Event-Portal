@@ -16,7 +16,7 @@ namespace Event_Portal.Dtos
 
     public string Password { get; init; }
 
-    public List<Event> createdEvents { get; init; } = new();
+    public List<Event> CreatedEvents { get; init; } = new();
 
 
 

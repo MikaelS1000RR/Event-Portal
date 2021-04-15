@@ -3,7 +3,7 @@ using Event_Portal.Models;
 
 namespace Event_Portal
 {
-  public static class Extensions 
+  public static class Extensions
   {
     public static UserDto AsDto(this User user)
     {
@@ -14,13 +14,13 @@ namespace Event_Portal
           FirstName = user.FirstName,
           LastName = user.LastName,
           Email = user.Email,
-          Password = user.Password, 
-          createdEvents = user.createdEvents
+          Password = user.Password,
+          CreatedEvents = user.CreatedEvents
         };
       }
     }
 
-    public static EventDto AsDto2(this Event myEvent) 
+    public static EventDto AsDto2(this Event myEvent)
     {
       return new EventDto
       {

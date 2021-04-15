@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Event_Portal.Models; 
+using Event_Portal.Models;
 
 namespace Event_Portal.Repositories
 
 {
-  
+
 
   public class UserRepo : IUserRepo
   {
@@ -21,7 +21,7 @@ namespace Event_Portal.Repositories
         Email = "patrick.star@bikinibottom.com",
         Password = "123",
 
-       createdEvents = {
+        CreatedEvents = {
           new Event
       {
         Id = Guid.NewGuid(),
@@ -33,7 +33,7 @@ namespace Event_Portal.Repositories
 
 
        }
-    
+
       },
 
       new User
@@ -68,7 +68,7 @@ namespace Event_Portal.Repositories
     public void UpdateUser(User user)
     {
       var index = users.FindIndex(existingUser => existingUser.Id == user.Id);
-      users[index] = user; 
+      users[index] = user;
     }
 
     public void DeleteUser(Guid id)
