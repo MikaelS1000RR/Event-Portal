@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Event_Portal.Models;
 
+
 namespace Event_Portal.Repositories
 
 {
@@ -87,5 +88,14 @@ namespace Event_Portal.Repositories
       var index = users.FindIndex(existingUser => existingUser.Id == id);
       users.RemoveAt(index);
     }
+
+
+     public void AddEventsToCreatedEvents(Event myEvent, User user)
+     {
+      var index = users.FindIndex(existingUser => existingUser.Id == user.Id);
+      users[index] = user;
+      user.CreatedEvents.Add(myEvent);
+    }
+
   }
 }
