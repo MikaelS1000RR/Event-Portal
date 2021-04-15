@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Event_Portal.Models;
 
 namespace Event_Portal.Dtos
 {
@@ -10,7 +12,8 @@ namespace Event_Portal.Dtos
     public DateTimeOffset StartDateTime { get; set; }
     public DateTimeOffset EndDateTime { get; set; }
 
-    public Guid HostId { get; init; }  
+    public Guid HostId { get; init; }
+    public List<User> JoinedUsers { get; init; } = new();
   }
 
 }

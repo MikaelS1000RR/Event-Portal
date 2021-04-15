@@ -16,7 +16,20 @@ namespace Event_Portal.Repositories
         Location = "Köpemhamn",
         StartDateTime = DateTimeOffset.UtcNow,
         EndDateTime = DateTimeOffset.UtcNow,
-        HostId = Guid.NewGuid()
+        HostId = Guid.NewGuid(),
+
+        JoinedUsers = {
+          new User
+       {
+
+        Id = Guid.NewGuid(),
+        FirstName = "Squidward",
+        LastName = "Tenticles",
+        Email = "squidwardstenticles@bikinibottom.com",
+
+        }
+
+        }
       },
 
       new Event

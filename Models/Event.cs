@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+
 namespace Event_Portal.Models
 {
   public record Event
@@ -13,7 +15,7 @@ namespace Event_Portal.Models
 
     public Guid HostId { get; init; }   // if error occurs, change to int 
 
-
+    public List<User> JoinedUsers { get; init; } = new();
 
   }
 }

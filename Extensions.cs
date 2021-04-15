@@ -29,7 +29,8 @@ namespace Event_Portal
         Location = myEvent.Location,
         StartDateTime = myEvent.StartDateTime,
         EndDateTime = myEvent.EndDateTime,
-        HostId = myEvent.HostId
+        HostId = myEvent.HostId,
+        JoinedUsers = myEvent.JoinedUsers
       };
     }
   }
