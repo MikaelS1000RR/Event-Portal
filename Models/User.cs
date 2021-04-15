@@ -15,7 +15,5 @@ namespace Event_Portal.Models
 
     public string Password { get; init; }
 
-    public List<Event> createdEvents { get; init; } = new();
-
   }
 }
