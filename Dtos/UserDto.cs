@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Event_Portal.Models;
 
 namespace Event_Portal.Dtos
 {
@@ -13,6 +15,11 @@ namespace Event_Portal.Dtos
     public string Email { get; init; }
 
     public string Password { get; init; }
+
+    public List<Event> createdEvents { get; init; } = new();
+
+
+
 
   }
 }

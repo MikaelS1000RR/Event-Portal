@@ -14,7 +14,8 @@ namespace Event_Portal
           FirstName = user.FirstName,
           LastName = user.LastName,
           Email = user.Email,
-          Password = user.Password
+          Password = user.Password, 
+          createdEvents = user.createdEvents
         };
       }
     }

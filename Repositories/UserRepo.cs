@@ -20,6 +20,19 @@ namespace Event_Portal.Repositories
         LastName = "Star",
         Email = "patrick.star@bikinibottom.com",
         Password = "123",
+
+       createdEvents = {
+          new Event
+      {
+        Id = Guid.NewGuid(),
+        Location = "Göteborg",
+        StartDateTime = DateTimeOffset.UtcNow,
+        EndDateTime = DateTimeOffset.UtcNow,
+        HostId = Guid.NewGuid()
+      },
+
+
+       }
     
       },
 
