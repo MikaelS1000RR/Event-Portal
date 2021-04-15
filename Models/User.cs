@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+
 namespace Event_Portal.Models
 {
   public record User
@@ -13,6 +15,7 @@ namespace Event_Portal.Models
 
     public string Password { get; init; }
 
+    public List<Event> createdEvents { get; init; } = new();
 
   }
 }

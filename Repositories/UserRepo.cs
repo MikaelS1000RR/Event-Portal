@@ -21,6 +21,19 @@ namespace Event_Portal.Repositories
         Email = "patrick.star@bikinibottom.com",
         Password = "123",
 
+        createdEvents = {
+
+             new Event
+      {
+        Id = Guid.NewGuid(),
+        Location = "Helsingør",
+        StartDateTime = DateTimeOffset.UtcNow,
+        EndDateTime = DateTimeOffset.UtcNow,
+        HostId = Guid.NewGuid()
+      },
+
+        }
+
       },
 
       new User
@@ -31,6 +44,19 @@ namespace Event_Portal.Repositories
         LastName = "Krabs",
         Email = "mr.krabs@krustykrabs.com",
         Password = "123",
+
+        createdEvents = {
+
+             new Event
+      {
+        Id = Guid.NewGuid(),
+        Location = "Umeå",
+        StartDateTime = DateTimeOffset.UtcNow,
+        EndDateTime = DateTimeOffset.UtcNow,
+        HostId = Guid.NewGuid()
+      },
+
+        }
 
       }
 
