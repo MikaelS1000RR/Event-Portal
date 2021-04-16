@@ -9,10 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace Event_Portal.Controllers
 {
 
-    [ApiController]
-    [Route("/events")]
-    public class EventController : ControllerBase
-    {
+  [ApiController]
+  [Route("/events")]
+  public class EventController : ControllerBase
+  {
     private readonly IEventRepo eventControllerRepository;
     private readonly IUserRepo userControllerRepository;
     public EventController(IEventRepo eventControllerRepository, IUserRepo userControllerRepository)
@@ -23,25 +23,25 @@ namespace Event_Portal.Controllers
 
     // GET /events
     [HttpGet]
-    public IEnumerable<EventDto> GetEvents() 
+    public IEnumerable<EventDto> GetEvents()
     {
-      var events = eventControllerRepository.GetEvents().Select( myEvent => myEvent.AsDto2());
-      return events; 
+      var events = eventControllerRepository.GetEvents().Select(myEvent => myEvent.AsDto2());
+      return events;
     }
 
     // GET /events/{id}
     [HttpGet("{id}")]
 
-    public ActionResult<EventDto> GetEvent(Guid id) 
+    public ActionResult<EventDto> GetEvent(Guid id)
     {
-        var myEvent = eventControllerRepository.GetEvent(id);
+      var myEvent = eventControllerRepository.GetEvent(id);
 
-        if(myEvent is null) 
-        {
+      if (myEvent is null)
+      {
         return NotFound();
       }
 
-        return myEvent.AsDto2();
+      return myEvent.AsDto2();
     }
 
     // POST /events
@@ -69,16 +69,16 @@ namespace Event_Portal.Controllers
       return CreatedAtAction(nameof(GetEvent), new { id = myEvent.Id }, myEvent.AsDto2());
     }
 
-      // PUT /events/{id}
+    // PUT /events/{id}
 
-      [HttpPut("{id}")]
+    [HttpPut("{id}")]
 
-      public ActionResult UpdateEvent(Guid id, UpdateEventDto eventDto) 
-      {
+    public ActionResult UpdateEvent(Guid id, UpdateEventDto eventDto)
+    {
       var existingEvent = eventControllerRepository.GetEvent(id);
 
-      if (existingEvent is null) 
-      { 
+      if (existingEvent is null)
+      {
         return NotFound();
       }
 
@@ -113,9 +113,9 @@ namespace Event_Portal.Controllers
 
     // POST User into Event
 
-    [HttpPost("{userId}/{eventId}")]
+    [HttpPost("addEventToUser/{eventId}/{userId}")]
 
-    public ActionResult<User> JoinEvent(Guid userId, Guid eventId) 
+    public ActionResult<User> AddEventToUser(Guid eventId, Guid userId)
     {
       var existingEvent = eventControllerRepository.GetEvent(eventId);
       if (existingEvent is null)
@@ -126,14 +126,39 @@ namespace Event_Portal.Controllers
 
 
       existingUser.JoinedEvents.Add(existingEvent);
-      existingEvent.JoinedUsers.Add(existingUser);
-    
+     
+     
+     // existingEvent.JoinedUsers.Add(existingUser)
 
       return existingUser;
     }
 
+    // Create new Method here
 
-        
+    [HttpPost("addUserToEvent/{eventId}/{userId}")]
+    public ActionResult<Event> AddUserToEvent(Guid userId, Guid eventId) 
+    {
+
+      var existingEvent = eventControllerRepository.GetEvent(eventId);
+      User existingUser = userControllerRepository.GetUser(userId);
+
+      if (existingUser is null)
+      {
+        return NotFound();
+      }
+
+      existingEvent.JoinedUsers.Add(existingUser);
+
+      return existingEvent;
+    }
+    
+
+
   }
-  
+
+
+
+
+
+
 }
