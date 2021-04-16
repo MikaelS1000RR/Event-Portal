@@ -25,11 +25,11 @@ namespace Event_Portal.Repositories
 
 
 
-      [HttpGet("createEvent/{userId}")]
-    public ActionResult<User> GetUser(Guid userId, [FromBody] string eventId) 
+      [HttpGet("createEvent/{userId}/{eventId}")]
+    public ActionResult<User> GetUser(Guid userId, Guid eventId) 
     {
       var existingUser = userRepository.GetUser(userId);
-      var existingEvent = eventRepository.GetEvent(Guid.Parse(eventId));
+      var existingEvent = eventRepository.GetEvent(eventId);
 
       existingUser.CreatedEvents.Add(existingEvent);
 
