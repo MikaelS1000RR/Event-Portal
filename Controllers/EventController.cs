@@ -13,18 +13,18 @@ namespace Event_Portal.Controllers
     [Route("/events")]
     public class EventController : ControllerBase
     {
-    private readonly IEventRepo repository;
+    private readonly IEventRepo eventControllerRepository;
 
-    public EventController(IEventRepo repository)
+    public EventController(IEventRepo eventControllerRepository)
     {
-      this.repository = repository;
+      this.eventControllerRepository = eventControllerRepository;
     }
 
     // GET /events
     [HttpGet]
     public IEnumerable<EventDto> GetEvents() 
     {
-      var events = repository.GetEvents().Select( myEvent => myEvent.AsDto2());
+      var events = eventControllerRepository.GetEvents().Select( myEvent => myEvent.AsDto2());
       return events; 
     }
 
@@ -33,7 +33,7 @@ namespace Event_Portal.Controllers
 
     public ActionResult<EventDto> GetEvent(Guid id) 
     {
-        var myEvent = repository.GetEvent(id);
+        var myEvent = eventControllerRepository.GetEvent(id);
 
         if(myEvent is null) 
         {
@@ -58,7 +58,7 @@ namespace Event_Portal.Controllers
         EndDateTime = eventDto.EndDateTime,
       };
 
-      repository.CreateEvent(myEvent);
+      eventControllerRepository.CreateEvent(myEvent);
 
       return CreatedAtAction(nameof(GetEvent), new { id = myEvent.Id }, myEvent.AsDto2());
     }
@@ -69,7 +69,7 @@ namespace Event_Portal.Controllers
 
       public ActionResult UpdateEvent(Guid id, UpdateEventDto eventDto) 
       {
-      var existingEvent = repository.GetEvent(id);
+      var existingEvent = eventControllerRepository.GetEvent(id);
 
       if (existingEvent is null) 
       { 
@@ -83,7 +83,7 @@ namespace Event_Portal.Controllers
         EndDateTime = eventDto.EndDateTime,
       };
 
-      repository.UpdateEvent(updatedEvent);
+      eventControllerRepository.UpdateEvent(updatedEvent);
 
       return NoContent();
     }
@@ -92,14 +92,14 @@ namespace Event_Portal.Controllers
     [HttpDelete("{id}")]
     public ActionResult DeleteEvent(Guid id)
     {
-      var existingEvent = repository.GetEvent(id);
+      var existingEvent = eventControllerRepository.GetEvent(id);
 
       if (existingEvent is null)
       {
         return NotFound();
       }
 
-      repository.DeleteItem(id);
+      eventControllerRepository.DeleteItem(id);
 
       return NoContent();
     }
