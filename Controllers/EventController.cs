@@ -110,5 +110,30 @@ namespace Event_Portal.Controllers
       return NoContent();
     }
 
+
+    // POST User into Event
+
+    [HttpPost("{userId}/{eventId}")]
+
+    public ActionResult<User> JoinEvent(Guid userId, Guid eventId) 
+    {
+      var existingEvent = eventControllerRepository.GetEvent(eventId);
+      if (existingEvent is null)
+      {
+        return NotFound();
+      }
+      User existingUser = userControllerRepository.GetUser(userId);
+
+
+      existingUser.JoinedEvents.Add(existingEvent);
+      existingEvent.JoinedUsers.Add(existingUser);
+    
+
+      return existingUser;
+    }
+
+
+        
   }
+  
 }
