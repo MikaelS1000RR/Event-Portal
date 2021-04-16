@@ -10,7 +10,7 @@ namespace Event_Portal.Controllers
 {
 
     [ApiController]
-    [Route("api/events")]
+    [Route("/events")]
     public class EventController : ControllerBase
     {
     private readonly IEventRepo repository;

@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\LIAProjekt\\EventProject\\Event-Portal\\Event_Portal.csproj": {}
+    "/Users/Mikael/Documents/GitHub/Event-Portal/Event_Portal.csproj": {}
   },
   "projects": {
-    "C:\\LIAProjekt\\EventProject\\Event-Portal\\Event_Portal.csproj": {
+    "/Users/Mikael/Documents/GitHub/Event-Portal/Event_Portal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\LIAProjekt\\EventProject\\Event-Portal\\Event_Portal.csproj",
+        "projectUniqueName": "/Users/Mikael/Documents/GitHub/Event-Portal/Event_Portal.csproj",
         "projectName": "Event_Portal",
-        "projectPath": "C:\\LIAProjekt\\EventProject\\Event-Portal\\Event_Portal.csproj",
-        "packagesPath": "C:\\Users\\annat\\.nuget\\packages\\",
-        "outputPath": "C:\\LIAProjekt\\EventProject\\Event-Portal\\obj\\",
+        "projectPath": "/Users/Mikael/Documents/GitHub/Event-Portal/Event_Portal.csproj",
+        "packagesPath": "/Users/Mikael/.nuget/packages/",
+        "outputPath": "/Users/Mikael/Documents/GitHub/Event-Portal/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\annat\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/Mikael/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -63,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.202/RuntimeIdentifierGraph.json"
         }
       }
     }

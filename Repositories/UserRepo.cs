@@ -23,30 +23,12 @@ namespace Event_Portal.Repositories
         Password = "123",
 
         CreatedEvents = {
-          new Event
-      {
-        Id = Guid.NewGuid(),
-        Location = "Göteborg",
-        StartDateTime = DateTimeOffset.UtcNow,
-        EndDateTime = DateTimeOffset.UtcNow,
-        HostId = Guid.NewGuid()
-      },
+            
+        }
 
 
-       },
 
-      JoinedEvents = {
-          new Event
-      {
-        Id = Guid.NewGuid(),
-        Location = "Oslo",
-        StartDateTime = DateTimeOffset.UtcNow,
-        EndDateTime = DateTimeOffset.UtcNow,
-        HostId = Guid.NewGuid()
-      },
-    }
-
- },
+  },
 
       new User
       {

@@ -11,7 +11,7 @@ namespace Event_Portal.Controllers
 {
 
   [ApiController]
-  [Route("api/users")]
+  [Route("/users")]
   public class UsersController : ControllerBase
   {
     private readonly IUserRepo repository;
