@@ -135,7 +135,7 @@ namespace Event_Portal.Controllers
 
     // Create new Method here
 
-    [HttpPost("addUserToEvent/{eventId}/{userId}")]
+    [HttpPost("addUserToEvent/{userId}/{eventId}")]
     public ActionResult<Event> AddUserToEvent(Guid userId, Guid eventId) 
     {
 
