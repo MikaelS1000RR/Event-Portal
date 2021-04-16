@@ -6,6 +6,10 @@ namespace Event_Portal.Dtos
   public record CreateEventDto 
   {
 
+
+    [Required]
+    public Guid HostId { get; init; }
+
     [Required]
     public string Location { get; init; }
 

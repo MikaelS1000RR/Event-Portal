@@ -52,6 +52,7 @@ namespace Event_Portal.Controllers
       Event myEvent = new()
       {
         Id = Guid.NewGuid(),
+        HostId = eventDto.HostId,
         Location = eventDto.Location,
         StartDateTime = eventDto.StartDateTime,
         EndDateTime = eventDto.EndDateTime,
