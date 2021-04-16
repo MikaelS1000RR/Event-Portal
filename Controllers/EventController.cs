@@ -77,7 +77,9 @@ namespace Event_Portal.Controllers
 
       Event updatedEvent = existingEvent with
       {
-        Location = eventDto.Location
+        Location = eventDto.Location,
+        StartDateTime = eventDto.StartDateTime,
+        EndDateTime = eventDto.EndDateTime,
       };
 
       repository.UpdateEvent(updatedEvent);

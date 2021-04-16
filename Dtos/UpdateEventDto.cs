@@ -11,6 +11,7 @@ namespace Event_Portal.Dtos
 
     [Required]
     public DateTimeOffset StartDateTime { get; init; } 
+   
     [Required]
     public DateTimeOffset EndDateTime { get; init; }
 
