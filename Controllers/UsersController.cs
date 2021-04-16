@@ -106,20 +106,7 @@ namespace Event_Portal.Controllers
 
 
 
-    // PUT /EVENT TO USER/{id}   AddEventsToCreatedEvents
-    [HttpPut("{id}")]
-    public ActionResult UpdateAddEvents(Guid id, UpdateUserDto userDto)
-    {
-      var existingUser = repository.GetUser(id);
-
-      if (existingUser is null)
-      {
-        return NotFound();
-      }
-
-      return NoContent();
-
-    }
+  
     
  
    }

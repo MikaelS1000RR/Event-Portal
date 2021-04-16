@@ -90,12 +90,6 @@ namespace Event_Portal.Repositories
     }
 
 
-     public void AddEventsToCreatedEvents(Event myEvent, User user)
-     {
-      var index = users.FindIndex(existingUser => existingUser.Id == user.Id);
-      users[index] = user;
-      user.CreatedEvents.Add(myEvent);
-    }
 
   }
 }

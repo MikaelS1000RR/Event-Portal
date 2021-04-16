@@ -16,7 +16,7 @@ namespace Event_Portal.Repositories
 
     void DeleteUser(Guid id);
 
-    void AddEventsToCreatedEvents(Event myEvent, User user);
+   
   }
   
 }
