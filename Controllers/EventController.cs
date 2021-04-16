@@ -14,10 +14,11 @@ namespace Event_Portal.Controllers
     public class EventController : ControllerBase
     {
     private readonly IEventRepo eventControllerRepository;
-
-    public EventController(IEventRepo eventControllerRepository)
+    private readonly IUserRepo userControllerRepository;
+    public EventController(IEventRepo eventControllerRepository, IUserRepo userControllerRepository)
     {
       this.eventControllerRepository = eventControllerRepository;
+      this.userControllerRepository = userControllerRepository;
     }
 
     // GET /events
@@ -59,6 +60,11 @@ namespace Event_Portal.Controllers
       };
 
       eventControllerRepository.CreateEvent(myEvent);
+      User existingUser = userControllerRepository.GetUser(myEvent.HostId);
+
+      existingUser.CreatedEvents.Add(myEvent);
+
+
 
       return CreatedAtAction(nameof(GetEvent), new { id = myEvent.Id }, myEvent.AsDto2());
     }
