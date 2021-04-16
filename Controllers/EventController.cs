@@ -52,7 +52,9 @@ namespace Event_Portal.Controllers
       Event myEvent = new()
       {
         Id = Guid.NewGuid(),
-        Location = eventDto.Location
+        Location = eventDto.Location,
+        StartDateTime = eventDto.StartDateTime,
+        EndDateTime = eventDto.EndDateTime,
       };
 
       repository.CreateEvent(myEvent);

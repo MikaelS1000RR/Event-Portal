@@ -10,8 +10,7 @@ namespace Event_Portal.Dtos
     public string Location { get; init; }
 
     [Required]
-    public DateTimeOffset StartDateTime { get; init; }
-
+    public DateTimeOffset StartDateTime { get; init; } 
     [Required]
     public DateTimeOffset EndDateTime { get; init; }
 
