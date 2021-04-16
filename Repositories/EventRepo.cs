@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Event_Portal.Models;
 
 namespace Event_Portal.Repositories
@@ -38,31 +39,35 @@ namespace Event_Portal.Repositories
         HostId = Guid.NewGuid()
       }
     };
-    public IEnumerable<Event> GetEvents()
+    public async Task<IEnumerable<Event>> GetEventsAsync()
     {
-      return events;
+      return await Task.FromResult(events);
     }
 
-    public Event GetEvent(Guid id)
+    public async Task<Event> GetEventAsync(Guid id)
     {
-      return events.Where(myEvent => myEvent.Id == id).SingleOrDefault();
+      var myEvent = events.Where(myEvent => myEvent.Id == id).SingleOrDefault();
+      return await Task.FromResult(myEvent);
     }
 
-    public void CreateEvent(Event myEvent)
+    public async Task CreateEventAsync(Event myEvent)
     {
       events.Add(myEvent);
+      await Task.CompletedTask;
     }
 
-    public void UpdateEvent(Event myEvent)
+    public async Task UpdateEventAsync(Event myEvent)
     {
       var index = events.FindIndex(existingEvent => existingEvent.Id == myEvent.Id);
       events[index] = myEvent;
+      await Task.CompletedTask;
     }
 
-    public void DeleteItem(Guid id)
+    public async Task DeleteEventAsync(Guid id)
     {
       var index = events.FindIndex(existingEvent => existingEvent.Id == id);
       events.RemoveAt(index);
+      await Task.CompletedTask; 
     }
   }
 }

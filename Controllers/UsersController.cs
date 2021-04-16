@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Event_Portal.Dtos;
 using Event_Portal.Models;
 using Event_Portal.Repositories;
@@ -23,18 +24,19 @@ namespace Event_Portal.Controllers
 
     // GET /users
     [HttpGet]
-    public IEnumerable<UserDto> GetUsers()
+    public async Task<IEnumerable<UserDto>> GetUsersAsync()
     {
-       var users = repository.GetUsers().Select(user => user.AsDto());
+       var users = (await repository.GetUsersAsync())
+                    .Select(user => user.AsDto());
        return users;
     
     }
 
     // GET /users/{id}
     [HttpGet("{id}")]
-    public ActionResult<UserDto> GetUser(Guid id) 
+    public async Task<ActionResult<UserDto>> GetUserAsync(Guid id) 
     {
-      var user = repository.GetUser(id);
+      var user = await repository.GetUserAsync(id);
 
       if(user is null) 
       {
@@ -46,7 +48,7 @@ namespace Event_Portal.Controllers
 
       // POST /users
      [HttpPost] 
-    public ActionResult<UserDto> CreateUser(CreateUserDto userDto)
+    public async Task<ActionResult<UserDto>> CreateUserAsync(CreateUserDto userDto)
     {
       User user = new()
       {
@@ -57,17 +59,17 @@ namespace Event_Portal.Controllers
         Password = userDto.Password
       };
 
-      repository.CreateUser(user);
+      await repository.CreateUserAsync(user);
 
-      return CreatedAtAction(nameof(GetUser), new { id = user.Id}, user.AsDto());
+      return CreatedAtAction(nameof(GetUserAsync), new { id = user.Id}, user.AsDto());
 
     }
 
     // PUT /users/{id}
     [HttpPut("{id}")]
-    public ActionResult UpdateUser(Guid id, UpdateUserDto userDto)
+    public async Task<ActionResult> UpdateUserAsync(Guid id, UpdateUserDto userDto)
     {
-      var existingUser = repository.GetUser(id);
+      var existingUser = await repository.GetUserAsync(id);
 
       if(existingUser is null)
       {
@@ -82,7 +84,7 @@ namespace Event_Portal.Controllers
         Password = userDto.Password,
       };
 
-      repository.UpdateUser(updatedUser);
+      await repository.UpdateUserAsync(updatedUser);
 
       return NoContent();
 
@@ -90,16 +92,16 @@ namespace Event_Portal.Controllers
 
     // DELETE /users/{id}
     [HttpDelete("{id}")]
-    public ActionResult DeleteUser(Guid id) {
+    public  async Task<ActionResult> DeleteUserAsync(Guid id) {
 
-      var existingUser = repository.GetUser(id);
+      var existingUser = await repository.GetUserAsync(id);
 
       if (existingUser is null)
       {
         return NotFound();
       }
 
-      repository.DeleteUser(id);
+      await repository.DeleteUserAsync (id);
 
       return NoContent();
     }

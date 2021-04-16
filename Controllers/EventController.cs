@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Event_Portal.Dtos;
 using Event_Portal.Models;
 using Event_Portal.Repositories;
@@ -23,18 +24,19 @@ namespace Event_Portal.Controllers
 
     // GET /events
     [HttpGet]
-    public IEnumerable<EventDto> GetEvents()
+    public async Task<IEnumerable<EventDto>> GetEvents()
     {
-      var events = eventControllerRepository.GetEvents().Select(myEvent => myEvent.AsDto2());
+      var events = (await eventControllerRepository.GetEventsAsync())
+                   .Select(myEvent => myEvent.AsDto2());
       return events;
     }
 
     // GET /events/{id}
     [HttpGet("{id}")]
 
-    public ActionResult<EventDto> GetEvent(Guid id)
+    public async Task <ActionResult<EventDto>> GetEventAsync(Guid id)
     {
-      var myEvent = eventControllerRepository.GetEvent(id);
+      var myEvent = await eventControllerRepository.GetEventAsync(id);
 
       if (myEvent is null)
       {
@@ -47,7 +49,7 @@ namespace Event_Portal.Controllers
     // POST /events
     [HttpPost]
 
-    public ActionResult<EventDto> CreateEvent(CreateEventDto eventDto)
+    public async Task <ActionResult<EventDto>> CreateEventAsync(CreateEventDto eventDto)
 
     {
       Event myEvent = new()
@@ -59,23 +61,23 @@ namespace Event_Portal.Controllers
         EndDateTime = eventDto.EndDateTime,
       };
 
-      eventControllerRepository.CreateEvent(myEvent);
-      User existingUser = userControllerRepository.GetUser(myEvent.HostId);
+     await eventControllerRepository.CreateEventAsync(myEvent);
+      User existingUser = await userControllerRepository.GetUserAsync(myEvent.HostId);
 
       existingUser.CreatedEvents.Add(myEvent);
 
 
 
-      return CreatedAtAction(nameof(GetEvent), new { id = myEvent.Id }, myEvent.AsDto2());
+      return CreatedAtAction(nameof(GetEventAsync), new { id = myEvent.Id }, myEvent.AsDto2());
     }
 
     // PUT /events/{id}
 
     [HttpPut("{id}")]
 
-    public ActionResult UpdateEvent(Guid id, UpdateEventDto eventDto)
+    public async Task <ActionResult> UpdateEvent(Guid id, UpdateEventDto eventDto)
     {
-      var existingEvent = eventControllerRepository.GetEvent(id);
+      var existingEvent = await eventControllerRepository.GetEventAsync(id);
 
       if (existingEvent is null)
       {
@@ -89,23 +91,23 @@ namespace Event_Portal.Controllers
         EndDateTime = eventDto.EndDateTime,
       };
 
-      eventControllerRepository.UpdateEvent(updatedEvent);
+     await eventControllerRepository.UpdateEventAsync(updatedEvent);
 
       return NoContent();
     }
 
     // DELETE /events/{id}
     [HttpDelete("{id}")]
-    public ActionResult DeleteEvent(Guid id)
+    public async Task<ActionResult> DeleteEventAsync(Guid id)
     {
-      var existingEvent = eventControllerRepository.GetEvent(id);
+      var existingEvent = await eventControllerRepository.GetEventAsync(id);
 
       if (existingEvent is null)
       {
         return NotFound();
       }
 
-      eventControllerRepository.DeleteItem(id);
+      await eventControllerRepository.DeleteEventAsync(id);
 
       return NoContent();
     }
@@ -115,14 +117,14 @@ namespace Event_Portal.Controllers
 
     [HttpPost("addEventToUser/{eventId}/{userId}")]
 
-    public ActionResult<User> AddEventToUser(Guid eventId, Guid userId)
+    public async Task <ActionResult<User>> AddEventToUser(Guid eventId, Guid userId)
     {
-      var existingEvent = eventControllerRepository.GetEvent(eventId);
+      var existingEvent = await eventControllerRepository.GetEventAsync(eventId);
       if (existingEvent is null)
       {
         return NotFound();
       }
-      User existingUser = userControllerRepository.GetUser(userId);
+      User existingUser = await userControllerRepository.GetUserAsync(userId);
 
 
       existingUser.JoinedEvents.Add(existingEvent);
@@ -136,11 +138,11 @@ namespace Event_Portal.Controllers
     // Create new Method here
 
     [HttpPost("addUserToEvent/{userId}/{eventId}")]
-    public ActionResult<Event> AddUserToEvent(Guid userId, Guid eventId) 
+    public async Task<ActionResult<Event>> AddUserToEventAsync(Guid userId, Guid eventId) 
     {
 
-      var existingEvent = eventControllerRepository.GetEvent(eventId);
-      User existingUser = userControllerRepository.GetUser(userId);
+      var existingEvent = await eventControllerRepository.GetEventAsync(eventId);
+      User existingUser = await userControllerRepository.GetUserAsync(userId);
 
       if (existingUser is null)
       {

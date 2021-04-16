@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Event_Portal.Models;
 
 namespace Event_Portal.Repositories
@@ -7,14 +8,14 @@ namespace Event_Portal.Repositories
 
   public interface IUserRepo
   {
-    User GetUser(Guid id);
-    IEnumerable<User> GetUsers();
+    Task<User> GetUserAsync(Guid id);
+    Task<IEnumerable<User>> GetUsersAsync();
 
-    void CreateUser(User user);
+    Task CreateUserAsync(User user);
 
-    void UpdateUser(User user);
+    Task UpdateUserAsync(User user);
 
-    void DeleteUser(Guid id);
+    Task DeleteUserAsync (Guid id);
 
    
   }

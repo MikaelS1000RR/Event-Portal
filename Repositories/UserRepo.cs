@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Event_Portal.Models;
 
 
@@ -42,33 +43,37 @@ namespace Event_Portal.Repositories
       }
 
     };
-    public IEnumerable<User> GetUsers()
+    public async Task<IEnumerable<User>> GetUsersAsync()
     {
-      return users;
+      return await Task.FromResult(users);
     }
 
-    public User GetUser(Guid id)
+    public async Task<User> GetUserAsync(Guid id)
     {
 
-      return users.Where(user => user.Id == id).SingleOrDefault();
+      var user = users.Where(user => user.Id == id).SingleOrDefault();
+      return await Task.FromResult(user);
 
     }
 
-    public void CreateUser(User user)
+    public async Task CreateUserAsync(User user)
     {
       users.Add(user);
+      await Task.CompletedTask;
     }
 
-    public void UpdateUser(User user)
+    public async Task UpdateUserAsync(User user)
     {
       var index = users.FindIndex(existingUser => existingUser.Id == user.Id);
       users[index] = user;
+      await Task.CompletedTask;
     }
 
-    public void DeleteUser(Guid id)
+    public async Task DeleteUserAsync (Guid id)
     {
       var index = users.FindIndex(existingUser => existingUser.Id == id);
       users.RemoveAt(index);
+      await Task.CompletedTask;
     }
 
 
