@@ -10,6 +10,7 @@ using FireSharp;
 using FireSharp.Config;
 using FireSharp.Response;
 using FireSharp.Interfaces;
+using System.Threading.Tasks;
 
 namespace Event_Portal.Controllers
 {
@@ -71,7 +72,7 @@ namespace Event_Portal.Controllers
 
       // POST /users
      [HttpPost] 
-    public async void CreateUser(CreateUserDto userDto)
+    public async Task<User> CreateUser(CreateUserDto userDto)
     {
       User user = new()
       {
@@ -82,31 +83,34 @@ namespace Event_Portal.Controllers
         Password = userDto.Password
       };
 
+
       var response = await client.PushTaskAsync("users", user);
       User result = response.ResultAs<User>();
 
       Console.WriteLine("Pushed new user");
 
 
+    
 
-      repository.CreateUser(user);
+      return user;
 
-     // return CreatedAtAction(nameof(GetUser), new { id = user.Id}, user.AsDto());
+
+      //return CreatedAtAction(nameof(GetUser), new { id = user.Id}, user.AsDto());
 
     }
 
     // PUT /users/{id}
     [HttpPut("{id}")]
-    public ActionResult UpdateUser(Guid id, UpdateUserDto userDto)
+    public async Task<UpdateUserDto> UpdateUser(String id, UpdateUserDto userDto)
     {
-      var existingUser = repository.GetUser(id);
+     // var existingUser = repository.GetUser(id);
 
-      if(existingUser is null)
+    /*  if(existingUser == null)
       {
-        return NotFound();
+         await Task.CompletedTask;   // Try to make NotFound() work 
       }
-
-      User updatedUser = existingUser with
+*/
+      UpdateUserDto updatedUser = new UpdateUserDto
       {
         FirstName = userDto.FirstName,
         LastName = userDto.LastName,
@@ -114,26 +118,32 @@ namespace Event_Portal.Controllers
         Password = userDto.Password,
       };
 
-      repository.UpdateUser(updatedUser);
 
-      return NoContent();
+      var response = await client.UpdateTaskAsync("users/" + id, updatedUser);  
+      User result = response.ResultAs<User>();
+
+      Console.WriteLine("Pushed new user");
+
+      
+
+      return updatedUser;
 
     }
 
     // DELETE /users/{id}
     [HttpDelete("{id}")]
-    public ActionResult DeleteUser(Guid id) {
+    public  async Task<String> DeleteUser(String id) {
 
-      var existingUser = repository.GetUser(id);
 
-      if (existingUser is null)
-      {
-        return NotFound();
-      }
 
-      repository.DeleteUser(id);
 
-      return NoContent();
+      var response = await client.DeleteTaskAsync("users/" + id);
+
+
+
+
+      return "This user has been removed.";
+
     }
 
 
