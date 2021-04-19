@@ -58,16 +58,17 @@ namespace Event_Portal.Controllers
 
     // GET /users/{id}
     [HttpGet("{id}")]
-    public ActionResult<UserDto> GetUser(Guid id) 
+    public async Task<UserDto> GetUser(String id) 
     {
-      var user = repository.GetUser(id);
+      var response = await client.GetTaskAsync("users/" + id);
 
-      if(user is null) 
+      if(client != null) 
       {
-        return NotFound();
+        Console.WriteLine("Connection is established.");
       }
-
-      return user.AsDto();
+      UserDto result = response.ResultAs<UserDto>();
+     
+      return result;
     }
 
       // POST /users
