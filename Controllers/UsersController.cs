@@ -18,6 +18,8 @@ namespace Event_Portal.Controllers
 
   [ApiController]
   [Route("/users")]
+
+
   public class UsersController : ControllerBase
   {
 
@@ -25,9 +27,10 @@ namespace Event_Portal.Controllers
     {
       AuthSecret = "JVGSRZVMU5Iw6TtGygVyEPUf41Zk40viN3UxWR76",
       BasePath = "https://geshdo-events-dev-default-rtdb.europe-west1.firebasedatabase.app/"
-  };
+    };
 
     IFirebaseClient client;
+
 
     private readonly IUserRepo repository;
 
@@ -35,26 +38,45 @@ namespace Event_Portal.Controllers
     {
       this.repository = repository;
 
-      client = new FireSharp.FirebaseClient(config);
 
+      try 
+      {
+        client = new FireSharp.FirebaseClient(config);
+      }
+      catch 
+      {
+        Console.WriteLine("Connection problems...");
+      }
 
       
     }
 
     // GET /users
     [HttpGet]
-    public IEnumerable<UserDto> GetUsers()
+    public async Task<UserDto> GetUsers()
     {
-       var users = repository.GetUsers().Select(user => user.AsDto());
-
-      if (client != null)
-      {
-        Console.WriteLine("Connection is established.");
-      }
-
-       return users;
     
+    
+      FirebaseResponse res = await client.GetTaskAsync("users");
+
+            if(client is null)
+            {
+              Console.WriteLine("Failed to connect...");
+             }
+
+            Console.WriteLine("List of users");
+            UserDto get = res.ResultAs<UserDto>();
+
+
+      return get;
+
+
+
     }
+
+
+
+
 
     // GET /users/{id}
     [HttpGet("{id}")]
