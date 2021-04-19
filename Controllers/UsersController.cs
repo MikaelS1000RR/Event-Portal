@@ -71,7 +71,7 @@ namespace Event_Portal.Controllers
 
       // POST /users
      [HttpPost] 
-    public ActionResult<UserDto> CreateUser(CreateUserDto userDto)
+    public async void CreateUser(CreateUserDto userDto)
     {
       User user = new()
       {
@@ -82,9 +82,16 @@ namespace Event_Portal.Controllers
         Password = userDto.Password
       };
 
+      var response = await client.PushTaskAsync("users", user);
+      User result = response.ResultAs<User>();
+
+      Console.WriteLine("Pushed new user");
+
+
+
       repository.CreateUser(user);
 
-      return CreatedAtAction(nameof(GetUser), new { id = user.Id}, user.AsDto());
+     // return CreatedAtAction(nameof(GetUser), new { id = user.Id}, user.AsDto());
 
     }
 
