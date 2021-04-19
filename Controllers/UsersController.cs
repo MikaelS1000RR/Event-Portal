@@ -6,19 +6,38 @@ using Event_Portal.Models;
 using Event_Portal.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
+using FireSharp;
+using FireSharp.Config;
+using FireSharp.Response;
+using FireSharp.Interfaces;
 
 namespace Event_Portal.Controllers
 {
+
 
   [ApiController]
   [Route("/users")]
   public class UsersController : ControllerBase
   {
+
+    IFirebaseConfig config = new FirebaseConfig
+    {
+      AuthSecret = "JVGSRZVMU5Iw6TtGygVyEPUf41Zk40viN3UxWR76",
+      BasePath = "https://geshdo-events-dev-default-rtdb.europe-west1.firebasedatabase.app/"
+  };
+
+    IFirebaseClient client;
+
     private readonly IUserRepo repository;
 
     public UsersController(IUserRepo repository)
     {
-      this.repository = repository; 
+      this.repository = repository;
+
+      client = new FireSharp.FirebaseClient(config);
+
+
+      
     }
 
     // GET /users
@@ -26,6 +45,12 @@ namespace Event_Portal.Controllers
     public IEnumerable<UserDto> GetUsers()
     {
        var users = repository.GetUsers().Select(user => user.AsDto());
+
+      if (client != null)
+      {
+        Console.WriteLine("Connection is established.");
+      }
+
        return users;
     
     }

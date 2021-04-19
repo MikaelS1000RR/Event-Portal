@@ -57,3 +57,7 @@ C:/LIAProjekt/EventProject/Event-Portal/obj/Debug/net5.0/ref/Event_Portal.dll
 C:/LIAProjekt/EventProject/Event-Portal/obj/Debug/net5.0/Event_Portal.pdb
 C:/LIAProjekt/EventProject/Event-Portal/obj/Debug/net5.0/Event_Portal.genruntimeconfig.cache
 /Users/Mikael/Documents/GitHub/Event-Portal/bin/Debug/net5.0/package-lock.json
+/Users/Mikael/Documents/GitHub/Event-Portal/bin/Debug/net5.0/FireSharp.dll
+/Users/Mikael/Documents/GitHub/Event-Portal/bin/Debug/net5.0/FireSharp.Serialization.JsonNet.dll
+/Users/Mikael/Documents/GitHub/Event-Portal/bin/Debug/net5.0/Newtonsoft.Json.dll
+/Users/Mikael/Documents/GitHub/Event-Portal/bin/Debug/net5.0/RestSharp.dll
