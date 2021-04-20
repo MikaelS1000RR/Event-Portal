@@ -54,9 +54,6 @@ namespace Event_Portal.Controllers
 
     }
 
-
-
-
   
     public List<User> populateRTB(Dictionary<string, User> record)
     {
