@@ -142,12 +142,7 @@ namespace Event_Portal.Controllers
     [HttpDelete("{id}")]
     public  async Task<String> DeleteUser(String id) {
 
-
-
-
       var response = await client.DeleteTaskAsync("users/" + id);
-
-
 
 
       return "This user has been removed.";

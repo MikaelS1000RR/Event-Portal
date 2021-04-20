@@ -122,18 +122,12 @@ namespace Event_Portal.Controllers
 
     // DELETE /events/{id}
     [HttpDelete("{id}")]
-    public ActionResult DeleteEvent(Guid id)
+    public async Task<String> DeleteEvent(String id)
     {
-      var existingEvent = eventControllerRepository.GetEvent(id);
+      var response = await client.DeleteTaskAsync("events/" + id);
 
-      if (existingEvent is null)
-      {
-        return NotFound();
-      }
 
-      eventControllerRepository.DeleteItem(id);
-
-      return NoContent();
+      return "This event has been removed.";
     }
 
 
