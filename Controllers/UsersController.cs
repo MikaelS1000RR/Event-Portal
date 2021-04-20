@@ -48,7 +48,7 @@ namespace Event_Portal.Controllers
     {
     
     
-      FirebaseResponse res = client.Get(@"users/123");
+      FirebaseResponse res = client.Get(@"users");
       Dictionary<string, User> data = JsonConvert.DeserializeObject<Dictionary<string, User>>(res.Body.ToString());
        var list=populateRTB(data);
       return list;
@@ -91,7 +91,7 @@ namespace Event_Portal.Controllers
     [HttpGet("{id}")]
     public async Task<UserDto> GetUser(String id) 
     {
-      var response = await client.GetTaskAsync("users/123/" + id);
+      var response = await client.GetTaskAsync("users/" + id);
 
       if(client != null) 
       {
