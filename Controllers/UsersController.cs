@@ -144,7 +144,6 @@ namespace Event_Portal.Controllers
 
       var response = await client.DeleteTaskAsync("users/" + id);
 
-
       return "This user has been removed.";
 
     }
