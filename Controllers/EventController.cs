@@ -101,25 +101,23 @@ namespace Event_Portal.Controllers
 
     [HttpPut("{id}")]
 
-    public ActionResult UpdateEvent(Guid id, UpdateEventDto eventDto)
+    public async Task<UpdateEventDto> UpdateEvent(String id, UpdateEventDto eventDto)
     {
-      var existingEvent = eventControllerRepository.GetEvent(id);
 
-      if (existingEvent is null)
-      {
-        return NotFound();
-      }
-
-      Event updatedEvent = existingEvent with
+      UpdateEventDto updatedEvent = new UpdateEventDto
       {
         Location = eventDto.Location,
         StartDateTime = eventDto.StartDateTime,
         EndDateTime = eventDto.EndDateTime,
       };
 
-      eventControllerRepository.UpdateEvent(updatedEvent);
+      var response = await client.UpdateTaskAsync("events/" + id, updatedEvent);
+      Event result = response.ResultAs<Event>();
 
-      return NoContent();
+      Console.WriteLine("Event's information has been updated.");
+
+      return updatedEvent;
+
     }
 
     // DELETE /events/{id}

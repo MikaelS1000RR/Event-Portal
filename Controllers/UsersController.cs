@@ -106,15 +106,10 @@ namespace Event_Portal.Controllers
       var response = await client.PushTaskAsync("users", user);
       User result = response.ResultAs<User>();
 
-      Console.WriteLine("Pushed new user");
-
-
-    
+      Console.WriteLine("Pushed new user");    
 
       return user;
 
-
-      //return CreatedAtAction(nameof(GetUser), new { id = user.Id}, user.AsDto());
 
     }
 
@@ -122,13 +117,7 @@ namespace Event_Portal.Controllers
     [HttpPut("{id}")]
     public async Task<UpdateUserDto> UpdateUser(String id, UpdateUserDto userDto)
     {
-     // var existingUser = repository.GetUser(id);
 
-    /*  if(existingUser == null)
-      {
-         await Task.CompletedTask;   // Try to make NotFound() work 
-      }
-*/
       UpdateUserDto updatedUser = new UpdateUserDto
       {
         FirstName = userDto.FirstName,
