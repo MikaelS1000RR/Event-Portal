@@ -47,24 +47,11 @@ namespace Event_Portal.Controllers
     public List<User>  GetUsers()
     {
     
-    
       FirebaseResponse res = client.Get(@"users");
       Dictionary<string, User> data = JsonConvert.DeserializeObject<Dictionary<string, User>>(res.Body.ToString());
        var list=populateRTB(data);
       return list;
 
-
-
-      //IEnumerable<User> get = res.ResultAs<IEnumerable<User>>();
-
-
-      /* var get = res.ResultAs<IEnumerable<User>>();
-
-         foreach (var user in get)
-         {
-          Console.WriteLine("Error..." + " " +  user);
-
-         } */
     }
 
 

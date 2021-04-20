@@ -6,20 +6,45 @@ using Event_Portal.Models;
 using Event_Portal.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
+using Newtonsoft.Json;
+using FireSharp;
+using FireSharp.Config;
+using FireSharp.Response;
+using FireSharp.Interfaces;
+using System.Threading.Tasks;
+
 namespace Event_Portal.Controllers
 {
 
   [ApiController]
   [Route("/events")]
+
+
+
   public class EventController : ControllerBase
   {
+
+    IFirebaseConfig config = new FirebaseConfig
+    {
+      AuthSecret = "JVGSRZVMU5Iw6TtGygVyEPUf41Zk40viN3UxWR76",
+      BasePath = "https://geshdo-events-dev-default-rtdb.europe-west1.firebasedatabase.app/"
+    };
+
+    IFirebaseClient client;
+
+
     private readonly IEventRepo eventControllerRepository;
     private readonly IUserRepo userControllerRepository;
     public EventController(IEventRepo eventControllerRepository, IUserRepo userControllerRepository)
     {
       this.eventControllerRepository = eventControllerRepository;
       this.userControllerRepository = userControllerRepository;
+
+      client = new FireSharp.FirebaseClient(config);
     }
+
+
+    
 
     // GET /events
     [HttpGet]
@@ -32,22 +57,23 @@ namespace Event_Portal.Controllers
     // GET /events/{id}
     [HttpGet("{id}")]
 
-    public ActionResult<EventDto> GetEvent(Guid id)
+    public async Task<EventDto> GetEvent(Guid id)
     {
-      var myEvent = eventControllerRepository.GetEvent(id);
+      var response = await client.GetTaskAsync("events/" + id);
 
-      if (myEvent is null)
+      if (client != null)
       {
-        return NotFound();
+        Console.WriteLine("Connection is established.");
       }
 
-      return myEvent.AsDto2();
+      EventDto result = response.ResultAs<EventDto>();
+
+      return result;
     }
 
     // POST /events
     [HttpPost]
-
-    public ActionResult<EventDto> CreateEvent(CreateEventDto eventDto)
+    public async Task<Event> CreateEvent(CreateEventDto eventDto)
 
     {
       Event myEvent = new()
@@ -59,14 +85,16 @@ namespace Event_Portal.Controllers
         EndDateTime = eventDto.EndDateTime,
       };
 
-      eventControllerRepository.CreateEvent(myEvent);
-      User existingUser = userControllerRepository.GetUser(myEvent.HostId);
 
-      existingUser.CreatedEvents.Add(myEvent);
+      var response = await client.PushTaskAsync("events", myEvent);
+      Event result = response.ResultAs<Event>();
+
+      Console.WriteLine("Pushed new event");
 
 
 
-      return CreatedAtAction(nameof(GetEvent), new { id = myEvent.Id }, myEvent.AsDto2());
+    return myEvent;
+
     }
 
     // PUT /events/{id}
