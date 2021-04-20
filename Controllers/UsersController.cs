@@ -53,7 +53,7 @@ namespace Event_Portal.Controllers
 
     // GET /users
     [HttpGet]
-    public async Task<UserDto> GetUsers()
+    public async Task<IEnumerable<User>> GetUsers()
     {
     
     
@@ -65,16 +65,30 @@ namespace Event_Portal.Controllers
              }
 
             Console.WriteLine("List of users");
-            UserDto get = res.ResultAs<UserDto>();
+
+           IEnumerable<User> get = res.ResultAs<IEnumerable<User>>();
 
 
-      return get;
+           Console.WriteLine("Error..." + " " + get);
+
+      /* var get = res.ResultAs<IEnumerable<User>>();
+
+         foreach (var user in get)
+         {
+          Console.WriteLine("Error..." + " " +  user);
+
+         } */
+
+
+          return get;
+      
+
+
+
 
 
 
     }
-
-
 
 
 
