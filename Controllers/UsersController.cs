@@ -5,6 +5,7 @@ using Event_Portal.Dtos;
 using Event_Portal.Models;
 using Event_Portal.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 using FireSharp;
 using FireSharp.Config;
@@ -37,39 +38,25 @@ namespace Event_Portal.Controllers
     public UsersController(IUserRepo repository)
     {
       this.repository = repository;
-
-
-      try 
-      {
-        client = new FireSharp.FirebaseClient(config);
-      }
-      catch 
-      {
-        Console.WriteLine("Connection problems...");
-      }
-
+      client = new FireSharp.FirebaseClient(config);
       
     }
 
     // GET /users
     [HttpGet]
-    public async Task<IEnumerable<User>> GetUsers()
+    public List<User>  GetUsers()
     {
     
     
-      FirebaseResponse res = await client.GetTaskAsync("users");
-
-            if(client is null)
-            {
-              Console.WriteLine("Failed to connect...");
-             }
-
-            Console.WriteLine("List of users");
-
-           IEnumerable<User> get = res.ResultAs<IEnumerable<User>>();
+      FirebaseResponse res = client.Get(@"users/123");
+      Dictionary<string, User> data = JsonConvert.DeserializeObject<Dictionary<string, User>>(res.Body.ToString());
+       var list=populateRTB(data);
+      return list;
 
 
-           Console.WriteLine("Error..." + " " + get);
+
+      //IEnumerable<User> get = res.ResultAs<IEnumerable<User>>();
+
 
       /* var get = res.ResultAs<IEnumerable<User>>();
 
@@ -78,25 +65,33 @@ namespace Event_Portal.Controllers
           Console.WriteLine("Error..." + " " +  user);
 
          } */
-
-
-          return get;
-      
-
-
-
-
-
-
     }
 
 
+
+
+  
+    public List<User> populateRTB(Dictionary<string, User> record)
+    {
+
+      List<User> myList = new List<User>();
+      foreach(var item in record)
+      {
+        //var info = "item is " + item.Value.FirstName;
+        myList.Add(item.Value);
+      }
+
+      return myList;
+
+    }
+
+    
 
     // GET /users/{id}
     [HttpGet("{id}")]
     public async Task<UserDto> GetUser(String id) 
     {
-      var response = await client.GetTaskAsync("users/" + id);
+      var response = await client.GetTaskAsync("users/123/" + id);
 
       if(client != null) 
       {
@@ -183,10 +178,6 @@ namespace Event_Portal.Controllers
 
     }
 
-
-
-  
-    
  
    }
 
