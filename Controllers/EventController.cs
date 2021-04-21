@@ -61,7 +61,7 @@ namespace Event_Portal.Controllers
     // GET /events/{id}
     [HttpGet("{id}")]
 
-    public async Task<EventDto> GetEvent(Guid id)
+    public async Task<Event> GetEvent(String id)
     {
       var response = await client.GetTaskAsync("events/" + id);
 
@@ -70,14 +70,14 @@ namespace Event_Portal.Controllers
         Console.WriteLine("Connection is established.");
       }
 
-      EventDto result = response.ResultAs<EventDto>();
+      Event result = response.ResultAs<Event>();
 
       return result;
     }
 
     // POST /events
     [HttpPost]
-    public async Task<Event> CreateEvent(CreateEventDto eventDto)
+    public async Task<EventDto> CreateEvent(CreateEventDto eventDto)
 
     {
       Event myEvent = new()
@@ -97,7 +97,7 @@ namespace Event_Portal.Controllers
       if(hostUser != null)
       {
         var response = await client.PushTaskAsync("events", myEvent);
-        Event result = response.ResultAs<Event>();
+        EventDto result = response.ResultAs<EventDto>();  
 
         Console.WriteLine("Added hostId");
 
@@ -110,6 +110,8 @@ namespace Event_Portal.Controllers
         Console.WriteLine("Wrong hostID");
          return null;
       }
+
+      
 
 
     }
