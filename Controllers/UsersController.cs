@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Event_Portal.Dtos;
 using Event_Portal.Models;
-using Event_Portal.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -33,11 +32,11 @@ namespace Event_Portal.Controllers
     IFirebaseClient client;
 
 
-    private readonly IUserRepo repository;
 
-    public UsersController(IUserRepo repository)
+
+    public UsersController()
     {
-      this.repository = repository;
+      
       client = new FireSharp.FirebaseClient(config);
       
     }
