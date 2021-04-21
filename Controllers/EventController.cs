@@ -3,51 +3,79 @@ using System.Collections.Generic;
 using System.Linq;
 using Event_Portal.Dtos;
 using Event_Portal.Models;
-using Event_Portal.Repositories;
 using Microsoft.AspNetCore.Mvc;
+
+using Newtonsoft.Json;
+using FireSharp;
+using FireSharp.Config;
+using FireSharp.Response;
+using FireSharp.Interfaces;
+using System.Threading.Tasks;
 
 namespace Event_Portal.Controllers
 {
 
   [ApiController]
   [Route("/events")]
+
+
+
   public class EventController : ControllerBase
   {
-    private readonly IEventRepo eventControllerRepository;
-    private readonly IUserRepo userControllerRepository;
-    public EventController(IEventRepo eventControllerRepository, IUserRepo userControllerRepository)
+
+    IFirebaseConfig config = new FirebaseConfig
     {
-      this.eventControllerRepository = eventControllerRepository;
-      this.userControllerRepository = userControllerRepository;
+      AuthSecret = "JVGSRZVMU5Iw6TtGygVyEPUf41Zk40viN3UxWR76",
+      BasePath = "https://geshdo-events-dev-default-rtdb.europe-west1.firebasedatabase.app/"
+    };
+
+    IFirebaseClient client;
+
+
+
+
+    public EventController()
+    {
+
+
+      client = new FireSharp.FirebaseClient(config);
     }
+
+
+
 
     // GET /events
     [HttpGet]
-    public IEnumerable<EventDto> GetEvents()
+    public IEnumerable<Event> GetEvents()
     {
-      var events = eventControllerRepository.GetEvents().Select(myEvent => myEvent.AsDto2());
-      return events;
+      FirebaseResponse res = client.Get(@"events");
+      Dictionary<string, Event> data = JsonConvert.DeserializeObject<Dictionary<string, Event>>(res.Body.ToString());
+      var list = data.Select(x => x.Value);
+
+      return list;
+
     }
 
     // GET /events/{id}
     [HttpGet("{id}")]
 
-    public ActionResult<EventDto> GetEvent(Guid id)
+    public async Task<Event> GetEvent(String id)
     {
-      var myEvent = eventControllerRepository.GetEvent(id);
+      var response = await client.GetTaskAsync("events/" + id);
 
-      if (myEvent is null)
+      if (client != null)
       {
-        return NotFound();
+        Console.WriteLine("Connection is established.");
       }
 
-      return myEvent.AsDto2();
+      Event result = response.ResultAs<Event>();
+
+      return result;
     }
 
     // POST /events
     [HttpPost]
-
-    public ActionResult<EventDto> CreateEvent(CreateEventDto eventDto)
+    public async Task<Event> CreateEvent(CreateEventDto eventDto)
 
     {
       Event myEvent = new()
@@ -59,55 +87,84 @@ namespace Event_Portal.Controllers
         EndDateTime = eventDto.EndDateTime,
       };
 
-      eventControllerRepository.CreateEvent(myEvent);
-      User existingUser = userControllerRepository.GetUser(myEvent.HostId);
 
-      existingUser.CreatedEvents.Add(myEvent);
-
+      FirebaseResponse res = client.Get(@"users/" + myEvent.HostId);
+      User hostUser = JsonConvert.DeserializeObject<User>(res.Body.ToString());
 
 
-      return CreatedAtAction(nameof(GetEvent), new { id = myEvent.Id }, myEvent.AsDto2());
+      Console.WriteLine(hostUser);
+
+      if(hostUser != null)
+      {
+        var response = await client.PushTaskAsync("events", myEvent);
+        
+        var me = GetEvents();
+        var lastPushedEvent = me.ElementAt(me.Count() - 1);
+        hostUser.CreatedEvents.Add(lastPushedEvent);
+
+        var rs = await client.SetTaskAsync("users/" + myEvent.HostId, hostUser);
+
+
+
+          // Push the last created event to CreatedEvents 
+
+        FirebaseResponse resEvent = client.Get(@"events");
+        User createdEvent = JsonConvert.DeserializeObject<User>(res.Body.ToString());
+
+        Event result = response.ResultAs<Event>();  
+
+
+        Console.WriteLine("Added hostId");
+
+        Console.WriteLine("Pushed new event");
+
+
+       // hostUser.CreatedEvents.Add(result);
+
+        return lastPushedEvent;
+
+      } 
+      
+      else {
+        Console.WriteLine("Wrong hostID");
+         return null;
+      }
+
+      
+
     }
 
     // PUT /events/{id}
 
     [HttpPut("{id}")]
 
-    public ActionResult UpdateEvent(Guid id, UpdateEventDto eventDto)
+    public async Task<UpdateEventDto> UpdateEvent(String id, UpdateEventDto eventDto)
     {
-      var existingEvent = eventControllerRepository.GetEvent(id);
 
-      if (existingEvent is null)
-      {
-        return NotFound();
-      }
-
-      Event updatedEvent = existingEvent with
+      UpdateEventDto updatedEvent = new UpdateEventDto
       {
         Location = eventDto.Location,
         StartDateTime = eventDto.StartDateTime,
         EndDateTime = eventDto.EndDateTime,
       };
 
-      eventControllerRepository.UpdateEvent(updatedEvent);
+      var response = await client.UpdateTaskAsync("events/" + id, updatedEvent);
+      Event result = response.ResultAs<Event>();
 
-      return NoContent();
+      Console.WriteLine("Event's information has been updated.");
+
+      return updatedEvent;
+
     }
 
     // DELETE /events/{id}
     [HttpDelete("{id}")]
-    public ActionResult DeleteEvent(Guid id)
+    public async Task<String> DeleteEvent(String id)
     {
-      var existingEvent = eventControllerRepository.GetEvent(id);
+      var response = await client.DeleteTaskAsync("events/" + id);
 
-      if (existingEvent is null)
-      {
-        return NotFound();
-      }
 
-      eventControllerRepository.DeleteItem(id);
-
-      return NoContent();
+      return "This event has been removed.";
     }
 
 
@@ -115,43 +172,53 @@ namespace Event_Portal.Controllers
 
     [HttpPost("addEventToUser/{eventId}/{userId}")]
 
-    public ActionResult<User> AddEventToUser(Guid eventId, Guid userId)
+    public async Task<User> AddEventToUser(String eventId, String userId)
     {
-      var existingEvent = eventControllerRepository.GetEvent(eventId);
-      if (existingEvent is null)
-      {
-        return NotFound();
-      }
-      User existingUser = userControllerRepository.GetUser(userId);
 
 
-      existingUser.JoinedEvents.Add(existingEvent);
-     
-     
-     // existingEvent.JoinedUsers.Add(existingUser)
+      var existingUser = await client.GetTaskAsync("users/" + userId);
+      var existingEvent = await client.GetTaskAsync("events/" + eventId);
 
-      return existingUser;
+
+      User user = existingUser.ResultAs<User>();
+      Event myEvent = existingEvent.ResultAs<Event>();
+
+
+      user.JoinedEvents.Add(myEvent);
+      var rs = await client.SetTaskAsync("users/" + userId, user);
+
+
+      return user;
+
+
+
     }
 
     // Create new Method here
 
     [HttpPost("addUserToEvent/{userId}/{eventId}")]
-    public ActionResult<Event> AddUserToEvent(Guid userId, Guid eventId) 
+    public async Task<Event> AddUserToEvent(String userId, String eventId)
     {
 
-      var existingEvent = eventControllerRepository.GetEvent(eventId);
-      User existingUser = userControllerRepository.GetUser(userId);
+      var existingUser = await client.GetTaskAsync("users/" + userId);
+      var existingEvent = await client.GetTaskAsync("events/" + eventId);
 
-      if (existingUser is null)
-      {
-        return NotFound();
-      }
 
-      existingEvent.JoinedUsers.Add(existingUser);
+      User user = existingUser.ResultAs<User>();
+      Event myEvent = existingEvent.ResultAs<Event>();
 
-      return existingEvent;
+
+      myEvent.JoinedUsers.Add(user);
+      var rs = await client.SetTaskAsync("events/" + eventId, myEvent);
+
+
+
+      return myEvent;
+
+
+
     }
-    
+
 
 
   }
