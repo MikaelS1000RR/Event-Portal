@@ -48,11 +48,11 @@ namespace Event_Portal.Controllers
 
     // GET /events
     [HttpGet]
-    public IEnumerable<string> GetEvents()
+    public IEnumerable<Event> GetEvents()
     {
-      FirebaseResponse res = client.Get(@"events");
+      FirebaseResponse res = client.Get(@"event");
       Dictionary<string, Event> data = JsonConvert.DeserializeObject<Dictionary<string, Event>>(res.Body.ToString());
-      var list = data.Select(x => x.Key);
+      var list = data.Select(x => x.Value);
 
       return list;
 
@@ -90,23 +90,14 @@ namespace Event_Portal.Controllers
       };
 
 
-      FirebaseResponse res = client.Get(@"events");
-      Dictionary<string, Event> data = JsonConvert.DeserializeObject<Dictionary<string, Event>>(res.Body.ToString());
+      FirebaseResponse res = client.Get(@"users/" + myEvent.HostId);
+      User hostUser = JsonConvert.DeserializeObject<User>(res.Body.ToString());
 
-    
-      var list = data.Select(x => x.Key);
 
-      Console.WriteLine(list);
-
-      if(myEvent.HostId.Equals(list)) {
+      if(hostUser != null)
+      {
         var response = await client.PushTaskAsync("events", myEvent);
         Event result = response.ResultAs<Event>();
-
-        var userRs = await client.GetTaskAsync("users/" + myEvent.HostId);
-        User userResult = userRs.ResultAs<User>();
-        userResult.CreatedEvents.Add(result);
-        var rs = await client.SetTaskAsync("users/" + myEvent.HostId, userResult);
-
 
         Console.WriteLine("Added hostId");
 
@@ -117,10 +108,8 @@ namespace Event_Portal.Controllers
 
       } else {
         Console.WriteLine("Wrong hostID");
-        return null;
+         return null;
       }
-
-
 
 
     }
