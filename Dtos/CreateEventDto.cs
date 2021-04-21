@@ -8,7 +8,7 @@ namespace Event_Portal.Dtos
 
 
     [Required]
-    public Guid HostId { get; init; }
+    public string HostId { get; init; }
 
     [Required]
     public string Location { get; init; }

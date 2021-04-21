@@ -33,26 +33,27 @@ namespace Event_Portal.Controllers
     IFirebaseClient client;
 
 
-    private readonly IEventRepo eventControllerRepository;
+
     private readonly IUserRepo userControllerRepository;
-    public EventController(IEventRepo eventControllerRepository, IUserRepo userControllerRepository)
+    public EventController(IUserRepo userControllerRepository)
     {
-      this.eventControllerRepository = eventControllerRepository;
+
       this.userControllerRepository = userControllerRepository;
 
       client = new FireSharp.FirebaseClient(config);
     }
 
 
-    
+
 
     // GET /events
     [HttpGet]
-    public IEnumerable<Event> GetEvents()
+    public IEnumerable<string> GetEvents()
     {
       FirebaseResponse res = client.Get(@"events");
       Dictionary<string, Event> data = JsonConvert.DeserializeObject<Dictionary<string, Event>>(res.Body.ToString());
-      var list = data.Select(x => x.Value);
+      var list = data.Select(x => x.Key);
+
       return list;
 
     }
@@ -89,14 +90,38 @@ namespace Event_Portal.Controllers
       };
 
 
-      var response = await client.PushTaskAsync("events", myEvent);
-      Event result = response.ResultAs<Event>();
+      FirebaseResponse res = client.Get(@"events");
+      Dictionary<string, Event> data = JsonConvert.DeserializeObject<Dictionary<string, Event>>(res.Body.ToString());
 
-      Console.WriteLine("Pushed new event");
+    
+      var list = data.Select(x => x.Key);
+
+      Console.WriteLine(list);
+
+      if(myEvent.HostId.Equals(list)) {
+        var response = await client.PushTaskAsync("events", myEvent);
+        Event result = response.ResultAs<Event>();
+
+        var userRs = await client.GetTaskAsync("users/" + myEvent.HostId);
+        User userResult = userRs.ResultAs<User>();
+        userResult.CreatedEvents.Add(result);
+        var rs = await client.SetTaskAsync("users/" + myEvent.HostId, userResult);
+
+
+        Console.WriteLine("Added hostId");
+
+        Console.WriteLine("Pushed new event");
+
+        return result;
+
+
+      } else {
+        Console.WriteLine("Wrong hostID");
+        return null;
+      }
 
 
 
-    return myEvent;
 
     }
 
@@ -140,7 +165,7 @@ namespace Event_Portal.Controllers
 
     public async Task<User> AddEventToUser(String eventId, String userId)
     {
-    
+
 
       var existingUser = await client.GetTaskAsync("users/" + userId);
       var existingEvent = await client.GetTaskAsync("events/" + eventId);
@@ -163,7 +188,7 @@ namespace Event_Portal.Controllers
     // Create new Method here
 
     [HttpPost("addUserToEvent/{userId}/{eventId}")]
-    public async Task<Event> AddUserToEvent(String userId, String eventId) 
+    public async Task<Event> AddUserToEvent(String userId, String eventId)
     {
 
       var existingUser = await client.GetTaskAsync("users/" + userId);
@@ -177,14 +202,14 @@ namespace Event_Portal.Controllers
       myEvent.JoinedUsers.Add(user);
       var rs = await client.SetTaskAsync("events/" + eventId, myEvent);
 
-  
+
 
       return myEvent;
 
-    
+
 
     }
-    
+
 
 
   }
