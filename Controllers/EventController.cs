@@ -50,7 +50,7 @@ namespace Event_Portal.Controllers
     [HttpGet]
     public IEnumerable<Event> GetEvents()
     {
-      FirebaseResponse res = client.Get(@"event");
+      FirebaseResponse res = client.Get(@"events");
       Dictionary<string, Event> data = JsonConvert.DeserializeObject<Dictionary<string, Event>>(res.Body.ToString());
       var list = data.Select(x => x.Value);
 
