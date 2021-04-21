@@ -140,20 +140,7 @@ namespace Event_Portal.Controllers
 
     public async Task<User> AddEventToUser(String eventId, String userId)
     {
-     /* var existingEvent = eventControllerRepository.GetEvent(eventId);
-      if (existingEvent is null)
-      {
-        return NotFound();
-      }
-      User existingUser = userControllerRepository.GetUser(userId);
-
-
-      existingUser.JoinedEvents.Add(existingEvent); */
-     
-     
-     // existingEvent.JoinedUsers.Add(existingUser)
-
-      //return existingUser;
+    
 
       var existingUser = await client.GetTaskAsync("users/" + userId);
       var existingEvent = await client.GetTaskAsync("events/" + eventId);
@@ -164,6 +151,7 @@ namespace Event_Portal.Controllers
 
 
       user.JoinedEvents.Add(myEvent);
+      var rs = await client.SetTaskAsync("users/" + userId, user);
 
       //myEvent.JoinedUsers.Add(user);
 
