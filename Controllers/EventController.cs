@@ -166,20 +166,26 @@ namespace Event_Portal.Controllers
     // Create new Method here
 
     [HttpPost("addUserToEvent/{userId}/{eventId}")]
-    public ActionResult<Event> AddUserToEvent(Guid userId, Guid eventId) 
+    public async Task<Event> AddUserToEvent(String userId, String eventId) 
     {
 
-      var existingEvent = eventControllerRepository.GetEvent(eventId);
-      User existingUser = userControllerRepository.GetUser(userId);
+      var existingUser = await client.GetTaskAsync("users/" + userId);
+      var existingEvent = await client.GetTaskAsync("events/" + eventId);
 
-      if (existingUser is null)
-      {
-        return NotFound();
-      }
 
-      existingEvent.JoinedUsers.Add(existingUser);
+      User user = existingUser.ResultAs<User>();
+      Event myEvent = existingEvent.ResultAs<Event>();
 
-      return existingEvent;
+
+      myEvent.JoinedUsers.Add(user);
+      var rs = await client.SetTaskAsync("events/" + eventId, myEvent);
+
+  
+
+      return myEvent;
+
+    
+
     }
     
 
