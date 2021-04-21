@@ -48,26 +48,12 @@ namespace Event_Portal.Controllers
 
     // GET /events
     [HttpGet]
-    public List<Event> GetEvents()
+    public IEnumerable<Event> GetEvents()
     {
       FirebaseResponse res = client.Get(@"events");
       Dictionary<string, Event> data = JsonConvert.DeserializeObject<Dictionary<string, Event>>(res.Body.ToString());
-      var list = populateRTB(data);
+      var list = data.Select(x => x.Value);
       return list;
-
-    }
-
-    public List<Event> populateRTB(Dictionary<string, Event> record)
-    {
-
-      List<Event> myList = new List<Event>();
-      foreach (var item in record)
-      {
-        //var info = "item is " + item.Value.FirstName;
-        myList.Add(item.Value);
-      }
-
-      return myList;
 
     }
 
