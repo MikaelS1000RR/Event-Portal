@@ -77,7 +77,7 @@ namespace Event_Portal.Controllers
 
     // POST /events
     [HttpPost]
-    public async Task<EventDto> CreateEvent(CreateEventDto eventDto)
+    public async Task<Event> CreateEvent(CreateEventDto eventDto)
 
     {
       Event myEvent = new()
@@ -97,13 +97,13 @@ namespace Event_Portal.Controllers
       if(hostUser != null)
       {
         var response = await client.PushTaskAsync("events", myEvent);
-        EventDto result = response.ResultAs<EventDto>();  
+        Event result = response.ResultAs<Event>();  
 
         Console.WriteLine("Added hostId");
 
         Console.WriteLine("Pushed new event");
 
-        return result;
+        return myEvent;
 
 
       } else {
