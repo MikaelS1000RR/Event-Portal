@@ -44,32 +44,17 @@ namespace Event_Portal.Controllers
 
     // GET /users
     [HttpGet]
-    public List<User>  GetUsers()
+    public IEnumerable<User>  GetUsers()
     {
     
       FirebaseResponse res = client.Get(@"users");
       Dictionary<string, User> data = JsonConvert.DeserializeObject<Dictionary<string, User>>(res.Body.ToString());
-       var list=populateRTB(data);
+      // Used Linq instead of foreach loop
+       var list = data.Select(x => x.Value);
+      
       return list;
 
-    }
-
-  
-    public List<User> populateRTB(Dictionary<string, User> record)
-    {
-
-      List<User> myList = new List<User>();
-      foreach(var item in record)
-      {
-        //var info = "item is " + item.Value.FirstName;
-        myList.Add(item.Value);
-      }
-
-      return myList;
-
-    }
-
-    
+    }    
 
     // GET /users/{id}
     [HttpGet("{id}")]
