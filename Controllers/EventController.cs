@@ -94,25 +94,45 @@ namespace Event_Portal.Controllers
       User hostUser = JsonConvert.DeserializeObject<User>(res.Body.ToString());
 
 
+      Console.WriteLine(hostUser);
+
       if(hostUser != null)
       {
         var response = await client.PushTaskAsync("events", myEvent);
+        
+        var me = GetEvents();
+        var lastPushedEvent = me.ElementAt(me.Count() - 1);
+        hostUser.CreatedEvents.Add(lastPushedEvent);
+
+        var rs = await client.SetTaskAsync("users/" + myEvent.HostId, hostUser);
+
+
+
+          // Push the last created event to CreatedEvents 
+
+        FirebaseResponse resEvent = client.Get(@"events");
+        User createdEvent = JsonConvert.DeserializeObject<User>(res.Body.ToString());
+
         Event result = response.ResultAs<Event>();  
+
 
         Console.WriteLine("Added hostId");
 
         Console.WriteLine("Pushed new event");
 
-        return myEvent;
 
+       // hostUser.CreatedEvents.Add(result);
 
-      } else {
+        return lastPushedEvent;
+
+      } 
+      
+      else {
         Console.WriteLine("Wrong hostID");
          return null;
       }
 
       
-
 
     }
 
