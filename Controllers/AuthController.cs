@@ -31,13 +31,14 @@ namespace Event_Portal.Controllers
 
     IFirebaseClient client;
 
-  public AuthController()
+    User userIncall = new User();
+
+    public AuthController()
   {
 
 
     client = new FireSharp.FirebaseClient(config);
   }
-
 
 
     [HttpPost]
@@ -46,6 +47,9 @@ namespace Event_Portal.Controllers
 
 
       Console.WriteLine("Reached here");
+
+
+      
 
 
       Login currentUser = new()
@@ -59,22 +63,42 @@ namespace Event_Portal.Controllers
       FirebaseResponse res = client.Get(@"users");
       Dictionary<string, User> listUser = JsonConvert.DeserializeObject<Dictionary<string, User>>(res.Body.ToString());
 
-      foreach (var user in listUser)
+      /*
+        1.  if statement to check if user is already logged in. 
+      
+
+      */
+
+        if(userIncall != null) {
+
+        Console.WriteLine("userIncall is working");
+
+        foreach (var user in listUser)
       {
 
         var userEmail = user.Value.Email;
         var userPassword = user.Value.Password;
 
+          
 
         if (userEmail == currentUser.Email)
         {
           if (userPassword == currentUser.Password)
           {
             Console.WriteLine("Welcome " + userEmail);
-          }
-        }
+          }   
+            // Try to solve if else problem. if userEmail && 
+            // userPassord is wrong, then give ERROR
+    
 
+      }  
+          
+        }
+           
+    
+        
       }
+
     }
     
         
