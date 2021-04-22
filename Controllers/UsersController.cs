@@ -3,50 +3,76 @@ using System.Collections.Generic;
 using System.Linq;
 using Event_Portal.Dtos;
 using Event_Portal.Models;
-using Event_Portal.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
+using FireSharp;
+using FireSharp.Config;
+using FireSharp.Response;
+using FireSharp.Interfaces;
+using System.Threading.Tasks;
 
 namespace Event_Portal.Controllers
 {
 
+
   [ApiController]
   [Route("/users")]
+
+
   public class UsersController : ControllerBase
   {
-    private readonly IUserRepo repository;
 
-    public UsersController(IUserRepo repository)
+    IFirebaseConfig config = new FirebaseConfig
     {
-      this.repository = repository; 
+      AuthSecret = "JVGSRZVMU5Iw6TtGygVyEPUf41Zk40viN3UxWR76",
+      BasePath = "https://geshdo-events-dev-default-rtdb.europe-west1.firebasedatabase.app/"
+    };
+
+    IFirebaseClient client;
+
+
+
+
+    public UsersController()
+    {
+      
+      client = new FireSharp.FirebaseClient(config);
+      
     }
 
     // GET /users
     [HttpGet]
-    public IEnumerable<UserDto> GetUsers()
+    public IEnumerable<User>  GetUsers()
     {
-       var users = repository.GetUsers().Select(user => user.AsDto());
-       return users;
     
-    }
+      FirebaseResponse res = client.Get(@"users");
+      Dictionary<string, User> data = JsonConvert.DeserializeObject<Dictionary<string, User>>(res.Body.ToString());
+      // Used Linq instead of foreach loop
+       var list = data.Select(x => x.Value);
+      
+      return list;
+
+    }    
 
     // GET /users/{id}
     [HttpGet("{id}")]
-    public ActionResult<UserDto> GetUser(Guid id) 
+    public async Task<UserDto> GetUser(String id) 
     {
-      var user = repository.GetUser(id);
+      var response = await client.GetTaskAsync("users/" + id);
 
-      if(user is null) 
+      if(client != null) 
       {
-        return NotFound();
+        Console.WriteLine("Connection is established.");
       }
-
-      return user.AsDto();
+      UserDto result = response.ResultAs<UserDto>();
+     
+      return result;
     }
 
       // POST /users
      [HttpPost] 
-    public ActionResult<UserDto> CreateUser(CreateUserDto userDto)
+    public async Task<User> CreateUser(CreateUserDto userDto)
     {
       User user = new()
       {
@@ -57,24 +83,23 @@ namespace Event_Portal.Controllers
         Password = userDto.Password
       };
 
-      repository.CreateUser(user);
 
-      return CreatedAtAction(nameof(GetUser), new { id = user.Id}, user.AsDto());
+      var response = await client.PushTaskAsync("users", user);
+      User result = response.ResultAs<User>();
+
+      Console.WriteLine("Pushed new user");    
+
+      return user;
+
 
     }
 
     // PUT /users/{id}
     [HttpPut("{id}")]
-    public ActionResult UpdateUser(Guid id, UpdateUserDto userDto)
+    public async Task<UpdateUserDto> UpdateUser(String id, UpdateUserDto userDto)
     {
-      var existingUser = repository.GetUser(id);
 
-      if(existingUser is null)
-      {
-        return NotFound();
-      }
-
-      User updatedUser = existingUser with
+      UpdateUserDto updatedUser = new UpdateUserDto
       {
         FirstName = userDto.FirstName,
         LastName = userDto.LastName,
@@ -82,32 +107,28 @@ namespace Event_Portal.Controllers
         Password = userDto.Password,
       };
 
-      repository.UpdateUser(updatedUser);
 
-      return NoContent();
+      var response = await client.UpdateTaskAsync("users/" + id, updatedUser);  
+      User result = response.ResultAs<User>();
+
+      Console.WriteLine("Pushed new user");
+
+      
+
+      return updatedUser;
 
     }
 
     // DELETE /users/{id}
     [HttpDelete("{id}")]
-    public ActionResult DeleteUser(Guid id) {
+    public  async Task<String> DeleteUser(String id) {
 
-      var existingUser = repository.GetUser(id);
+      var response = await client.DeleteTaskAsync("users/" + id);
 
-      if (existingUser is null)
-      {
-        return NotFound();
-      }
+      return "This user has been removed.";
 
-      repository.DeleteUser(id);
-
-      return NoContent();
     }
 
-
-
-  
-    
  
    }
 
