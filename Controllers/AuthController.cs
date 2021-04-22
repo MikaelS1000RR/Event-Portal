@@ -31,7 +31,7 @@ namespace Event_Portal.Controllers
 
     IFirebaseClient client;
 
-    User userIncall = new User();
+  
 
     public AuthController()
   {
@@ -69,7 +69,7 @@ namespace Event_Portal.Controllers
 
       */
 
-        if(userIncall != null) {
+       
 
         Console.WriteLine("userIncall is working");
 
@@ -97,7 +97,7 @@ namespace Event_Portal.Controllers
            
     
         
-      }
+      
 
     }
     
