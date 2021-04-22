@@ -98,8 +98,8 @@ namespace Event_Portal.Controllers
       {
         var response = await client.PushTaskAsync("events", myEvent);
         
-        var me = GetEvents();
-        var lastPushedEvent = me.ElementAt(me.Count() - 1);
+        var eventsList = GetEvents();
+        var lastPushedEvent = eventsList.ElementAt(eventsList.Count() - 1);
         hostUser.CreatedEvents.Add(lastPushedEvent);
 
         var rs = await client.SetTaskAsync("users/" + myEvent.HostId, hostUser);
