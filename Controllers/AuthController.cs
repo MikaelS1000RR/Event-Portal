@@ -53,13 +53,38 @@ namespace Event_Portal.Controllers
         Password = userDto.Password
       };
 
+      FirebaseResponse res = client.Get(@"users");
+      Dictionary<string, User> listUser = JsonConvert.DeserializeObject<Dictionary<string, User>>(res.Body.ToString());
 
-      var response = await client.PushTaskAsync("users", user);
-      User result = response.ResultAs<User>();
 
-      Console.WriteLine("Pushed new user");
+      bool emailExists = false;
+
+      foreach (var userReg in listUser)
+      {
+
+        var userEmail = userReg.Value.Email;
+        if (userEmail == user.Email)
+        {
+          emailExists = true;
+        }
+
+      } 
+      if(!emailExists) 
+      {
+        var response = await client.PushTaskAsync("users", user);
+        User result = response.ResultAs<User>();
+
+        Console.WriteLine("Pushed new user");
 
       return user;
+      } 
+
+      else 
+      {
+        Console.WriteLine("This email is already registered!");
+        return null;
+      }
+    
 
 
     }
