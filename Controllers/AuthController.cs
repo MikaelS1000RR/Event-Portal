@@ -11,6 +11,7 @@ using FireSharp.Config;
 using FireSharp.Response;
 using FireSharp.Interfaces;
 using System.Threading.Tasks;
+using Event_Portal.Auth;
 
 namespace Event_Portal.Controllers
 {
@@ -50,7 +51,7 @@ namespace Event_Portal.Controllers
         FirstName = userDto.FirstName,
         LastName = userDto.LastName,
         Email = userDto.Email,
-        Password = userDto.Password
+        Password = EncryptSHA.GetShaData(userDto.Password)
       };
 
       FirebaseResponse res = client.Get(@"users");
