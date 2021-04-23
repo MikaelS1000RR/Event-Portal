@@ -70,30 +70,7 @@ namespace Event_Portal.Controllers
       return result;
     }
 
-      // POST /users
-     [HttpPost] 
-    public async Task<User> CreateUser(CreateUserDto userDto)
-    {
-      User user = new()
-      {
-        Id = Guid.NewGuid(),
-        FirstName = userDto.FirstName,
-        LastName = userDto.LastName,
-        Email = userDto.Email,
-        Password = userDto.Password
-      };
-
-
-      var response = await client.PushTaskAsync("users", user);
-      User result = response.ResultAs<User>();
-
-      Console.WriteLine("Pushed new user");    
-
-      return user;
-
-
-    }
-
+      
     // PUT /users/{id}
     [HttpPut("{id}")]
     public async Task<UpdateUserDto> UpdateUser(String id, UpdateUserDto userDto)

@@ -18,7 +18,6 @@ namespace Event_Portal.Controllers
 
 
   [ApiController]
-  [Route("/auth")]
     public class AuthController : ControllerBase
     {
 
@@ -40,8 +39,34 @@ namespace Event_Portal.Controllers
     client = new FireSharp.FirebaseClient(config);
   }
 
+    // POST /users
+    [HttpPost]
+    [Route("/register")]
+    public async Task<User> CreateUser(CreateUserDto userDto)
+    {
+      User user = new()
+      {
+        Id = Guid.NewGuid(),
+        FirstName = userDto.FirstName,
+        LastName = userDto.LastName,
+        Email = userDto.Email,
+        Password = userDto.Password
+      };
+
+
+      var response = await client.PushTaskAsync("users", user);
+      User result = response.ResultAs<User>();
+
+      Console.WriteLine("Pushed new user");
+
+      return user;
+
+
+    }
+
 
     [HttpPost]
+    [Route("/login")]
     public void GetLogin(Login login)
     {
 
@@ -69,9 +94,7 @@ namespace Event_Portal.Controllers
 
       */
 
-       
-
-        Console.WriteLine("userIncall is working");
+      
 
         foreach (var user in listUser)
       {
@@ -99,10 +122,15 @@ namespace Event_Portal.Controllers
         
       
 
-    }
+    } 
+
     
-        
-    }
+    
+   
+
+
+
+  }
 
 
 }
