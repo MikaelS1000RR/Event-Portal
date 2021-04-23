@@ -128,7 +128,7 @@ namespace Event_Portal.Controllers
 
         if (userEmail == currentUser.Email)
         {
-          if (userPassword == currentUser.Password)
+          if (userPassword == EncryptSHA.GetShaData(currentUser.Password))
           {
             isLoggedIn = user.Value;
             rightCredentials = true;
