@@ -88,7 +88,7 @@ namespace Event_Portal.Controllers
       var response = await client.UpdateTaskAsync("users/" + id, updatedUser);  
       User result = response.ResultAs<User>();
 
-      Console.WriteLine("Pushed new user");
+      Console.WriteLine("Updated user's information.");
 
       
 
