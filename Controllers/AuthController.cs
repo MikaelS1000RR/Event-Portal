@@ -53,7 +53,7 @@ namespace Event_Portal.Controllers
         FirstName = userDto.FirstName,
         LastName = userDto.LastName,
         Email = userDto.Email,
-        Password = EncryptSHA.GetShaData(userDto.Password)
+        Password = PasswordHash.HashPassword(userDto.Password)
       };
 
       FirebaseResponse res = client.Get(@"users");
@@ -130,7 +130,7 @@ namespace Event_Portal.Controllers
 
         if (userEmail == currentUser.Email)
         {
-          if (userPassword == EncryptSHA.GetShaData(currentUser.Password))
+          if (PasswordHash.ValidatePassword(currentUser.Password,userPassword))
           {
             isLoggedIn = user.Value;
             rightCredentials = true;
