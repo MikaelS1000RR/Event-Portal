@@ -43,11 +43,11 @@ namespace Event_Portal.Controllers
 
     // GET /users
     [HttpGet]
-    public IEnumerable<User>  GetUsers()
+    public IEnumerable<SecureUserDto>  GetUsers()
     {
     
       FirebaseResponse res = client.Get(@"users");
-      Dictionary<string, User> data = JsonConvert.DeserializeObject<Dictionary<string, User>>(res.Body.ToString());
+      Dictionary<string, SecureUserDto> data = JsonConvert.DeserializeObject<Dictionary<string, SecureUserDto>>(res.Body.ToString());
       // Used Linq instead of foreach loop
        var list = data.Select(x => x.Value);
       
@@ -57,7 +57,7 @@ namespace Event_Portal.Controllers
 
     // GET /users/{id}
     [HttpGet("{id}")]
-    public async Task<UserDto> GetUser(String id) 
+    public async Task<SecureUserDto> GetUser(String id) 
     {
       var response = await client.GetTaskAsync("users/" + id);
 
@@ -65,7 +65,7 @@ namespace Event_Portal.Controllers
       {
         Console.WriteLine("Connection is established.");
       }
-      UserDto result = response.ResultAs<UserDto>();
+      SecureUserDto result = response.ResultAs<SecureUserDto>();
      
       return result;
     }
