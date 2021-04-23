@@ -18,8 +18,8 @@ namespace Event_Portal.Controllers
 
 
   [ApiController]
-    public class AuthController : ControllerBase
-    {
+  public class AuthController : ControllerBase
+  {
 
 
     IFirebaseConfig config = new FirebaseConfig
@@ -30,14 +30,14 @@ namespace Event_Portal.Controllers
 
     IFirebaseClient client;
 
-  
+
 
     public AuthController()
-  {
+    {
 
 
-    client = new FireSharp.FirebaseClient(config);
-  }
+      client = new FireSharp.FirebaseClient(config);
+    }
 
     // POST /users
     [HttpPost]
@@ -68,23 +68,23 @@ namespace Event_Portal.Controllers
           emailExists = true;
         }
 
-      } 
-      if(!emailExists) 
+      }
+      if (!emailExists)
       {
         var response = await client.PushTaskAsync("users", user);
         User result = response.ResultAs<User>();
 
         Console.WriteLine("Pushed new user");
 
-      return user;
-      } 
+        return user;
+      }
 
-      else 
+      else
       {
         Console.WriteLine("This email is already registered!");
         return null;
       }
-    
+
 
 
     }
@@ -92,23 +92,23 @@ namespace Event_Portal.Controllers
 
     [HttpPost]
     [Route("/login")]
-    public void GetLogin(Login login)
+    public User GetLogin(Login login)
     {
 
 
       Console.WriteLine("Reached here");
 
 
-      
+
 
 
       Login currentUser = new()
       {
-      
+
         Email = login.Email,
         Password = login.Password
-   
-    };
+
+      };
 
       FirebaseResponse res = client.Get(@"users");
       Dictionary<string, User> listUser = JsonConvert.DeserializeObject<Dictionary<string, User>>(res.Body.ToString());
@@ -119,39 +119,50 @@ namespace Event_Portal.Controllers
 
       */
 
-      
 
-        foreach (var user in listUser)
+      bool rightCredentials = false;
+      User isLoggedIn = null;
+
+      foreach (var user in listUser)
       {
 
         var userEmail = user.Value.Email;
         var userPassword = user.Value.Password;
 
-          
+
 
         if (userEmail == currentUser.Email)
         {
           if (userPassword == currentUser.Password)
           {
-            Console.WriteLine("Welcome " + userEmail);
-          }   
-            // Try to solve if else problem. if userEmail && 
-            // userPassord is wrong, then give ERROR
-    
+            isLoggedIn = user.Value;
+            rightCredentials = true;
+          }
 
-      }  
-          
+
         }
-           
-    
-        
-      
 
-    } 
+      }
+      if (rightCredentials == true)
+      {
+        Console.WriteLine("Welcome " + currentUser.Email);
 
-    
-    
-   
+      }
+      else
+      {
+        Console.WriteLine("Bad credentials");
+      }
+      return isLoggedIn;
+
+
+
+
+
+    }
+
+
+
+
 
 
 
