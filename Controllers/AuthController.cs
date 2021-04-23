@@ -113,12 +113,6 @@ namespace Event_Portal.Controllers
       FirebaseResponse res = client.Get(@"users");
       Dictionary<string, User> listUser = JsonConvert.DeserializeObject<Dictionary<string, User>>(res.Body.ToString());
 
-      /*
-        1.  if statement to check if user is already logged in. 
-      
-
-      */
-
 
       bool rightCredentials = false;
       User isLoggedIn = null;
