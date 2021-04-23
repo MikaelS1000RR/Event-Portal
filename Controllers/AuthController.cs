@@ -12,6 +12,9 @@ using FireSharp.Response;
 using FireSharp.Interfaces;
 using System.Threading.Tasks;
 using Event_Portal.Auth;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Event_Portal.Controllers
 {
@@ -21,7 +24,6 @@ namespace Event_Portal.Controllers
   [ApiController]
   public class AuthController : ControllerBase
   {
-
 
     IFirebaseConfig config = new FirebaseConfig
     {
@@ -141,6 +143,16 @@ namespace Event_Portal.Controllers
       if (rightCredentials == true)
       {
         Console.WriteLine("Welcome " + currentUser.Email);
+        var claims = new List<Claim>
+        {
+          new Claim(ClaimTypes.Email, currentUser.Email)
+      };
+
+        var claimsIdentity = new ClaimsIdentity(claims, "Login");
+
+        HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+
+        
 
       }
       else
@@ -153,6 +165,15 @@ namespace Event_Portal.Controllers
 
 
 
+    }
+
+    [HttpPost] 
+    [Route("/logout")]
+
+    public async Task<string> Logout() 
+    {
+      await HttpContext.SignOutAsync();
+      return "You've been logged out ";
     }
 
 

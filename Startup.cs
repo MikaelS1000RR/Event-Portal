@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,7 +27,14 @@ namespace Event_Portal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-     
+
+      services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+     .AddCookie(o =>
+     {
+       o.LoginPath = "/Home/Login";
+
+     });
+
       services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -48,6 +55,8 @@ namespace Event_Portal
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
