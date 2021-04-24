@@ -99,86 +99,120 @@ namespace Event_Portal.Controllers
     {
 
 
-      Console.WriteLine("Reached here");
-
-
-
-
-
-      Login currentUser = new()
+      if (!User.Identity.IsAuthenticated)
       {
+        string uniquekey = "";
 
-        Email = login.Email,
-        Password = login.Password
 
+        Login currentUser = new()
+        {
+
+          Email = login.Email,
+          Password = login.Password,
+
+        };
+
+        FirebaseResponse res = client.Get(@"users");
+        Dictionary<string, User> listUser = JsonConvert.DeserializeObject<Dictionary<string, User>>(res.Body.ToString());
+
+
+        bool rightCredentials = false;
+        User isLoggedIn = null;
+
+        foreach (var user in listUser)
+        {
+
+          var userEmail = user.Value.Email;
+          var userPassword = user.Value.Password;
+          uniquekey = user.Key;
+
+
+
+          if (userEmail == currentUser.Email)
+          {
+            if (PasswordHash.ValidatePassword(currentUser.Password, userPassword))
+            {
+              isLoggedIn = user.Value;
+              rightCredentials = true;
+              break;
+            }
+
+
+          }
+
+        }
+        if (rightCredentials == true)
+        {
+
+          Console.WriteLine("Unique key after foreach is " + uniquekey);
+          Console.WriteLine("Welcome " + currentUser.Email);
+          var claims = new List<Claim>
+        {
+          new Claim(ClaimTypes.Email, currentUser.Email),
+          new Claim(ClaimTypes.Name, uniquekey)
       };
 
-      FirebaseResponse res = client.Get(@"users");
-      Dictionary<string, User> listUser = JsonConvert.DeserializeObject<Dictionary<string, User>>(res.Body.ToString());
+          var claimsIdentity = new ClaimsIdentity(claims, "Login");
 
+          HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-      bool rightCredentials = false;
-      User isLoggedIn = null;
-
-      foreach (var user in listUser)
-      {
-
-        var userEmail = user.Value.Email;
-        var userPassword = user.Value.Password;
-
-
-
-        if (userEmail == currentUser.Email)
-        {
-          if (PasswordHash.ValidatePassword(currentUser.Password,userPassword))
-          {
-            isLoggedIn = user.Value;
-            rightCredentials = true;
-          }
 
 
         }
-
-      }
-      if (rightCredentials == true)
-      {
-        Console.WriteLine("Welcome " + currentUser.Email);
-        var claims = new List<Claim>
+        else
         {
-          new Claim(ClaimTypes.Email, currentUser.Email)
-      };
-
-        var claimsIdentity = new ClaimsIdentity(claims, "Login");
-
-        HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-
-        
-
+          Console.WriteLine("Bad credentials");
+        }
+        return isLoggedIn;
       }
+
+
+
       else
       {
-        Console.WriteLine("Bad credentials");
+        Console.WriteLine("You are already logged in");
+        return null;
+
       }
-      return isLoggedIn;
-
-
-
-
-
     }
 
-    [HttpPost] 
+    [HttpPost]
     [Route("/logout")]
 
-    public async Task<string> Logout() 
+    public async Task<string> Logout()
     {
       await HttpContext.SignOutAsync();
       return "You've been logged out ";
     }
 
+    [HttpPost]
+    [Route("/whoami")]
+
+    public string Whoami()
+    {
+      ClaimsPrincipal principal = HttpContext.User as
+      ClaimsPrincipal;
+
+      if (User.Identity.IsAuthenticated)
+      {
+        var key = principal.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault();
+        Console.WriteLine("Unique key in whoami is " + key);
 
 
+        foreach (Claim claim in principal.Claims)
+        {
+          Console.WriteLine("Claim Value: " + claim.Value);
+        }
 
+        return key;
+
+
+      }
+      else
+      {
+        return "User is unauthenticated";
+      }
+    }
 
 
 
