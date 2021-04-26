@@ -48,8 +48,8 @@ export default {
     width: 100%;
     height: 100vh;
      background-image: radial-gradient(at top left, black, transparent),
-    radial-gradient(at top right, rgb(70, 0, 128), transparent),
-    radial-gradient(at bottom left, #6133ed68, transparent);
+    radial-gradient(at top right, rgb(81, 3, 145), transparent),
+    radial-gradient(at bottom left, #4110d4, transparent);
 
 
   }

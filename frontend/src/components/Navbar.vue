@@ -1,11 +1,18 @@
+
 <template>
+
+
 
 <div class="navbar-wrapper">
 
      <v-toolbar color="black" dark fixed app>
-       <v-toolbar-title>Logo</v-toolbar-title>
+       <div class="logo">
+      <img class="logoImg" src="../assets/Geshdo-logo.png">
+       </div>
           <v-spacer></v-spacer>
+          <div class="hamburger">
      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+     </div>
  
      </v-toolbar>
   
@@ -23,6 +30,30 @@ export default {
 
 
 
+.logo {
+  padding-left: 5vw;
+  padding-top: 2vw;
+}
+
+.logoImg {
+  width: 115%;
+}
+
+.hamburger {
+  padding-right: 5vw;
+  padding-top: 1vw;
+}
+
+.v-btn--icon.v-size--default .v-icon, .v-btn--fab.v-size--default .v-icon{
+  font-size: 300%!important;
+}
+
+
+  
+.v-application .black {
+  background-color: #1e1e1e !important;
+  height: 6vw!important;
+}
 
 
 
