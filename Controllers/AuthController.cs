@@ -74,7 +74,7 @@ namespace Event_Portal.Controllers
       }
       if (!emailExists)
       {
-        var response = await client.PushTaskAsync("users", user);
+        var response = await client.SetTaskAsync("users/" + user.Id, user);
         User result = response.ResultAs<User>();
 
         Console.WriteLine("Pushed new user");
@@ -88,8 +88,6 @@ namespace Event_Portal.Controllers
         return null;
       }
 
-
-
     }
 
 
@@ -101,7 +99,7 @@ namespace Event_Portal.Controllers
 
       if (!User.Identity.IsAuthenticated)
       {
-        string uniquekey = "";
+        Guid Id=new Guid();
 
 
         Login currentUser = new()
@@ -124,7 +122,7 @@ namespace Event_Portal.Controllers
 
           var userEmail = user.Value.Email;
           var userPassword = user.Value.Password;
-          uniquekey = user.Key;
+          Id = user.Value.Id;
 
 
 
@@ -144,19 +142,17 @@ namespace Event_Portal.Controllers
         if (rightCredentials == true)
         {
 
-          Console.WriteLine("Unique key after foreach is " + uniquekey);
+        
           Console.WriteLine("Welcome " + currentUser.Email);
           var claims = new List<Claim>
         {
           new Claim(ClaimTypes.Email, currentUser.Email),
-          new Claim(ClaimTypes.Name, uniquekey)
+          new Claim(ClaimTypes.Name, Id.ToString())
       };
 
           var claimsIdentity = new ClaimsIdentity(claims, "Login");
 
           HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-
-
 
         }
         else
@@ -185,18 +181,19 @@ namespace Event_Portal.Controllers
       return "You've been logged out ";
     }
 
+
     [HttpPost]
     [Route("/whoami")]
 
-    public string Whoami()
+    public async Task<User> Whoami()
     {
       ClaimsPrincipal principal = HttpContext.User as
       ClaimsPrincipal;
 
       if (User.Identity.IsAuthenticated)
       {
-        var key = principal.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault();
-        Console.WriteLine("Unique key in whoami is " + key);
+        var Id = principal.Claims.Where(c => c.Type == ClaimTypes.Name).Select(c => c.Value).SingleOrDefault();
+        Console.WriteLine("Unique key in whoami is " + Id);
 
 
         foreach (Claim claim in principal.Claims)
@@ -204,13 +201,18 @@ namespace Event_Portal.Controllers
           Console.WriteLine("Claim Value: " + claim.Value);
         }
 
-        return key;
+        var response = await client.GetTaskAsync("users/" + Id);
+         User user = response.ResultAs<User>();
+
+
+        return user;
 
 
       }
       else
       {
-        return "User is unauthenticated";
+        User user = new User();
+        return user;
       }
     }
 

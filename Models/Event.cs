@@ -9,7 +9,7 @@ namespace Event_Portal.Models
 
     public Guid Id { get; init; }
     public string Location { get; init; }
-    public string Key { get; set; }
+    
 
     public DateTimeOffset StartDateTime { get; set; }
     public DateTimeOffset EndDateTime { get; set; }

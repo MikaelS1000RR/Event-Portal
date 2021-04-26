@@ -96,36 +96,53 @@ namespace Event_Portal.Controllers
 
       if(hostUser != null)
       {
-        var response = await client.PushTaskAsync("events", myEvent);
-        
-        var eventsList = GetEvents();
-        var lastPushedEvent = eventsList.ElementAt(eventsList.Count() - 1);
-        hostUser.CreatedEvents.Add(lastPushedEvent);
+        /* var response = await client.PushTaskAsync("events", myEvent);
 
+         var eventsList = GetEvents();
+         var lastPushedEvent = eventsList.ElementAt(eventsList.Count() - 1);
+         hostUser.CreatedEvents.Add(lastPushedEvent);
+
+         var rs = await client.SetTaskAsync("users/" + myEvent.HostId, hostUser);
+
+
+
+           // Push the last created event to CreatedEvents 
+
+         FirebaseResponse resEvent = client.Get(@"events");
+         User createdEvent = JsonConvert.DeserializeObject<User>(res.Body.ToString());
+
+         Event result = response.ResultAs<Event>();  
+
+
+
+
+         Console.WriteLine("Pushed new event");
+
+      //Adding event to host user's created events list
+        hostUser.CreatedEvents.Add(result);
+
+         return lastPushedEvent;*/
+
+
+         //Saving event
+        var response = await client.SetTaskAsync("events/" + myEvent.Id, myEvent);
+        Event result = response.ResultAs<Event>();
+
+     
+
+
+       //Pushing event to user
+        hostUser.CreatedEvents.Add(result);
+      //Saving updated user
         var rs = await client.SetTaskAsync("users/" + myEvent.HostId, hostUser);
 
+         Console.WriteLine("Pushed new event");
 
-
-          // Push the last created event to CreatedEvents 
-
-        FirebaseResponse resEvent = client.Get(@"events");
-        User createdEvent = JsonConvert.DeserializeObject<User>(res.Body.ToString());
-
-        Event result = response.ResultAs<Event>();  
-
-
-       
-
-        Console.WriteLine("Pushed new event");
-
-
-       hostUser.CreatedEvents.Add(result);
-
-        return lastPushedEvent;
+        return result;
 
       } 
       
-      else {
+      else { 
         Console.WriteLine("Wrong hostID");
          return null;
       }
@@ -169,26 +186,31 @@ namespace Event_Portal.Controllers
 
 
     // POST User into Event
-
-    [HttpPost("addEventToUser/{eventId}/{userId}")]
+   
+    [HttpPost("/addEventToUser/{eventId}/{userId}")]
 
     public async Task<User> AddEventToUser(String eventId, String userId)
     {
 
-
-      var existingUser = await client.GetTaskAsync("users/" + userId);
-      var existingEvent = await client.GetTaskAsync("events/" + eventId);
-
-
-      User user = existingUser.ResultAs<User>();
-      Event myEvent = existingEvent.ResultAs<Event>();
+      
+            var existingUser = await client.GetTaskAsync("users/" + userId);
+            var existingEvent = await client.GetTaskAsync("events/" + eventId);
 
 
-      user.JoinedEvents.Add(myEvent);
-      var rs = await client.SetTaskAsync("users/" + userId, user);
+            User user = existingUser.ResultAs<User>();
 
 
-      return user;
+            Event myEvent = existingEvent.ResultAs<Event>();
+
+
+            user.JoinedEvents.Add(myEvent);
+            var rs = await client.SetTaskAsync("users/" + userId, user);
+
+
+            return user;
+
+
+     
 
 
 
@@ -196,7 +218,7 @@ namespace Event_Portal.Controllers
 
     // Create new Method here
 
-    [HttpPost("addUserToEvent/{userId}/{eventId}")]
+    [HttpPost("/addUserToEvent/{userId}/{eventId}")]
     public async Task<Event> AddUserToEvent(String userId, String eventId)
     {
 
