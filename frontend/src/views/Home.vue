@@ -11,6 +11,12 @@
     <div class="specEvent">
       <p>{{$store.state.specEvent.location}}</p>
       <button v-on:click="getSpecEvent">Fetch specific event</button>
+
+
+      <p>{{$store.state.users}}</p>
+       <button v-on:click=" getUsers">Fetch users</button>
+      <p>{{$store.state.specUser}}</p>
+       <button v-on:click="getSpecUser">Fetch  specific user</button>
     </div>
   </div>
 </template>
@@ -45,6 +51,12 @@ export default {
 
     getSpecEvent(){
       return this.$store.dispatch('fetchSpecEvent')
+    },
+    getUsers(){
+      return this.$store.dispatch('fetchUsers')
+    },
+    getSpecUser(){
+      return this.$store.dispatch('fetchSpecUser')
     }
   }
   

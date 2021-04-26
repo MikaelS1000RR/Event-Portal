@@ -7,20 +7,31 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     events: [],
+    users: [],
     specEvent: "",
-    id: "",
-    
+    specUser: "",
+    eventId: "",
+    userId: "",
   },
   mutations: {
     setEvents(state, events) {
       state.events = events;
     },
+    setUsers(state, users) {
+      state.users = users;
+    },
 
     setSpecEvent(state, event) {
       state.specEvent = event;
     },
-    setId(state, id) {
-      state.id = id;
+    setSpecUser(state, user) {
+      state.specUser = user;
+    },
+    setEventId(state, id) {
+      state.eventId = id;
+    },
+    setUserId(state, id) {
+      state.userId = id;
     },
   },
 
@@ -37,13 +48,37 @@ export default new Vuex.Store({
           console.log(err.response);
         });
     },
+    fetchUsers({ commit }) {
+      axios
+        .get("/users")
+        .then((res) => {
+          console.log(res.data);
+          commit("setUsers", res.data);
+        })
+
+        .catch((err) => {
+          console.log(err.response);
+        });
+    },
 
     fetchSpecEvent({ state, commit }) {
       axios
-        .get("/events/" + state.id)
+        .get("/events/" + state.eventId)
         .then((res) => {
           console.log(res.data);
           commit("setSpecEvent", res.data);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    },
+
+    fetchSpecUser({ state, commit }) {
+      axios
+        .get("/users/" + state.userId)
+        .then((res) => {
+          console.log(res.data);
+          commit("setSpecUser", res.data);
         })
         .catch((err) => {
           console.log(err.response);
