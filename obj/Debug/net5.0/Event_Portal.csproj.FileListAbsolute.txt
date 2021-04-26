@@ -66,3 +66,5 @@ C:\Users\Mikael\Documents\GitHub\Event-Portal\obj\Debug\net5.0\Event_Portal.dll
 C:\Users\Mikael\Documents\GitHub\Event-Portal\obj\Debug\net5.0\ref\Event_Portal.dll
 C:\Users\Mikael\Documents\GitHub\Event-Portal\obj\Debug\net5.0\Event_Portal.pdb
 C:\Users\Mikael\Documents\GitHub\Event-Portal\obj\Debug\net5.0\Event_Portal.genruntimeconfig.cache
+C:\LIAProjekt\EventProject\Event-Portal\bin\Debug\net5.0\frontend\package-lock.json
+C:\LIAProjekt\EventProject\Event-Portal\bin\Debug\net5.0\frontend\package.json

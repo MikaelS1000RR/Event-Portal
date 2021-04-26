@@ -92,7 +92,7 @@ namespace Event_Portal.Controllers
       User hostUser = JsonConvert.DeserializeObject<User>(res.Body.ToString());
 
 
-      Console.WriteLine(hostUser);
+     
 
       if(hostUser != null)
       {
@@ -114,12 +114,12 @@ namespace Event_Portal.Controllers
         Event result = response.ResultAs<Event>();  
 
 
-        Console.WriteLine("Added hostId");
+       
 
         Console.WriteLine("Pushed new event");
 
 
-       // hostUser.CreatedEvents.Add(result);
+       hostUser.CreatedEvents.Add(result);
 
         return lastPushedEvent;
 
