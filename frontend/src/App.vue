@@ -18,6 +18,9 @@ export default {
     Navbar,
   },
 
+ created(){
+  //this.$store.dispatch('fetchEvents')
+ },
   data: () => ({
     //
   }),
@@ -26,21 +29,25 @@ export default {
 
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,400;0,600;0,700;0,800;1,100;1,600&display=swap');
 
 *,
 ::before,
 ::after {
   padding: 0;
   margin: 0;
-   
+  font-family: "Montserrat", sans-serif;
+ 
+  
+  box-sizing: border-box;
 
 
 }
 
 body {
   margin: 0;
-  font-family: "Montserrat", sans-serif;
+
+  
   overflow-x: hidden;
    
 }

@@ -1,17 +1,19 @@
 <template>
   <div class="home">
-    
+    <div class="event-list-wrapper">
+     <EventList/>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
+import EventList from '../components/EventList.vue'
 
 
 export default {
   name: 'Home',
   components: {
-
+   EventList
   },
 
   data(){
