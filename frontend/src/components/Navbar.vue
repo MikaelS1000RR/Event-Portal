@@ -52,7 +52,7 @@ export default {
   
 .v-application .black {
   background-color: #1e1e1e !important;
-  height: 6vw!important;
+  height: 4.5vw!important;
 }
 
 
