@@ -45,6 +45,10 @@ props:['event'],
   
 }
 
+.v-sheet.v-card{
+  border-radius:0px;
+}
+
 .event-card:hover{
   cursor: pointer;
   transform: scale(1.1);
