@@ -63,6 +63,8 @@ export default {
 
 <style scoped>
 
+
+
 * {
   box-sizing: border-box;
 }
@@ -150,15 +152,18 @@ form p {
   cursor: pointer;
   outline: none;
   margin-right: 5vw;
+
 }
 
 .door {
   width: 10%;
+
 }
 
 .lock {
   width: 10%;
-  margin-left: 1vw;
+
+
 }
 
 </style>
