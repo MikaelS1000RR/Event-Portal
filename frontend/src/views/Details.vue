@@ -89,9 +89,20 @@
 </div>
 
 <div class="event-desc">
-
+  <div class="description">
+     <p>Description</p>
+  </div>
+ 
+  <p>{{currEvent.description}}</p>
+ 
 </div>
 
+</div>
+ <div class="btn-join">
+ <v-btn
+ elevation="11"
+  x-large
+>Join</v-btn>
 </div>
 
 
@@ -121,11 +132,6 @@ export default {
     await this.$store.dispatch("fetchSpecEvent", this.id);
 
   },
-
-  mounted(){
-    
-  }
-
   
 
   
@@ -145,12 +151,14 @@ export default {
 
 .my-12{
   width:90vw;
-  /*height:80vh;*/
+  
   background-color: white;
      display: flex;
      flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+  padding-right:2vw;
+  
 }
 
 .event-name{
@@ -182,7 +190,39 @@ ul>li{
   flex-direction: row;
   padding:1.5vw;
   align-items: center;
+  text-align: center;
+}
+
+li>p{
+  margin-top:1.2vw;
+  padding-left:1vw;
+  font-size:1.2vw;
+}
+
+.event-desc{
+  display:grid;
+  grid-auto-rows: 15% 85%;
+ height:100%;
+padding-top:2.6vw;
+}
+
+.description{
+  font-weight: 500;
  
 }
+
+.btn-join{
+ margin-top:-3vw;
+ padding-bottom:1vw;
+  margin-right:8vw;
+}
+.theme--light.v-btn.v-btn--has-bg{
+  background-color: var(--buttonPurple);
+}
+.v-btn:not(.v-btn--round).v-size--x-large{
+  width:10vw;
+  height:5vh;
+}
+
 
 </style>
