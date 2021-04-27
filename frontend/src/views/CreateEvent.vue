@@ -29,10 +29,24 @@
            <textarea name="" id="" cols="30" rows="7"></textarea>
         </p>
 
+       <p class="checkbox">
+       
+         
+        <label for="">Public</label>
+        <input type="checkbox" id="public">
+               
+        <label for="">Private</label>
+        <input type="checkbox" id="private">
+        
+       
+          </p>
+
+
         <p class="input-file-wrapper">
           <label for="upload">Upload your photo</label>
           <input type="file" name="" id="upload">
         </p>
+        
         <p>
           <button>Create</button>
         </p>
@@ -124,7 +138,7 @@ button {
   border: 0;
 }
 button:hover, button:focus {
-  background: rgba(107, 21, 206, 0.233);
+  background: rgba(107, 21, 206, 0.548);
   outline: 0;
 }
 
@@ -143,7 +157,12 @@ form p {
 }
 
 
-  
+.checkbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; 
+  align-items: center;
+}
 
 
 </style>
