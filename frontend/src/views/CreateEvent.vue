@@ -46,7 +46,12 @@
 
 </template>
 
+
+
 <script>
+
+
+
 export default {
 
   name: "CreateEvent",
@@ -85,7 +90,7 @@ h3 {
 
 input:focus,
 textarea:focus {
-  outline: 3px solid gold;
+  outline: 3px solid rgba(107, 21, 206, 0.233);
 }
 
 input,
@@ -119,7 +124,7 @@ button {
   border: 0;
 }
 button:hover, button:focus {
-  background: gold;
+  background: rgba(107, 21, 206, 0.233);
   outline: 0;
 }
 
