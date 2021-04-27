@@ -26,7 +26,7 @@
 
          <p>
           <label for="">Description</label>
-          <input type="text">
+           <textarea name="" id="" cols="30" rows="7"></textarea>
         </p>
 
         <p class="input-file-wrapper">
