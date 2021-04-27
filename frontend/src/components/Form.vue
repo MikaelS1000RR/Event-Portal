@@ -56,9 +56,11 @@
 </template>
 
 <script>
+  
 export default {
-
-}
+  
+  
+  }
 </script>
 
 <style scoped>
@@ -67,6 +69,7 @@ export default {
 
 * {
   box-sizing: border-box;
+  font-family:  "Montserrat", sans-serif;;
 }
 
 body {
