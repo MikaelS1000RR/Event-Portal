@@ -30,9 +30,13 @@
        
          
         <label for="">Public</label>
+         
+      <img class="door" src="../assets/door.png">
+
         <input type="checkbox" id="public">
                
         <label for="">Private</label>
+        <img class="lock" src="../assets/lock.png">
         <input type="checkbox" id="private">
         
        
@@ -145,6 +149,16 @@ form p {
 #public, #private {
   cursor: pointer;
   outline: none;
+  margin-right: 5vw;
+}
+
+.door {
+  width: 10%;
+}
+
+.lock {
+  width: 10%;
+  margin-left: 1vw;
 }
 
 </style>
