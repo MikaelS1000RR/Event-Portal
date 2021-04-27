@@ -2,7 +2,9 @@
   <v-app class="app">
     <Navbar />
     <v-main>
-      <Home />
+     
+      <router-view></router-view>
+  
     </v-main>
   </v-app>
 </template>
