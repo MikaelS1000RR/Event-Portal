@@ -13,10 +13,12 @@ namespace Event_Portal.Models
 
     public string Access { get; set; }
     public string Location { get; init; }
-    
+
+    public string ImgUrl{ get; set; }
 
 
-    
+
+
 
     public DateTimeOffset StartDateTime { get; init; }
     public DateTimeOffset EndDateTime { get; init; }
