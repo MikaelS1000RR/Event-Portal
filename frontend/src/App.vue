@@ -2,14 +2,18 @@
   <v-app class="app">
     <Navbar />
     <v-main>
-      <Home />
+     <div class="routerView">
+      <router-view></router-view>
+    </div>
     </v-main>
+ 
   </v-app>
 </template>
 
 <script>
 import Home from "./views/Home.vue";
 import Navbar from "./components/Navbar.vue";
+import CreateEvent from "./views/CreateEvent.vue";
 import "../index.css";
 
 export default {
@@ -18,6 +22,7 @@ export default {
   components: {
     Home,
     Navbar,
+    CreateEvent
   },
 
   data: () => ({

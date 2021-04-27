@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import CreateEvent from '../views/CreateEvent.vue'
 
 Vue.use(VueRouter)
 
@@ -10,6 +11,12 @@ const routes = [
     name: 'Home',
     component: Home
   },
+{
+    path: '/create-event',
+    name: 'CreateEvent',
+    component: CreateEvent
+  },
+
 ]
 
 const router = new VueRouter({
