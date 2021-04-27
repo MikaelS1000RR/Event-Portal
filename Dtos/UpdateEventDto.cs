@@ -8,6 +8,17 @@ namespace Event_Portal.Dtos
 
     [Required]
     public string Location { get; init; }
+    
+    [Required]
+    public string Name { get; init; }
+
+
+    [Required]
+    public string Description { get; init; }
+
+
+   [Required]
+    public string Access { get; set; }
 
     [Required]
     public DateTimeOffset StartDateTime { get; init; } 

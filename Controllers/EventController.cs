@@ -81,6 +81,9 @@ namespace Event_Portal.Controllers
       Event myEvent = new()
       {
         Id = Guid.NewGuid(),
+        Name=eventDto.Name,
+        Description=eventDto.Description,
+        Access=eventDto.Access,
         HostId = eventDto.HostId,
         Location = eventDto.Location,
         StartDateTime = eventDto.StartDateTime,
@@ -161,6 +164,9 @@ namespace Event_Portal.Controllers
       UpdateEventDto updatedEvent = new UpdateEventDto
       {
         Location = eventDto.Location,
+        Name=eventDto.Name,
+        Description=eventDto.Description,
+        Access=eventDto.Access,
         StartDateTime = eventDto.StartDateTime,
         EndDateTime = eventDto.EndDateTime,
       };

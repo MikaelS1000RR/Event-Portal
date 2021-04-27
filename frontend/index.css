@@ -1,0 +1,43 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,100;1,500&display=swap');
+
+:root {
+  --grey:#1e1e1e;
+  --background1: 
+    radial-gradient(at top left, black, transparent),
+    radial-gradient(at top right, rgb(81, 3, 145), transparent),
+    radial-gradient(at bottom left, #4110d4, transparent);
+}
+
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+
+}
+
+#app{
+   background-image:var(--background1);
+}
+
+*,
+::before,
+::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+
+.noselect {
+ -webkit-touch-callout: none; /* iOS Safari */
+ -webkit-user-select: none; /* Safari */
+ -khtml-user-select: none; /* Konqueror HTML */
+ -moz-user-select: none; /* Old versions of Firefox */
+ -ms-user-select: none; /* Internet Explorer/Edge */
+ user-select: none; /* Non-prefixed version, currently
+ supported by Chrome, Edge, Opera
+and Firefox */
+}
