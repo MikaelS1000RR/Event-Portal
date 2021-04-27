@@ -57,7 +57,8 @@
     >
       mdi-account-circle-outline
     </v-icon>
-   <p>{{hostUser.firstName}}</p>
+   <p>{{hostUser.firstName}}  {{hostUser.lastName}}</p>
+  
   
 
    </li>
@@ -109,18 +110,25 @@ export default {
     hostUser(){
   
        return this.$store.state.specUser
-    }
+    },
+     id() {
+      return this.$route.params.id;
+    },
+   
   },
  async created() {
-  // await this.$store.commit('setEventId',  )
-    await this.$store.dispatch("fetchSpecEvent", this.$route.params.id);
-    await this.$store.dispatch("fetchSpecUser", this.$store.state.specEvent.hostId)
-   
-  //await this.$store.commit('setUserId', this.$store.state.specEvent.hostId)
-    //await this.$store.dispatch("fetchSpecUser")
+  
+    await this.$store.dispatch("fetchSpecEvent", this.id);
 
-    
   },
+
+  mounted(){
+    
+  }
+
+  
+
+  
 }
 </script>
 
