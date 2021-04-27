@@ -55,9 +55,9 @@ export default {
 
 .v-card__title {
   justify-content: center;
-  font-weight: bold !important;
   margin-top: 4vw;
   color: white;
+  font-size:1.5vw;
 }
 
 .access {

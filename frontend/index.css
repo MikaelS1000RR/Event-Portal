@@ -10,16 +10,17 @@
     radial-gradient(at bottom left, #4110d4, transparent);
 }
 
-
 body {
-  margin: 0;
-  overflow-x: hidden;
-
+ margin: 0;
+ 
 }
+
 
 #app{
    background-image:var(--background1);
+
 }
+
 
 *,
 ::before,

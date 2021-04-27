@@ -1,16 +1,16 @@
 <template>
   <div class="wrapper">
-   <div class="event-list">
-     <EventItem v-for="event of events" :key="event.id" :event="event"/>
-   </div>
+    <div class="event-list">
+      <EventItem v-for="event of events" :key="event.id" :event="event" />
+    </div>
   </div>
 </template>
 
 <script>
-import EventItem from './EventItem.vue'
+import EventItem from "./EventItem.vue";
 export default {
-  components:{
-   EventItem
+  components: {
+    EventItem,
   },
   computed: {
     events() {
@@ -20,7 +20,6 @@ export default {
   created() {
     this.$store.dispatch("fetchEvents");
   },
-
 };
 </script>
 
@@ -35,16 +34,12 @@ export default {
 
 .event-list {
   width: 95%;
-  height:100vh;
-  padding-top:3vw;
+  padding-top: 3vw;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
- 
-  justify-content: center;
 
+  justify-content: center;
 
   position: relative;
 }
-
-
 </style>

@@ -15,9 +15,6 @@ export default {
    EventList
   },
 
-  data() {
-    return {};
-  },
 
   methods: {
     getEvents() {
@@ -32,8 +29,5 @@ export default {
 </script>
 
 <style scoped>
-.home {
-  width: 100%;
-  height: 100vh;
-}
+
 </style>
