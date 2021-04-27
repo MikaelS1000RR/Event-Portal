@@ -24,6 +24,9 @@ export default {
   methods: {
     redirect() {
       this.$router.push("/details/" + this.event.id);
+      this.$store.commit("setEventId", this.event.id )
+      
+      
     },
   },
 
