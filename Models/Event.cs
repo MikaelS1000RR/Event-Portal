@@ -8,11 +8,18 @@ namespace Event_Portal.Models
 
 
     public Guid Id { get; init; }
+    public string Name { get; init; }
+    public string Description { get; init; }
+
+    public string Access { get; set; }
     public string Location { get; init; }
     
 
-    public DateTimeOffset StartDateTime { get; set; }
-    public DateTimeOffset EndDateTime { get; set; }
+
+    
+
+    public DateTimeOffset StartDateTime { get; init; }
+    public DateTimeOffset EndDateTime { get; init; }
 
 
 
