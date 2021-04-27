@@ -13,7 +13,7 @@
 
         <p>
           <label for="">Time</label>
-          <input type="time">
+          <input type="time" id="time">
         </p>
 
          <p>
@@ -151,12 +151,15 @@ form p {
   
 }
 
+
 #public, #private {
   cursor: pointer;
   outline: none;
   margin-right: 5vw;
 
 }
+
+
 
 .door {
   width: 10%;
