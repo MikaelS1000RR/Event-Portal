@@ -1,5 +1,4 @@
 <template>
-
   <v-app class="app">
     <Navbar />
     <v-main>
@@ -13,7 +12,6 @@
 <script>
 import Home from "./views/Home.vue";
 import Navbar from "./components/Navbar.vue";
-
 import "../index.css";
 
 export default {
@@ -25,7 +23,7 @@ export default {
   },
 
  created(){
-  this.$store.dispatch('fetchUsers')
+  //this.$store.dispatch('fetchEvents')
  },
   data: () => ({
     //

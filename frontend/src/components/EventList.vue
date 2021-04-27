@@ -17,8 +17,8 @@ export default {
       return this.$store.state.events;
     },
   },
-  async created() {
-    await this.$store.dispatch("fetchEvents");
+  created() {
+    this.$store.dispatch("fetchEvents");
   },
 };
 </script>
