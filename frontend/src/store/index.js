@@ -48,6 +48,9 @@ export default new Vuex.Store({
           console.log(err.response);
         });
     },
+
+  
+
     fetchUsers({ commit }) {
       axios
         .get("/users")
@@ -84,6 +87,17 @@ export default new Vuex.Store({
           console.log(err.response);
         });
     },
+
+    createNewEvent({ state, commit }) {
+      axios
+        .post("https://geshdo-events-dev-default-rtdb.europe-west1.firebasedatabase.app/events")
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        })
+    }
   },
 
   modules: {},

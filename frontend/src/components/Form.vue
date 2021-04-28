@@ -3,43 +3,52 @@
       <h3>Create new event</h3>
       <form action="">
         <p>
-          <label for="">Event name</label>
-          <input type="text">
+
+          <label id="eventName" for="">Event name</label>
+          <input type="text" v-model="eventName">
         </p>
         <p>
-          <label for="">Location</label>
-          <input type="text">
+          <label id="location" for="">Location</label>
+          <input type="text" v-model="location">
         </p>
 
         <p>
-          <label for="">Time</label>
+          <label id="time1" for="">Start Time</label>
           <input type="time" id="time">
         </p>
 
-         <p>
-          <label for="">Date</label>
-          <input type="date">
+        <p>
+          <label id="time2" for="">End Time</label>
+          <input type="time" id="time"> 
         </p>
 
          <p>
-          <label for="">Description</label>
-           <textarea name="" id="" cols="30" rows="7"></textarea>
+          <label id="date1" for="">Start Date</label>
+          <input type="date">
+        </p>
+        <p>
+          <label id="date2" for="">End Date</label>
+          <input type="date" >
+        </p>
+
+         <p>
+          <label id="description" for="">Description</label>
+           <textarea v-model="description" name="" id="" cols="30" rows="7"> </textarea>
         </p>
 
        <p class="checkbox">
        
          
-        <label for="">Public</label>
+        <label for="public">Public</label>
          
       <img class="door" src="../assets/door.png">
 
-        <input type="checkbox" id="public">
+        <input id="public" value="Public" type="checkbox" v-model="publicAccess">
                
-        <label for="">Private</label>
+        <label for="private">Private</label>
         <img class="lock" src="../assets/lock.png">
-        <input type="checkbox" id="private">
-        
-       
+        <input  id="private" value="Private" type="checkbox" v-model="privateAccess">
+    
           </p>
 
 
@@ -49,7 +58,7 @@
         </p>
         
         <p>
-          <button>Create</button>
+          <button @click.prevent="postEvent">Create</button>
         </p>
       </form>
     </div>
@@ -58,7 +67,34 @@
 <script>
   
 export default {
-  
+  data() {
+    return {
+      eventName: '',
+      location: '',
+      StartDateTime: '2021-04-20T13:31:59.3528866Z',
+      EndDateTime: '2022-04-20T13:31:49.3528866Z',
+      description: '',
+      publicAccess: '',
+      privateAccess: '',
+      access: "",
+     
+    }
+  },
+  methods: {
+    postEvent() {
+
+      if(this.publicAccess) {
+        this.access = 'public'
+      } 
+      else if(this.privateAccess) {
+        this.access = 'private' 
+      } 
+      // Vuex
+      console.log({ eventName: this.eventName, location: this.location, StartDateTime: this.StartDateTime, EndDateTime: this.EndDateTime,
+     description: this.description, access: this.access});
+    },
+
+  },
   
   }
 </script>
