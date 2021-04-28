@@ -92,6 +92,7 @@ export default {
       description: this.description, publicAccess: this.publicAccess,
       privateAccess: this.publicAccess, access: this.access},
       ).then(response => {
+        this.isSuccess = true;
         console.log(response);
       });
     }
