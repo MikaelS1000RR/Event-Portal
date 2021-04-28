@@ -77,8 +77,8 @@ export default {
       startDate: '',
       endDate: '',
       description: '',
-      publicAccess: '',
-      privateAccess: '',
+     publicAccess: true,
+      privateAccess: false,
       access: "",
       isSuccess: false
      
@@ -86,11 +86,19 @@ export default {
   },
   methods: {
     onCreateEvent() {
+
+            if(this.publicAccess) {
+        this.access = 'public'
+      } 
+      else if(this.privateAccess) {
+        this.access = 'private' 
+      }
+
+
       axios.post('https://geshdo-events-dev-default-rtdb.europe-west1.firebasedatabase.app/events.json',
       {eventName: this.eventName, location: this.location, 
       startTime: this.startTime, endTime: this.endTime, startDate: this.startDate, endDate: this.endDate,
-      description: this.description, publicAccess: this.publicAccess,
-      privateAccess: this.publicAccess, access: this.access},
+      description: this.description, access: this.access},
       ).then(response => {
         this.isSuccess = true;
         console.log(response);
