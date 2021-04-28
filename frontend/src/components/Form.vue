@@ -5,7 +5,7 @@
         <p>
 
           <label id="eventName" for="">Event name</label>
-          <input type="text" v-bind="eventName">
+          <input type="text" v-model="eventName">
         </p>
         <p>
           <label id="location" for="">Location</label>

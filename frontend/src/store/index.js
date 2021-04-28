@@ -108,6 +108,7 @@ export default new Vuex.Store({
       };*/
 
       console.log(typeof name);
+      console.log(JSON.parse(JSON.stringify(name)));
       console.log(typeof location);
       console.log(typeof description);
       console.log(typeof access);
