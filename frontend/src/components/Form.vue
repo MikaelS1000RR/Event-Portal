@@ -6,7 +6,7 @@
         <p>
 
           <label id="eventName" for="">Event name</label>
-          <input type="text" v-model="eventName">
+          <input type="text" v-model="eventName" />
         </p>
         <p>
           <label id="location" for="">Location</label>
@@ -15,21 +15,21 @@
 
         <p>
           <label id="time1" for="">Start Time</label>
-          <input type="time" id="time">
+          <input type="time" id="time" v-model="startTime">
         </p>
 
         <p>
           <label id="time2" for="">End Time</label>
-          <input type="time" id="time"> 
+          <input type="time" id="time" v-model="endTime"> 
         </p>
 
          <p>
           <label id="date1" for="">Start Date</label>
-          <input type="date">
+          <input type="date" v-model="startDate">
         </p>
         <p>
           <label id="date2" for="">End Date</label>
-          <input type="date" >
+          <input type="date" v-model="endDate">
         </p>
 
          <p>
@@ -44,11 +44,11 @@
          
       <img class="door" src="../assets/door.png">
 
-        <input id="public" value="Public" type="checkbox" v-model="publicAccess"  @change="disablePrivate" >
+        <input id="public" value="Public" type="checkbox" v-model="publicAccess"  >
                
         <label for="private">Private</label>
         <img class="lock" src="../assets/lock.png">
-        <input  id="private" value="Private" type="checkbox" v-model="privateAccess" @change="disablePublic">
+        <input  id="private" value="Private" type="checkbox" v-model="privateAccess" >
     
           </p>
 
@@ -59,7 +59,7 @@
         </p>
         
         <p>
-          <button type="submit">Create</button>
+          <button type="submit" class="btn btn-primary">Create</button>
         </p>
       </form>
     </div>
@@ -72,51 +72,29 @@ export default {
     return {
       eventName: '',
       location: '',
-      StartDateTime: '2021-04-20T13:31:59.3528866Z',
-      EndDateTime: '2022-04-20T13:31:49.3528866Z',
+      startTime: '',
+      endTime: '',
+      startDate: '',
+      endDate: '',
       description: '',
-      publicAccess: true,
-      privateAccess: false,
+      publicAccess: '',
+      privateAccess: '',
       access: "",
       isSuccess: false
      
     }
   },
   methods: {
-    postEvent() {
-
-      if(this.publicAccess) {
-        this.access = 'public'
-      } 
-      else if(this.privateAccess) {
-        this.access = 'private' 
-      }
-      // Vuex
-     console.log({ eventName: this.eventName, location: this.location, StartDateTime: this.StartDateTime, EndDateTime: this.EndDateTime,
-     description: this.description, access: this.access});
-    },
-
-    onChangeMethod() {
-      console.log(this.privateAccess);
-    },
-   disablePublic(){
-     this.publicAccess=false;
-   },
-   disablePrivate(){
-     this.privateAccess=false;
-   },
-
-   onCreateEvent() {
-     axios
-        .post('/events', 
-        {eventName: this.eventName, location: this.location, StartDateTime: this.StartDateTime, EndDateTime: this.EndDateTime,
-     description: this.description, access: this.access},
-      )
-      .then((response) => {
-          this.isSuccess = true;
-          console.log(response);
+    onCreateEvent() {
+      axios.post('https://geshdo-events-dev-default-rtdb.europe-west1.firebasedatabase.app/events.json',
+      {eventName: this.eventName, location: this.location, 
+      startTime: this.startTime, endTime: this.endTime, startDate: this.startDate, endDate: this.endDate,
+      description: this.description, publicAccess: this.publicAccess,
+      privateAccess: this.publicAccess, access: this.access},
+      ).then(response => {
+        console.log(response);
       });
-   }
+    }
 
   },
   
