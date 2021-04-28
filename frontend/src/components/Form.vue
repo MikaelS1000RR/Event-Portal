@@ -47,7 +47,7 @@
                
         <label for="private">Private</label>
         <img class="lock" src="../assets/lock.png">
-        <input  id="private" value="Private" type="checkbox" v-model="privateAccess">
+        <input  id="private" value="Private" type="checkbox" v-model="privateAccess" @change="onChangeMethod">
     
           </p>
 
@@ -74,8 +74,8 @@ export default {
       StartDateTime: '2021-04-20T13:31:59.3528866Z',
       EndDateTime: '2022-04-20T13:31:49.3528866Z',
       description: '',
-      publicAccess: '',
-      privateAccess: '',
+      publicAccess: true,
+      privateAccess: this.trueOrFalse,
       access: "",
      
     }
@@ -93,6 +93,17 @@ export default {
       console.log({ eventName: this.eventName, location: this.location, StartDateTime: this.StartDateTime, EndDateTime: this.EndDateTime,
      description: this.description, access: this.access});
     },
+
+    onChangeMethod() {
+      console.log(this.privateAccess);
+    },
+    trueOrFalse() {
+      if(this.publicAccess) {
+        return false;
+      } else {
+        return true;
+      }
+    }
 
   },
   
