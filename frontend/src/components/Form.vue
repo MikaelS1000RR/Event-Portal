@@ -44,11 +44,11 @@
          
       <img class="door" src="../assets/door.png">
 
-        <input id="public" value="Public" type="checkbox" v-model="publicAccess"  >
+        <input id="public" value="Public" type="checkbox" v-model="publicAccess"  @change="disablePublic">
                
         <label for="private">Private</label>
         <img class="lock" src="../assets/lock.png">
-        <input  id="private" value="Private" type="checkbox" v-model="privateAccess" >
+        <input  id="private" value="Private" type="checkbox" v-model="privateAccess" @change="disablePrivate">
     
           </p>
 
@@ -103,7 +103,14 @@ export default {
         this.isSuccess = true;
         console.log(response);
       });
-    }
+    },
+    disablePublic(){
+     this.publicAccess=false;
+   },
+   disablePrivate(){
+     this.privateAccess=false;
+   },
+
 
   },
   
