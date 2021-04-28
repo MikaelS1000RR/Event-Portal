@@ -32,11 +32,11 @@ export default {
 
 .logo {
   padding-left: 5vw;
-  padding-top: 2vw;
+  padding-top: 1vw;
 }
 
 .logoImg {
-  width: 115%;
+  width: 95%;
 }
 
 .hamburger {
