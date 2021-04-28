@@ -5,7 +5,7 @@
         <p>
 
           <label id="eventName" for="">Event name</label>
-          <input type="text" v-model="eventName">
+          <input type="text" v-bind="eventName">
         </p>
         <p>
           <label id="location" for="">Location</label>
@@ -71,12 +71,13 @@ export default {
     return {
       eventName: '',
       location: '',
-      StartDateTime: '2021-04-20T13:31:59.3528866Z',
-      EndDateTime: '2022-04-20T13:31:49.3528866Z',
+      startDateTime: '2021-04-20T13:31:59.3528866Z',
+      endDateTime: '2022-04-20T13:31:49.3528866Z',
       description: '',
       publicAccess: true,
       privateAccess: false,
       access: "",
+      hostId:"061eb70c-7055-4d07-a584-b3c20cd59d73"
      
     }
   },
@@ -90,8 +91,22 @@ export default {
         this.access = 'private' 
       } 
       // Vuex
-      console.log({ eventName: this.eventName, location: this.location, StartDateTime: this.StartDateTime, EndDateTime: this.EndDateTime,
-     description: this.description, access: this.access});
+      console.log({ eventName: this.eventName, location: this.location, startDateTime: this.startDateTime, endDateTime: this.endDateTime,
+     description: this.description, access: this.access, hostId: this.hostId});
+
+       console.log(typeof this.eventName);
+      console.log(typeof this.location);
+      console.log(typeof this.description);
+      console.log(typeof this.access);
+
+
+  
+    
+   
+    this.$store.dispatch("createNewEvent", this.eventName, this.location, this.startDateTime, this.endDateTime, this.description, this.hostId, this.access)
+
+    
+
     },
 
     onChangeMethod() {
