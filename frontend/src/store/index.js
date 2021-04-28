@@ -12,6 +12,7 @@ export default new Vuex.Store({
     specUser: "",
     eventId: "",
     userId: "",
+    name: "",
     myEvent: {}
   },
   mutations: {
@@ -35,9 +36,14 @@ export default new Vuex.Store({
       state.userId = id;
     },
 
-    setMyEvent(state, event) {
-      state.myEvent = event;
-      console.log('my event has been set', state.myEvent);
+    setName(state, name) {
+      state.name = name;
+      console.log('my name has been set', state.name);
+    },
+
+    setMyEvent(state, myEvent) {
+      state.myEvent = myEvent;
+      console.log('my event has been set');
     }
   },
 
@@ -94,7 +100,7 @@ export default new Vuex.Store({
         });
     },
 
-    createNewEvent(name, location, startDateTime, endDateTime, description, hostId, access) {
+    createNewEvent(store) {
      
      /*
       let newEvent = {
@@ -106,23 +112,23 @@ export default new Vuex.Store({
         hostId: "061eb70c-7055-4d07-a584-b3c20cd59d73",
         description: "blah",
       };*/
-
+      console.log(typeof store.state.name);
+      /*
       console.log(typeof name);
-      console.log(JSON.parse(JSON.stringify(name)));
       console.log(typeof location);
       console.log(typeof description);
       console.log(typeof access);
-
+*/
      
     
-     /* axios({
+     /*axios({
         method: "post",
         url: "/events",
         data: {
-          name: name,
+          name: store.state.name,
           description: "Meeting to discuss our business in future",
           access: "public",
-          location: "Tokysdvso",
+          location: "Malmö",
           startDateTime: "2021-04-20T13:31:59.3528866+00:00",
           endDateTime: "2022-04-21T13:31:49.3528866+00:00",
           hostId: "7bcd7cff-1848-4a02-9db9-3d2265e97aba",
@@ -134,8 +140,17 @@ export default new Vuex.Store({
         (error) => {
           console.log(error);
         }
+      );*/
+      
+      axios.post("/events", store.state.myEvent).then(
+        (response) => {
+          console.log(response);
+        },
+        (error) => {
+          console.log(error);
+        }
       );
-      */
+      
    
     }
   },

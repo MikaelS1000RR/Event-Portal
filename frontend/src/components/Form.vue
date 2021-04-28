@@ -102,8 +102,19 @@ export default {
 
   
     
-   
-    this.$store.dispatch("createNewEvent", this.eventName, this.location, this.startDateTime, this.endDateTime, this.description, this.hostId, this.access)
+
+     //this.$store.commit("setName", this.eventName)
+     this.$store.commit("setMyEvent",  {
+          name: this.eventName,
+          description: this.description,
+          access: this.access,
+          location: this.location,
+          startDateTime: "2021-04-20T13:31:59.3528866+00:00",
+          endDateTime: "2022-04-21T13:31:49.3528866+00:00",
+          hostId: "7bcd7cff-1848-4a02-9db9-3d2265e97aba",
+        },)
+   // this.$store.dispatch("createNewEvent", this.eventName, this.location, this.startDateTime, this.endDateTime, this.description, this.hostId, this.access)
+   this.$store.dispatch("createNewEvent")
 
     
 
