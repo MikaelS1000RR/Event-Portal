@@ -6,20 +6,23 @@
       <router-view></router-view>
   
     </v-main>
+   <Footer/>
   </v-app>
 </template>
 
 <script>
-import Home from "./views/Home.vue";
+
 import Navbar from "./components/Navbar.vue";
+import Footer from "./components/Footer.vue"
 import "../index.css";
 
 export default {
   name: "App",
 
   components: {
-    Home,
+   
     Navbar,
+    Footer
   },
 
  created(){

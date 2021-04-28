@@ -2,7 +2,7 @@
   <div class="event-card" @click="redirect">
     <v-card :loading="loading" class="mx-auto my-12" max-width="374">
       <div class="access">
-        <p>Public</p>
+        <p>{{event.access}}</p>
        
       </div>
       <v-img class="event-img" height="200px" :src="event.imgUrl">
@@ -45,7 +45,7 @@ export default {
 
 .v-sheet.v-card {
   border-radius: 0px;
-   box-shadow: 5px 10px black;
+  
 }
 
 .event-card:hover {
@@ -62,7 +62,8 @@ export default {
 
 .access {
   background-color: white;
-  height: 20px;
+  height: 3.5vh;
+  
 }
 
 .event-img {
