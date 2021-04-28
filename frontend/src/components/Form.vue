@@ -43,11 +43,11 @@
          
       <img class="door" src="../assets/door.png">
 
-        <input id="public" value="Public" type="checkbox" v-model="publicAccess">
+        <input id="public" value="Public" type="checkbox" v-model="publicAccess"  @change="disablePrivate" >
                
         <label for="private">Private</label>
         <img class="lock" src="../assets/lock.png">
-        <input  id="private" value="Private" type="checkbox" v-model="privateAccess" @change="onChangeMethod">
+        <input  id="private" value="Private" type="checkbox" v-model="privateAccess" @change="disablePublic">
     
           </p>
 
@@ -75,7 +75,7 @@ export default {
       EndDateTime: '2022-04-20T13:31:49.3528866Z',
       description: '',
       publicAccess: true,
-      privateAccess: this.trueOrFalse,
+      privateAccess: false,
       access: "",
      
     }
@@ -97,13 +97,12 @@ export default {
     onChangeMethod() {
       console.log(this.privateAccess);
     },
-    trueOrFalse() {
-      if(this.publicAccess) {
-        return false;
-      } else {
-        return true;
-      }
-    }
+   disablePublic(){
+     this.publicAccess=false;
+   },
+   disablePrivate(){
+     this.privateAccess=false;
+   }
 
   },
   
