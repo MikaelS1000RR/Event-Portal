@@ -7,7 +7,7 @@
 
      <v-toolbar color="black" dark fixed app>
        <div class="logo">
-      <img class="logoImg" src="../assets/Geshdo-logo.png">
+      <img class="logoImg" src="../assets/Geshdo-logo.png" @click="homeRedirect">
        </div>
           <v-spacer></v-spacer>
           <div class="hamburger">
@@ -22,7 +22,11 @@
 
 <script>
 export default {
-
+ methods:{
+  homeRedirect(){
+    this.$router.push("/");
+  }
+ }
 }
 </script>
 
@@ -36,7 +40,13 @@ export default {
 }
 
 .logoImg {
-  width: 115%;
+  width: 90%;
+  margin-top:-2vh;
+  user-select: none
+}
+
+.logoImg:hover{
+  cursor: pointer;
 }
 
 .hamburger {
