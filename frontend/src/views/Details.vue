@@ -35,7 +35,8 @@
       mdi-clock-time-nine-outline
     </v-icon>
 
-    <p>{{currEvent.EndDateTime}}</p>
+    
+    <p>{{currEvent.endDateTime}}</p>
      
    </li>
 
@@ -47,7 +48,7 @@
       mdi-calendar-range
     </v-icon>
 
-    <p></p>
+    <p>{{dates}}</p>
    </li>
 
    <li>
@@ -113,6 +114,19 @@
 <script>
 export default {
 
+  methods:{
+        getDate(eventDate){
+            var startDt=new Date(eventDate);
+                  const startDay = startDt.getDate(),
+             startMonth = startDt.getMonth(),
+              date=startDay +
+              "/" +
+              (startMonth + 1)
+              return date
+
+        }
+  },
+
    computed: {
     currEvent() {
       
@@ -124,6 +138,37 @@ export default {
     },
      id() {
       return this.$route.params.id;
+    },
+
+    dates(){
+           /* var dt = new Date(this.currEvent.startDateTime);
+
+          var day = dt.getDate(),
+            month = dt.getMonth(),
+           
+            hours = dt.getHours(),
+            minutes = dt.getMinutes(),
+            seconds = dt.getSeconds();*/
+
+            const startDate=this.getDate(this.currEvent.startDateTime);
+            const endDate=this.getDate(this.currEvent.endDateTime);
+
+            if(startDate===endDate)
+            {
+              return startDate
+            }
+            if(startDate !== endDate)
+            {
+              const generalDate=`${startDate} - ${endDate}`
+              return generalDate
+            }
+
+            
+            
+            return this.getDate(this.currEvent.startDateTime);
+
+
+  
     },
    
   },

@@ -73,6 +73,8 @@ export default new Vuex.Store({
         .then((res) => {
           console.log(res.data);
           store.commit("setSpecEvent", res.data);
+    
+          console.log("date and time in event is", res.data.endDateTime);
           store.dispatch("fetchSpecUser", res.data.hostId)
         })
         .catch((err) => {
