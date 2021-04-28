@@ -2,7 +2,6 @@
 <template>
 
 
-
 <div class="navbar-wrapper">
 
      <v-toolbar color="black" dark fixed app>

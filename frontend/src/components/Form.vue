@@ -1,7 +1,8 @@
 <template>
   <div class="wrapper">
       <h3>Create new event</h3>
-      <form action="">
+      <div class="alert alert-success" v-if="isSuccess">Event was Created Successfully</div>
+      <form @submit.prevent="onCreateEvent">
         <p>
 
           <label id="eventName" for="">Event name</label>
@@ -58,14 +59,14 @@
         </p>
         
         <p>
-          <button @click.prevent="postEvent">Create</button>
+          <button type="submit">Create</button>
         </p>
       </form>
     </div>
 </template>
 
 <script>
-  
+  import axios from 'axios';
 export default {
   data() {
     return {
@@ -77,6 +78,7 @@ export default {
       publicAccess: true,
       privateAccess: false,
       access: "",
+      isSuccess: false
      
     }
   },
@@ -88,9 +90,9 @@ export default {
       } 
       else if(this.privateAccess) {
         this.access = 'private' 
-      } 
+      }
       // Vuex
-      console.log({ eventName: this.eventName, location: this.location, StartDateTime: this.StartDateTime, EndDateTime: this.EndDateTime,
+     console.log({ eventName: this.eventName, location: this.location, StartDateTime: this.StartDateTime, EndDateTime: this.EndDateTime,
      description: this.description, access: this.access});
     },
 
@@ -102,6 +104,18 @@ export default {
    },
    disablePrivate(){
      this.privateAccess=false;
+   },
+
+   onCreateEvent() {
+     axios
+        .post('/events', 
+        {eventName: this.eventName, location: this.location, StartDateTime: this.StartDateTime, EndDateTime: this.EndDateTime,
+     description: this.description, access: this.access},
+      )
+      .then((response) => {
+          this.isSuccess = true;
+          console.log(response);
+      });
    }
 
   },

@@ -12,6 +12,8 @@ export default new Vuex.Store({
     specUser: "",
     eventId: "",
     userId: "",
+    errorMessage: null
+    
   },
   mutations: {
     setEvents(state, events) {
@@ -88,16 +90,16 @@ export default new Vuex.Store({
         });
     },
 
-    createNewEvent({ state, commit }) {
-      axios
-        .post("https://geshdo-events-dev-default-rtdb.europe-west1.firebasedatabase.app/events")
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err.response);
-        })
-    }
+  /*  createNewEvent() {
+      const event = { name: "New Event test" };
+      axios.post("https://geshdo-events-dev-default-rtdb.europe-west1.firebasedatabase.app/events", event)
+        .then(response => this.eventId = response.data.id)
+        .catch(error => {
+          this.errorMessage = error.message;
+          console.error("There was en error!", error);
+        });
+      }*/
+    
   },
 
   modules: {},
