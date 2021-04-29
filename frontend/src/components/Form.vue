@@ -41,14 +41,12 @@
        
          
         <label for="public">Public</label>
-         
-      <img class="door" src="../assets/door.png">
-
-        <input id="public" value="Public" type="checkbox" v-model="publicAccess"  @change="disablePublic">
+        <img class="door" src="../assets/door.png">
+        <input id="public" value="Public" type="checkbox" v-model="publicAccess"  @change="disablePrivate">
                
         <label for="private">Private</label>
         <img class="lock" src="../assets/lock.png">
-        <input  id="private" value="Private" type="checkbox" v-model="privateAccess" @change="disablePrivate">
+        <input  id="private" value="Private" type="checkbox" v-model="privateAccess" @change="disablePublic">
     
           </p>
 
