@@ -14,22 +14,14 @@
 
         <p>
           <label id="time1" for="">Start Time</label>
-          <input type="time" id="time" v-model="startTime">
+          <input type="datetime-local" id="time" v-model="startTimeAndDate">
         </p>
 
         <p>
           <label id="time2" for="">End Time</label>
-          <input type="time" id="time" v-model="endTime"> 
+          <input type="datetime-local" id="time" v-model="endTimeAndDate"> 
         </p>
 
-         <p>
-          <label id="date1" for="">Start Date</label>
-          <input type="date" v-model="startDate">
-        </p>
-        <p>
-          <label id="date2" for="">End Date</label>
-          <input type="date" v-model="endDate">
-        </p>
 
          <p>
           <label id="description" for="">Description</label>
@@ -59,6 +51,7 @@
           <button type="submit" class="btn btn-primary">Create</button>
         </p>
       </form>
+     
     </div>
 </template>
 
@@ -69,10 +62,9 @@ export default {
     return {
       eventName: '',
       location: '',
-      startTime: '2021-04-20T20:31:59.3528866+02:00',
-      endTime: '2021-04-20T20:40:59.3528866+02:00',
-      startDate:'',
-      endDate:'',
+      startTimeAndDate: '',
+      endTimeAndDate: '',
+     
       description: '',
      publicAccess: true,
       privateAccess: false,
@@ -92,19 +84,31 @@ export default {
       }
 
 
+
+    const startDateTime=`${this.startTimeAndDate}:59.3528866+02:00`
+    const endDateTime=`${this.endTimeAndDate}:59.3528866+02:00`
+
+  console.log(startDateTime);
+  console.log(endDateTime);
+
+
       const createdEvent = {
-        name: this.eventName, location: this.location, 
-      startDateTime: this.startTime, endDateTime: this.endTime, 
-      description: this.description, access: this.access, hostId: this.hostId
+        name: this.eventName,
+         location: this.location, 
+      startDateTime: startDateTime,
+       endDateTime: endDateTime, 
+      description: this.description, 
+      access: this.access,
+       hostId: this.hostId
       }
 
-
+  
      
 
 
 
-      this.$store.commit("setCreatedEvent", createdEvent);
-      this.$store.dispatch("createNewEvent");
+     this.$store.commit("setCreatedEvent", createdEvent);
+     this.$store.dispatch("createNewEvent");
    
     },
     disablePublic(){
