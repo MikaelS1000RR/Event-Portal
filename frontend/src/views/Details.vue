@@ -10,43 +10,33 @@
         <div class="event-info">
           <ul>
             <li>
-              <v-icon large color="black">
-                mdi-domain
-              </v-icon>
+              <img class="detailedImg" src="https://www.flaticon.com/svg/vstatic/svg/4585/4585617.svg?token=exp=1619724567~hmac=1a64feb6ca9b8ef9acc92eb3c6aeb715" alt="" srcset="">
               <p>{{ currEvent.location }}</p>
             </li>
 
             <li>
-              <v-icon large color="black">
-                mdi-clock-time-nine-outline
-              </v-icon>
+            <img class="detailedImg" src="https://www.flaticon.com/svg/vstatic/svg/4585/4585180.svg?token=exp=1619724673~hmac=b51eed2d5d6b2ff03b8cefd7e5e93b61" alt="" srcset="">
 
               <p>{{ time }}</p>
             </li>
 
             <li>
-              <v-icon large color="black">
-                mdi-calendar-range
-              </v-icon>
+              <img class="detailedImg" src="https://www.flaticon.com/svg/vstatic/svg/4585/4585147.svg?token=exp=1619724730~hmac=bab92bca9cca01f2c559c82059f750b5" alt="" srcset="">
 
               <p>{{ dates }}</p>
             </li>
 
             <li>
-              <v-icon large color="black">
-                mdi-account-circle-outline
-              </v-icon>
+              <img class="detailedImg" src="https://www.flaticon.com/svg/vstatic/svg/4585/4585642.svg?token=exp=1619724785~hmac=2b64fd3798d384fa8f3a41ef0aa74622" alt="">
               <p>{{ hostUser.firstName }} {{ hostUser.lastName }}</p>
             </li>
 
             <li>
-              <v-icon large color="black" v-if="currEvent.access === 'private'">
-                mdi-lock
-              </v-icon>
+            
 
-              <v-icon large color="black" v-else>
-                mdi-lock-open
-              </v-icon>
+              <img class="detailedImg" v-if="currEvent.access === 'private'" src="https://www.flaticon.com/svg/vstatic/svg/4585/4585434.svg?token=exp=1619724943~hmac=b08d1decec1ad6784d3e7afe76c97ff2" alt="">
+
+              <img class="detailedImg" v-if="currEvent.access === 'public'" src="https://www.flaticon.com/svg/vstatic/svg/1180/1180140.svg?token=exp=1619725192~hmac=b8bc5889aa730b872e15a7e81be8af7c" alt="" srcset="">
 
               <p>{{ currEvent.access }}</p>
             </li>
@@ -179,6 +169,10 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+.detailedImg{
+  width:8%;
 }
 
 ul {
