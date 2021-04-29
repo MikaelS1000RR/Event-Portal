@@ -4,6 +4,7 @@
     <v-card :loading="loading" class="mx-auto my-12" outlined shaped tile>
       <div class="event-name">
         <p>{{ currEvent.name }}</p>
+        <img class="detailedImg settings" v-if="userIsHost" src="https://www.flaticon.com/svg/vstatic/svg/975/975660.svg?token=exp=1619726324~hmac=f8ca797f9028b2faa98ee981912a52a3" alt="">
       </div>
 
       <div class="event-details">
@@ -105,6 +106,11 @@ export default {
       return this.$route.params.id;
     },
 
+    ifHost(){
+     let userIsHost= this.hostUser.Id === 'fetchWhoAmI' ? true : false
+     return userIsHost
+    },
+
     dates() {
       const startDate = this.getDate(this.currEvent.startDateTime);
       const endDate = this.getDate(this.currEvent.endDateTime);
@@ -156,6 +162,10 @@ export default {
 .event-name {
   width: 100%;
   height: 20%;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 
   font-weight: bold;
   font-size: 1.5vw;
@@ -215,5 +225,9 @@ li > p {
 .v-btn:not(.v-btn--round).v-size--x-large {
   width: 10vw;
   height: 5vh;
+}
+
+.settings{
+  width:3%;
 }
 </style>
