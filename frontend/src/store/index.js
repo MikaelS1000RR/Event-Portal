@@ -12,7 +12,8 @@ export default new Vuex.Store({
     specUser: "",
     eventId: "",
     userId: "",
-    errorMessage: null
+    errorMessage: null,
+    createdEvent: {}
     
   },
   mutations: {
@@ -35,6 +36,11 @@ export default new Vuex.Store({
     setUserId(state, id) {
       state.userId = id;
     },
+
+    setCreatedEvent(state, event) {
+      state.createdEvent = event;
+      console.log("Event is set", event);
+    }
   },
 
   actions: {
@@ -89,6 +95,15 @@ export default new Vuex.Store({
           console.log(err.response);
         });
     },
+
+    createNewEvent(store) {
+      axios.post('/events',
+        store.state.createdEvent, 
+      ).then(response => {
+        this.isSuccess = true;
+        console.log(response);
+      });
+    }
 
   /*  createNewEvent() {
       const event = { name: "New Event test" };

@@ -1,7 +1,6 @@
 <template>
   <div class="wrapper">
       <h3>Create new event</h3>
-      <div class="alert alert-success" v-if="isSuccess">Event was Created Successfully</div>
       <form @submit.prevent="onCreateEvent">
         <p>
 
@@ -64,28 +63,26 @@
 </template>
 
 <script>
-  import axios from 'axios';
+ // import axios from 'axios';
 export default {
   data() {
     return {
       eventName: '',
       location: '',
-      startTime: '',
-      endTime: '',
-      startDate: '',
-      endDate: '',
+      startTime: '2021-04-20T13:31:59.3528866Z',
+      endTime: '2021-04-20T13:31:59.3528866Z',
       description: '',
      publicAccess: true,
       privateAccess: false,
       access: "",
-      isSuccess: false
+      hostId: '061eb70c-7055-4d07-a584-b3c20cd59d73'
      
     }
   },
   methods: {
     onCreateEvent() {
 
-            if(this.publicAccess) {
+        if(this.publicAccess) {
         this.access = 'public'
       } 
       else if(this.privateAccess) {
@@ -93,14 +90,15 @@ export default {
       }
 
 
-      axios.post('https://geshdo-events-dev-default-rtdb.europe-west1.firebasedatabase.app/events.json',
-      {eventName: this.eventName, location: this.location, 
-      startTime: this.startTime, endTime: this.endTime, startDate: this.startDate, endDate: this.endDate,
-      description: this.description, access: this.access},
-      ).then(response => {
-        this.isSuccess = true;
-        console.log(response);
-      });
+      const createdEvent = {
+        name: this.eventName, location: this.location, 
+      startDateTime: this.startTime, endDateTime: this.endTime, 
+      description: this.description, access: this.access, hostId: this.hostId
+      }
+
+      this.$store.commit("setCreatedEvent", createdEvent);
+      this.$store.dispatch("createNewEvent");
+   
     },
     disablePublic(){
      this.publicAccess=false;
