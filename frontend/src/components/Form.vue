@@ -69,8 +69,10 @@ export default {
     return {
       eventName: '',
       location: '',
-      startTime: '2021-04-20T13:31:59.3528866Z',
-      endTime: '2021-04-20T13:31:59.3528866Z',
+      startTime: '2021-04-20T20:31:59.3528866+02:00',
+      endTime: '2021-04-20T20:40:59.3528866+02:00',
+      startDate:'',
+      endDate:'',
       description: '',
      publicAccess: true,
       privateAccess: false,
@@ -95,6 +97,11 @@ export default {
       startDateTime: this.startTime, endDateTime: this.endTime, 
       description: this.description, access: this.access, hostId: this.hostId
       }
+
+
+     
+
+
 
       this.$store.commit("setCreatedEvent", createdEvent);
       this.$store.dispatch("createNewEvent");
