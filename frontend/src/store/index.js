@@ -12,7 +12,8 @@ export default new Vuex.Store({
     specUser: "",
     eventId: "",
     userId: "",
-    createdEvent: {}
+    createdEvent: {},
+    currLoggedInUser: {}
     
   },
   mutations: {
@@ -34,6 +35,10 @@ export default new Vuex.Store({
     },
     setUserId(state, id) {
       state.userId = id;
+    },
+
+    setCurrLoggedInUser(state, user) {
+      state.currLoggedInUser = user;
     },
 
     setCreatedEvent(state, event) {
@@ -106,17 +111,25 @@ export default new Vuex.Store({
         this.isSuccess = true;
         console.log(response);
       });
-    }
+    },
 
-  /*  createNewEvent() {
-      const event = { name: "New Event test" };
-      axios.post("https://geshdo-events-dev-default-rtdb.europe-west1.firebasedatabase.app/events", event)
-        .then(response => this.eventId = response.data.id)
-        .catch(error => {
-          this.errorMessage = error.message;
-          console.error("There was en error!", error);
+    fetchWhoAmI(store) {
+      axios
+        .post("/whoami")
+        .then((res) => {
+          if (res.data.email !== null) {
+             console.log(res.data);
+          store.state.commit("setCurrLoggedInUser", res.data);
+          }
+          else {
+            console.log('user is not logged in');
+          }
+         
+        })
+        .catch((err) => {
+          console.log(err.response);
         });
-      }*/
+    }
     
   },
 

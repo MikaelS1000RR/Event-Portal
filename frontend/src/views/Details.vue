@@ -107,6 +107,7 @@ export default {
     },
 
     ifHost(){
+      console.log(this.$store.state.currLoggedInUser);
      let userIsHost= this.hostUser.Id === 'fetchWhoAmI' ? true : false
      return userIsHost
     },
@@ -136,6 +137,7 @@ export default {
   },
   async created() {
     await this.$store.dispatch("fetchSpecEvent", this.id);
+    await   this.$store.dispatch("fetchWhoAmI");
   },
 };
 </script>
