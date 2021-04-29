@@ -228,7 +228,9 @@ form p {
 }
 
 .lock {
-  width: 10%;
+  width: 9%;
+  padding-bottom: 0.5%;
+
 
 
 }
