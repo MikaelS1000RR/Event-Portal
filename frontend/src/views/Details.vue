@@ -88,6 +88,14 @@ export default {
        let time=hours + " : 00";
       return time;
       }
+      else if(hours === 0) {
+        let time="00 : " + minutes;
+        return time; 
+      } 
+      else if(hours === 0 && minutes === 0) {
+        let time = "00 : 00";
+        return time;
+      }
       else{
        let  time=hours + " : " + minutes;
       return time;
