@@ -12,7 +12,6 @@ export default new Vuex.Store({
     specUser: "",
     eventId: "",
     userId: "",
-    errorMessage: null,
     createdEvent: {}
     
   },
@@ -72,24 +71,28 @@ export default new Vuex.Store({
         });
     },
 
-    fetchSpecEvent({ state, commit }) {
+    fetchSpecUser(store, id) {
+      console.log('id in fetch user is', id);
       axios
-        .get("/events/" + state.eventId)
+        .get("/users/" + id)
         .then((res) => {
           console.log(res.data);
-          commit("setSpecEvent", res.data);
+          store.commit("setSpecUser", res.data);
         })
         .catch((err) => {
           console.log(err.response);
         });
     },
 
-    fetchSpecUser({ state, commit }) {
+    fetchSpecEvent(store, id) {
       axios
-        .get("/users/" + state.userId)
+        .get("/events/" + id)
         .then((res) => {
           console.log(res.data);
-          commit("setSpecUser", res.data);
+          store.commit("setSpecEvent", res.data);
+    
+          console.log("date and time in event is", res.data.endDateTime);
+          store.dispatch("fetchSpecUser", res.data.hostId)
         })
         .catch((err) => {
           console.log(err.response);

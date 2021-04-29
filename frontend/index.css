@@ -8,18 +8,20 @@
     radial-gradient(at top left, black, transparent),
     radial-gradient(at top right, rgb(81, 3, 145), transparent),
     radial-gradient(at bottom left, #4110d4, transparent);
+  --buttonPurple: rgba(107, 21, 206, 0.548);
 }
-
 
 body {
-  margin: 0;
-  overflow-x: hidden;
-
+ margin: 0;
+ 
 }
+
 
 #app{
    background-image:var(--background1);
+
 }
+
 
 *,
 ::before,

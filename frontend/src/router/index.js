@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import CreateEvent from '../views/CreateEvent.vue'
+import Details from '../views/Details.vue'
 
 Vue.use(VueRouter)
 
@@ -17,6 +18,11 @@ const routes = [
     component: CreateEvent
   },
 
+  {
+    path: '/details/:id',
+    name: 'Details',
+    component: Details
+  },
 ]
 
 const router = new VueRouter({

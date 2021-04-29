@@ -78,9 +78,22 @@ namespace Event_Portal.Controllers
     public async Task<Event> CreateEvent(CreateEventDto eventDto)
 
     {
+
+      string[] pictures ={"https://images.pexels.com/photos/4062561/pexels-photo-4062561.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+                "https://images.pexels.com/photos/1038916/pexels-photo-1038916.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+                "https://images.pexels.com/photos/317385/pexels-photo-317385.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+                "https://images.pexels.com/photos/735911/pexels-photo-735911.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                      };
+
+        Random rd = new Random();
+      int randomNum = rd.Next(0, 4);
+
+
+
       Event myEvent = new()
       {
         Id = Guid.NewGuid(),
+        ImgUrl=pictures[randomNum],
         Name=eventDto.Name,
         Description=eventDto.Description,
         Access=eventDto.Access,
