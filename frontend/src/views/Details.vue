@@ -82,10 +82,17 @@ export default {
     getTime(eventDate){
       var dt=new Date(eventDate);
 
-      const hours = dt.getHours(),
-      minutes = dt.getMinutes(),
-      time=hours + " : " + minutes;
+      const hours = dt.getHours()
+    const minutes = dt.getMinutes()
+      if(minutes === 0){
+       let time=hours + " : 00";
       return time;
+      }
+      else{
+       let  time=hours + " : " + minutes;
+      return time;
+      }
+
     }
   },
 
