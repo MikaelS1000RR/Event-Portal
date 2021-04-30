@@ -137,7 +137,7 @@ export default {
   },
   async created() {
     await this.$store.dispatch("fetchSpecEvent", this.id);
-    await   this.$store.dispatch("fetchWhoAmI");
+   
   },
 };
 </script>

@@ -123,6 +123,7 @@ export default new Vuex.Store({
           }
           else {
             console.log('user is not logged in');
+            console.log(store.state.currLoggedInUser);
           }
          
         })
