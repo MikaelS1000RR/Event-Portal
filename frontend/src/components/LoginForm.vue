@@ -14,6 +14,8 @@
            
            label="Username" 
            prepend-icon="mdi-account-circle"
+
+            v-model="email"
            />
            <v-text-field
            :type="showPassword ? 'text' : 'password'"
@@ -21,6 +23,7 @@
            prepend-icon="mdi-lock"
            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
            @click:append="showPassword = !showPassword"
+           v-model="password"
            />
          </v-form>
          </v-card-text>
@@ -58,8 +61,16 @@ export default {
     }
   },
   methods: {
-    pressed() {
-      firebase.auth().signInW
+    async pressed() {
+      try {
+
+     const val = await firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+      console.log(val);
+      this.$router.replace({name: "secret"})
+
+      } catch(err) {
+        console.log(err)
+      } 
     }
   }
   
