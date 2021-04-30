@@ -64,6 +64,7 @@ export default {
       location: '',
       startTimeAndDate: '',
       endTimeAndDate: '',
+     
       description: '',
      publicAccess: true,
       privateAccess: false,

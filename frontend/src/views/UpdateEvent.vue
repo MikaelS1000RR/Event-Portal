@@ -54,8 +54,32 @@
         <input  id="private" value="Private" type="checkbox" v-model="privateAccess" @change="disablePublic">
             
             </li>
+            <li>
+ <div class="save-btn">
+          
+              
+    <v-btn
+      class="ma-2"
+      :loading="loading"
+      :disabled="loading"
+      color="success"
+      @click="loader = 'loading'"
+      type="submit"
+    >
+      Save changes
+      <template v-slot:loader>
+        <span>Saving...</span>
+      </template>
+    </v-btn>
+
+          </div>
+            </li>
           </ul>
           </div>
+
+         
+
+
         </div>
          
 
@@ -74,6 +98,8 @@
     
     </v-card>
      </form>
+
+     <div class="btnDiv"></div>
      </div>
   
 </template>
@@ -85,19 +111,40 @@ export default {
   data(){
    return{
       eventName: this.$store.state.specEvent.name,
-      location: 'sfesfs',
-      startTimeAndDate: 'dgdg',
+      location:  this.$store.state.specEvent.location,
+      startTimeAndDate: '',
       endTimeAndDate: 'drgrdgdgr',
       description: '',
      publicAccess: true,
       privateAccess: false,
       access: "",
-      hostId: '061eb70c-7055-4d07-a584-b3c20cd59d73'
+      hostId: '061eb70c-7055-4d07-a584-b3c20cd59d73',
+      loader: null,
+         loading: false,
    }
   },
+      watch: {
+      loader () {
+        const l = this.loader
+        this[l] = !this[l]
+
+        setTimeout(() => (this[l] = false), 3000)
+
+        this.loader = null
+      },
+    },
    methods:{
      saveChanges(){
+       this.loading=!false
+       setTimeout(() => {
+        this.loading!=true
+        
+       }, 2000)
+
        console.log('saving changes');
+        const startDateTime=this.$store.state.specEvent.startDateTime
+    const endDateTime=this.$store.state.specEvent.startDateTime
+
      },
        disablePublic(){
      this.publicAccess=false;
@@ -134,10 +181,18 @@ export default {
 
 .event-desc {
   display: grid;
+  width:50vw;
   grid-auto-rows: 15% 85%;
-  height: 100%;
+
   padding-top: 2.6vw;
+  padding-bottom:10vh;
 }
+
+.v-application .success{
+  background-color: var(--buttonPurple) !important;
+}
+
+
 
 li>span{
   padding: 0 1vw 0 1vw;
@@ -159,9 +214,8 @@ input:focus, textarea:focus {
   width: 90vw;
 
   background-color: white;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-
+  display: flex;
+ flex-direction: row;
   padding-right: 2vw;
 }
 
@@ -186,7 +240,7 @@ li > p {
 
 
 .door {
-  width: 12%;
+  width: 9%;
   
 
 }
@@ -195,7 +249,7 @@ li > p {
 }
 
 .lock {
-  width: 10%;
+  width: 7%;
 
 
 }
