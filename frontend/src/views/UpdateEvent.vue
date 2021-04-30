@@ -107,7 +107,7 @@ export default {
       location: this.$store.state.specEvent.location,
       startTimeAndDate: "",
       endTimeAndDate: "drgrdgdgr",
-      description: "",
+      description: this.$store.state.specEvent.description,
       publicAccess: true,
       privateAccess: false,
       access: "",
