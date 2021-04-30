@@ -4,8 +4,8 @@
    
 
     <v-app>
-       <v-card>
-         <v-card-title>
+       <v-card width="400px" class="mt-5 mx-a">
+         <v-card-title class="pb-0">
         <h1>Login</h1>
          </v-card-title>
          <v-card-text>
@@ -18,12 +18,15 @@
            type="Password"
            label="Password"
            prepend-icon="mdi-lock"
+           append-icon="mdi-eye-off"
            />
          </v-form>
          </v-card-text>
+         <v-divider></v-divider>
          <v-card-actions>
-         <v-btn>Register</v-btn>
-         <v-btn>Login</v-btn>
+         <v-btn color=success>Register</v-btn>
+         <v-spacer></v-spacer>
+         <v-btn color="info">Login</v-btn>
          </v-card-actions>
     </v-card>
   </v-app>
