@@ -4,7 +4,7 @@
     <v-card :loading="loading" class="mx-auto my-12" outlined shaped tile>
       <div class="event-name">
         <p>{{ currEvent.name }}</p>
-        <img class="detailedImg settings" v-if="userIsHost" src="https://www.flaticon.com/svg/vstatic/svg/975/975660.svg?token=exp=1619726324~hmac=f8ca797f9028b2faa98ee981912a52a3" alt="">
+        <img class="detailedImg settings"  src="https://www.flaticon.com/svg/vstatic/svg/975/975660.svg?token=exp=1619726324~hmac=f8ca797f9028b2faa98ee981912a52a3" alt="">
       </div>
 
       <div class="event-details">
@@ -100,6 +100,7 @@ export default {
       return this.$store.state.specEvent;
     },
     hostUser() {
+     
       return this.$store.state.specUser;
     },
     id() {
@@ -107,8 +108,9 @@ export default {
     },
 
     ifHost(){
-      console.log(this.$store.state.currLoggedInUser);
-     let userIsHost= this.hostUser.Id === 'fetchWhoAmI' ? true : false
+      console.log('current logged in user id is',this.$store.state.currLoggedInUser);
+      console.log('Id of the event host is', this.hostUser.id);
+     let userIsHost= this.hostUser.id === this.$store.state.currLoggedInUser.id ? true : false
      return userIsHost
     },
 
