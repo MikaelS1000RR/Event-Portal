@@ -13,7 +13,7 @@
                
 
         <img class="detailedImg" src="https://www.flaticon.com/svg/vstatic/svg/1250/1250252.svg?token=exp=1619784941~hmac=be8b5c2880fd0496925c51adf3f5f626" alt="">
-          <input type="text" v-model="eventName" />
+          <input type="text" v-model="eventName" placeholder=""/>
       
 
        
@@ -25,18 +25,7 @@
                 alt=""
                 srcset=""
               />
-              <input type="text" placeholder="" v-model="name">
-            </li>
-
-            <li>
-              <img
-                class="detailedImg"
-                src="https://www.flaticon.com/svg/vstatic/svg/4585/4585180.svg?token=exp=1619724673~hmac=b51eed2d5d6b2ff03b8cefd7e5e93b61"
-                alt=""
-                srcset=""
-              />
-
-            <input type="text" placeholder="" v-model="name">
+              <input type="text" placeholder="" v-model="location">
             </li>
 
             <li>
@@ -47,7 +36,9 @@
                 srcset=""
               />
 
-              <input type="text" placeholder="" v-model="name">
+            <input type="datetime-local" placeholder="" v-model="startTimeAndDate">
+            <span>to</span>
+            <input type="datetime-local" placeholder="" v-model="endTimeAndDate">
             </li>
 
 
@@ -73,7 +64,7 @@
             <p>Description</p>
           </div>
 
-          <p>{{ currEvent.description }}</p>
+         <textarea v-model="description" name="" id="" cols="30" rows="7"> </textarea>
 
 
 
@@ -93,10 +84,10 @@ export default {
 
   data(){
    return{
-      eventName: '',
-      location: '',
-      startTimeAndDate: '',
-      endTimeAndDate: '',
+      eventName: this.$store.state.specEvent.name,
+      location: 'sfesfs',
+      startTimeAndDate: 'dgdg',
+      endTimeAndDate: 'drgrdgdgr',
       description: '',
      publicAccess: true,
       privateAccess: false,
@@ -137,6 +128,7 @@ export default {
 
 .detailedImg {
   width: 8%;
+  padding-right:1vh;
 }
 
 
@@ -145,6 +137,19 @@ export default {
   grid-auto-rows: 15% 85%;
   height: 100%;
   padding-top: 2.6vw;
+}
+
+li>span{
+  padding: 0 1vw 0 1vw;
+}
+
+input, textarea {
+  border: 1px solid #000 !important;
+  padding: .5vw 1vw .5vw 1vw;
+}
+
+input:focus, textarea:focus {
+  outline: 3px solid rgba(107, 21, 206, 0.233);
 }
 
 .description {
