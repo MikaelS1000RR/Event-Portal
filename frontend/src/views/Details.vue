@@ -148,8 +148,9 @@ export default {
         date = startDay + "/" + (startMonth + 1);
       return date;
     },
-    deleteEvent(){
+    async deleteEvent(){
     this.dialog=false;
+    await this.$store.dispatch("deleteEvent");
     },
 
     editEvent() {

@@ -130,8 +130,25 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err.response);
         });
-    }
+      
+      
+      
+    },
     
+    deleteEvent(store) {
+      console.log('in process deleting event');
+        axios
+          .delete("/events/" + store.state.specEvent.id)
+          .then((res) => {
+            
+              console.log(res.data);
+            
+            
+          })
+          .catch((err) => {
+            console.log(err.response);
+          });
+      }
   },
 
   modules: {},
