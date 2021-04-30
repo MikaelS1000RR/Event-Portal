@@ -4,58 +4,113 @@
     <v-card :loading="loading" class="mx-auto my-12" outlined shaped tile>
       <div class="event-name">
         <p>{{ currEvent.name }}</p>
-         <v-menu offset-y
-               transition="slide-y-transition"
-                     open-on-hover
-      bottom>
-      <template v-slot:activator="{ on, attrs }">
-      
-                 <img class="detailedImg settings" v-bind="attrs" v-on="on" src="https://www.flaticon.com/svg/vstatic/svg/975/975660.svg?token=exp=1619726324~hmac=f8ca797f9028b2faa98ee981912a52a3" alt="">
-      
-      </template>
-      <v-list>
-       
-          <v-list-item-title class="dropdown-item" @click="editEvent">Edit </v-list-item-title>
-       
-          <v-list-item-title class="dropdown-item" @click="deleteEvent">Delete</v-list-item-title>
-       
-      </v-list>
-    </v-menu>
+        <v-menu offset-y transition="slide-y-transition" bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <img
+              class="detailedImg settings"
+              v-bind="attrs"
+              v-on="on"
+              src="https://www.flaticon.com/svg/vstatic/svg/975/975660.svg?token=exp=1619726324~hmac=f8ca797f9028b2faa98ee981912a52a3"
+              alt=""
+            />
+          </template>
+          <v-list>
+            <v-list-item-title class="dropdown-item" @click="editEvent"
+              >Edit
+            </v-list-item-title>
 
+            <v-dialog v-model="dialog" width="500">
+              <template v-slot:activator="{ on, attrs }">
+                <v-list-item-title
+                  v-bind="attrs"
+                  v-on="on"
+                  class="dropdown-item"
+                  >Delete</v-list-item-title
+                >
+              </template>
+
+              <v-card>
+                <v-card-title class="headline grey lighten-2">
+                  Are you sure that you want to delete this event?
+                </v-card-title>
+
+
+                <v-divider></v-divider>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="primary" text @click="deleteEvent">
+                    Yes
+                  </v-btn>
+                  <v-btn color="primary" text @click="dialog = false">
+                  Cancel
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-list>
+        </v-menu>
       </div>
 
       <div class="event-details">
         <div class="event-info">
           <ul>
             <li>
-     
-              <img class="detailedImg" src="https://www.flaticon.com/svg/vstatic/svg/4585/4585617.svg?token=exp=1619724567~hmac=1a64feb6ca9b8ef9acc92eb3c6aeb715" alt="" srcset="">
+              <img
+                class="detailedImg"
+                src="https://www.flaticon.com/svg/vstatic/svg/4585/4585617.svg?token=exp=1619724567~hmac=1a64feb6ca9b8ef9acc92eb3c6aeb715"
+                alt=""
+                srcset=""
+              />
               <p>{{ currEvent.location }}</p>
             </li>
 
             <li>
-            <img class="detailedImg" src="https://www.flaticon.com/svg/vstatic/svg/4585/4585180.svg?token=exp=1619724673~hmac=b51eed2d5d6b2ff03b8cefd7e5e93b61" alt="" srcset="">
+              <img
+                class="detailedImg"
+                src="https://www.flaticon.com/svg/vstatic/svg/4585/4585180.svg?token=exp=1619724673~hmac=b51eed2d5d6b2ff03b8cefd7e5e93b61"
+                alt=""
+                srcset=""
+              />
 
               <p>{{ time }}</p>
             </li>
 
             <li>
-              <img class="detailedImg" src="https://www.flaticon.com/svg/vstatic/svg/4585/4585147.svg?token=exp=1619724730~hmac=bab92bca9cca01f2c559c82059f750b5" alt="" srcset="">
+              <img
+                class="detailedImg"
+                src="https://www.flaticon.com/svg/vstatic/svg/4585/4585147.svg?token=exp=1619724730~hmac=bab92bca9cca01f2c559c82059f750b5"
+                alt=""
+                srcset=""
+              />
 
               <p>{{ dates }}</p>
             </li>
 
             <li>
-              <img class="detailedImg" src="https://www.flaticon.com/svg/vstatic/svg/4585/4585642.svg?token=exp=1619724785~hmac=2b64fd3798d384fa8f3a41ef0aa74622" alt="">
+              <img
+                class="detailedImg"
+                src="https://www.flaticon.com/svg/vstatic/svg/4585/4585642.svg?token=exp=1619724785~hmac=2b64fd3798d384fa8f3a41ef0aa74622"
+                alt=""
+              />
               <p>{{ hostUser.firstName }} {{ hostUser.lastName }}</p>
             </li>
 
             <li>
-            
+              <img
+                class="detailedImg"
+                v-if="currEvent.access === 'private'"
+                src="https://www.flaticon.com/svg/vstatic/svg/4585/4585434.svg?token=exp=1619724943~hmac=b08d1decec1ad6784d3e7afe76c97ff2"
+                alt=""
+              />
 
-              <img class="detailedImg" v-if="currEvent.access === 'private'" src="https://www.flaticon.com/svg/vstatic/svg/4585/4585434.svg?token=exp=1619724943~hmac=b08d1decec1ad6784d3e7afe76c97ff2" alt="">
-
-              <img class="detailedImg" v-if="currEvent.access === 'public'" src="https://www.flaticon.com/svg/vstatic/svg/1180/1180140.svg?token=exp=1619725192~hmac=b8bc5889aa730b872e15a7e81be8af7c" alt="" srcset="">
+              <img
+                class="detailedImg"
+                v-if="currEvent.access === 'public'"
+                src="https://www.flaticon.com/svg/vstatic/svg/1180/1180140.svg?token=exp=1619725192~hmac=b8bc5889aa730b872e15a7e81be8af7c"
+                alt=""
+                srcset=""
+              />
 
               <p>{{ currEvent.access }}</p>
             </li>
@@ -79,6 +134,12 @@
 
 <script>
 export default {
+  data() {
+    return {
+      dialog: false,
+      deletePopup: false,
+    };
+  },
   methods: {
     getDate(eventDate) {
       var startDt = new Date(eventDate);
@@ -87,38 +148,33 @@ export default {
         date = startDay + "/" + (startMonth + 1);
       return date;
     },
-
-    editEvent(){
-      console.log('editing event');
-    },
-
     deleteEvent(){
-      console.log('deleting event');
+    this.dialog=false;
     },
 
-    getTime(eventDate){
-      var dt=new Date(eventDate);
+    editEvent() {
+      console.log("editing event");
+    },
 
-      const hours = dt.getHours()
-    const minutes = dt.getMinutes()
-      if(minutes === 0){
-       let time=hours + " : 00";
-      return time;
-      }
-      else if(hours === 0) {
-        let time="00 : " + minutes;
-        return time; 
-      } 
-      else if(hours === 0 && minutes === 0) {
+    getTime(eventDate) {
+      var dt = new Date(eventDate);
+
+      const hours = dt.getHours();
+      const minutes = dt.getMinutes();
+      if (minutes === 0) {
+        let time = hours + " : 00";
+        return time;
+      } else if (hours === 0) {
+        let time = "00 : " + minutes;
+        return time;
+      } else if (hours === 0 && minutes === 0) {
         let time = "00 : 00";
         return time;
+      } else {
+        let time = hours + " : " + minutes;
+        return time;
       }
-      else{
-       let  time=hours + " : " + minutes;
-      return time;
-      }
-
-    }
+    },
   },
 
   computed: {
@@ -126,18 +182,23 @@ export default {
       return this.$store.state.specEvent;
     },
     hostUser() {
-     
       return this.$store.state.specUser;
     },
     id() {
       return this.$route.params.id;
     },
 
-    ifHost(){
-      console.log('current logged in user id is',this.$store.state.currLoggedInUser);
-      console.log('Id of the event host is', this.hostUser.id);
-     let userIsHost= this.hostUser.id === this.$store.state.currLoggedInUser.id ? true : false
-     return userIsHost
+    ifHost() {
+      console.log(
+        "current logged in user id is",
+        this.$store.state.currLoggedInUser
+      );
+      console.log("Id of the event host is", this.hostUser.id);
+      let userIsHost =
+        this.hostUser.id === this.$store.state.currLoggedInUser.id
+          ? true
+          : false;
+      return userIsHost;
     },
 
     dates() {
@@ -155,17 +216,15 @@ export default {
       return this.getDate(this.currEvent.startDateTime);
     },
 
-    time(){
-      const startTime=this.getTime(this.currEvent.startDateTime);
-      const endTime=this.getTime(this.currEvent.endDateTime);
-      const times=`${startTime} - ${endTime}`;
+    time() {
+      const startTime = this.getTime(this.currEvent.startDateTime);
+      const endTime = this.getTime(this.currEvent.endDateTime);
+      const times = `${startTime} - ${endTime}`;
       return times;
-
-    }
+    },
   },
   async created() {
     await this.$store.dispatch("fetchSpecEvent", this.id);
-   
   },
 };
 </script>
@@ -178,8 +237,15 @@ export default {
   align-items: center;
 }
 
-.dropdown-item{
+.dropdown-item {
   cursor: pointer;
+}
+.v-dialog > .v-card > .v-card__title{
+  font-size:1.8vw !important;
+}
+
+.v-application .grey.lighten-2 {
+  background-color: var(--buttonPurpleSecondary) !important;
 }
 
 .my-12 {
@@ -193,28 +259,26 @@ export default {
   padding-right: 2vw;
 }
 
-.v-sheet.v-list{
+.v-sheet.v-list {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  
 }
 
-.theme--light.v-list{
+.theme--light.v-list {
   background-color: rgba(0, 0, 0, 0.5) !important;
-  color:white;
+  color: white;
 }
 
-.v-list-item__title{
+.v-list-item__title {
   padding: 0 1.5vw 1vh 1.5vw;
 }
 
 .event-name {
   width: 100%;
   height: 20%;
-  display:flex;
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -225,9 +289,8 @@ export default {
   padding-top: 1vw;
 }
 
-
-.v-menu__content{
-  margin-left:-2.5vw;
+.v-menu__content {
+  margin-left: -2.5vw;
 }
 .event-details {
   display: grid;
@@ -237,8 +300,8 @@ export default {
   width: 100%;
 }
 
-.detailedImg{
-  width:8%;
+.detailedImg {
+  width: 8%;
 }
 
 ul {
@@ -283,13 +346,13 @@ li > p {
   height: 5vh;
 }
 
-.settings{
-  width:3%;
+.settings {
+  width: 3%;
   cursor: pointer;
-   transition: transform 0.2s;
+  transition: transform 0.2s;
 }
 
-.settings:hover{
-    transform: scale(1.1);
+.settings:hover {
+  transform: scale(1.1);
 }
 </style>
