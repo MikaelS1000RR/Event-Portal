@@ -4,13 +4,31 @@
     <v-card :loading="loading" class="mx-auto my-12" outlined shaped tile>
       <div class="event-name">
         <p>{{ currEvent.name }}</p>
-        <img class="detailedImg settings"  src="https://www.flaticon.com/svg/vstatic/svg/975/975660.svg?token=exp=1619726324~hmac=f8ca797f9028b2faa98ee981912a52a3" alt="">
+         <v-menu offset-y
+               transition="slide-y-transition"
+                     open-on-hover
+      bottom>
+      <template v-slot:activator="{ on, attrs }">
+      
+                 <img class="detailedImg settings" v-bind="attrs" v-on="on" src="https://www.flaticon.com/svg/vstatic/svg/975/975660.svg?token=exp=1619726324~hmac=f8ca797f9028b2faa98ee981912a52a3" alt="">
+      
+      </template>
+      <v-list>
+       
+          <v-list-item-title class="dropdown-item">Edit </v-list-item-title>
+       
+          <v-list-item-title class="dropdown-item">Delete</v-list-item-title>
+       
+      </v-list>
+    </v-menu>
+
       </div>
 
       <div class="event-details">
         <div class="event-info">
           <ul>
             <li>
+     
               <img class="detailedImg" src="https://www.flaticon.com/svg/vstatic/svg/4585/4585617.svg?token=exp=1619724567~hmac=1a64feb6ca9b8ef9acc92eb3c6aeb715" alt="" srcset="">
               <p>{{ currEvent.location }}</p>
             </li>
@@ -152,6 +170,10 @@ export default {
   align-items: center;
 }
 
+.dropdown-item{
+  cursor: pointer;
+}
+
 .my-12 {
   width: 90vw;
 
@@ -161,6 +183,24 @@ export default {
   justify-content: center;
   align-items: flex-end;
   padding-right: 2vw;
+}
+
+.v-sheet.v-list{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  
+}
+
+.theme--light.v-list{
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  color:white;
+}
+
+.v-list-item__title{
+  padding: 0 1.5vw 1vh 1.5vw;
 }
 
 .event-name {
@@ -177,6 +217,10 @@ export default {
   padding-top: 1vw;
 }
 
+
+.v-menu__content{
+  margin-left:-2.5vw;
+}
 .event-details {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -233,5 +277,11 @@ li > p {
 
 .settings{
   width:3%;
+  cursor: pointer;
+   transition: transform 0.2s;
+}
+
+.settings:hover{
+    transform: scale(1.1);
 }
 </style>
