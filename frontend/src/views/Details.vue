@@ -200,6 +200,7 @@ export default {
 
     editEvent() {
       console.log("editing event");
+      this.$router.push("/update-event/"+ this.currEvent.id)
     },
 
     getTime(eventDate) {
