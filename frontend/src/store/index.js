@@ -13,7 +13,9 @@ export default new Vuex.Store({
     eventId: "",
     userId: "",
     createdEvent: {},
-    currLoggedInUser: {}
+    currLoggedInUser: {},
+    deleteSuccess: false
+
     
   },
   mutations: {
@@ -44,6 +46,10 @@ export default new Vuex.Store({
     setCreatedEvent(state, event) {
       state.createdEvent = event;
       console.log("Event is set", event);
+    },
+
+    setDeleteSuccess(state) {
+      state.deleteSuccess = true;
     }
   },
 
@@ -140,9 +146,9 @@ export default new Vuex.Store({
         axios
           .delete("/events/" + store.state.specEvent.id)
           .then((res) => {
-            
-              console.log(res.data);
-            
+              
+            console.log(res.data);
+           store.commit("setDeleteSuccess");
             
           })
           .catch((err) => {

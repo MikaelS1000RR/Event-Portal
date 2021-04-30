@@ -50,6 +50,25 @@
             </v-dialog>
           </v-list>
         </v-menu>
+
+
+          <v-dialog
+        v-model="afterDelete"
+        hide-overlay
+        persistent
+        width="300"
+      >
+        <v-card
+          color="primary"
+          dark
+        >
+          <v-card-text>
+            Event has been deleted
+          </v-card-text>
+        </v-card>
+      </v-dialog>
+
+
       </div>
 
       <div class="event-details">
@@ -138,8 +157,19 @@ export default {
     return {
       dialog: false,
       deletePopup: false,
+      afterDelete:false
     };
   },
+
+  watch: {
+    dialog (val) {
+      if (!val) return
+
+      setTimeout(() => (this.afterDelete = false), 4000)
+    
+    },
+  },
+
   methods: {
     getDate(eventDate) {
       var startDt = new Date(eventDate);
@@ -148,9 +178,15 @@ export default {
         date = startDay + "/" + (startMonth + 1);
       return date;
     },
+
     async deleteEvent(){
     this.dialog=false;
-    await this.$store.dispatch("deleteEvent");
+     await this.$store.dispatch("deleteEvent");
+     if(this.$store.state.deleteSuccess){
+       console.log('success in store is',this.$store.state.deleteSuccess);
+         this.afterDelete=true;
+     }
+    
     },
 
     editEvent() {
@@ -238,6 +274,17 @@ export default {
   align-items: center;
 }
 
+.v-dialog > .v-card > .v-card__text{
+  padding:2vh 3vw 2vh 3vw;
+  display: flex;
+  
+  justify-content: center;
+}
+
+
+.v-application .primary{
+  background-color: var(--buttonPurpleSecondary) !important;
+}
 .dropdown-item {
   cursor: pointer;
 }
