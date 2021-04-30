@@ -15,9 +15,9 @@
       </template>
       <v-list>
        
-          <v-list-item-title class="dropdown-item">Edit </v-list-item-title>
+          <v-list-item-title class="dropdown-item" @click="editEvent">Edit </v-list-item-title>
        
-          <v-list-item-title class="dropdown-item">Delete</v-list-item-title>
+          <v-list-item-title class="dropdown-item" @click="deleteEvent">Delete</v-list-item-title>
        
       </v-list>
     </v-menu>
@@ -86,6 +86,14 @@ export default {
         startMonth = startDt.getMonth(),
         date = startDay + "/" + (startMonth + 1);
       return date;
+    },
+
+    editEvent(){
+      console.log('editing event');
+    },
+
+    deleteEvent(){
+      console.log('deleting event');
     },
 
     getTime(eventDate){
