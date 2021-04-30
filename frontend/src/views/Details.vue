@@ -62,8 +62,11 @@
           color="primary"
           dark
         >
-          <v-card-text>
+          <v-card-text v-if="$store.state.deleteSuccess">
             Event has been deleted
+          </v-card-text>
+          <v-card-text v-else>
+            Something went wrong
           </v-card-text>
         </v-card>
       </v-dialog>
