@@ -9,8 +9,9 @@
         <h1>Login</h1>
          </v-card-title>
          <v-card-text>
-         <v-form>
+         <v-form @submit.prevent="pressed">
            <v-text-field 
+           
            label="Username" 
            prepend-icon="mdi-account-circle"
            />
@@ -27,7 +28,9 @@
          <v-card-actions>
          <v-btn :color="type==='guest' ? 'secondary' : '#a64dff'">Register</v-btn>
          <v-spacer></v-spacer>
-         <v-btn :color="type==='guest' ? 'secondary' : '#9933FF'">Login</v-btn>
+         <v-btn type="submit" :color="type==='guest' ? 'secondary' : '#9933FF'">Login</v-btn>
+         <div class="error" v-if="error">{{error.message}}</div>
+        
          </v-card-actions>
     </v-card>
 </div>
@@ -39,13 +42,27 @@
 
 <script>
 
+  import * as firebase from "firebase/app";
+  import "firebase/auth";
+
+
 export default {
+
   name: "LoginForm",
   data() {
     return {
-      showPassword: false
+      showPassword: false,
+      email: '',
+      password: '',
+      error: ''
+    }
+  },
+  methods: {
+    pressed() {
+      firebase.auth().signInW
     }
   }
+  
 }
 
 </script>
