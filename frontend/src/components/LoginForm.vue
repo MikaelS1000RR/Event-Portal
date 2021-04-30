@@ -4,7 +4,7 @@
    
     <v-app>
 <div class="grid">
-       <v-card width="400px" class="mt-5 mx-a">
+       <v-card width="500px" class="mt-5 mx-a">
          <v-card-title class="pb-0">
         <h1>Login</h1>
          </v-card-title>
@@ -57,9 +57,10 @@ export default {
 .grid {
  
 display: grid;
-  justify-content: center;
-  align-content: center;
-
+  justify-items: center;
+  align-items: center;
+ grid-template-columns: 1fr;
+  grid-template-rows: 70vh;
 
 
 }
