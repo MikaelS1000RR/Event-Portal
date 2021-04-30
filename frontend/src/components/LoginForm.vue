@@ -1,9 +1,9 @@
 <template>
   
-  <div class="vue-tempalte">
+  <div class="form-grid-container">
    
-
     <v-app>
+<div class="grid">
        <v-card width="400px" class="mt-5 mx-a">
          <v-card-title class="pb-0">
         <h1>Login</h1>
@@ -30,10 +30,10 @@
          <v-btn color="info">Login</v-btn>
          </v-card-actions>
     </v-card>
+</div>
   </v-app>
-
-       
     </div>
+       
 
 </template>
 
@@ -50,8 +50,19 @@ export default {
 
 </script>
 
+
+
 <style scoped>
 
+.grid {
+ 
+display: grid;
+  justify-content: center;
+  align-content: center;
+
+
+
+}
 
 
 
