@@ -241,7 +241,8 @@ export default {
   cursor: pointer;
 }
 .v-dialog > .v-card > .v-card__title{
-  font-size:1.8vw !important;
+  font-size:1.1em !important;
+  font-family:"Montserrat", sans-serif  !important;
 }
 
 .v-application .grey.lighten-2 {
