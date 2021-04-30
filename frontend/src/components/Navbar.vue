@@ -40,7 +40,7 @@ export default {
 
 .logoImg {
   width: 90%;
-  margin-bottom: -1.5vh;
+  margin-bottom: -1vh;
   user-select: none
 }
 
