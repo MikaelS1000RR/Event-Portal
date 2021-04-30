@@ -140,7 +140,16 @@ export default {
 }
 
 
+.event-desc {
+  display: grid;
+  grid-auto-rows: 15% 85%;
+  height: 100%;
+  padding-top: 2.6vw;
+}
 
+.description {
+  font-weight: 500;
+}
 .my-12 {
   width: 90vw;
 
