@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import CreateEvent from '../views/CreateEvent.vue'
 import Details from '../views/Details.vue'
+import UpdateEvent from '../views/UpdateEvent.vue'
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,11 @@ const routes = [
     path: '/details/:id',
     name: 'Details',
     component: Details
+  },
+  {
+    path: '/update-event/:id',
+    name: 'Update-event',
+    component: UpdateEvent
   },
 ]
 
