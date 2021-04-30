@@ -165,7 +165,7 @@ export default {
     dialog (val) {
       if (!val) return
 
-      setTimeout(() => (this.afterDelete = false), 4000)
+      setTimeout(() => (this.redirect()), 3000)
     
     },
   },
@@ -179,11 +179,17 @@ export default {
       return date;
     },
 
+    redirect(){
+   this.afterDelete=false;
+   this.$router.push("/")
+    },
+
     async deleteEvent(){
     this.dialog=false;
-     await this.$store.dispatch("deleteEvent");
+     await this.$store.dispatch("deleteEvent", this.currEvent.id );
+     console.log('success in store is', this.$store.state.deleteSuccess);
      if(this.$store.state.deleteSuccess){
-       console.log('success in store is',this.$store.state.deleteSuccess);
+       
          this.afterDelete=true;
      }
     

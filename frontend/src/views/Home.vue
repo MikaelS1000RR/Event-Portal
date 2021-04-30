@@ -2,6 +2,7 @@
   <div class="home">
     <div class="event-list-wrapper">
      <EventList/>
+     
     </div>
   </div>
 </template>
@@ -15,6 +16,8 @@ export default {
    EventList
   },
 
+
+ 
 
   methods: {
     getEvents() {

@@ -49,6 +49,7 @@ export default new Vuex.Store({
     },
 
     setDeleteSuccess(state) {
+      console.log('setting success in commit');
       state.deleteSuccess = true;
     }
   },
@@ -141,14 +142,14 @@ export default new Vuex.Store({
       
     },
     
-    deleteEvent(store) {
+    async deleteEvent({commit }, id) {
       console.log('in process deleting event');
-        axios
-          .delete("/events/" + store.state.specEvent.id)
+        await axios
+          .delete("/events/" + id)
           .then((res) => {
               
             console.log(res.data);
-           store.commit("setDeleteSuccess");
+           commit("setDeleteSuccess");
             
           })
           .catch((err) => {
