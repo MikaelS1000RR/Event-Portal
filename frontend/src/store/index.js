@@ -10,8 +10,6 @@ export default new Vuex.Store({
     users: [],
     specEvent: "",
     specUser: "",
-    eventId: "",
-    userId: "",
     createdEvent: {},
     currLoggedInUser: {},
     deleteSuccess: false,
@@ -23,9 +21,6 @@ export default new Vuex.Store({
     setEvents(state, events) {
       state.events = events;
     },
-    setUsers(state, users) {
-      state.users = users;
-    },
 
     setSpecEvent(state, event) {
       console.log("specific event is set");
@@ -33,12 +28,6 @@ export default new Vuex.Store({
     },
     setSpecUser(state, user) {
       state.specUser = user;
-    },
-    setEventId(state, id) {
-      state.eventId = id;
-    },
-    setUserId(state, id) {
-      state.userId = id;
     },
 
     setCurrLoggedInUser(state, user) {
@@ -53,16 +42,19 @@ export default new Vuex.Store({
       state.deleteSuccess = true;
     },
     setPublicAccess(state) {
+      console.log("setting public");
       state.publicAccess = true;
       state.privateAccess = false;
       state.internalAccess = false;
     },
     setPrivateAccess(state) {
+      console.log("setting private");
       state.privateAccess = true;
       state.publicAccess = false;
       state.internalAccess = false;
     },
     setInternalAccess(state) {
+      console.log("setting internal");
       state.internalAccess = true;
       state.privateAccess = false;
       state.publicAccess = false;
@@ -76,19 +68,6 @@ export default new Vuex.Store({
         .then((res) => {
           console.log(res.data);
           commit("setEvents", res.data);
-        })
-
-        .catch((err) => {
-          console.log(err.response);
-        });
-    },
-
-    fetchUsers({ commit }) {
-      axios
-        .get("/users")
-        .then((res) => {
-          console.log(res.data);
-          commit("setUsers", res.data);
         })
 
         .catch((err) => {
@@ -116,7 +95,13 @@ export default new Vuex.Store({
           console.log(res.data);
           store.commit("setSpecEvent", res.data);
 
-          console.log("date and time in event is", res.data.endDateTime);
+          if (res.data.access === "private") {
+            store.commit("setPrivateAccess");
+          } else if (res.data.access === "public") {
+            store.commit("setPublicAccess");
+          } else if (res.data.access === "internal") {
+            store.commit("setInternalAccess");
+          }
           store.dispatch("fetchSpecUser", res.data.hostId);
         })
         .catch((err) => {

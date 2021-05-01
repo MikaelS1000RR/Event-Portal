@@ -123,7 +123,7 @@ export default {
       description: this.$store.state.specEvent.description,
       publicAccess: this.$store.state.publicAccess,
       privateAccess: this.$store.state.privateAccess,
-      internalAccess: this.store.state.internalAccess,
+      internalAccess: this.$store.state.internalAccess,
       access: "",
       hostId: "061eb70c-7055-4d07-a584-b3c20cd59d73",
       loader: null,
