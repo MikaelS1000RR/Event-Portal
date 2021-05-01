@@ -14,9 +14,10 @@ export default new Vuex.Store({
     userId: "",
     createdEvent: {},
     currLoggedInUser: {},
-    deleteSuccess: false
-
-    
+    deleteSuccess: false,
+    publicAccess: false,
+    privateAccess: false,
+    internalAccess: false,
   },
   mutations: {
     setEvents(state, events) {
@@ -27,6 +28,7 @@ export default new Vuex.Store({
     },
 
     setSpecEvent(state, event) {
+      console.log("specific event is set");
       state.specEvent = event;
     },
     setSpecUser(state, user) {
@@ -45,18 +47,34 @@ export default new Vuex.Store({
 
     setCreatedEvent(state, event) {
       state.createdEvent = event;
-      console.log("Event is set", event);
     },
 
     setDeleteSuccess(state) {
-      console.log('setting success in commit');
       state.deleteSuccess = true;
-    }
+    },
+    setPublicAccess(state) {
+      console.log("public access is set in commit");
+      state.publicAccess = true;
+      state.privateAccess = false;
+      state.internalAccess = false;
+    },
+    setPrivateAccess(state) {
+      console.log("private access is set in commit");
+      state.privateAccess = true;
+      state.publicAccess = false;
+      state.internalAccess = false;
+    },
+    setInternalAccess(state) {
+      console.log("internal access is set in commit");
+      state.internalAccess = true;
+       state.privateAccess = false;
+       state.publicAccess = false;
+    },
   },
 
   actions: {
-    fetchEvents({ commit }) {
-      axios
+    async fetchEvents({ commit }) {
+      await axios
         .get("/events")
         .then((res) => {
           console.log(res.data);
@@ -67,8 +85,6 @@ export default new Vuex.Store({
           console.log(err.response);
         });
     },
-
-  
 
     fetchUsers({ commit }) {
       axios
@@ -83,9 +99,9 @@ export default new Vuex.Store({
         });
     },
 
-    fetchSpecUser(store, id) {
-      console.log('id in fetch user is', id);
-      axios
+    async fetchSpecUser(store, id) {
+      console.log("id in fetch user is", id);
+      await axios
         .get("/users/" + id)
         .then((res) => {
           console.log(res.data);
@@ -96,66 +112,57 @@ export default new Vuex.Store({
         });
     },
 
-    fetchSpecEvent(store, id) {
-      axios
+    async fetchSpecEvent(store, id) {
+      await axios
         .get("/events/" + id)
         .then((res) => {
           console.log(res.data);
           store.commit("setSpecEvent", res.data);
-    
+
           console.log("date and time in event is", res.data.endDateTime);
-          store.dispatch("fetchSpecUser", res.data.hostId)
+          store.dispatch("fetchSpecUser", res.data.hostId);
         })
         .catch((err) => {
           console.log(err.response);
         });
     },
 
-    createNewEvent(store) {
-      axios.post('/events',
-        store.state.createdEvent, 
-      ).then(response => {
+    async createNewEvent(store) {
+      await axios.post("/events", store.state.createdEvent).then((response) => {
         this.isSuccess = true;
         console.log(response);
       });
     },
 
-    fetchWhoAmI(store) {
-      axios
+    async fetchWhoAmI(store) {
+      await axios
         .post("/whoami")
         .then((res) => {
           if (res.data.email !== null) {
-             console.log(res.data);
-          store.state.commit("setCurrLoggedInUser", res.data);
-          }
-          else {
-            console.log('user is not logged in');
+            console.log(res.data);
+            store.state.commit("setCurrLoggedInUser", res.data);
+          } else {
+            console.log("user is not logged in");
             console.log(store.state.currLoggedInUser);
           }
-         
         })
         .catch((err) => {
           console.log(err.response);
         });
-      
-      
-      
     },
-    
-    async deleteEvent({commit }, id) {
-      console.log('in process deleting event');
-        await axios
-          .delete("/events/" + id)
-          .then((res) => {
-              
-            console.log(res.data);
-           commit("setDeleteSuccess");
-            
-          })
-          .catch((err) => {
-            console.log(err.response);
-          });
-      }
+
+    async deleteEvent({ commit }, id) {
+      console.log("in process deleting event");
+      await axios
+        .delete("/events/" + id)
+        .then((res) => {
+          console.log(res.data);
+          commit("setDeleteSuccess");
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    },
   },
 
   modules: {},

@@ -272,6 +272,16 @@ export default {
   },
   async created() {
     await this.$store.dispatch("fetchSpecEvent", this.id);
+    console.log(this.$store.state.specEvent);
+      if(this.$store.state.specEvent.access==="private"){
+       await this.$store.commit("setPrivateAccess")
+     }
+     if(this.$store.state.specEvent.access==="public"){
+       await this.$store.commit("setPublicAccess")
+     }
+     if(this.$store.state.specEvent.access==="internal"){
+       await this.$store.commit("setInternalAccess")
+     }
   },
 };
 </script>

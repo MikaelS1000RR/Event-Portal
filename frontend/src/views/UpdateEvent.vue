@@ -8,7 +8,7 @@
               <li>
                 <img
                   class="detailedImg"
-                  src="https://www.flaticon.com/svg/vstatic/svg/1250/1250252.svg?token=exp=1619784941~hmac=be8b5c2880fd0496925c51adf3f5f626"
+                  src="../assets/DetailedImg/event-name.png"
                   alt=""
                 />
                 <input type="text" v-model="eventName" placeholder="" />
@@ -16,7 +16,7 @@
               <li>
                 <img
                   class="detailedImg"
-                  src="https://www.flaticon.com/svg/vstatic/svg/4585/4585617.svg?token=exp=1619724567~hmac=1a64feb6ca9b8ef9acc92eb3c6aeb715"
+                  src="../assets/DetailedImg/place.png"
                   alt=""
                   srcset=""
                 />
@@ -26,7 +26,7 @@
               <li>
                 <img
                   class="detailedImg"
-                  src="https://www.flaticon.com/svg/vstatic/svg/4585/4585147.svg?token=exp=1619724730~hmac=bab92bca9cca01f2c559c82059f750b5"
+                  src="../assets/DetailedImg/calendar.png"
                   alt=""
                   srcset=""
                 />
@@ -109,10 +109,10 @@ export default {
       eventName: this.$store.state.specEvent.name,
       location: this.$store.state.specEvent.location,
       startTimeAndDate: "",
-      endTimeAndDate: "drgrdgdgr",
+      endTimeAndDate: "",
       description: this.$store.state.specEvent.description,
-      publicAccess: true,
-      privateAccess: false,
+      publicAccess: this.$store.state.publicAccess,
+      privateAccess: this.$store.state.privateAccess,
       access: "",
       hostId: "061eb70c-7055-4d07-a584-b3c20cd59d73",
       loader: null,
@@ -148,9 +148,11 @@ export default {
     },
   },
   computed: {
-    currEvent() {
-      return this.$store.state.specEvent;
-    },
+   
+  },
+
+    async created() {
+   
   },
 };
 </script>
