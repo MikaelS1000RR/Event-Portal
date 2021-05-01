@@ -90,7 +90,7 @@
                       <span>Saving...</span>
                     </template>
                   </v-btn>
-                  <v-btn>
+                  <v-btn @click="cancel">
                     Cancel
                   </v-btn>
                 </div>
@@ -164,6 +164,10 @@ export default {
       this.privateAccess=false;
       this.publicAccess=false;
     },
+
+    cancel(){
+      this.$router.push("/details/" + this.$store.state.specEvent.id)
+    }
   },
   computed: {
    
