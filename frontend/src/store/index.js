@@ -16,6 +16,7 @@ export default new Vuex.Store({
     publicAccess: false,
     privateAccess: false,
     internalAccess: false,
+    updatedEvent: {}
   },
   mutations: {
     setEvents(state, events) {
@@ -59,6 +60,12 @@ export default new Vuex.Store({
       state.privateAccess = false;
       state.publicAccess = false;
     },
+
+    setUpdatedEvent(state, event) {
+     
+      state.updatedEvent = event;
+       console.log('updated event in store is', state.updatedEvent);
+    }
   },
 
   actions: {
@@ -110,10 +117,14 @@ export default new Vuex.Store({
     },
 
     async createNewEvent(store) {
-      await axios.post("/events", store.state.createdEvent).then((response) => {
-        this.isSuccess = true;
-        console.log(response);
-      });
+      await axios
+        .post("/events", store.state.createdEvent)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });;
     },
 
     async fetchWhoAmI(store) {
@@ -134,7 +145,6 @@ export default new Vuex.Store({
     },
 
     async deleteEvent({ commit }, id) {
-      console.log("in process deleting event");
       await axios
         .delete("/events/" + id)
         .then((res) => {
@@ -145,6 +155,17 @@ export default new Vuex.Store({
           console.log(err.response);
         });
     },
+
+    async updateEvent(store) {
+      await axios
+        .put("/events/" + store.state.specEvent.id, store.state.updatedEvent)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    }
   },
 
   modules: {},

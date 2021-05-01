@@ -149,7 +149,9 @@ export default {
         access: this.access,
       };
 
-      console.log("updating event is", updatedEvent);
+      await this.$store.commit("setUpdatedEvent", updatedEvent)
+      await this.$store.dispatch("updateEvent")
+
     },
 
     disablePublicAndInternal() {
