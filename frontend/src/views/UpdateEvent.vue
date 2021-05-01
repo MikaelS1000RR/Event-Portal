@@ -45,6 +45,22 @@
               </li>
 
               <li>
+                <div class="help-circle">
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-icon v-bind="attrs" v-on="on">
+                      mdi-help-circle
+                    </v-icon>
+                  </template>
+                  <div class="help-info">
+                    <p>Public events are accessible for anybody, even for unregistered users
+                 in comparison to private events which can be seen only by registered users. Internal events
+                 on other hand, can not be seen by anybody unless user is registered and has a special link to the event</p>
+                  </div>
+                  
+                </v-tooltip>
+                </div>
+
                 <label for="public">Public</label>
 
                 <input
@@ -74,6 +90,7 @@
                   @change="disablePublicAndPrivate"
                 />
               </li>
+
               <li>
                 <div class="save-btn">
                   <v-btn
@@ -149,9 +166,10 @@ export default {
         access: this.access,
       };
 
-      await this.$store.commit("setUpdatedEvent", updatedEvent)
-      await this.$store.dispatch("updateEvent")
+      await this.$store.commit("setUpdatedEvent", updatedEvent);
+      await this.$store.dispatch("updateEvent");
 
+      this.$router.push("/details/" + this.$store.state.specEvent.id);
     },
 
     disablePublicAndInternal() {
@@ -209,13 +227,19 @@ export default {
 li > span {
   padding: 0 1vw 0 1vw;
 }
-
+.help-info{
+  max-width:15vw;
+  
+}
 input,
 textarea {
   border: 1px solid #000 !important;
   padding: 0.5vw 1vw 0.5vw 1vw;
 }
 
+.help-circle{
+  padding-right:2vw;
+}
 input:focus,
 textarea:focus {
   outline: 3px solid rgba(107, 21, 206, 0.233);
