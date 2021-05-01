@@ -129,7 +129,7 @@
               <img
                 class="detailedImg"
                 v-if="currEvent.access === 'public'"
-                src="https://www.flaticon.com/svg/vstatic/svg/1180/1180140.svg?token=exp=1619725192~hmac=b8bc5889aa730b872e15a7e81be8af7c"
+                src="../assets/DetailedImg/open-lock.png"
                 alt=""
                 srcset=""
               />
