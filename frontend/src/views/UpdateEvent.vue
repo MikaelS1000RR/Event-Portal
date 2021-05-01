@@ -46,7 +46,7 @@
 
               <li>
                 <label for="public">Public</label>
-                
+
                 <input
                   id="public"
                   value="Public"
@@ -56,7 +56,7 @@
                 />
 
                 <label for="private" class="lock-label">Private</label>
-              
+
                 <input
                   id="private"
                   value="Private"
@@ -65,7 +65,7 @@
                   @change="disablePublicAndInternal"
                 />
                 <label for="internal" class="lock-label">Internal</label>
-              
+
                 <input
                   id="private"
                   value="Private"
@@ -73,7 +73,6 @@
                   v-model="internalAccess"
                   @change="disablePublicAndPrivate"
                 />
-
               </li>
               <li>
                 <div class="save-btn">
@@ -82,7 +81,7 @@
                     :loading="loading"
                     :disabled="loading"
                     color="success"
-                    @click="loader='loading'"
+                    @click="loader = 'loading'"
                     type="submit"
                   >
                     Save changes
@@ -124,69 +123,59 @@ export default {
       publicAccess: this.$store.state.publicAccess,
       privateAccess: this.$store.state.privateAccess,
       internalAccess: this.$store.state.internalAccess,
-      access: "",
+      access: "public",
       loader: null,
       loading: false,
     };
   },
-  watch: {
-    loader() {
-     
-    },
-  },
   methods: {
-    saveChanges() {
-     
-     const l = this.loader;
+    async saveChanges() {
+      const l = this.loader;
       this[l] = !this[l];
 
-      setTimeout(() => (this[l] = false), 3000);
+      await new Promise((res) => setTimeout(res, 3000));
 
+      this[l] = false;
       this.loader = null;
 
-      const startDateTime=`${this.startTimeAndDate}:59.3528866+02:00`
-    const endDateTime=`${this.endTimeAndDate}:59.3528866+02:00`
-    const updatedEvent = {
+      const startDateTime = `${this.startTimeAndDate}:59.3528866+02:00`;
+      const endDateTime = `${this.endTimeAndDate}:59.3528866+02:00`;
+      const updatedEvent = {
         name: this.eventName,
-         location: this.location, 
-      startDateTime: startDateTime,
-       endDateTime: endDateTime, 
-      description: this.description, 
-      access: this.access,
-      }
+        location: this.location,
+        startDateTime: startDateTime,
+        endDateTime: endDateTime,
+        description: this.description,
+        access: this.access,
+      };
 
-      console.log('updating event is', updatedEvent);
-
+      console.log("updating event is", updatedEvent);
     },
 
     disablePublicAndInternal() {
-      this.access="private"
+      this.access = "private";
       this.publicAccess = false;
-      this.internalAccess=false;
+      this.internalAccess = false;
     },
     disablePrivateAndInternal() {
-       this.access="public"
+      this.access = "public";
       this.privateAccess = false;
-      this.internalAccess=false;
+      this.internalAccess = false;
     },
 
-    disablePublicAndPrivate(){
-       this.access="internal"
-      this.privateAccess=false;
-      this.publicAccess=false;
+    disablePublicAndPrivate() {
+      this.access = "internal";
+      this.privateAccess = false;
+      this.publicAccess = false;
     },
 
-    cancel(){
-      this.$router.push("/details/" + this.$store.state.specEvent.id)
-    }
+    cancel() {
+      this.$router.push("/details/" + this.$store.state.specEvent.id);
+    },
   },
-  computed: {
-   
-  },
+  computed: {},
 
-    async created() {
-   
-  },
+  async created() {},
 };
 </script>
 
@@ -260,8 +249,8 @@ li > p {
   font-size: 1.2vw;
 }
 
-li>label{
-  padding-right:1.1vw;
+li > label {
+  padding-right: 1.1vw;
 }
 
 .door {
