@@ -52,7 +52,7 @@
                   value="Public"
                   type="checkbox"
                   v-model="publicAccess"
-                  @change="disablePrivate"
+                  @change="disablePrivateAndInternal"
                 />
 
                 <label for="private" class="lock-label">Private</label>
@@ -62,7 +62,7 @@
                   value="Private"
                   type="checkbox"
                   v-model="privateAccess"
-                  @change="disablePublic"
+                  @change="disablePublicAndInternal"
                 />
                 <label for="internal" class="lock-label">Internal</label>
               
@@ -71,7 +71,7 @@
                   value="Private"
                   type="checkbox"
                   v-model="internalAccess"
-                  @change="disablePublic"
+                  @change="disablePublicAndPrivate"
                 />
 
               </li>
@@ -151,11 +151,18 @@ export default {
       const startDateTime = this.$store.state.specEvent.startDateTime;
       const endDateTime = this.$store.state.specEvent.startDateTime;
     },
-    disablePublic() {
+    disablePublicAndInternal() {
       this.publicAccess = false;
+      this.internalAccess=false;
     },
-    disablePrivate() {
+    disablePrivateAndInternal() {
       this.privateAccess = false;
+      this.internalAccess=false;
+    },
+
+    disablePublicAndPrivate(){
+      this.privateAccess=false;
+      this.publicAccess=false;
     },
   },
   computed: {
