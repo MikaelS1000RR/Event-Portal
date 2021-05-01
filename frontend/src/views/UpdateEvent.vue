@@ -82,7 +82,7 @@
                     :loading="loading"
                     :disabled="loading"
                     color="success"
-                    @click="loader = 'loading'"
+                    @click="loader='loading'"
                     type="submit"
                   >
                     Save changes
@@ -125,42 +125,53 @@ export default {
       privateAccess: this.$store.state.privateAccess,
       internalAccess: this.$store.state.internalAccess,
       access: "",
-      hostId: "061eb70c-7055-4d07-a584-b3c20cd59d73",
       loader: null,
       loading: false,
     };
   },
   watch: {
     loader() {
-      const l = this.loader;
+     
+    },
+  },
+  methods: {
+    saveChanges() {
+     
+     const l = this.loader;
       this[l] = !this[l];
 
       setTimeout(() => (this[l] = false), 3000);
 
       this.loader = null;
-    },
-  },
-  methods: {
-    saveChanges() {
-      this.loading = !false;
-      setTimeout(() => {
-        this.loading != true;
-      }, 2000);
 
-      console.log("saving changes");
-      const startDateTime = this.$store.state.specEvent.startDateTime;
-      const endDateTime = this.$store.state.specEvent.startDateTime;
+      const startDateTime=`${this.startTimeAndDate}:59.3528866+02:00`
+    const endDateTime=`${this.endTimeAndDate}:59.3528866+02:00`
+    const updatedEvent = {
+        name: this.eventName,
+         location: this.location, 
+      startDateTime: startDateTime,
+       endDateTime: endDateTime, 
+      description: this.description, 
+      access: this.access,
+      }
+
+      console.log('updating event is', updatedEvent);
+
     },
+
     disablePublicAndInternal() {
+      this.access="private"
       this.publicAccess = false;
       this.internalAccess=false;
     },
     disablePrivateAndInternal() {
+       this.access="public"
       this.privateAccess = false;
       this.internalAccess=false;
     },
 
     disablePublicAndPrivate(){
+       this.access="internal"
       this.privateAccess=false;
       this.publicAccess=false;
     },
