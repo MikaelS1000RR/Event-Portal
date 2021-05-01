@@ -80,7 +80,7 @@
             <li>
               <img
                 class="detailedImg"
-                src="https://www.flaticon.com/svg/vstatic/svg/4585/4585617.svg?token=exp=1619724567~hmac=1a64feb6ca9b8ef9acc92eb3c6aeb715"
+                src="../assets/DetailedImg/place.png"
                 alt=""
                 srcset=""
               />
@@ -90,7 +90,7 @@
             <li>
               <img
                 class="detailedImg"
-                src="https://www.flaticon.com/svg/vstatic/svg/4585/4585180.svg?token=exp=1619724673~hmac=b51eed2d5d6b2ff03b8cefd7e5e93b61"
+                src="../assets/DetailedImg/clock.png"
                 alt=""
                 srcset=""
               />
@@ -101,7 +101,7 @@
             <li>
               <img
                 class="detailedImg"
-                src="https://www.flaticon.com/svg/vstatic/svg/4585/4585147.svg?token=exp=1619724730~hmac=bab92bca9cca01f2c559c82059f750b5"
+                src="../assets/DetailedImg/calendar.png"
                 alt=""
                 srcset=""
               />
@@ -112,7 +112,7 @@
             <li>
               <img
                 class="detailedImg"
-                src="https://www.flaticon.com/svg/vstatic/svg/4585/4585642.svg?token=exp=1619724785~hmac=2b64fd3798d384fa8f3a41ef0aa74622"
+                src="../assets/DetailedImg/user.png"
                 alt=""
               />
               <p>{{ hostUser.firstName }} {{ hostUser.lastName }}</p>
@@ -122,7 +122,7 @@
               <img
                 class="detailedImg"
                 v-if="currEvent.access === 'private'"
-                src="https://www.flaticon.com/svg/vstatic/svg/4585/4585434.svg?token=exp=1619724943~hmac=b08d1decec1ad6784d3e7afe76c97ff2"
+                src="../assets/lock.png"
                 alt=""
               />
 

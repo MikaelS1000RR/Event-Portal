@@ -80,6 +80,9 @@
                       <span>Saving...</span>
                     </template>
                   </v-btn>
+                  <v-btn>
+                    Cancel
+                  </v-btn>
                 </div>
               </li>
             </ul>
