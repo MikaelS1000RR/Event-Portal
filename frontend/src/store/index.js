@@ -53,22 +53,19 @@ export default new Vuex.Store({
       state.deleteSuccess = true;
     },
     setPublicAccess(state) {
-      console.log("public access is set in commit");
       state.publicAccess = true;
       state.privateAccess = false;
       state.internalAccess = false;
     },
     setPrivateAccess(state) {
-      console.log("private access is set in commit");
       state.privateAccess = true;
       state.publicAccess = false;
       state.internalAccess = false;
     },
     setInternalAccess(state) {
-      console.log("internal access is set in commit");
       state.internalAccess = true;
-       state.privateAccess = false;
-       state.publicAccess = false;
+      state.privateAccess = false;
+      state.publicAccess = false;
     },
   },
 

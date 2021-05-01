@@ -46,7 +46,7 @@
 
               <li>
                 <label for="public">Public</label>
-                <img class="door" src="../assets/door.png" />
+                
                 <input
                   id="public"
                   value="Public"
@@ -56,7 +56,7 @@
                 />
 
                 <label for="private" class="lock-label">Private</label>
-                <img class="lock" src="../assets/lock.png" />
+              
                 <input
                   id="private"
                   value="Private"
@@ -64,6 +64,16 @@
                   v-model="privateAccess"
                   @change="disablePublic"
                 />
+                <label for="internal" class="lock-label">Internal</label>
+              
+                <input
+                  id="private"
+                  value="Private"
+                  type="checkbox"
+                  v-model="internalAccess"
+                  @change="disablePublic"
+                />
+
               </li>
               <li>
                 <div class="save-btn">
@@ -113,6 +123,7 @@ export default {
       description: this.$store.state.specEvent.description,
       publicAccess: this.$store.state.publicAccess,
       privateAccess: this.$store.state.privateAccess,
+      internalAccess: this.store.state.internalAccess,
       access: "",
       hostId: "061eb70c-7055-4d07-a584-b3c20cd59d73",
       loader: null,
@@ -225,6 +236,10 @@ li > p {
   margin-top: 1.2vw;
   padding-left: 1vw;
   font-size: 1.2vw;
+}
+
+li>label{
+  padding-right:1.1vw;
 }
 
 .door {

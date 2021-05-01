@@ -34,7 +34,6 @@
                   Are you sure that you want to delete this event?
                 </v-card-title>
 
-
                 <v-divider></v-divider>
 
                 <v-card-actions>
@@ -43,7 +42,7 @@
                     Yes
                   </v-btn>
                   <v-btn color="primary" text @click="dialog = false">
-                  Cancel
+                    Cancel
                   </v-btn>
                 </v-card-actions>
               </v-card>
@@ -51,27 +50,16 @@
           </v-list>
         </v-menu>
 
-
-          <v-dialog
-        v-model="afterDelete"
-        hide-overlay
-        persistent
-        width="300"
-      >
-        <v-card
-          color="primary"
-          dark
-        >
-          <v-card-text v-if="$store.state.deleteSuccess">
-            Event has been deleted
-          </v-card-text>
-          <v-card-text v-else>
-            Something went wrong
-          </v-card-text>
-        </v-card>
-      </v-dialog>
-
-
+        <v-dialog v-model="afterDelete" hide-overlay persistent width="300">
+          <v-card color="primary" dark>
+            <v-card-text v-if="$store.state.deleteSuccess">
+              Event has been deleted
+            </v-card-text>
+            <v-card-text v-else>
+              Something went wrong
+            </v-card-text>
+          </v-card>
+        </v-dialog>
       </div>
 
       <div class="event-details">
@@ -160,16 +148,15 @@ export default {
     return {
       dialog: false,
       deletePopup: false,
-      afterDelete:false
+      afterDelete: false,
     };
   },
 
   watch: {
-    dialog (val) {
-      if (!val) return
+    dialog(val) {
+      if (!val) return;
 
-      setTimeout(() => (this.redirect()), 3000)
-    
+      setTimeout(() => this.redirect(), 3000);
     },
   },
 
@@ -182,25 +169,21 @@ export default {
       return date;
     },
 
-    redirect(){
-   this.afterDelete=false;
-   this.$router.push("/")
+    redirect() {
+      this.afterDelete = false;
+      this.$router.push("/");
     },
 
-    async deleteEvent(){
-    this.dialog=false;
-     await this.$store.dispatch("deleteEvent", this.currEvent.id );
-     console.log('success in store is', this.$store.state.deleteSuccess);
-     if(this.$store.state.deleteSuccess){
-       
-         this.afterDelete=true;
-     }
-    
+    async deleteEvent() {
+      this.dialog = false;
+      await this.$store.dispatch("deleteEvent", this.currEvent.id);
+      if (this.$store.state.deleteSuccess) {
+        this.afterDelete = true;
+      }
     },
 
     editEvent() {
-      console.log("editing event");
-      this.$router.push("/update-event/"+ this.currEvent.id)
+      this.$router.push("/update-event/" + this.currEvent.id);
     },
 
     getTime(eventDate) {
@@ -236,11 +219,6 @@ export default {
     },
 
     ifHost() {
-      console.log(
-        "current logged in user id is",
-        this.$store.state.currLoggedInUser
-      );
-      console.log("Id of the event host is", this.hostUser.id);
       let userIsHost =
         this.hostUser.id === this.$store.state.currLoggedInUser.id
           ? true
@@ -272,16 +250,16 @@ export default {
   },
   async created() {
     await this.$store.dispatch("fetchSpecEvent", this.id);
-    console.log(this.$store.state.specEvent);
-      if(this.$store.state.specEvent.access==="private"){
-       await this.$store.commit("setPrivateAccess")
-     }
-     if(this.$store.state.specEvent.access==="public"){
-       await this.$store.commit("setPublicAccess")
-     }
-     if(this.$store.state.specEvent.access==="internal"){
-       await this.$store.commit("setInternalAccess")
-     }
+
+    if (this.$store.state.specEvent.access === "private") {
+      await this.$store.commit("setPrivateAccess");
+    }
+    if (this.$store.state.specEvent.access === "public") {
+      await this.$store.commit("setPublicAccess");
+    }
+    if (this.$store.state.specEvent.access === "internal") {
+      await this.$store.commit("setInternalAccess");
+    }
   },
 };
 </script>
@@ -294,23 +272,22 @@ export default {
   align-items: center;
 }
 
-.v-dialog > .v-card > .v-card__text{
-  padding:2vh 3vw 2vh 3vw;
+.v-dialog > .v-card > .v-card__text {
+  padding: 2vh 3vw 2vh 3vw;
   display: flex;
-  
+
   justify-content: center;
 }
 
-
-.v-application .primary{
+.v-application .primary {
   background-color: var(--buttonPurpleSecondary) !important;
 }
 .dropdown-item {
   cursor: pointer;
 }
-.v-dialog > .v-card > .v-card__title{
-  font-size:1.1em !important;
-  font-family:"Montserrat", sans-serif  !important;
+.v-dialog > .v-card > .v-card__title {
+  font-size: 1.1em !important;
+  font-family: "Montserrat", sans-serif !important;
 }
 
 .v-application .grey.lighten-2 {
