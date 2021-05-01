@@ -34,7 +34,6 @@ export default {
 <style scoped>
 .event-card {
   text-align: center;
-  padding: 1vw;
   height: 75%;
 
   display: flex;
