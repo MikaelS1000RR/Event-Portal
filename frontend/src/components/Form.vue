@@ -1,136 +1,155 @@
 <template>
   <div class="wrapper">
-      <h3>Create new event</h3>
-      <form @submit.prevent="onCreateEvent">
-        <p>
+    <h3>Create new event</h3>
+    <form @submit.prevent="onCreateEvent">
+      
+      <p>
+        <label id="eventName" for="">Event name</label>
+        <input type="text" v-model="eventName" />
+      </p>
+      <p>
+        <label id="location" for="">Location</label>
+        <input type="text" v-model="location" />
+      </p>
 
-          <label id="eventName" for="">Event name</label>
-          <input type="text" v-model="eventName" />
-        </p>
-        <p>
-          <label id="location" for="">Location</label>
-          <input type="text" v-model="location">
-        </p>
+      <p>
+        <label id="time1" for="">Start Time</label>
+        <input type="datetime-local" id="time" v-model="startTimeAndDate" />
+      </p>
 
-        <p>
-          <label id="time1" for="">Start Time</label>
-          <input type="datetime-local" id="time" v-model="startTimeAndDate">
-        </p>
+      <p>
+        <label id="time2" for="">End Time</label>
+        <input type="datetime-local" id="time" v-model="endTimeAndDate" />
+      </p>
 
-        <p>
-          <label id="time2" for="">End Time</label>
-          <input type="datetime-local" id="time" v-model="endTimeAndDate"> 
-        </p>
+      <p>
+        <label id="description" for="">Description</label>
+        <textarea v-model="description" name="" id="" cols="30" rows="7">
+        </textarea>
+      </p>
+<div class="accessibility">
+  <div class="access-label">
+      <p>Choose accessibility:</p>
+      <HelpCircle/>
+  </div>
 
-
-         <p>
-          <label id="description" for="">Description</label>
-           <textarea v-model="description" name="" id="" cols="30" rows="7"> </textarea>
-        </p>
-
-       <p class="checkbox">
-       
-         
+      <p class="checkbox">
+        <img class="door" src="../assets/CreateEventImg/door.png" />
         <label for="public">Public</label>
-        <img class="door" src="../assets/door.png">
-        <input id="public" value="Public" type="checkbox" v-model="publicAccess"  @change="disablePrivate">
-               
+
+        <input
+          id="public"
+          value="Public"
+          type="checkbox"
+          v-model="publicAccess"
+          @change="disablePrivateAndInternal"
+        />
+
+        <img class="lock" src="../assets/CreateEventImg/padlock.png" />
         <label for="private">Private</label>
-        <img class="lock" src="../assets/lock.png">
-        <input  id="private" value="Private" type="checkbox" v-model="privateAccess" @change="disablePublic">
-    
-          </p>
 
+        <input
+          id="private"
+          value="Private"
+          type="checkbox"
+          v-model="privateAccess"
+          @change="disablePublicAndInternal"
+        />
 
-        <p class="input-file-wrapper">
-          <label for="upload">Upload your photo</label>
-          <input type="file" name="" id="upload">
-        </p>
-        
-        <p>
-          <button type="submit" class="btn btn-primary">Create</button>
-        </p>
-      </form>
-     
-    </div>
+        <img class="key" src="../assets/CreateEventImg/key (1).png" />
+        <label for="internal">Internal</label>
+
+        <input
+          id="internal"
+          value="Internal"
+          type="checkbox"
+          v-model="internalAccess"
+          @change="disablePublicAndPrivate"
+        />
+      </p>
+      </div>
+
+      <p class="input-file-wrapper">
+        <label for="upload">Upload your photo</label>
+        <input type="file" name="" id="upload" />
+      </p>
+
+      
+
+      <p>
+        <button type="submit" class="btn btn-primary">Create</button>
+      </p>
+    </form>
+  </div>
 </template>
 
 <script>
- // import axios from 'axios';
+// import axios from 'axios';
+import HelpCircle from '../components/HelpCircle.vue'
 export default {
+  components:{
+HelpCircle
+  },
   data() {
     return {
-      eventName: '',
-      location: '',
-      startTimeAndDate: '',
-      endTimeAndDate: '',
-     
-      description: '',
-     publicAccess: true,
+      eventName: "",
+      location: "",
+      startTimeAndDate: "",
+      endTimeAndDate: "",
+
+      description: "",
+      publicAccess: true,
       privateAccess: false,
+      internalAccess: false,
       access: "",
-      hostId: '061eb70c-7055-4d07-a584-b3c20cd59d73'
-     
-    }
+      hostId: "061eb70c-7055-4d07-a584-b3c20cd59d73",
+    };
   },
   methods: {
     onCreateEvent() {
+      const startDateTime = `${this.startTimeAndDate}:59.3528866+02:00`;
+      const endDateTime = `${this.endTimeAndDate}:59.3528866+02:00`;
 
-        if(this.publicAccess) {
-        this.access = 'public'
-      } 
-      else if(this.privateAccess) {
-        this.access = 'private' 
-      }
-
-
-
-    const startDateTime=`${this.startTimeAndDate}:59.3528866+02:00`
-    const endDateTime=`${this.endTimeAndDate}:59.3528866+02:00`
-
-  console.log(startDateTime);
-  console.log(endDateTime);
-
+      console.log(startDateTime);
+      console.log(endDateTime);
 
       const createdEvent = {
         name: this.eventName,
-         location: this.location, 
-      startDateTime: startDateTime,
-       endDateTime: endDateTime, 
-      description: this.description, 
-      access: this.access,
-       hostId: this.hostId
-      }
+        location: this.location,
+        startDateTime: startDateTime,
+        endDateTime: endDateTime,
+        description: this.description,
+        access: this.access,
+        hostId: this.hostId,
+      };
 
-  
-     
-
-
-
-     this.$store.commit("setCreatedEvent", createdEvent);
-     this.$store.dispatch("createNewEvent");
-   
+      this.$store.commit("setCreatedEvent", createdEvent);
+      this.$store.dispatch("createNewEvent");
     },
-    disablePublic(){
-     this.publicAccess=false;
-   },
-   disablePrivate(){
-     this.privateAccess=false;
-   },
+    disablePublicAndInternal() {
+      this.access = "private";
+      this.publicAccess = false;
+      this.internalAccess = false;
+    },
+    disablePrivateAndInternal() {
+      this.access = "public";
+      this.privateAccess = false;
+      this.internalAccess = false;
+    },
 
-
+    disablePublicAndPrivate() {
+      this.access = "internal";
+      this.privateAccess = false;
+      this.publicAccess = false;
+    },
   },
-  
-  }
+};
 </script>
 
 <style scoped>
-
-
-
 * {
   box-sizing: border-box;
-  font-family:  "Montserrat", sans-serif;;
+  font-family: "Montserrat", sans-serif;
 }
 
 body {
@@ -184,7 +203,8 @@ button {
   width: 100%;
   border: 0;
 }
-button:hover, button:focus {
+button:hover,
+button:focus {
   background: rgba(107, 21, 206, 0.548);
   outline: 0;
 }
@@ -203,36 +223,39 @@ form p {
   grid-row: 1 / 2;
 }
 
+.accessibility{
+  grid-column: 1/2;
+  margin-top:2vh;
+}
+
+.access-label{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
 .checkbox {
   display: flex;
   flex-direction: row;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
-  
+  padding-top:2vh;
 }
 
-
-#public, #private {
+#public,
+#private,
+#internal {
   cursor: pointer;
   outline: none;
-  margin-right: 5vw;
-
+  margin-right:1vw;
 }
-
-
 
 .door {
-  width: 10%;
-
-}
-
-.lock {
   width: 9%;
-  padding-bottom: 0.5%;
-
-
-
 }
 
+.lock, .key {
+  width: 8%;
+  padding-bottom: 0.5%;
+}
 </style>

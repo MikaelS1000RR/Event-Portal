@@ -27,7 +27,11 @@ export default {};
   padding-right: 2vw;
 }
 .help-info{
-  max-width:15vw;
+  max-width:18vw;
   
+}
+
+.mdi-set, .mdi:before{
+  font-size:.8em !important;
 }
 </style>

@@ -110,7 +110,7 @@
               <img
                 class="detailedImg"
                 v-if="currEvent.access === 'private'"
-                src="../assets/lock.png"
+                src="../assets/CreateEventImg/lock.png"
                 alt=""
               />
 
