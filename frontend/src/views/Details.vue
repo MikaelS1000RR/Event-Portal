@@ -10,7 +10,7 @@
               class="detailedImg settings"
               v-bind="attrs"
               v-on="on"
-              src="https://www.flaticon.com/svg/vstatic/svg/975/975660.svg?token=exp=1619726324~hmac=f8ca797f9028b2faa98ee981912a52a3"
+              src="../assets/DetailedImg/setting.png"
               alt=""
             />
           </template>
