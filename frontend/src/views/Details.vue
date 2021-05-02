@@ -1,9 +1,17 @@
 <template>
   <div class="details-wrapper">
+      <!-- <div class="loading" v-if="loadingContent">
+
+        </div>-->
+
+       <Loading/>
+
     <vue-fontawesome icon="file" size="2" color="lightgray"></vue-fontawesome>
     <v-card :loading="loading" class="mx-auto my-12" outlined shaped tile>
       <div class="event-name">
+       
         <p>{{ currEvent.name }}</p>
+       
         <v-menu offset-y transition="slide-y-transition" bottom>
           <template v-slot:activator="{ on, attrs }">
             <img
@@ -150,12 +158,17 @@
 </template>
 
 <script>
+import Loading from '../components/Loading.vue'
 export default {
+  components:{
+Loading
+  },
   data() {
     return {
       dialog: false,
       deletePopup: false,
       afterDelete: false,
+     
     };
   },
 
@@ -232,6 +245,7 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
       return this.$route.params.id;
     },
 
+
     ifHost() {
       let userIsHost =
         this.hostUser.id === this.$store.state.currLoggedInUser.id
@@ -263,7 +277,9 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
     },
   },
   async created() {
+    console.log('before fech', this.$store.state.loading);
     await this.$store.dispatch("fetchSpecEvent", this.id);
+    
   },
 };
 </script>
@@ -282,6 +298,8 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
 
   justify-content: center;
 }
+
+
 
 .v-application .primary {
   background-color: var(--buttonPurpleSecondary) !important;

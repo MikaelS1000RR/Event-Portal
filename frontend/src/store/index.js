@@ -18,7 +18,8 @@ export default new Vuex.Store({
     internalAccess: false,
     updatedEvent: {},
     accessTypes: [],
-    allEvents:[]
+    allEvents: [],
+    loading:false
   },
   mutations: {
     setEvents(state, events) {
@@ -92,6 +93,7 @@ export default new Vuex.Store({
     },
 
     async fetchSpecUser(store, id) {
+      store.state.loading = true;
       console.log("id in fetch user is", id);
       await axios
         .get("/users/" + id)
@@ -101,10 +103,13 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           console.log(err.response);
-        });
+        })
+        .finally(() => (store.state.loading = false));
     },
 
     async fetchSpecEvent(store, id) {
+      store.state.loading = true;
+      console.log('loading in store is',store.state.loading);
       await axios
         .get("/events/" + id)
         .then((res) => {
@@ -122,7 +127,8 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           console.log(err.response);
-        });
+        })
+        .finally(() => (store.state.loading = false));
     },
 
     async createNewEvent(store) {
