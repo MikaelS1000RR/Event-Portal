@@ -4,13 +4,60 @@
 
 <div class="navbar-wrapper">
 
+   <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      temporary
+      dark
+    >
+     
+
+      <v-divider></v-divider>
+
+      <v-list dense>
+        <v-list-item  
+         link
+        >
+          <v-list-item-icon>
+            <v-icon>mdi-view-dashboard</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>My events</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item  
+         link
+        >
+          <v-list-item-icon>
+            <v-icon>mdi-calendar-star</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Joined events</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item  
+         link
+        >
+          <v-list-item-icon>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Log out</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
      <v-toolbar color="black" dark fixed app>
        <div class="logo">
       <img class="logoImg" src="../assets/Geshdo-logo.png" @click="homeRedirect">
        </div>
           <v-spacer></v-spacer>
           <div v-if="isLoggedIn" class="hamburger">
-     <v-app-bar-nav-icon></v-app-bar-nav-icon>
+     <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
      </div>
      <div class="login-navbar" v-if="!isLoggedIn">
             <button class="login btn" @click="login">Log in</button>
@@ -27,9 +74,16 @@
 export default {
   data(){
     return{
-        isLoggedIn:false
+        isLoggedIn:true,
+        drawer:null,
+        items: [
+          { title: 'Home', icon: 'mdi-view-dashboard' },
+          { title: 'About', icon: 'mdi-forum' },
+        ],
+        
     }
   },
+  
  methods:{
   homeRedirect(){
     this.$router.push("/");
@@ -67,6 +121,8 @@ export default {
   user-select: none
 }
 
+
+
 .logoImg:hover{
   cursor: pointer;
 }
@@ -80,6 +136,9 @@ export default {
   font-size: 300%!important;
 }
 
+.v-list-item--dense, .v-list--dense .v-list-item{
+  padding-top:3vh;
+}
 
   
 .v-application .black {
