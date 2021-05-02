@@ -9,8 +9,12 @@
       <img class="logoImg" src="../assets/Geshdo-logo.png" @click="homeRedirect">
        </div>
           <v-spacer></v-spacer>
-          <div class="hamburger">
+          <div v-if="isLoggedIn" class="hamburger">
      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+     </div>
+     <div class="login-navbar" v-if="!isLoggedIn">
+            <button class="login btn" @click="login">Log in</button>
+            <button class="register btn" @click="register">Register</button>
      </div>
  
      </v-toolbar>
@@ -21,10 +25,29 @@
 
 <script>
 export default {
+  data(){
+    return{
+        isLoggedIn:false
+    }
+  },
  methods:{
   homeRedirect(){
     this.$router.push("/");
+  },
+
+  login(){
+    console.log('logging in');
+  },
+
+  register(){
+    console.log('registering');
   }
+ },
+
+ created(){
+   if (this.$store.state.currLoggedInUser.id === undefined){
+     
+   }
  }
 }
 </script>
@@ -48,7 +71,7 @@ export default {
   cursor: pointer;
 }
 
-.hamburger {
+.hamburger, .login-navbar {
   padding-right: 5vw;
   padding-top: 1vw;
 }
@@ -62,6 +85,21 @@ export default {
 .v-application .black {
   background-color: #1e1e1e !important;
   height: 4.5vw!important;
+}
+
+.login-navbar{
+  display: flex;
+  flex-direction: row;
+  gap:2vw;
+}
+
+.btn{
+    background: -webkit-linear-gradient(rgb(153, 53, 219), rgb(226, 126, 196));
+    font-size:1.4vw;
+
+  -webkit-background-clip: text;
+  background-clip:text;
+  -webkit-text-fill-color: transparent;
 }
 
 
