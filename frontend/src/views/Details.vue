@@ -121,6 +121,13 @@
                 alt=""
                 srcset=""
               />
+              <img
+                class="detailedImg"
+                v-if="currEvent.access === 'internal'"
+                src="../assets/DetailedImg/key.png"
+                alt=""
+                srcset=""
+              />
 
               <p>{{ currEvent.access }}</p>
             </li>
@@ -162,10 +169,17 @@ export default {
 
   methods: {
     getDate(eventDate) {
+      const monthNames = ["january", "february", "march", "april", "may", "june",
+  "july", "august", "september", "cotober", "november", "december"
+];
+
+var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
       var startDt = new Date(eventDate);
       const startDay = startDt.getDate(),
-        startMonth = startDt.getMonth(),
-        date = startDay + "/" + (startMonth + 1);
+        startMonth = monthNames[startDt.getMonth()],
+        day=days[startDt.getDay()],
+        date = day+" "+startDay + " " + (startMonth);
       return date;
     },
 
@@ -234,7 +248,7 @@ export default {
         return startDate;
       }
       if (startDate !== endDate) {
-        const generalDate = `${startDate} - ${endDate}`;
+        const generalDate = `${startDate}  -  ${endDate}`;
         return generalDate;
       }
 
