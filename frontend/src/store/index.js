@@ -17,7 +17,8 @@ export default new Vuex.Store({
     privateAccess: false,
     internalAccess: false,
     updatedEvent: {},
-    accessTypes: []
+    accessTypes: [],
+    allEvents:[]
   },
   mutations: {
     setEvents(state, events) {
@@ -69,6 +70,10 @@ export default new Vuex.Store({
     },
     setAccessTypes(state, accessTypes) {
       state.accessTypes = accessTypes;
+    },
+
+    setAllEvents(state, allEvents) {
+      state.allEvents = allEvents;
     }
   },
 
@@ -78,7 +83,7 @@ export default new Vuex.Store({
         .get("/events")
         .then((res) => {
           console.log(res.data);
-          commit("setEvents", res.data);
+          commit("setAllEvents", res.data);
         })
 
         .catch((err) => {

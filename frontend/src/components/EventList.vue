@@ -11,9 +11,9 @@
           <v-select
             v-model="value"
             :items="items"
-            attach
+           filled
             chips
-            label="Filter"
+           
             multiple
             @change="filterEvents"
           ></v-select>
@@ -122,11 +122,13 @@ export default {
  margin-right:6vw;
 }
 
+
 .col-sm-12 {
   font-weight: bold;
   color:white;
   border-radius: 10px;
 }
+
 
 
 .v-application .grey.lighten-2 {
