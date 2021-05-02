@@ -26,6 +26,7 @@
                 <v-card-title class="headline grey lighten-2">
                   You do not have permission to view private events
                 </v-card-title>
+                 <v-card-text>Please log in or register first in order to see private events</v-card-text>
 
                 <v-divider></v-divider>
 
@@ -135,6 +136,10 @@ export default {
 .v-dialog > .v-card > .v-card__title {
   font-size: 1.1em !important;
   font-family: "Montserrat", sans-serif !important;
+}
+
+.v-dialog > .v-card > .v-card__text{
+  padding-top:1vh;
 }
 
 
