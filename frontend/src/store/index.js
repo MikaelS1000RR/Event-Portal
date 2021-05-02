@@ -140,7 +140,7 @@ export default new Vuex.Store({
             store.commit("setCurrLoggedInUser", res.data);
           } else {
             console.log("user is not logged in");
-            console.log(store.state.currLoggedInUser);
+            
           }
         })
         .catch((err) => {

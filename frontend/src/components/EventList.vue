@@ -18,6 +18,26 @@
             @change="filterEvents"
           ></v-select>
         </v-col>
+
+            <v-dialog v-model="dialog" width="500">
+              
+
+              <v-card>
+                <v-card-title class="headline grey lighten-2">
+                  You do not have permission to view private events
+                </v-card-title>
+
+                <v-divider></v-divider>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="primary" text @click="dialog=false">
+                   Ok
+                  </v-btn>
+                 
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
        
     </div>
         
@@ -34,6 +54,7 @@ export default {
     return{
       items: ['private', 'public'],
       value: ['public'],
+      dialog: false,
      
     }
     
@@ -41,7 +62,15 @@ export default {
   methods:{
   async  filterEvents(){
     console.log(this.value);
-    await this.$store.dispatch("fetchFilteredEvents", this.value)
+   
+    if(this.value.includes("private") && this.$store.state.currLoggedInUser.id === undefined){
+      this.value=['public']
+      this.dialog=true;
+    }
+    else{
+      await this.$store.dispatch("fetchFilteredEvents", this.value)
+    }
+    
     }
   },
   components: {
@@ -98,6 +127,15 @@ export default {
   border-radius: 10px;
 }
 
+
+.v-application .grey.lighten-2 {
+  background-color: var(--buttonPurpleSecondary) !important;
+}
+
+.v-dialog > .v-card > .v-card__title {
+  font-size: 1.1em !important;
+  font-family: "Montserrat", sans-serif !important;
+}
 
 
 </style>
