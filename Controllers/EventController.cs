@@ -50,7 +50,31 @@ namespace Event_Portal.Controllers
     {
       FirebaseResponse res = client.Get(@"events");
       Dictionary<string, Event> data = JsonConvert.DeserializeObject<Dictionary<string, Event>>(res.Body.ToString());
-      var list = data.Select(x => x.Value);
+      var list = data.Select(x => x.Value).Where(x => x.Access != "internal");
+
+      return list;
+
+    }
+    [HttpGet]
+    [Route("/public-events")]
+
+    public IEnumerable<Event> GetPublicEvents()
+    {
+      FirebaseResponse res = client.Get(@"events");
+      Dictionary<string, Event> data = JsonConvert.DeserializeObject<Dictionary<string, Event>>(res.Body.ToString());
+      var list = data.Select(x => x.Value).Where(x => x.Access=="public");
+
+      return list;
+
+    }
+    [HttpGet]
+    [Route("/private-events")]
+
+    public IEnumerable<Event> GetPrivateEvents()
+    {
+      FirebaseResponse res = client.Get(@"events");
+      Dictionary<string, Event> data = JsonConvert.DeserializeObject<Dictionary<string, Event>>(res.Body.ToString());
+      var list = data.Select(x => x.Value).Where(x => x.Access=="private");
 
       return list;
 
