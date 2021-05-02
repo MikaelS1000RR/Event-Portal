@@ -55,32 +55,9 @@ namespace Event_Portal.Controllers
       return list;
 
     }
-    [HttpGet]
-    [Route("/public-events")]
-
-    public IEnumerable<Event> GetPublicEvents()
-    {
-      FirebaseResponse res = client.Get(@"events");
-      Dictionary<string, Event> data = JsonConvert.DeserializeObject<Dictionary<string, Event>>(res.Body.ToString());
-      var list = data.Select(x => x.Value).Where(x => x.Access=="public");
-
-      return list;
-
-    }
-    [HttpGet]
-    [Route("/private-events")]
-
-    public IEnumerable<Event> GetPrivateEvents()
-    {
-      FirebaseResponse res = client.Get(@"events");
-      Dictionary<string, Event> data = JsonConvert.DeserializeObject<Dictionary<string, Event>>(res.Body.ToString());
-      var list = data.Select(x => x.Value).Where(x => x.Access=="private");
-
-      return list;
-
-    }
-    [HttpGet]
-    [Route("/filter")]
+   
+    [HttpPost]
+    [Route("/filter-events")]
 
     public IEnumerable<Event> GetFilteredEvents([FromBody] string[] accessTypes)
     {
@@ -103,10 +80,6 @@ namespace Event_Portal.Controllers
         return publicEvents;
       }
       return emptyList;
-
-
-
-
 
     }
 

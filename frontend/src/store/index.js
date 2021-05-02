@@ -16,7 +16,8 @@ export default new Vuex.Store({
     publicAccess: false,
     privateAccess: false,
     internalAccess: false,
-    updatedEvent: {}
+    updatedEvent: {},
+    accessTypes: []
   },
   mutations: {
     setEvents(state, events) {
@@ -36,7 +37,6 @@ export default new Vuex.Store({
     },
 
     setCreatedEvent(state, event) {
-      
       state.createdEvent = event;
       console.log("in process of setting commit", state.createdEvent);
     },
@@ -64,9 +64,11 @@ export default new Vuex.Store({
     },
 
     setUpdatedEvent(state, event) {
-     
       state.updatedEvent = event;
-       console.log('updated event in store is', state.updatedEvent);
+      console.log("updated event in store is", state.updatedEvent);
+    },
+    setAccessTypes(state, accessTypes) {
+      state.accessTypes = accessTypes;
     }
   },
 
@@ -126,7 +128,7 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           console.log(err.response);
-        });;
+        });
     },
 
     async fetchWhoAmI(store) {
@@ -167,7 +169,19 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err.response);
         });
-    }
+    },
+
+    async fetchFilteredEvents(store, accessTypes) {
+      await axios
+        .post("/filter-events", accessTypes)
+        .then((res) => {
+          console.log(res.data);
+          store.commit("setEvents", res.data);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    },
   },
 
   modules: {},

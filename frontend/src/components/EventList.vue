@@ -15,7 +15,7 @@
             chips
             label="Filter"
             multiple
-            @change="events"
+            @change="filterEvents"
           ></v-select>
         </v-col>
        
@@ -34,26 +34,27 @@ export default {
     return{
       items: ['private', 'public'],
       value: ['public'],
+     
     }
     
   },
   methods:{
-    log(){
-    console.log('added item');
+  async  filterEvents(){
     console.log(this.value);
+    await this.$store.dispatch("fetchFilteredEvents", this.value)
     }
   },
   components: {
     EventItem,
   },
   computed: {
-     events() {
-      
-      
-    },
+     events(){
+       return this.$store.state.events
+     }
   },
-  created() {
-    this.$store.dispatch("fetchEvents");
+  async created() {
+    this.$store.commit("setAccessTypes", this.value)
+    await this.$store.dispatch("fetchFilteredEvents", this.value);
   },
 };
 </script>
