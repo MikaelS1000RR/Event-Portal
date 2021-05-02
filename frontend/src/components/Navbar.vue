@@ -6,7 +6,8 @@
 
      <v-toolbar color="black" dark fixed app>
        <div class="logo">
-      <img class="logoImg" src="../assets/Geshdo-logo.png" @click="homeRedirect">
+         
+      <img class="logoImg" src="../assets/GeshdoT.png" @click="homeRedirect">
        </div>
           <v-spacer></v-spacer>
           <div v-if="isLoggedIn" class="hamburger">
@@ -56,14 +57,12 @@ export default {
 
 
 
-.logo {
-  padding-left: 5vw;
-  padding-top: 1vw;
-}
+
 
 .logoImg {
-  width: 90%;
+  width: 15%;
   margin-bottom: -1vh;
+  margin-left: 1vh;
   user-select: none
 }
 
