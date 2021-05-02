@@ -20,13 +20,8 @@ export default {
  
 
   methods: {
-    getEvents() {
-      return this.$store.dispatch("fetchEvents");
-    },
+   
 
-    getSpecEvent() {
-      return this.$store.dispatch("fetchSpecEvent");
-    },
   },
 };
 </script>
