@@ -2,7 +2,6 @@
   <div class="wrapper">
     <h3>Create new event</h3>
     <form @submit.prevent="onCreateEvent">
-      
       <p>
         <label id="eventName" for="">Event name</label>
         <input type="text" v-model="eventName" />
@@ -27,54 +26,69 @@
         <textarea v-model="description" name="" id="" cols="30" rows="7">
         </textarea>
       </p>
-<div class="accessibility">
-  <div class="access-label">
-      <p>Choose accessibility:</p>
-      <HelpCircle/>
-  </div>
+      <div class="accessibility">
+        <div class="access-label">
+          <p>Choose accessibility:</p>
+          <HelpCircle />
+        </div>
 
-      <p class="checkbox">
-        <img class="door" src="../assets/CreateEventImg/door.png" />
-        <label for="public">Public</label>
+           <v-dialog
+      v-model="dialog"
+      hide-overlay
+      persistent
+      width="300"
+    >
+      <v-card
+        color="primary"
+        dark
+      >
+        <v-card-text>
+          Event has been created
+         
+        </v-card-text>
+      </v-card>
+    </v-dialog>
 
-        <input
-          id="public"
-          value="Public"
-          type="checkbox"
-          v-model="publicAccess"
-          @change="disablePrivateAndInternal"
-        />
+        <p class="checkbox">
+          <img class="door" src="../assets/CreateEventImg/door.png" />
+          <label for="public">Public</label>
 
-        <img class="lock" src="../assets/CreateEventImg/padlock.png" />
-        <label for="private">Private</label>
+          <input
+            id="public"
+            value="Public"
+            type="checkbox"
+            v-model="publicAccess"
+            @change="disablePrivateAndInternal"
+          />
 
-        <input
-          id="private"
-          value="Private"
-          type="checkbox"
-          v-model="privateAccess"
-          @change="disablePublicAndInternal"
-        />
+          <img class="lock" src="../assets/CreateEventImg/padlock.png" />
+          <label for="private">Private</label>
 
-        <img class="key" src="../assets/CreateEventImg/key (1).png" />
-        <label for="internal">Internal</label>
+          <input
+            id="private"
+            value="Private"
+            type="checkbox"
+            v-model="privateAccess"
+            @change="disablePublicAndInternal"
+          />
 
-        <input
-          id="internal"
-          value="Internal"
-          type="checkbox"
-          v-model="internalAccess"
-          @change="disablePublicAndPrivate"
-        />
-      </p>
+          <img class="key" src="../assets/CreateEventImg/key (1).png" />
+          <label for="internal">Internal</label>
+
+          <input
+            id="internal"
+            value="Internal"
+            type="checkbox"
+            v-model="internalAccess"
+            @change="disablePublicAndPrivate"
+          />
+        </p>
       </div>
 
       <p class="input-file-wrapper">
         <label for="upload">Upload your photo</label>
         <input type="file" name="" id="upload" />
       </p>
-
-      
 
       <p>
         <button type="submit" class="btn btn-primary">Create</button>
@@ -85,10 +99,10 @@
 
 <script>
 // import axios from 'axios';
-import HelpCircle from '../components/HelpCircle.vue'
+import HelpCircle from "../components/HelpCircle.vue";
 export default {
-  components:{
-HelpCircle
+  components: {
+    HelpCircle,
   },
   data() {
     return {
@@ -103,10 +117,20 @@ HelpCircle
       internalAccess: false,
       access: "public",
       hostId: "061eb70c-7055-4d07-a584-b3c20cd59d73",
+     dialog: false,
+     
     };
   },
+  watch: {
+      dialog (val) {
+        if (!val) return
+
+        setTimeout(() => this.redirect(), 3000)
+      },
+    },
   methods: {
     async onCreateEvent() {
+        this.dialog=true;
       const startDateTime = `${this.startTimeAndDate}:59.3528866+02:00`;
       const endDateTime = `${this.endTimeAndDate}:59.3528866+02:00`;
 
@@ -123,10 +147,16 @@ HelpCircle
         hostId: this.hostId,
       };
 
-      console.log('event is form is', createdEvent);
+      console.log("event is form is", createdEvent);
 
       this.$store.commit("setCreatedEvent", createdEvent);
       await this.$store.dispatch("createNewEvent");
+      
+    },
+
+    redirect() {
+      this.afterCreate = false;
+      this.$router.push("/");
     },
     disablePublicAndInternal() {
       this.access = "private";
@@ -156,6 +186,22 @@ HelpCircle
 
 body {
   padding-top: 1rem;
+}
+
+
+.v-dialog > .v-card > .v-card__text {
+  padding: 2vh 3vw 2vh 3vw;
+  display: flex;
+
+  justify-content: center;
+}
+
+.v-dialog > .v-card > .v-card__title {
+  font-size: 1.1em !important;
+  font-family: "Montserrat", sans-serif !important;
+}
+.v-application .primary {
+  background-color: var(--buttonPurpleSecondary) !important;
 }
 
 .wrapper {
@@ -225,12 +271,12 @@ form p {
   grid-row: 1 / 2;
 }
 
-.accessibility{
+.accessibility {
   grid-column: 1/2;
-  margin-top:2vh;
+  margin-top: 2vh;
 }
 
-.access-label{
+.access-label {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -241,7 +287,7 @@ form p {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding-top:2vh;
+  padding-top: 2vh;
 }
 
 #public,
@@ -249,14 +295,15 @@ form p {
 #internal {
   cursor: pointer;
   outline: none;
-  margin-right:1vw;
+  margin-right: 1vw;
 }
 
 .door {
   width: 9%;
 }
 
-.lock, .key {
+.lock,
+.key {
   width: 8%;
   padding-bottom: 0.5%;
 }
