@@ -101,12 +101,12 @@ HelpCircle
       publicAccess: true,
       privateAccess: false,
       internalAccess: false,
-      access: "",
+      access: "public",
       hostId: "061eb70c-7055-4d07-a584-b3c20cd59d73",
     };
   },
   methods: {
-    onCreateEvent() {
+    async onCreateEvent() {
       const startDateTime = `${this.startTimeAndDate}:59.3528866+02:00`;
       const endDateTime = `${this.endTimeAndDate}:59.3528866+02:00`;
 
@@ -123,8 +123,10 @@ HelpCircle
         hostId: this.hostId,
       };
 
+      console.log('event is form is', createdEvent);
+
       this.$store.commit("setCreatedEvent", createdEvent);
-      this.$store.dispatch("createNewEvent");
+      await this.$store.dispatch("createNewEvent");
     },
     disablePublicAndInternal() {
       this.access = "private";

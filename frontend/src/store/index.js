@@ -36,7 +36,9 @@ export default new Vuex.Store({
     },
 
     setCreatedEvent(state, event) {
+      
       state.createdEvent = event;
+      console.log("in process of setting commit", state.createdEvent);
     },
 
     setDeleteSuccess(state) {
