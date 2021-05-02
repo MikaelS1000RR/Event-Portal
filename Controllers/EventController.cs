@@ -79,6 +79,36 @@ namespace Event_Portal.Controllers
       return list;
 
     }
+    [HttpGet]
+    [Route("/filter")]
+
+    public IEnumerable<Event> GetFilteredEvents([FromBody] string[] accessTypes)
+    {
+      FirebaseResponse res = client.Get(@"events");
+      Dictionary<string, Event> data = JsonConvert.DeserializeObject<Dictionary<string, Event>>(res.Body.ToString());
+      var emptyList = new List<Event>();
+
+    
+       if(accessTypes.Contains("public") && accessTypes.Contains("private") ){
+         var publicEvents = data.Select(x => x.Value).Where(x => x.Access !="internal");
+        return publicEvents;
+      }
+       else if(accessTypes.Contains("private")){
+
+        var privateEvents = data.Select(x => x.Value).Where(x => x.Access =="private");
+        return privateEvents;
+      }
+      else if(accessTypes.Contains("public")){
+         var publicEvents = data.Select(x => x.Value).Where(x => x.Access =="public");
+        return publicEvents;
+      }
+      return emptyList;
+
+
+
+
+
+    }
 
     // GET /events/{id}
     [HttpGet("{id}")]
