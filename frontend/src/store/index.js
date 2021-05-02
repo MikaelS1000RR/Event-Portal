@@ -137,7 +137,7 @@ export default new Vuex.Store({
         .then((res) => {
           if (res.data.email !== null) {
             console.log(res.data);
-            store.state.commit("setCurrLoggedInUser", res.data);
+            store.commit("setCurrLoggedInUser", res.data);
           } else {
             console.log("user is not logged in");
             console.log(store.state.currLoggedInUser);
