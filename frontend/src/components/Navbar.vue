@@ -99,8 +99,8 @@ export default {
  },
 
  created(){
-   if (this.$store.state.currLoggedInUser.id === undefined){
-     
+   if (this.$store.state.currLoggedInUser.id !== undefined){
+     this.isLoggedIn=true;
    }
  }
 }
