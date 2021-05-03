@@ -15,6 +15,11 @@
            label="Username" 
            prepend-icon="mdi-account-circle"
            />
+           <v-card-actions>
+              <v-btn class="join-btn" 
+              type="submit"
+              >JOIN</v-btn>
+               </v-card-actions>
                </v-form>
               </v-card-text>
               <v-divider></v-divider>
@@ -80,6 +85,15 @@ display: grid;
     margin-left: auto;
    margin-right: auto;
 }
+
+.join-btn {
+  margin-left: auto;
+   margin-right: auto;
+   
+
+}
+
+
 
 
 </style>

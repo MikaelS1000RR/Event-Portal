@@ -153,8 +153,11 @@
       <div class="btnJoin" >
         
        
-         <v-btn class="joinBut" @click="joined = true" elevation="11" x-large> Join </v-btn>
-        
+         <v-btn class="joinBut" @click="joined = true" 
+         v-if="!joined" 
+         elevation="11" x-large> Join 
+         </v-btn>
+
 
    
       </div>
@@ -189,7 +192,9 @@ GuestOrLogin
       dialog: false,
       deletePopup: false,
       afterDelete: false,
-      joined: false
+      joined: false,
+      joinBut: true
+
     
      
     };
