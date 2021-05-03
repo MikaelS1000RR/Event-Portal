@@ -3,6 +3,8 @@
    
     <v-app>
 <div class="grid">
+
+
      <v-card width="500px" class="mt-5 mx-a">
          <v-card-title class="pb-0">
           <h1>Join as Guest</h1>
@@ -15,8 +17,10 @@
            />
                </v-form>
               </v-card-text>
+              <v-divider></v-divider>
             </v-card-title>
             </v-card>
+
 
 
   
@@ -36,6 +40,7 @@ export default {
 </script>
 
 <style scoped>
+
 
 .grid {
  

@@ -155,7 +155,6 @@
        
          <v-btn @click="joined = !joined" elevation="11" x-large> Join </v-btn>
         
-         <div class="popupWindow" v-if="joined"><GuestOrLogin/></div>
 
    
       </div>
@@ -163,6 +162,7 @@
       
       
     </v-card>
+         <div class="popupWindow" v-if="joined"><GuestOrLogin/></div>
   </div>
 </template>
 
@@ -581,4 +581,5 @@ ul>li{
 @media only screen and (min-width: 340px){
  
 }
+
 </style>
