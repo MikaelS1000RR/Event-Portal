@@ -74,7 +74,7 @@
 export default {
   data(){
     return{
-        isLoggedIn:true,
+        isLoggedIn:false,
         drawer:null,
         items: [
           { title: 'Home', icon: 'mdi-view-dashboard' },
@@ -177,10 +177,7 @@ export default {
 }
 
 @media only screen and (max-width: 850px) {
-  .hide{
-    display: none;
-  }
-  
+
 }
 @media only screen and (max-width: 750px) {
   
@@ -191,7 +188,12 @@ export default {
  .btn{
    font-size:15px;
  }
-
+ .logo{
+   margin:0px;
+ }
+ .logoImg {
+   width:80px;
+ }
 }
 
 
