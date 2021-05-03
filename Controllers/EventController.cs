@@ -260,6 +260,35 @@ namespace Event_Portal.Controllers
 
     }
 
+    [HttpPost]
+    [Route("/addGuestToEvent/{eventId}")]
+    public async Task<Event> AddUserToEvent(String eventId)
+    {
+      Console.WriteLine("reached");
+      Guest guest = new Guest
+      {
+        Id = Guid.NewGuid(),
+        GuestName  = "Guest"
+
+
+      };
+
+      var existingEvent = await client.GetTaskAsync("events/" + eventId);
+
+      Event myEvent = existingEvent.ResultAs<Event>();
+
+
+      myEvent.JoinedGuests.Add(guest);
+      var rs = await client.SetTaskAsync("events/" + eventId, myEvent);
+
+
+
+      return myEvent;
+
+
+
+    }
+
 
 
   }

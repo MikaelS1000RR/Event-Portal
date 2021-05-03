@@ -38,7 +38,7 @@ namespace Event_Portal.Controllers
       client = new FireSharp.FirebaseClient(config);
     }
 
-    [HttpPost]
+   /* [HttpPost]
 
     public async Task<Guest> CreateGuest (CreateGuestDto guestDto) {
 
@@ -75,7 +75,7 @@ namespace Event_Portal.Controllers
         return null;
       }
 
-    }
+    }*/
 
     }
 }
