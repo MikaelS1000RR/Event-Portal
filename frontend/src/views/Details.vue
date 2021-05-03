@@ -153,7 +153,7 @@
       <div class="btnJoin" >
         
        
-         <v-btn class="joinBut" @click="joined = !joined" elevation="11" x-large> Join </v-btn>
+         <v-btn class="joinBut" @click="joined = true" elevation="11" x-large> Join </v-btn>
         
 
    
@@ -162,7 +162,15 @@
       
       
     </v-card>
-         <div class="popupWindow" v-if="joined"><GuestOrLogin/></div>
+         <div class="popupWindow" v-if="joined"><GuestOrLogin/>
+     <div class="close-container">
+  <div class="leftright"></div>
+  <div class="rightleft"></div>
+  <label class="close">close</label>
+  </div>
+
+        
+</div>
   </div>
 </template>
 
@@ -581,5 +589,62 @@ ul>li{
 @media only screen and (min-width: 340px){
  
 }
+
+ .close-container {
+position: absolute;
+	 margin: auto;
+	 width: 50px;
+	 height: 50px;
+	
+	 cursor: pointer;
+    top: 1%;
+    right: 1%;
+}
+ .leftright {
+	 height: 4px;
+	 width: 40px;
+	 position: absolute;
+	 margin-top: 24px;
+	 background-color: #f4a259;
+	 border-radius: 2px;
+	 transform: rotate(45deg);
+	 transition: all 0.3s ease-in;
+}
+ .rightleft {
+	 height: 4px;
+	 width: 40px;
+	 position: absolute;
+	 margin-top: 24px;
+	 background-color: #f4a259;
+	 border-radius: 2px;
+	 transform: rotate(-45deg);
+	 transition: all 0.3s ease-in;
+}
+ label {
+	 color: white;
+	 font-family: Helvetica, Arial, sans-serif;
+	 font-size: 0.4em;
+	 text-transform: uppercase;
+	 letter-spacing: 2px;
+	 transition: all 0.3s ease-in;
+	 opacity: 0;
+}
+ .close {
+	 margin: 50px 0 0 5px;
+	 position: absolute;
+}
+ .close-container:hover .leftright {
+	 transform: rotate(-45deg);
+	 background-color: #f25c66;
+}
+ .close-container:hover .rightleft {
+	 transform: rotate(45deg);
+	 background-color: #f25c66;
+}
+ .close-container:hover label {
+	 opacity: 1;
+}
+ 
+
 
 </style>
