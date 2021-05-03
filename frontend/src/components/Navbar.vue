@@ -51,8 +51,8 @@
       </v-list>
     </v-navigation-drawer>
 
-     <v-toolbar color="black" dark fixed app>
-       <div class="logo">
+     <v-toolbar color="black" dark fixed app >
+       <div class="logo hide">
       <img class="logoImg" src="../assets/Geshdo-logo.png" @click="homeRedirect">
        </div>
           <v-spacer></v-spacer>
@@ -110,15 +110,17 @@ export default {
 
 
 
-.logo {
-  padding-left: 5vw;
-  padding-top: 1vw;
+.logoImg {
+  width:150px;
+  user-select: none
 }
 
-.logoImg {
-  width: 90%;
-  margin-bottom: -1vh;
-  user-select: none
+.logo{
+   margin-left: 5vw;
+  margin-bottom: -1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
@@ -128,8 +130,8 @@ export default {
 }
 
 .hamburger, .login-navbar {
-  padding-right: 5vw;
-  padding-top: 1vw;
+  margin-right: 5vw;
+  margin-top: 1vw;
 }
 
 .v-btn--icon.v-size--default .v-icon, .v-btn--fab.v-size--default .v-icon{
@@ -143,23 +145,55 @@ export default {
   
 .v-application .black {
   background-color: #1e1e1e !important;
-  height: 4.5vw!important;
+  height: 75px!important;
 }
 
 .login-navbar{
   display: flex;
   flex-direction: row;
-  gap:2vw;
+  gap:20px;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn{
     background: -webkit-linear-gradient(rgb(153, 53, 219), rgb(226, 126, 196));
-    font-size:1.4vw;
+    font-size:28px;
 
   -webkit-background-clip: text;
   background-clip:text;
   -webkit-text-fill-color: transparent;
 }
+
+
+
+
+
+@media only screen and (max-width: 1000px) {
+ .btn{
+   font-size:20px;
+ }
+
+}
+
+@media only screen and (max-width: 850px) {
+  .hide{
+    display: none;
+  }
+  
+}
+@media only screen and (max-width: 750px) {
+  
+ .v-application .black{
+   height:50px  !important;
+ }
+
+ .btn{
+   font-size:15px;
+ }
+
+}
+
 
 
 
