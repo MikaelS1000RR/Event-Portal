@@ -78,15 +78,14 @@ export default {
   width:40vw;
   
 }
+.v-card__title{
+  font-size:4vw;
+}
 }
 @media only screen and (max-width: 560px) {
  .event-img {
   width:60vw;
   
-}
-
-.v-card__title{
-  font-size:4vw;
 }
 }
 </style>
