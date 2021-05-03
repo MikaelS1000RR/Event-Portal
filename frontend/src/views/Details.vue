@@ -18,7 +18,7 @@
               <v-form @submit.prevent="joinEventAsGuest">
                 <v-text-field
                   id="userName"
-                  
+                  v-model="name"
                   label="Username"
                   prepend-icon="mdi-account-circle"
                 />
@@ -228,7 +228,8 @@ GuestOrLogin
       dialog: false,
       deletePopup: false,
       afterDelete: false,
-      guestLoginPopup:false
+      guestLoginPopup:false,
+      name:"guest"
      
 
     
@@ -275,7 +276,7 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
     },
 
     async joinEventAsGuest(){
-     await this.$store.dispatch("guestJoinEvent")
+     await this.$store.dispatch("guestJoinEvent", this.name)
     },
 
     editEvent() {
