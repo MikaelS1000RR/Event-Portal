@@ -464,13 +464,27 @@ ul>li{
 
   
  li > p, .event-desc>p{
-   font-size:2vw;
+   font-size:2vh;
  }
 
- .detailedImg {
-  width: 15%;
+
+.event-details{
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: 1fr;
 }
 
+.event-info{
+  display: flex;
+  flex-direction: column;
+}
+ .detailedImg {
+  width: 40px;
+}
+
+.event-desc{
+ 
+  margin-left:2vw;
+}
 .settings{
   width:5%;
 }
@@ -484,8 +498,71 @@ ul>li{
   font-size:1.8em;
 }
 
-.dates{
-  display: flex;
 }
+
+@media only screen and (max-width: 510px) {
+
+.event-desc{
+ 
+  margin-top:-2vw;
+}
+
+.v-btn:not(.v-btn--round).v-size--x-large[data-v-14d957f8]{
+   font-size:2vw;
+ }
+
+ .v-btn:not(.v-btn--round).v-size--x-large[data-v-14d957f8]{
+   width:20vw;
+   height:5vw;
+ }
+
+ .event-info{
+  height:auto;
+  margin-bottom:5vh;
+ }
+
+}
+
+@media only screen and (max-width: 510px) {
+  .detailedImg {
+  width: 30px;
+}
+.settings{
+  width:5%;
+}
+
+ li > p, .event-desc>p{
+   font-size:1.8vh;
+ }
+}
+@media only screen and (max-width: 340px){
+ li > p, .event-desc>p{
+   font-size:1.6vh;
+ }
+
+   .detailedImg {
+  width: 20px;
+}
+.settings{
+  width:5%;
+}
+
+
+
+ .event-info{
+
+  margin-top:-15vh;
+ }
+
+
+.event-desc{
+  margin-top:-10vh;
+}
+.event-name{
+  font-size:2.5vw;
+}
+}
+@media only screen and (min-width: 340px){
+ 
 }
 </style>
