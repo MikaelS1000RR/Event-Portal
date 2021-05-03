@@ -112,8 +112,6 @@ export default {
 
 
 .filter-wrapper{
-
-
  padding: 0 1vw 0 1vw;
  margin-top:2vh;
  
@@ -130,7 +128,6 @@ export default {
 }
 
 
-
 .v-application .grey.lighten-2 {
   background-color: var(--buttonPurpleSecondary) !important;
 }
@@ -142,6 +139,18 @@ export default {
 
 .v-dialog > .v-card > .v-card__text{
   padding-top:1vh;
+}
+
+@media only screen and (max-width: 950px) {
+  .event-list{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 560px) {
+ .event-list{
+    grid-template-columns: 1fr;
+  }
 }
 
 
