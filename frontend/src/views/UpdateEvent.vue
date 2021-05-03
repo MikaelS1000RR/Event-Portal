@@ -101,6 +101,27 @@
           </div>
         </div>
 
+            <v-dialog v-model="badRequest" width="500">
+              
+
+              <v-card>
+                <v-card-title class="headline grey lighten-2">
+                  Please fill in the dates
+                </v-card-title>
+                
+
+                <v-divider></v-divider>
+
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="primary" text @click="badRequest=false">
+                   Ok
+                  </v-btn>
+                 
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+
         <div class="event-desc">
           <div class="description">
             <p>Description</p>
@@ -133,6 +154,7 @@ export default {
       access: "public",
       loader: null,
       loading: false,
+      badRequest:false
     };
   },
   methods: {
@@ -144,7 +166,8 @@ export default {
 
       this[l] = false;
       this.loader = null;
-
+      if(this.startTimeAndDate !== "" && this.endTimeAndDate !== "")
+      {
       const startDateTime = `${this.startTimeAndDate}:59.3528866+02:00`;
       const endDateTime = `${this.endTimeAndDate}:59.3528866+02:00`;
       const updatedEvent = {
@@ -160,6 +183,10 @@ export default {
       await this.$store.dispatch("updateEvent");
 
       this.$router.push("/details/" + this.$store.state.specEvent.id);
+      }
+      else{
+         this.badRequest=true;
+      }
     },
 
     disablePublicAndInternal() {
@@ -208,6 +235,14 @@ export default {
 
   padding-top: 2.6vw;
   padding-bottom: 10vh;
+}
+.v-application .grey.lighten-2 {
+  background-color: var(--buttonPurpleSecondary) !important;
+}
+
+.v-dialog > .v-card > .v-card__title {
+  font-size: 1.1em !important;
+  font-family: "Montserrat", sans-serif !important;
 }
 
 .v-application .success {
