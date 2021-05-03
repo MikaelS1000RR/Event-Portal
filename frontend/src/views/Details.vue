@@ -150,7 +150,7 @@
           <p>{{ currEvent.description }}</p>
         </div>
       </div>
-      <div class="btn-join">
+      <div class="btn-join" v-if="!ifHost">
         <v-btn elevation="11" x-large>Join</v-btn>
       </div>
     </v-card>
