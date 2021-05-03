@@ -74,7 +74,7 @@
 export default {
   data(){
     return{
-        isLoggedIn:false,
+        isLoggedIn:true,
         drawer:null,
         items: [
           { title: 'Home', icon: 'mdi-view-dashboard' },

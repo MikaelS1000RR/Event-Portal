@@ -28,7 +28,7 @@ export default {
   .footer{
     width:100%;
     color:white;
-    font-size:.8vw;
+    font-size:13px;
    display:flex;
    flex-direction: column;
    align-items: flex-start;
@@ -37,12 +37,18 @@ export default {
   .footer-info{
     display:flex;
     flex-direction: column;
-   /* padding-bottom:2vh;
-    padding-left:4vw;*/
     padding:1vh 0 2vh 4vw;
   }
 
   .footer>span{
      display: block;
   }
+
+  
+@media only screen and (max-width: 850px) {
+ .footer{
+   font-size:10px;
+ }
+
+}
 </style>
