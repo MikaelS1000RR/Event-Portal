@@ -102,7 +102,7 @@
                 srcset=""
               />
 
-              <p>{{ dates }}</p>
+              <p class="dates">{{ dates }}</p>
             </li>
 
             <li>
@@ -422,5 +422,70 @@ li > p {
 
 .settings:hover {
   transform: scale(1.1);
+}
+
+@media only screen and (max-width: 930px) {
+ .v-btn:not(.v-btn--round).v-size--x-large[data-v-14d957f8]{
+   font-size:1.5vw;
+ }
+
+ .v-btn:not(.v-btn--round).v-size--x-large[data-v-14d957f8]{
+   width:12vw;
+   height:4vw;
+ }
+
+ .event-desc, .event-info{
+   height:70vh;
+ }
+
+ li > p, .event-desc>p{
+   font-size:1.5vw;
+ }
+
+
+}
+
+@media only screen and (max-width: 790px) {
+  
+.detailedImg {
+  width: 12%;
+}
+
+.settings{
+  width:5%;
+}
+
+ul>li{
+  margin-top:4vw;
+}
+}
+
+@media only screen and (max-width: 610px) {
+
+  
+ li > p, .event-desc>p{
+   font-size:2vw;
+ }
+
+ .detailedImg {
+  width: 15%;
+}
+
+.settings{
+  width:5%;
+}
+
+ul>li{
+  margin-top:5vw;
+}
+
+.event-name>p{
+  font-weight: 500;
+  font-size:1.8em;
+}
+
+.dates{
+  display: flex;
+}
 }
 </style>
