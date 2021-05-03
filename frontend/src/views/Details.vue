@@ -163,7 +163,7 @@
       
     </v-card>
          <div class="popupWindow" v-if="joined"><GuestOrLogin/>
-     <div class="close-container">
+     <div class="close-container" @click="joined = !joined">
   <div class="leftright"></div>
   <div class="rightleft"></div>
   <label class="close">close</label>
