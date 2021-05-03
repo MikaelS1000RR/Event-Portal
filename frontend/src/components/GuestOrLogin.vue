@@ -6,6 +6,15 @@
      <v-card width="500px" class="mt-5 mx-a">
          <v-card-title class="pb-0">
           <h1>Join as Guest</h1>
+          <v-card-text>
+         <v-form @submit.prevent="pressed">
+           <v-text-field 
+  
+           label="Username" 
+           prepend-icon="mdi-account-circle"
+           />
+               </v-form>
+              </v-card-text>
             </v-card-title>
             </v-card>
 
