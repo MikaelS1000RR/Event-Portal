@@ -11,6 +11,7 @@ export default new Vuex.Store({
     specEvent: "",
     specUser: "",
     createdEvent: {},
+    joinedUsers: {},
     currLoggedInUser: {},
     deleteSuccess: false,
     publicAccess: false,
@@ -19,7 +20,7 @@ export default new Vuex.Store({
     updatedEvent: {},
     accessTypes: [],
     allEvents: [],
-    loading:false
+    loading: false
   },
   mutations: {
     setEvents(state, events) {
@@ -41,6 +42,11 @@ export default new Vuex.Store({
     setCreatedEvent(state, event) {
       state.createdEvent = event;
       console.log("in process of setting commit", state.createdEvent);
+    },
+
+    setJoinedUser(state, user) {
+      state.joinedUsers = user;
+      console.log("User is joining", state.joinedUsers)
     },
 
     setDeleteSuccess(state) {
@@ -109,7 +115,7 @@ export default new Vuex.Store({
 
     async fetchSpecEvent(store, id) {
       store.state.loading = true;
-      console.log('loading in store is',store.state.loading);
+      console.log('loading in store is', store.state.loading);
       await axios
         .get("/events/" + id)
         .then((res) => {
@@ -139,6 +145,17 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           console.log(err.response);
+        });
+    },
+    
+    async joinNewEvent(store) {
+      await axios
+        .post("/users", store.state.joinedUsers)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log(err.response)
         });
     },
 

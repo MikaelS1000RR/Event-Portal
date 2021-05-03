@@ -9,9 +9,10 @@
          <v-card-title class="pb-0">
           <h2 class="join-as-guest">Join as Guest</h2>
           <v-card-text>
-         <v-form @submit.prevent="pressed">
+         <v-form @submit.prevent="joinEvent">
            <v-text-field 
-  
+          id="userName"
+          v-model="userName"
            label="Username" 
            prepend-icon="mdi-account-circle"
            />
@@ -54,7 +55,21 @@
 
 <script>
 export default {
+data() {
+  return {
+    userName: ""
+  }
+},
+methods: {
+  async joinEvent() {
+    const joinedUsers = {
+      name: this.userName
+    };
+    console.log('Joined users ' + joinedUsers);
 
+    
+  }
+}
   
 
 }
