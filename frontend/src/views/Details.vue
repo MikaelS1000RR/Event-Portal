@@ -5,7 +5,11 @@
         </div>-->
 
        <Loading/>
-
+       <div v-if="guestLoginPopup">
+ <GuestOrLogin/>
+  </div>
+       
+ 
     <vue-fontawesome icon="file" size="2" color="lightgray"></vue-fontawesome>
     <v-card :loading="loading" class="mx-auto my-12" outlined shaped tile>
       <div class="event-name">
@@ -153,27 +157,18 @@
       <div class="btnJoin" >
         
        
-         <v-btn class="joinBut" @click="joined = true" 
-         v-if="!joined" 
-         elevation="11" x-large> Join 
+         <v-btn class="joinBut" elevation="11" x-large @click="joinEvent"> Join 
          </v-btn>
 
 
    
       </div>
 
+
       
       
     </v-card>
-         <div class="popupWindow" v-if="joined"><GuestOrLogin/>
-     <div class="close-container" @click="joined = !joined">
-  <div class="leftright"></div>
-  <div class="rightleft"></div>
-  <label class="close">close</label>
-  </div>
-
-        
-</div>
+    
   </div>
 </template>
 
@@ -192,8 +187,8 @@ GuestOrLogin
       dialog: false,
       deletePopup: false,
       afterDelete: false,
-      joined: false,
-      joinBut: true
+      guestLoginPopup:false
+     
 
     
      
@@ -240,6 +235,13 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
 
     editEvent() {
       this.$router.push("/update-event/" + this.currEvent.id);
+    },
+
+    joinEvent(){
+      console.log(this.$store.state.currLoggedInUser.id);
+       if(this.$store.state.currLoggedInUser.id===undefined){
+              this.guestLoginPopup=true
+       }
     },
 
     getTime(eventDate) {
