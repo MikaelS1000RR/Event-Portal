@@ -66,8 +66,9 @@ methods: {
       name: this.userName
     };
     console.log('Joined users ' + joinedUsers);
+      this.$store.commit("setJoinedUser", joinedUsers);
+      await this.$store.dispatch("joinNewEvent");
 
-    
   }
 }
   
