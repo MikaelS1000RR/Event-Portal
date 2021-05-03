@@ -35,6 +35,7 @@ export default {
 .event-card {
   text-align: center;
   height: 75%;
+  width:95%;
 
   display: flex;
   align-items: center;
