@@ -139,6 +139,10 @@
 
               <p>{{ currEvent.access }}</p>
             </li>
+            <li>
+              <div class="people-count">
+              </div>
+            </li>
           </ul>
         </div>
 
@@ -230,6 +234,11 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
         let time = "00 : 00";
         return time;
       } else {
+        let minsLength=minutes+""
+        if(minsLength.length===1){
+           let time = hours + " : 0" + minutes;
+        return time;
+        }
         let time = hours + " : " + minutes;
         return time;
       }
