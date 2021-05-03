@@ -18,10 +18,10 @@
          <!--Create guest icon-->
 
 
-           
+
             <img class="guest" src="../assets/DetailedImg/guest.png" />
              <label class="label-guest">Guest</label>
-          
+
             <button class="login btn" @click="login">Log in</button>
             <button class="register btn" @click="register">Register</button>
      </div>
@@ -86,7 +86,7 @@ export default {
 .guest {
     width: 5%;
     margin-left: 60vh;
- 
+    cursor: pointer;
 }
 
 .label-guest {

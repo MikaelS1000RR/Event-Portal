@@ -7,6 +7,10 @@ namespace Event_Portal.Models
     {
     public Guid Id { get; init; }
 
-    public string NickName{ get; init; }
-    }
+
+    public string RandomName { get; init; }
+
+
+
+  }
 }
