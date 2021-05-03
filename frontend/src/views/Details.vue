@@ -35,8 +35,10 @@
                   class="dropdown-item"
                   >Delete</v-list-item-title
                 >
-              </template>
 
+              </template>
+              
+           
               <v-card>
                 <v-card-title class="headline grey lighten-2">
                   Are you sure that you want to delete this event?
@@ -55,6 +57,9 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
+                <v-list-item-title class="dropdown-item" @click="openGuests"
+              >See all guests
+            </v-list-item-title>
           </v-list>
         </v-menu>
 
