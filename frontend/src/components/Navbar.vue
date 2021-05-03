@@ -17,6 +17,11 @@
      <div class="login-navbar" v-if="!isLoggedIn">
          <!--Create guest icon-->
 
+
+           
+            <img class="guest" src="../assets/DetailedImg/guest.png" />
+             <label class="label-guest">Guest</label>
+          
             <button class="login btn" @click="login">Log in</button>
             <button class="register btn" @click="register">Register</button>
      </div>
@@ -28,10 +33,12 @@
 </template>
 
 <script>
+
 export default {
   data(){
     return{
-        isLoggedIn:false
+        isLoggedIn:false,
+        
     }
   },
  methods:{
@@ -65,9 +72,8 @@ export default {
 
 
 
-
 .logoImg {
-  width: 15%;
+  width: 25%;
   margin-bottom: -1vh;
   margin-left: 1vh;
   user-select: none
@@ -75,6 +81,18 @@ export default {
 
 .logoImg:hover{
   cursor: pointer;
+}
+
+.guest {
+    width: 5%;
+    margin-left: 60vh;
+ 
+}
+
+.label-guest {
+  margin-top: 1.5vh;
+  margin-right: 6vh;
+
 }
 
 .hamburger, .login-navbar {
@@ -97,7 +115,9 @@ export default {
   display: flex;
   flex-direction: row;
   gap:2vw;
+ 
 }
+
 
 .btn{
     background: -webkit-linear-gradient(rgb(153, 53, 219), rgb(226, 126, 196));
