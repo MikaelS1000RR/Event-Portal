@@ -153,7 +153,7 @@
       <div class="btnJoin" >
         
        
-         <v-btn @click="joined = !joined" elevation="11" x-large> Join </v-btn>
+         <v-btn class="joinBut" @click="joined = !joined" elevation="11" x-large> Join </v-btn>
         
 
    
@@ -417,10 +417,10 @@ li > p {
   font-weight: 500;
 }
 
-.btn-join {
-  margin-top: -3vw;
-  padding-bottom: 1vw;
-  margin-right: 8vw;
+.joinBut {
+
+ margin-bottom: 2vw;
+  margin-right: 5vw;
 }
 .theme--light.v-btn.v-btn--has-bg {
   background-color: var(--buttonPurple);
