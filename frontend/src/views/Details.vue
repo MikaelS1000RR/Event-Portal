@@ -600,12 +600,15 @@ position: absolute;
     top: 1%;
     right: 1%;
 }
+
+
+
  .leftright {
 	 height: 4px;
 	 width: 40px;
 	 position: absolute;
 	 margin-top: 24px;
-	 background-color: #f4a259;
+	 background-color: #0008fffe;
 	 border-radius: 2px;
 	 transform: rotate(45deg);
 	 transition: all 0.3s ease-in;
@@ -615,7 +618,7 @@ position: absolute;
 	 width: 40px;
 	 position: absolute;
 	 margin-top: 24px;
-	 background-color: #f4a259;
+	 background-color: #0108d0fe;
 	 border-radius: 2px;
 	 transform: rotate(-45deg);
 	 transition: all 0.3s ease-in;
