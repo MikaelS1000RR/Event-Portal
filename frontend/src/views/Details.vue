@@ -150,8 +150,9 @@
           <p>{{ currEvent.description }}</p>
         </div>
       </div>
-      <div class="btn-join" v-if="!ifHost">
-        <v-btn elevation="11" x-large>Join</v-btn>
+      <div class="btn-join" >
+        <v-btn elevation="11" x-large v-if="!ifHost && !getJoined">Join</v-btn>
+   <v-btn elevation="11" x-large disabled v-if="getJoined">Joined</v-btn>
       </div>
     </v-card>
   </div>
@@ -168,6 +169,7 @@ Loading
       dialog: false,
       deletePopup: false,
       afterDelete: false,
+     // joined:false
      
     };
   },
@@ -248,10 +250,15 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
 
     ifHost() {
       let userIsHost =
-        this.hostUser.id === this.$store.state.currLoggedInUser.id
+       this.hostUser.id === this.$store.state.currLoggedInUser.id
           ? true
-          : false;
+          : false
       return userIsHost;
+    },
+
+   getJoined(){
+    let joined=this.$store.state.specEvent.joinedUsers.includes(this.$store.state.currLoggedInUser)? true:false
+       return joined
     },
 
     dates() {
@@ -405,6 +412,7 @@ li > p {
   margin-top: -3vw;
   padding-bottom: 1vw;
   margin-right: 8vw;
+  min-height:50px;
 }
 .theme--light.v-btn.v-btn--has-bg {
   background-color: var(--buttonPurple);
