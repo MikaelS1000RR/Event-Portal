@@ -150,24 +150,39 @@
           <p>{{ currEvent.description }}</p>
         </div>
       </div>
-      <div class="btn-join">
-        <v-btn elevation="11" x-large>Join</v-btn>
+      <div class="btnJoin" >
+        
+       
+         <v-btn @click="joined = !joined" elevation="11" x-large> Join </v-btn>
+        
+         <div class="popupWindow" v-if="joined"><GuestOrLogin/></div>
+
+   
       </div>
+
+      
+      
     </v-card>
   </div>
 </template>
 
 <script>
 import Loading from '../components/Loading.vue'
+import GuestOrLogin from '../components/GuestOrLogin.vue'
 export default {
   components:{
-Loading
+
+Loading,
+GuestOrLogin
+
   },
   data() {
     return {
       dialog: false,
       deletePopup: false,
       afterDelete: false,
+      joined: false
+    
      
     };
   },
@@ -181,6 +196,7 @@ Loading
   },
 
   methods: {
+    
     getDate(eventDate) {
       const monthNames = ["january", "february", "march", "april", "may", "june",
   "july", "august", "september", "cotober", "november", "december"
