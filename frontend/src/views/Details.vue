@@ -15,15 +15,15 @@
             <h2 class="join-as-guest">Join as Guest</h2>
              </v-card-title>
             <v-card-text>
-              <v-form @submit.prevent="joinEvent">
+              <v-form @submit.prevent="joinEventAsGuest">
                 <v-text-field
                   id="userName"
                   
                   label="Username"
                   prepend-icon="mdi-account-circle"
                 />
-              </v-form>
-            </v-card-text>
+              
+            
              <v-card-actions class="guest-actions">
                   <v-btn class="join-btn guest-btn" type="submit">JOIN</v-btn>
                 </v-card-actions>
@@ -45,6 +45,8 @@
             >
             <div class="error" v-if="error">{{ error.message }}</div>
           </v-card-actions>
+              </v-form>
+          </v-card-text>
         </v-card>
     </v-dialog>
        
@@ -270,6 +272,10 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
       if (this.$store.state.deleteSuccess) {
         this.afterDelete = true;
       }
+    },
+
+    async joinEventAsGuest(){
+     await this.$store.dispatch("guestJoinEvent")
     },
 
     editEvent() {

@@ -20,7 +20,7 @@ export default new Vuex.Store({
     updatedEvent: {},
     accessTypes: [],
     allEvents: [],
-    loading: false
+    loading: false,
   },
   mutations: {
     setEvents(state, events) {
@@ -46,7 +46,7 @@ export default new Vuex.Store({
 
     setJoinedUser(state, user) {
       state.joinedUsers = user;
-      console.log("User is joining", state.joinedUsers)
+      console.log("User is joining", state.joinedUsers);
     },
 
     setDeleteSuccess(state) {
@@ -81,7 +81,7 @@ export default new Vuex.Store({
 
     setAllEvents(state, allEvents) {
       state.allEvents = allEvents;
-    }
+    },
   },
 
   actions: {
@@ -115,7 +115,7 @@ export default new Vuex.Store({
 
     async fetchSpecEvent(store, id) {
       store.state.loading = true;
-      console.log('loading in store is', store.state.loading);
+      console.log("loading in store is", store.state.loading);
       await axios
         .get("/events/" + id)
         .then((res) => {
@@ -147,7 +147,7 @@ export default new Vuex.Store({
           console.log(err.response);
         });
     },
-    
+
     async joinNewEvent(store) {
       await axios
         .post("/users", store.state.joinedUsers)
@@ -155,7 +155,7 @@ export default new Vuex.Store({
           console.log(response);
         })
         .catch((err) => {
-          console.log(err.response)
+          console.log(err.response);
         });
     },
 
@@ -168,7 +168,6 @@ export default new Vuex.Store({
             store.commit("setCurrLoggedInUser", res.data);
           } else {
             console.log("user is not logged in");
-            
           }
         })
         .catch((err) => {
@@ -205,6 +204,17 @@ export default new Vuex.Store({
         .then((res) => {
           console.log(res.data);
           store.commit("setEvents", res.data);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    },
+
+    async guestJoinEvent(store) {
+      await axios
+        .post("/addGuestToEvent/"+store.state.specEvent.id)
+        .then((response) => {
+          console.log(response);
         })
         .catch((err) => {
           console.log(err.response);

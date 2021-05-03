@@ -262,13 +262,13 @@ namespace Event_Portal.Controllers
 
     [HttpPost]
     [Route("/addGuestToEvent/{eventId}")]
-    public async Task<Event> AddUserToEvent(String eventId)
+    public async Task<Event> Join (String eventId, [FromBody] string [] userName)
     {
-      Console.WriteLine("reached");
+      
       Guest guest = new Guest
       {
         Id = Guid.NewGuid(),
-        GuestName  = "Guest"
+        GuestName  = userName[0]
 
 
       };
