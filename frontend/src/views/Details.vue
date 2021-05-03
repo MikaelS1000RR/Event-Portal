@@ -7,11 +7,13 @@
        <Loading/>
           <v-dialog
     v-model="guestLoginPopup"
-      max-width="290"
+      max-width="500px"
+      class="guest-dialog"
     >
            <v-card width="500px" class="mt-5 mx-a">
           <v-card-title class="pb-0">
             <h2 class="join-as-guest">Join as Guest</h2>
+             </v-card-title>
             <v-card-text>
               <v-form @submit.prevent="joinEvent">
                 <v-text-field
@@ -20,23 +22,23 @@
                   label="Username"
                   prepend-icon="mdi-account-circle"
                 />
-                <v-card-actions>
-                  <v-btn class="join-btn" type="submit">JOIN</v-btn>
-                </v-card-actions>
               </v-form>
             </v-card-text>
+             <v-card-actions class="guest-actions">
+                  <v-btn class="join-btn guest-btn" type="submit">JOIN</v-btn>
+                </v-card-actions>
             <v-divider></v-divider>
-          </v-card-title>
+         
 
           <v-card-title class="pb-0">
             <h2 class="join-as-guest">OR</h2>
-            <v-card-text> </v-card-text>
-            <v-divider></v-divider>
-          </v-card-title>
+            </v-card-title>
+            
+          
 
-          <v-card-actions>
+          <v-card-actions class="guest-actions">
             <v-btn
-              class="login"
+              class="login guest-btn"
               type="submit"
               :color="type === 'guest' ? 'secondary' : '#9933FF'"
               >Login</v-btn
@@ -369,6 +371,11 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
 
 
 
+.guest-actions{
+  justify-content: center !important;
+}
+
+
 .v-application .primary {
   background-color: var(--buttonPurpleSecondary) !important;
 }
@@ -425,6 +432,12 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
   padding-top: 1vw;
 }
 
+.pb-0{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .v-menu__content {
   margin-left: -2.5vw;
 }
@@ -434,6 +447,10 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+.guest-btn{
+  width:300px  !important;
 }
 
 .detailedImg {

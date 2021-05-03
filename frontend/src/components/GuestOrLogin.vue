@@ -1,12 +1,13 @@
 <template>
  
-      <v-dialog
+     <v-dialog
     v-model="openGuest"
-      max-width="290"
+        max-width="500px"
     >
-           <v-card width="500px" class="mt-5 mx-a">
+          <!---  <v-card width="500px" class="mt-5 mx-a">
           <v-card-title class="pb-0">
-            <h2 class="join-as-guest">Join as Guest</h2>
+          Join as Guest
+             </v-card-title>
             <v-card-text>
               <v-form @submit.prevent="joinEvent">
                 <v-text-field
@@ -15,13 +16,15 @@
                   label="Username"
                   prepend-icon="mdi-account-circle"
                 />
+                  </v-form>
+                </v-card-text>
                 <v-card-actions>
                   <v-btn class="join-btn" type="submit">JOIN</v-btn>
                 </v-card-actions>
-              </v-form>
-            </v-card-text>
+            
+            
             <v-divider></v-divider>
-          </v-card-title>
+         
 
           <v-card-title class="pb-0">
             <h2 class="join-as-guest">OR</h2>
@@ -38,9 +41,8 @@
             >
             <div class="error" v-if="error">{{ error.message }}</div>
           </v-card-actions>
-        </v-card>
+        </v-card>-->
     </v-dialog>
-
    
 </template>
 
@@ -60,13 +62,7 @@ export default {
 </script>
 
 <style scoped>
-.grid {
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  grid-template-columns: 1fr;
-  grid-template-rows: 70vh;
-}
+
 
 .join-as-guest {
   margin-left: auto;
