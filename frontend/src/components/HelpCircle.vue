@@ -27,11 +27,18 @@ export default {};
   padding-right: 2vw;
 }
 .help-info{
-  max-width:18vw;
+ width:18vw;
   
 }
 
 .mdi-set, .mdi:before{
   font-size:.8em !important;
+}
+
+@media only screen and (max-width: 540px) {
+.help-info{
+  width:30vw;
+  
+}
 }
 </style>

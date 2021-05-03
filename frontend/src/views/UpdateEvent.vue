@@ -78,7 +78,7 @@
               </li>
 
               <li>
-                <div class="save-btn">
+                <div class="save-btn hide-on-small">
                   <v-btn
                     class="ma-2"
                     :loading="loading"
@@ -129,6 +129,24 @@
 
           <textarea v-model="description" name="" id="" cols="30" rows="7">
           </textarea>
+            <div class="save-btn hide">
+                  <v-btn
+                    class="ma-2 save-btn"
+                    :loading="loading"
+                    :disabled="loading"
+                    color="success"
+                    @click="loader = 'loading'"
+                    type="submit"
+                  >
+                    Save changes
+                    <template v-slot:loader>
+                      <span>Saving...</span>
+                    </template>
+                  </v-btn>
+                  <v-btn @click="cancel">
+                    Cancel
+                  </v-btn>
+                </div>
         </div>
       </v-card>
     </form>
@@ -308,5 +326,56 @@ li > label {
 
 .lock {
   width: 7%;
+}
+
+.hide{
+  display: none;
+}
+
+@media only screen and (max-width: 1360px) {
+
+.my-12{
+  flex-direction: column;
+}
+
+.hide{
+  display: inline;
+  padding-top:15px;
+}
+
+.hide-on-small{
+  display: none;
+}
+
+.event-desc{
+  margin-left:30px;
+}
+}
+
+@media only screen and (max-width: 750px) {
+ul > li{
+  padding-top:30px;
+}
+}
+@media only screen and (max-width: 650px) {
+.hide{
+  display: flex;
+  flex-direction: column;
+  
+}
+.event-desc{
+  padding-bottom: 150px;
+}
+
+.detailedImg{
+  width:50px;
+}
+}
+
+@media only screen and (max-width: 500px) {
+.event-desc{
+  width:75vw;
+}
+
 }
 </style>
