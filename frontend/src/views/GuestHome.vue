@@ -1,29 +1,21 @@
 <template>
- <router-link v-if="!isLoggedIn" to="/Guest">
-
-  <div class="home">
-    <div class="event-list-wrapper" >
+  <div class="guest-home">
+    <div class="event-list-wrapper">
      <EventList/>
      
     </div>
   </div>
- </router-link>
 </template>
 
 <script>
 import EventList from '../components/EventList.vue'
 
 export default {
-  name: 'Home',
+  name: 'GuestHome',
   components: {
    EventList
   },
 
-  data() {
-    return {
-      isLoggedIn: false
-    }
-  },
 
  
 

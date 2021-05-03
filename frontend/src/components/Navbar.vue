@@ -7,13 +7,16 @@
      <v-toolbar color="black" dark fixed app>
        <div class="logo">
          
-      <img class="logoImg" src="../assets/GeshdoT.png" @click="homeRedirect">
+      <img class="logoImg" src="../assets/GeshdoT.png" 
+      @click="isLoggedIn ? homeRedirect() : guestRedirect()">
        </div>
           <v-spacer></v-spacer>
           <div v-if="isLoggedIn" class="hamburger">
      <v-app-bar-nav-icon></v-app-bar-nav-icon>
      </div>
      <div class="login-navbar" v-if="!isLoggedIn">
+         <!--Create guest icon-->
+
             <button class="login btn" @click="login">Log in</button>
             <button class="register btn" @click="register">Register</button>
      </div>
@@ -34,6 +37,10 @@ export default {
  methods:{
   homeRedirect(){
     this.$router.push("/");
+  },
+  
+  guestRedirect() {
+ this.$router.push("/Guest");
   },
 
   login(){

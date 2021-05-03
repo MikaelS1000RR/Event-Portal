@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import CreateEvent from '../views/CreateEvent.vue'
 import Details from '../views/Details.vue'
 import UpdateEvent from '../views/UpdateEvent.vue'
+import GuestHome from '../views/GuestHome.vue'
 
 Vue.use(VueRouter)
 
@@ -12,6 +13,12 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+
+   {
+    path: '/Guest',
+    name: 'GuestHome',
+    component: GuestHome
   },
 {
     path: '/create-event',
