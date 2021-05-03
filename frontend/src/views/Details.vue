@@ -141,6 +141,8 @@
             </li>
             <li>
               <div class="people-count">
+                <p>People going:</p>
+                <p>{{$store.state.specEvent.joinedUsers.length}}</p>
               </div>
             </li>
           </ul>
@@ -400,7 +402,7 @@ ul > li {
   text-align: center;
 }
 
-li > p {
+li > p, .people-count {
   margin-top: 1.2vw;
   padding-left: 1vw;
   font-size: 1.2vw;
@@ -455,7 +457,7 @@ li > p {
    height:70vh;
  }
 
- li > p, .event-desc>p{
+ li > p, .event-desc>p, .people-count{
    font-size:1.5vw;
  }
 
@@ -480,7 +482,7 @@ ul>li{
 @media only screen and (max-width: 610px) {
 
   
- li > p, .event-desc>p{
+ li > p, .event-desc>p, .people-count{
    font-size:2vh;
  }
 
@@ -548,12 +550,12 @@ ul>li{
   width:5%;
 }
 
- li > p, .event-desc>p{
+ li > p, .event-desc>p, .people-count{
    font-size:1.4vh;
  }
 }
 @media only screen and (max-width: 360px){
- li > p, .event-desc>p{
+ li > p, .event-desc>p, .people-count{
    font-size:1.2vh;
  }
 
