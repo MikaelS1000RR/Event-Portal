@@ -532,12 +532,12 @@ ul>li{
 }
 
  li > p, .event-desc>p{
-   font-size:1.8vh;
+   font-size:1.4vh;
  }
 }
-@media only screen and (max-width: 340px){
+@media only screen and (max-width: 360px){
  li > p, .event-desc>p{
-   font-size:1.6vh;
+   font-size:1.2vh;
  }
 
    .detailedImg {
