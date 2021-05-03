@@ -139,34 +139,7 @@ namespace Event_Portal.Controllers
 
       if(hostUser != null)
       {
-        /* var response = await client.PushTaskAsync("events", myEvent);
-
-         var eventsList = GetEvents();
-         var lastPushedEvent = eventsList.ElementAt(eventsList.Count() - 1);
-         hostUser.CreatedEvents.Add(lastPushedEvent);
-
-         var rs = await client.SetTaskAsync("users/" + myEvent.HostId, hostUser);
-
-
-
-           // Push the last created event to CreatedEvents 
-
-         FirebaseResponse resEvent = client.Get(@"events");
-         User createdEvent = JsonConvert.DeserializeObject<User>(res.Body.ToString());
-
-         Event result = response.ResultAs<Event>();  
-
-
-
-
-         Console.WriteLine("Pushed new event");
-
-      //Adding event to host user's created events list
-        hostUser.CreatedEvents.Add(result);
-
-         return lastPushedEvent;*/
-
-
+    
          //Saving event
         var response = await client.SetTaskAsync("events/" + myEvent.Id, myEvent);
         Event result = response.ResultAs<Event>();

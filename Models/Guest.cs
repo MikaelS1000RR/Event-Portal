@@ -1,5 +1,5 @@
 using System;
-
+using System.Collections.Generic;
 
 namespace Event_Portal.Models
 {
@@ -10,7 +10,7 @@ namespace Event_Portal.Models
 
     public string GuestName { get; init; }
 
-
+    public List<Event> JoinedEvents { get; init; } = new();
 
   }
 }
