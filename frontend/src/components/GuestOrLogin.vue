@@ -1,7 +1,7 @@
 <template>
  
       <v-dialog
-      v-model="guestLogin"
+    v-model="openGuest"
       max-width="290"
     >
            <v-card width="500px" class="mt-5 mx-a">
@@ -11,7 +11,7 @@
               <v-form @submit.prevent="joinEvent">
                 <v-text-field
                   id="userName"
-                  v-model="userName"
+                  
                   label="Username"
                   prepend-icon="mdi-account-circle"
                 />
@@ -48,7 +48,7 @@
 export default {
   data() {
     return {
-      guestLogin:false
+       openGuest:true
     };
   },
   methods: {
