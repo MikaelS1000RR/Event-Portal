@@ -27,14 +27,19 @@
              <v-card-actions class="guest-actions">
                   <v-btn @click="joinedSuccess"  class="join-btn guest-btn" type="submit">JOIN</v-btn >
 
+                </v-card-actions>
                   <transition name="fade" mode="out-in">
                    <div v-if="isJoined" class="alert" role="alert">
+      <v-card
+        color="primary"
+        dark
+      >
        <v-card-text>
           Joined successfully!
         </v-card-text>
+         </v-card>
     </div>
      </transition>
-                </v-card-actions>
             <v-divider></v-divider>
          
 
@@ -244,7 +249,8 @@ Loading,
       afterDelete: false,
       guestLoginPopup:false,
       isJoined: false,
-      name:"guest"
+      afterJoin: false,
+      name: ''
          
     };
   },
@@ -255,15 +261,20 @@ Loading,
 
       setTimeout(() => this.redirect(), 3000);
     },
+
+    isJoined(val) {
+      if(!val) return; 
+        setTimeout(() => this.afterJoinRedirect(), 2000)
+      
+       
+
+    }
+
   },
 
   methods: {
     joinedSuccess() {
       this.isJoined = true;
-      setTimeout(() => {
-        this.testButClicked = false
-      }, 5000)
-    
     },
     
     getDate(eventDate) {
@@ -283,6 +294,11 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
 
     redirect() {
       this.afterDelete = false;
+      this.$router.push("/");
+    },
+
+    afterJoinRedirect() {
+      
       this.$router.push("/");
     },
 
@@ -336,6 +352,8 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
   },
 
   computed: {
+
+    
     currEvent() {
       return this.$store.state.specEvent;
     },
@@ -752,8 +770,8 @@ position: absolute;
 }
  
 .alert {
-  background-color: rgba(191, 144, 238, 0.797);
-  padding: 15px;
+  background-color: rgba(231, 223, 240, 0.797);
+  padding: 3px;
 }
 
 .fade-enter-active,
