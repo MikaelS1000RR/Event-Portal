@@ -8,7 +8,7 @@
 
     <v-divider></v-divider>
 
-    <v-virtual-scroll :items="items" :item-height="50" height="150">
+    <v-virtual-scroll :items="joinedUsers" :item-height="50" height="150">
       <template v-slot:default="{ item }">
         <v-list-item>
           <v-list-item-avatar>
@@ -49,15 +49,15 @@ export default {
   },
 
   computed: {
-    items() {
+    joinedUsers() {
       const joinedUsers = this.$store.state.specEvent.joinedUsers;
       const joinedGuests = this.$store.state.specEvent.joinedGuests;
-      const length = this.$store.state.specEvent.joinedUsers.length 
+      const length = joinedUsers.length
 
-      const names = this.$store.state.specEvent.joinedUsers.map(
+      const names = joinedUsers.map(
         (user) => user.firstName
       );
-      const surnames = this.$store.state.specEvent.joinedUsers.map(
+      const surnames = joinedUsers.map(
         (user) => user.lastName
       );
       const namesLength = names.length;
