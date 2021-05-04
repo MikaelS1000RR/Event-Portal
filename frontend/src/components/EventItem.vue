@@ -35,6 +35,7 @@ export default {
 .event-card {
   text-align: center;
   height: 75%;
+  width:95%;
 
   display: flex;
   align-items: center;
@@ -69,5 +70,22 @@ export default {
   text-align: center;
   width:30vw;
   
+}
+
+@media only screen and (max-width: 670px) {
+ .event-img {
+  
+  width:40vw;
+  
+}
+.v-card__title{
+  font-size:4vw;
+}
+}
+@media only screen and (max-width: 560px) {
+ .event-img {
+  width:60vw;
+  
+}
 }
 </style>

@@ -184,6 +184,12 @@
 
               <p>{{ currEvent.access }}</p>
             </li>
+            <li>
+              <div class="people-count">
+                <p>People going:</p>
+                <p>{{$store.state.specEvent.joinedUsers.length}}</p>
+              </div>
+            </li>
           </ul>
         </div>
 
@@ -305,6 +311,11 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
         let time = "00 : 00";
         return time;
       } else {
+        let minsLength=minutes+""
+        if(minsLength.length===1){
+           let time = hours + " : 0" + minutes;
+        return time;
+        }
         let time = hours + " : " + minutes;
         return time;
       }
@@ -325,10 +336,15 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
 
     ifHost() {
       let userIsHost =
-        this.hostUser.id === this.$store.state.currLoggedInUser.id
+       this.hostUser.id === this.$store.state.currLoggedInUser.id
           ? true
-          : false;
+          : false
       return userIsHost;
+    },
+
+   getJoined(){
+    let joined=this.$store.state.specEvent.joinedUsers.includes(this.$store.state.currLoggedInUser)? true:false
+       return joined
     },
 
     dates() {
@@ -476,7 +492,7 @@ ul > li {
   text-align: center;
 }
 
-li > p {
+li > p, .people-count {
   margin-top: 1.2vw;
   padding-left: 1vw;
   font-size: 1.2vw;
@@ -497,6 +513,12 @@ li > p {
 
  margin-bottom: 2vw;
   margin-right: 5vw;
+}
+.btn-join {
+  margin-top: -3vw;
+  padding-bottom: 1vw;
+  margin-right: 8vw;
+  min-height:50px;
 }
 .theme--light.v-btn.v-btn--has-bg {
   background-color: var(--buttonPurple);
@@ -530,7 +552,7 @@ li > p {
    height:70vh;
  }
 
- li > p, .event-desc>p{
+ li > p, .event-desc>p, .people-count{
    font-size:1.5vw;
  }
 
@@ -555,7 +577,7 @@ ul>li{
 @media only screen and (max-width: 610px) {
 
   
- li > p, .event-desc>p{
+ li > p, .event-desc>p, .people-count{
    font-size:2vh;
  }
 
@@ -623,12 +645,12 @@ ul>li{
   width:5%;
 }
 
- li > p, .event-desc>p{
+ li > p, .event-desc>p, .people-count{
    font-size:1.4vh;
  }
 }
 @media only screen and (max-width: 360px){
- li > p, .event-desc>p{
+ li > p, .event-desc>p, .people-count{
    font-size:1.2vh;
  }
 

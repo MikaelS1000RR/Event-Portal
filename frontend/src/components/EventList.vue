@@ -143,6 +143,16 @@ export default {
 .v-dialog > .v-card > .v-card__text{
   padding-top:1vh;
 }
+@media only screen and (max-width: 950px) {
+  .event-list{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
+@media only screen and (max-width: 560px) {
+ .event-list{
+    grid-template-columns: 1fr;
+  }
+}
 
 </style>
