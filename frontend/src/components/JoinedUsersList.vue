@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-card-title class="white--text orange darken-4">
+    <v-card-title class="white--text purple darken-4">
       Joined user list
 
       <v-spacer></v-spacer>
@@ -65,8 +65,7 @@ export default {
       const surnames = joinedUsers.map(
         (user) => user.lastName
       );
-      const namesLength = names.length;
-      const surnamesLength = surnames.length;
+     
       const colorsLength = this.colors.length;
       let i=-1;
       return Array.from({ length: length }, (k, v) => {
