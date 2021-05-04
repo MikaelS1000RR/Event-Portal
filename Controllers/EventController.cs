@@ -139,34 +139,7 @@ namespace Event_Portal.Controllers
 
       if(hostUser != null)
       {
-        /* var response = await client.PushTaskAsync("events", myEvent);
-
-         var eventsList = GetEvents();
-         var lastPushedEvent = eventsList.ElementAt(eventsList.Count() - 1);
-         hostUser.CreatedEvents.Add(lastPushedEvent);
-
-         var rs = await client.SetTaskAsync("users/" + myEvent.HostId, hostUser);
-
-
-
-           // Push the last created event to CreatedEvents 
-
-         FirebaseResponse resEvent = client.Get(@"events");
-         User createdEvent = JsonConvert.DeserializeObject<User>(res.Body.ToString());
-
-         Event result = response.ResultAs<Event>();  
-
-
-
-
-         Console.WriteLine("Pushed new event");
-
-      //Adding event to host user's created events list
-        hostUser.CreatedEvents.Add(result);
-
-         return lastPushedEvent;*/
-
-
+    
          //Saving event
         var response = await client.SetTaskAsync("events/" + myEvent.Id, myEvent);
         Event result = response.ResultAs<Event>();
@@ -277,6 +250,35 @@ namespace Event_Portal.Controllers
 
 
       myEvent.JoinedUsers.Add(user);
+      var rs = await client.SetTaskAsync("events/" + eventId, myEvent);
+
+
+
+      return myEvent;
+
+
+
+    }
+
+    [HttpPost]
+    [Route("/addGuestToEvent/{eventId}")]
+    public async Task<Event> Join (String eventId, [FromBody] string [] userName)
+    {
+      
+      Guest guest = new Guest
+      {
+        Id = Guid.NewGuid(),
+        GuestName  = userName[0]
+
+
+      };
+
+      var existingEvent = await client.GetTaskAsync("events/" + eventId);
+
+      Event myEvent = existingEvent.ResultAs<Event>();
+
+
+      myEvent.JoinedGuests.Add(guest);
       var rs = await client.SetTaskAsync("events/" + eventId, myEvent);
 
 

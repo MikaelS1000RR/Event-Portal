@@ -94,10 +94,8 @@
                   class="dropdown-item"
                   >Delete</v-list-item-title
                 >
-
               </template>
-              
-           
+
               <v-card>
                 <v-card-title class="headline grey lighten-2">
                   Are you sure that you want to delete this event?
@@ -116,28 +114,6 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
-
-
-<v-dialog
-      v-model="dialog"
-      width="500"
-    >
-      <template v-slot:activator="{ on, attrs }">
-        
-
-                <v-list-item-title class="dropdown-item"  v-bind="attrs" @click="openGuests=true"
-          v-on="on"
-              >See all guests
-            </v-list-item-title>
-
-                 </template>
-
-    <JoinedUsersList/>
-</v-dialog>
-
-
-
-
           </v-list>
         </v-menu>
 
@@ -258,18 +234,19 @@
 
 <script>
 import Loading from '../components/Loading.vue'
-import JoinedUsersList from '../components/JoinedUsersList.vue'
+
 export default {
   components:{
+
 Loading,
-JoinedUsersList
+
+
   },
   data() {
     return {
       dialog: false,
       deletePopup: false,
       afterDelete: false,
-      openGuests:false,
       guestLoginPopup:false,
       isJoined: false,
       afterJoin: false,
@@ -386,6 +363,8 @@ var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'S
     id() {
       return this.$route.params.id;
     },
+
+
     ifHost() {
       let userIsHost =
        this.hostUser.id === this.$store.state.currLoggedInUser.id
@@ -749,8 +728,7 @@ ul>li{
 
 .succefully-joined {
   display: flex;
-  justify-content: center;
-  align-items: center;  
+  justify-content: ;  
 }
 
 </style>
