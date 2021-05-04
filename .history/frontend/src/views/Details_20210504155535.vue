@@ -710,6 +710,8 @@ ul>li{
 @media only screen and (min-width: 340px){
  
 }
+
+
  
 .alert {
   background-color: rgba(231, 223, 240, 0.797);
@@ -724,12 +726,6 @@ ul>li{
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
-}
-
-.succefully-joined {
-  display: flex;
-  justify-content: center;
-  align-items: center;  
 }
 
 </style>

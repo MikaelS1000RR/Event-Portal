@@ -34,7 +34,7 @@
         color="primary"
         dark
       >
-       <v-card-text class="succefully-joined">
+       <v-card-text class="succefully-">
           Joined successfully!
         </v-card-text>
          </v-card>
@@ -710,6 +710,64 @@ ul>li{
 @media only screen and (min-width: 340px){
  
 }
+
+ .close-container {
+position: absolute;
+	 margin: auto;
+	 width: 50px;
+	 height: 50px;
+	
+	 cursor: pointer;
+    top: 1%;
+    right: 1%;
+}
+
+
+
+ .leftright {
+	 height: 4px;
+	 width: 40px;
+	 position: absolute;
+	 margin-top: 24px;
+	 background-color: #0008fffe;
+	 border-radius: 2px;
+	 transform: rotate(45deg);
+	 transition: all 0.3s ease-in;
+}
+ .rightleft {
+	 height: 4px;
+	 width: 40px;
+	 position: absolute;
+	 margin-top: 24px;
+	 background-color: #0108d0fe;
+	 border-radius: 2px;
+	 transform: rotate(-45deg);
+	 transition: all 0.3s ease-in;
+}
+ label {
+	 color: white;
+	 font-family: Helvetica, Arial, sans-serif;
+	 font-size: 0.4em;
+	 text-transform: uppercase;
+	 letter-spacing: 2px;
+	 transition: all 0.3s ease-in;
+	 opacity: 0;
+}
+ .close {
+	 margin: 50px 0 0 5px;
+	 position: absolute;
+}
+ .close-container:hover .leftright {
+	 transform: rotate(-45deg);
+	 background-color: #f25c66;
+}
+ .close-container:hover .rightleft {
+	 transform: rotate(45deg);
+	 background-color: #f25c66;
+}
+ .close-container:hover label {
+	 opacity: 1;
+}
  
 .alert {
   background-color: rgba(231, 223, 240, 0.797);
@@ -724,12 +782,6 @@ ul>li{
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
-}
-
-.succefully-joined {
-  display: flex;
-  justify-content: center;
-  align-items: center;  
 }
 
 </style>

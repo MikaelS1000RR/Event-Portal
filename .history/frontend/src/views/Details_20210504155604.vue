@@ -726,10 +726,6 @@ ul>li{
   opacity: 0;
 }
 
-.succefully-joined {
-  display: flex;
-  justify-content: center;
-  align-items: center;  
-}
+
 
 </style>

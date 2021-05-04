@@ -727,9 +727,7 @@ ul>li{
 }
 
 .succefully-joined {
-  display: flex;
-  justify-content: center;
-  align-items: center;  
+  display: a,  
 }
 
 </style>
