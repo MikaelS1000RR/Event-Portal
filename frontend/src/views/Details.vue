@@ -201,7 +201,7 @@
             <li>
               <div class="people-count">
                 <p>People going:</p>
-                <p>{{$store.state.specEvent.joinedUsers.length}}</p>
+                <p>{{$store.state.specEvent.joinedUsers.length +$store.state.specEvent.joinedGuests.length }}</p>
               </div>
             </li>
           </ul>
