@@ -781,11 +781,4 @@ position: absolute;
   opacity: 0;
 }
 
-
-.successfull-join {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 </style>

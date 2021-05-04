@@ -1,6 +1,7 @@
 <template>
   <div class="details-wrapper">
       
+
        <Loading/>
           <v-dialog
     v-model="guestLoginPopup"
@@ -31,7 +32,7 @@
         color="primary"
         dark
       >
-       <v-card-text class="successfull-join">
+       <v-card-text>
           Joined successfully!
         </v-card-text>
          </v-card>
@@ -779,13 +780,6 @@ position: absolute;
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
-}
-
-
-.successfull-join {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 </style>

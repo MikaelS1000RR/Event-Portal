@@ -783,9 +783,8 @@ position: absolute;
 
 
 .successfull-join {
-  display: flex;
   align-items: center;
-  justify-content: center;
+  items
 }
 
 </style>
