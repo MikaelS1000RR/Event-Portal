@@ -52,6 +52,9 @@ export default new Vuex.Store({
     setDeleteSuccess(state) {
       state.deleteSuccess = true;
     },
+
+  
+
     setPublicAccess(state) {
       console.log("setting public");
       state.publicAccess = true;

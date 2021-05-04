@@ -44,8 +44,8 @@
       >
         <v-card-text>
           Event has been created
-         
         </v-card-text>
+        
       </v-card>
     </v-dialog>
 

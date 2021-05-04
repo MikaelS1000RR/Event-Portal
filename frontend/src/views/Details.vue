@@ -25,7 +25,15 @@
               
             
              <v-card-actions class="guest-actions">
-                  <v-btn class="join-btn guest-btn" type="submit">JOIN</v-btn>
+                  <v-btn @click="joinedSuccess"  class="join-btn guest-btn" type="submit">JOIN</v-btn >
+
+                  <transition name="fade" mode="out-in">
+                   <div v-if="isJoined" class="alert" role="alert">
+       <v-card-text>
+          Joined successfully!
+        </v-card-text>
+    </div>
+     </transition>
                 </v-card-actions>
             <v-divider></v-divider>
          
@@ -43,7 +51,8 @@
               :color="type === 'guest' ? 'secondary' : '#9933FF'"
               >Login</v-btn
             >
-            <div class="error" v-if="error">{{ error.message }}</div>
+            
+           
           </v-card-actions>
               </v-form>
           </v-card-text>
@@ -207,7 +216,6 @@
          <v-btn class="joinBut" elevation="11" x-large @click="joinEvent"> Join 
          </v-btn>
 
-
    
       </div>
 
@@ -235,11 +243,9 @@ Loading,
       deletePopup: false,
       afterDelete: false,
       guestLoginPopup:false,
+      isJoined: false,
       name:"guest"
-     
-
-    
-     
+         
     };
   },
 
@@ -252,6 +258,13 @@ Loading,
   },
 
   methods: {
+    joinedSuccess() {
+      this.isJoined = true;
+      setTimeout(() => {
+        this.testButClicked = false
+      }, 5000)
+    
+    },
     
     getDate(eventDate) {
       const monthNames = ["january", "february", "march", "april", "may", "june",
@@ -738,6 +751,19 @@ position: absolute;
 	 opacity: 1;
 }
  
+.alert {
+  background-color: rgba(191, 144, 238, 0.797);
+  padding: 15px;
+}
 
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1.3s ease;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 
 </style>
