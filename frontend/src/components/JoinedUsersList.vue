@@ -21,16 +21,7 @@
             <v-list-item-title>{{ item.fullName }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-<v-list-item v-for="guest in joinedGuests" :key="guest.id">
-    <v-list-item-avatar>
-            <v-avatar :color="item.color" size="56" class="white--text">
-              {{ guest.initials }}
-            </v-avatar>
-          </v-list-item-avatar>
-              <v-list-item-content>
-            <v-list-item-title>{{ guest.fullName }}</v-list-item-title>
-          </v-list-item-content>
-</v-list-item>
+
 
       </template>
   
@@ -64,27 +55,41 @@ export default {
     joinedUsers() {
       const joinedUsers = this.$store.state.specEvent.joinedUsers;
        const joinedGuests = this.$store.state.specEvent.joinedGuests;
-      const length = joinedUsers.length
+      const length = joinedUsers.length + joinedGuests.length
 
       const names = joinedUsers.map(
         (user) => user.firstName
-      )
+      ).concat(joinedGuests.map(guest => guest.guestName))
+
+      console.log(names);
       const surnames = joinedUsers.map(
         (user) => user.lastName
       );
       const namesLength = names.length;
       const surnamesLength = surnames.length;
       const colorsLength = this.colors.length;
-
+      let i=-1;
       return Array.from({ length: length }, (k, v) => {
-        const name = names[this.genRandomIndex(namesLength)];
-        const surname = surnames[this.genRandomIndex(surnamesLength)];
+        i++
+        const name = names[i];
+        const surname = surnames[i];
+        if(i <= joinedUsers.length-1)
+        {
 
         return {
           color: this.colors[this.genRandomIndex(colorsLength)],
           fullName: `${name} ${surname}`,
           initials: `${name[0]} ${surname[0]}`,
-        };
+        }
+      }
+      else{
+         
+        return {
+          color: this.colors[this.genRandomIndex(colorsLength)],
+          fullName: `${name}`,
+          initials: `${name[0]}`,
+        }
+      }
       });
     },
 
