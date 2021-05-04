@@ -21,10 +21,7 @@
             <v-list-item-title>{{ item.fullName }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-
-
       </template>
-  
     </v-virtual-scroll>
   </v-card>
 </template>
@@ -54,65 +51,36 @@ export default {
   computed: {
     joinedUsers() {
       const joinedUsers = this.$store.state.specEvent.joinedUsers;
-       const joinedGuests = this.$store.state.specEvent.joinedGuests;
-      const length = joinedUsers.length + joinedGuests.length
+      const joinedGuests = this.$store.state.specEvent.joinedGuests;
+      const length = joinedUsers.length + joinedGuests.length;
 
-      const names = joinedUsers.map(
-        (user) => user.firstName
-      ).concat(joinedGuests.map(guest => guest.guestName))
+      const names = joinedUsers
+        .map((user) => user.firstName)
+        .concat(joinedGuests.map((guest) => guest.guestName));
 
-      console.log(names);
-      const surnames = joinedUsers.map(
-        (user) => user.lastName
-      );
-     
+      const surnames = joinedUsers.map((user) => user.lastName);
+
       const colorsLength = this.colors.length;
-      let i=-1;
+      let i = -1;
       return Array.from({ length: length }, (k, v) => {
-        i++
+        i++;
         const name = names[i];
         const surname = surnames[i];
-        if(i <= joinedUsers.length-1)
-        {
-
-        return {
-          color: this.colors[this.genRandomIndex(colorsLength)],
-          fullName: `${name} ${surname}`,
-          initials: `${name[0]} ${surname[0]}`,
+        if (i <= joinedUsers.length - 1) {
+          return {
+            color: this.colors[this.genRandomIndex(colorsLength)],
+            fullName: `${name} ${surname}`,
+            initials: `${name[0]} ${surname[0]}`,
+          };
+        } else {
+          return {
+            color: this.colors[this.genRandomIndex(colorsLength)],
+            fullName: `${name}`,
+            initials: `${name[0]}`,
+          };
         }
-      }
-      else{
-         
-        return {
-          color: this.colors[this.genRandomIndex(colorsLength)],
-          fullName: `${name}`,
-          initials: `${name[0]}`,
-        }
-      }
       });
     },
-
-    joinedGuests(){
-       const joinedGuests = this.$store.state.specEvent.joinedGuests;
-      const length = joinedGuests.length
-
-      const names = joinedGuests.map(
-        (guest) => guest.guestName
-      );
-   
-      const namesLength = names.length;
-      const colorsLength = this.colors.length;
-
-      return Array.from({ length: length }, (k, v) => {
-        const name = names[this.genRandomIndex(namesLength)];
-
-        return {
-          color: this.colors[this.genRandomIndex(colorsLength)],
-          fullName: `${name}`,
-          initials: `${name[0]}`,
-        };
-      });
-    }
   },
 
   methods: {

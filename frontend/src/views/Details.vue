@@ -119,7 +119,7 @@
 
 
 <v-dialog
-      v-model="dialog"
+      v-model="dialog2"
       width="500"
     >
       <template v-slot:activator="{ on, attrs }">
@@ -273,7 +273,8 @@ JoinedUsersList
       guestLoginPopup:false,
       isJoined: false,
       afterJoin: false,
-      name: ''
+      name: 'Anonymous',
+      dialog2:false
          
     };
   },
