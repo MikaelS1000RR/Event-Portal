@@ -221,12 +221,12 @@
 
 <script>
 import Loading from '../components/Loading.vue'
-import GuestOrLogin from '../components/GuestOrLogin.vue'
+
 export default {
   components:{
 
 Loading,
-GuestOrLogin
+
 
   },
   data() {
