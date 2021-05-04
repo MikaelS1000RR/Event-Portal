@@ -21,7 +21,19 @@
             <v-list-item-title>{{ item.fullName }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+<v-list-item v-for="guest in joinedGuests" :key="guest.id">
+    <v-list-item-avatar>
+            <v-avatar :color="item.color" size="56" class="white--text">
+              {{ guest.initials }}
+            </v-avatar>
+          </v-list-item-avatar>
+              <v-list-item-content>
+            <v-list-item-title>{{ guest.fullName }}</v-list-item-title>
+          </v-list-item-content>
+</v-list-item>
+
       </template>
+  
     </v-virtual-scroll>
   </v-card>
 </template>
@@ -51,12 +63,12 @@ export default {
   computed: {
     joinedUsers() {
       const joinedUsers = this.$store.state.specEvent.joinedUsers;
-      const joinedGuests = this.$store.state.specEvent.joinedGuests;
+       const joinedGuests = this.$store.state.specEvent.joinedGuests;
       const length = joinedUsers.length
 
       const names = joinedUsers.map(
         (user) => user.firstName
-      );
+      )
       const surnames = joinedUsers.map(
         (user) => user.lastName
       );
@@ -75,6 +87,28 @@ export default {
         };
       });
     },
+
+    joinedGuests(){
+       const joinedGuests = this.$store.state.specEvent.joinedGuests;
+      const length = joinedGuests.length
+
+      const names = joinedGuests.map(
+        (guest) => guest.guestName
+      );
+   
+      const namesLength = names.length;
+      const colorsLength = this.colors.length;
+
+      return Array.from({ length: length }, (k, v) => {
+        const name = names[this.genRandomIndex(namesLength)];
+
+        return {
+          color: this.colors[this.genRandomIndex(colorsLength)],
+          fullName: `${name}`,
+          initials: `${name[0]}`,
+        };
+      });
+    }
   },
 
   methods: {

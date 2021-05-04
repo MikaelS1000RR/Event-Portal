@@ -237,9 +237,12 @@ namespace Event_Portal.Controllers
 
     // Create new Method here
 
-    [HttpPost("/addUserToEvent/{userId}/{eventId}")]
+    [HttpPost]
+    [Route("/addUserToEvent/{userId}/{eventId}")]
     public async Task<Event> AddUserToEvent(String userId, String eventId)
     {
+
+     
 
       var existingUser = await client.GetTaskAsync("users/" + userId);
       var existingEvent = await client.GetTaskAsync("events/" + eventId);
