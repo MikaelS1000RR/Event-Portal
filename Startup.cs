@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +29,20 @@ namespace Event_Portal
         public void ConfigureServices(IServiceCollection services)
         {
 
+      services.AddAuthentication(options =>
+{
+options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+  .AddJwtBearer(jwtOptions =>
+  {
+    jwtOptions.Authority = @"https://login.microsoftonline.com/geshdo.com";
+    jwtOptions.TokenValidationParameters.ValidateIssuer = true;
+    jwtOptions.TokenValidationParameters.ValidateAudience = true;
+    jwtOptions.TokenValidationParameters.ValidIssuer = "https://login.microsoftonline.com/cd20e4c9-f82c-4d3e-9224-90f2bc4be1a0/v2.0";
+    jwtOptions.TokenValidationParameters.ValidAudience = "1a602afd-b047-4730-892f-715f551f9c97";
+  });
+
+
       services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
      .AddCookie(o =>
      {
@@ -40,6 +55,10 @@ namespace Event_Portal
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Event_Portal", Version = "v1" });
             });
+
+
+            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
