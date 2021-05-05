@@ -11,15 +11,20 @@ using FireSharp.Config;
 using FireSharp.Response;
 using FireSharp.Interfaces;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+
+using Microsoft.Extensions.Logging;
+
 
 namespace Event_Portal.Controllers
 {
+
 
   [ApiController]
   [Route("/events")]
 
 
-
+[Authorize]
   public class EventController : ControllerBase
   {
 
