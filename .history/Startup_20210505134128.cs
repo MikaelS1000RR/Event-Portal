@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,7 +30,7 @@ namespace Event_Portal
 
       services.AddAuthentication(options =>
 {
-options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+options.DefaultScheme = JwtBea…rerDefaults.AuthenticationScheme;
 })
 .AddJwtBearer(jwtOptions =>
 {
