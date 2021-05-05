@@ -48,7 +48,7 @@ namespace Event_Portal.Controllers
 
 
 
-[AllowAnonymous]
+
     // GET /events
     [HttpGet]
     public IEnumerable<Event> GetEvents()
@@ -61,7 +61,6 @@ namespace Event_Portal.Controllers
 
     }
    
-   [AllowAnonymous]
     [HttpPost]
     [Route("/filter-events")]
 
@@ -89,7 +88,6 @@ namespace Event_Portal.Controllers
 
     }
 
-[AllowAnonymous]
     // GET /events/{id}
     [HttpGet("{id}")]
 
@@ -269,7 +267,7 @@ namespace Event_Portal.Controllers
 
 
     }
-[AllowAnonymous]
+
     [HttpPost]
     [Route("/addGuestToEvent/{eventId}")]
     public async Task<Event> Join (String eventId, [FromBody] string [] userName)
@@ -294,9 +292,18 @@ namespace Event_Portal.Controllers
 
 
       return myEvent;
+
+
+
     }
 
+
+
   }
+
+
+
+
 
 
 }
