@@ -12,6 +12,17 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Identity.Web;
+using Microsoft.Identity.Web.UI;
+
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+
+using Microsoft.Identity.Web;
+using Microsoft.Identity.Web.UI;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace Event_Portal
 {
@@ -28,12 +39,25 @@ namespace Event_Portal
         public void ConfigureServices(IServiceCollection services)
         {
 
-      services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+      /*services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
      .AddCookie(o =>
      {
        o.LoginPath = "/Home/Login";
 
-     });
+     });*/
+
+       services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+          .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureAd"));
+
+      services.AddControllersWithViews(options =>
+      {
+          var policy = new AuthorizationPolicyBuilder()
+              .RequireAuthenticatedUser()
+              .Build();
+          options.Filters.Add(new AuthorizeFilter(policy));
+      });
+      services.AddRazorPages()
+          .AddMicrosoftIdentityUI();
 
       services.AddControllers();
             services.AddSwaggerGen(c =>
