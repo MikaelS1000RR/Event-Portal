@@ -11,6 +11,7 @@ using FireSharp.Config;
 using FireSharp.Response;
 using FireSharp.Interfaces;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Event_Portal.Controllers
 {
@@ -45,7 +46,9 @@ namespace Event_Portal.Controllers
 
 
     // GET /events
+      
     [HttpGet]
+
     public IEnumerable<Event> GetEvents()
     {
       FirebaseResponse res = client.Get(@"events");
@@ -82,6 +85,9 @@ namespace Event_Portal.Controllers
       return emptyList;
 
     }
+
+
+  
 
     // GET /events/{id}
     [HttpGet("{id}")]

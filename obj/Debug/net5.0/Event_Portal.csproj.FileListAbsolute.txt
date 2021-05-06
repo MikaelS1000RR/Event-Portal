@@ -105,3 +105,10 @@ C:\LIAProjekt\EventProject\Event-Portal\obj\Debug\net5.0\Event_Portal.dll
 C:\LIAProjekt\EventProject\Event-Portal\obj\Debug\net5.0\ref\Event_Portal.dll
 C:\LIAProjekt\EventProject\Event-Portal\obj\Debug\net5.0\Event_Portal.pdb
 C:\LIAProjekt\EventProject\Event-Portal\obj\Debug\net5.0\Event_Portal.genruntimeconfig.cache
+C:\LIAProjekt\EventProject\Event-Portal\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\LIAProjekt\EventProject\Event-Portal\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\LIAProjekt\EventProject\Event-Portal\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+C:\LIAProjekt\EventProject\Event-Portal\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+C:\LIAProjekt\EventProject\Event-Portal\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\LIAProjekt\EventProject\Event-Portal\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+C:\LIAProjekt\EventProject\Event-Portal\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll

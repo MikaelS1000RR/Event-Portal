@@ -12,6 +12,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Event_Portal
 {
@@ -28,19 +31,50 @@ namespace Event_Portal
         public void ConfigureServices(IServiceCollection services)
         {
 
-      services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-     .AddCookie(o =>
-     {
-       o.LoginPath = "/Home/Login";
+      /* services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+      .AddCookie(o =>
+      {
+        o.LoginPath = "/Home/Login";
 
-     });
+      });*/
 
-      services.AddControllers();
+   
+
+      services.AddCors(ops =>
+      {
+        ops.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials().Build());
+
+      });
+
+           services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Event_Portal", Version = "v1" });
             });
-        }
+
+
+            services.AddAuthentication(options =>
+{
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(jwtOptions =>
+    {
+      jwtOptions.TokenValidationParameters = new TokenValidationParameters
+      {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+
+        ValidIssuer = Configuration["Jwt:Issuer"],
+        ValidAudience = Configuration["Jwt:Audience"],
+        IssuerSigningKey=new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+
+      };
+    });
+
+      services.AddMvc();
+    }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -15,6 +15,12 @@ using Event_Portal.Auth;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.IdentityModel.Tokens;
+
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Configuration;
 
 namespace Event_Portal.Controllers
 {
@@ -31,14 +37,15 @@ namespace Event_Portal.Controllers
       BasePath = "https://geshdo-events-dev-default-rtdb.europe-west1.firebasedatabase.app/"
     };
 
+    private IConfiguration _config;
     IFirebaseClient client;
 
 
 
-    public AuthController()
+    public AuthController(IConfiguration myConfig)
     {
 
-
+      _config = myConfig;
       client = new FireSharp.FirebaseClient(config);
     }
 
@@ -91,11 +98,51 @@ namespace Event_Portal.Controllers
     }
 
 
+   /* public IActionResult getToken()
+    {
+      var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("geshdosecretkey@3"));
+      var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+
+      var tokenOptions = new JwtSecurityToken(
+        issuer: "https://login.microsoftonline.com/cd20e4c9-f82c-4d3e-9224-90f2bc4be1a0/v2.0",
+        audience: "1a602afd-b047-4730-892f-715f551f9c97",
+        claims: new List<Claim>()
+      );
+
+      var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+      return Ok(new { Token = tokenString });
+    }
+*/
+
     [HttpPost]
     [Route("/login")]
-    public User GetLogin(Login login)
+    public IActionResult GetLogin(Login login)
     {
 
+     string GenerateToken(Login login){
+     var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+      var mySigningCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+
+      var claims = new[]{
+        new Claim(JwtRegisteredClaimNames.Email, login.Email),
+        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+
+      };
+
+      
+      var token = new JwtSecurityToken(
+        issuer: _config["Jwt:Issuer"],
+        audience: _config["Jwt:Audience"],
+        claims,
+        expires:DateTime.Now.AddMinutes(120),
+        signingCredentials: mySigningCredentials
+      );
+
+      var encodeToken = new JwtSecurityTokenHandler().WriteToken(token);
+      return encodeToken;
+    }
+
+      IActionResult response = Unauthorized();
 
       if (!User.Identity.IsAuthenticated)
       {
@@ -144,22 +191,22 @@ namespace Event_Portal.Controllers
 
         
           Console.WriteLine("Welcome " + currentUser.Email);
-          var claims = new List<Claim>
-        {
-          new Claim(ClaimTypes.Email, currentUser.Email),
-          new Claim(ClaimTypes.Name, Id.ToString())
-      };
+          var tokenStr = GenerateToken(currentUser);
+          response = Ok(new { token = tokenStr });
 
-          var claimsIdentity = new ClaimsIdentity(claims, "Login");
 
-          HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+
+          // HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
         }
         else
         {
           Console.WriteLine("Bad credentials");
+          
         }
-        return isLoggedIn;
+
+        return response;
+
       }
 
 
@@ -171,6 +218,18 @@ namespace Event_Portal.Controllers
 
       }
     }
+
+
+
+
+    [Authorize]
+     [HttpGet]
+      [Route("/getauth")]
+public string getValid(){
+      return "you are authorized";
+    }
+
+
 
     [HttpPost]
     [Route("/logout")]
