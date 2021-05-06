@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Jimt6b03JZ6uraEdbiWWAwmmNX+JOB55F4RIsbjE6rEHHsJUiBWvM9wtFZk5VnGrGiCeB/teFT7OKK3Xn9mjpA==",
+  "dgSpecHash": "XD90zo7+YEO1ArjZE0dp19EHguhxvGJkmcLmzvwjFTo868yT7ZeQvPmCbMLewQY7o+mIE9x6air4RDwMFq7OcA==",
   "success": true,
   "projectFilePath": "/Users/Mikael/Documents/GitHub/Event-Portal/Event_Portal.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,9 @@
     "/Users/Mikael/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/3.0.0/microsoft.aspnetcore.authentication.jwtbearer.3.0.0.nupkg.sha512",
     "/Users/Mikael/.nuget/packages/microsoft.csharp/4.3.0/microsoft.csharp.4.3.0.nupkg.sha512",
     "/Users/Mikael/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "/Users/Mikael/.nuget/packages/microsoft.extensions.configuration/6.0.0-preview.3.21201.4/microsoft.extensions.configuration.6.0.0-preview.3.21201.4.nupkg.sha512",
+    "/Users/Mikael/.nuget/packages/microsoft.extensions.configuration.abstractions/6.0.0-preview.3.21201.4/microsoft.extensions.configuration.abstractions.6.0.0-preview.3.21201.4.nupkg.sha512",
+    "/Users/Mikael/.nuget/packages/microsoft.extensions.primitives/6.0.0-preview.3.21201.4/microsoft.extensions.primitives.6.0.0-preview.3.21201.4.nupkg.sha512",
     "/Users/Mikael/.nuget/packages/microsoft.identitymodel.jsonwebtokens/5.5.0/microsoft.identitymodel.jsonwebtokens.5.5.0.nupkg.sha512",
     "/Users/Mikael/.nuget/packages/microsoft.identitymodel.logging/5.5.0/microsoft.identitymodel.logging.5.5.0.nupkg.sha512",
     "/Users/Mikael/.nuget/packages/microsoft.identitymodel.protocols/5.5.0/microsoft.identitymodel.protocols.5.5.0.nupkg.sha512",
@@ -50,6 +53,7 @@
     "/Users/Mikael/.nuget/packages/system.reflection.typeextensions/4.3.0/system.reflection.typeextensions.4.3.0.nupkg.sha512",
     "/Users/Mikael/.nuget/packages/system.resources.resourcemanager/4.3.0/system.resources.resourcemanager.4.3.0.nupkg.sha512",
     "/Users/Mikael/.nuget/packages/system.runtime/4.3.0/system.runtime.4.3.0.nupkg.sha512",
+    "/Users/Mikael/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0-preview.3.21201.4/system.runtime.compilerservices.unsafe.6.0.0-preview.3.21201.4.nupkg.sha512",
     "/Users/Mikael/.nuget/packages/system.runtime.extensions/4.3.0/system.runtime.extensions.4.3.0.nupkg.sha512",
     "/Users/Mikael/.nuget/packages/system.runtime.handles/4.3.0/system.runtime.handles.4.3.0.nupkg.sha512",
     "/Users/Mikael/.nuget/packages/system.runtime.interopservices/4.3.0/system.runtime.interopservices.4.3.0.nupkg.sha512",
