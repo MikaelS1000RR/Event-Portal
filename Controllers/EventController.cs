@@ -107,6 +107,7 @@ namespace Event_Portal.Controllers
     }
 
     // POST /events
+    [Authorize]
     [HttpPost]
     public async Task<Event> CreateEvent(CreateEventDto eventDto)
 

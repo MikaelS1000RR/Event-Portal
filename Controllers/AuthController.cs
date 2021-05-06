@@ -21,6 +21,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 
 namespace Event_Portal.Controllers
 {
@@ -138,14 +139,14 @@ namespace Event_Portal.Controllers
         signingCredentials: mySigningCredentials
       );
 
+   
+
       var encodeToken = new JwtSecurityTokenHandler().WriteToken(token);
       return encodeToken;
     }
 
       IActionResult response = Unauthorized();
 
-      if (!User.Identity.IsAuthenticated)
-      {
         Guid Id=new Guid();
 
 
@@ -191,12 +192,14 @@ namespace Event_Portal.Controllers
 
         
           Console.WriteLine("Welcome " + currentUser.Email);
+         
+
           var tokenStr = GenerateToken(currentUser);
-          response = Ok(new { token = tokenStr });
+   
 
 
+        response = Ok(new { token = tokenStr });
 
-          // HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
         }
         else
@@ -208,35 +211,22 @@ namespace Event_Portal.Controllers
         return response;
 
       }
+    
 
 
-
-      else
-      {
-        Console.WriteLine("You are already logged in");
-        return null;
-
-      }
-    }
-
-
-
-
-    [Authorize]
-     [HttpGet]
-      [Route("/getauth")]
-public string getValid(){
-      return "you are authorized";
-    }
 
 
 
     [HttpPost]
     [Route("/logout")]
 
-    public async Task<string> Logout()
+    public string Logout()
     {
-      await HttpContext.SignOutAsync();
+
+      CookieOptions options = new CookieOptions();
+      options.Expires = DateTime.Now.AddDays(-2);
+        Response.Cookies.Delete("jwt"); 
+     
       return "You've been logged out ";
     }
 

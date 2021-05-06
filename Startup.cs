@@ -31,7 +31,7 @@ namespace Event_Portal
         public void ConfigureServices(IServiceCollection services)
         {
 
-      /* services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+     /* services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
       .AddCookie(o =>
       {
         o.LoginPath = "/Home/Login";
