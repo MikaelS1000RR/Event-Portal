@@ -26,8 +26,11 @@ export default {
     Footer
   },
 
- created(){
-  //this.$store.dispatch('fetchEvents')
+ 
+
+ async created(){
+  await this.$store.dispatch('fetchEvents')
+   await  this.$store.dispatch("fetchWhoAmI");
  },
   data: () => ({
     //

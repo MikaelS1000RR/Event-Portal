@@ -10,60 +10,90 @@ export default new Vuex.Store({
     users: [],
     specEvent: "",
     specUser: "",
-    eventId: "",
-    userId: "",
-    createdEvent: {}
-    
+    createdEvent: {},
+    //joinedUsers: {},
+    currLoggedInUser: {},
+    deleteSuccess: false,
+    publicAccess: false,
+    privateAccess: false,
+    internalAccess: false,
+    updatedEvent: {},
+    accessTypes: [],
+    allEvents: [],
+    loading: false,
   },
   mutations: {
     setEvents(state, events) {
       state.events = events;
     },
-    setUsers(state, users) {
-      state.users = users;
-    },
 
     setSpecEvent(state, event) {
+      console.log("specific event is set");
       state.specEvent = event;
     },
     setSpecUser(state, user) {
       state.specUser = user;
     },
-    setEventId(state, id) {
-      state.eventId = id;
-    },
-    setUserId(state, id) {
-      state.userId = id;
+
+    setCurrLoggedInUser(state, user) {
+      state.currLoggedInUser = user;
     },
 
     setCreatedEvent(state, event) {
       state.createdEvent = event;
-      console.log("Event is set", event);
-    }
-  },
+      console.log("in process of setting commit", state.createdEvent);
+    },
 
-  actions: {
-    fetchEvents({ commit }) {
-      axios
-        .get("/events")
-        .then((res) => {
-          console.log(res.data);
-          commit("setEvents", res.data);
-        })
+    setJoinedUser(state, user) {
+      state.joinedUsers = user;
+      console.log("User is joining", state.joinedUsers);
+    },
 
-        .catch((err) => {
-          console.log(err.response);
-        });
+    setDeleteSuccess(state) {
+      state.deleteSuccess = true;
     },
 
   
 
-    fetchUsers({ commit }) {
-      axios
-        .get("/users")
+    setPublicAccess(state) {
+      console.log("setting public");
+      state.publicAccess = true;
+      state.privateAccess = false;
+      state.internalAccess = false;
+    },
+    setPrivateAccess(state) {
+      console.log("setting private");
+      state.privateAccess = true;
+      state.publicAccess = false;
+      state.internalAccess = false;
+    },
+    setInternalAccess(state) {
+      console.log("setting internal");
+      state.internalAccess = true;
+      state.privateAccess = false;
+      state.publicAccess = false;
+    },
+
+    setUpdatedEvent(state, event) {
+      state.updatedEvent = event;
+      console.log("updated event in store is", state.updatedEvent);
+    },
+    setAccessTypes(state, accessTypes) {
+      state.accessTypes = accessTypes;
+    },
+
+    setAllEvents(state, allEvents) {
+      state.allEvents = allEvents;
+    },
+  },
+
+  actions: {
+    async fetchEvents({ commit }) {
+      await axios
+        .get("/events")
         .then((res) => {
           console.log(res.data);
-          commit("setUsers", res.data);
+          commit("setAllEvents", res.data);
         })
 
         .catch((err) => {
@@ -71,9 +101,10 @@ export default new Vuex.Store({
         });
     },
 
-    fetchSpecUser(store, id) {
-      console.log('id in fetch user is', id);
-      axios
+    async fetchSpecUser(store, id) {
+      store.state.loading = true;
+      console.log("id in fetch user is", id);
+      await axios
         .get("/users/" + id)
         .then((res) => {
           console.log(res.data);
@@ -81,43 +112,117 @@ export default new Vuex.Store({
         })
         .catch((err) => {
           console.log(err.response);
-        });
+        })
+        .finally(() => (store.state.loading = false));
     },
 
-    fetchSpecEvent(store, id) {
-      axios
+    async fetchSpecEvent(store, id) {
+      store.state.loading = true;
+      console.log("loading in store is", store.state.loading);
+      await axios
         .get("/events/" + id)
         .then((res) => {
           console.log(res.data);
           store.commit("setSpecEvent", res.data);
-    
-          console.log("date and time in event is", res.data.endDateTime);
-          store.dispatch("fetchSpecUser", res.data.hostId)
+
+          if (res.data.access === "private") {
+            store.commit("setPrivateAccess");
+          } else if (res.data.access === "public") {
+            store.commit("setPublicAccess");
+          } else if (res.data.access === "internal") {
+            store.commit("setInternalAccess");
+          }
+          store.dispatch("fetchSpecUser", res.data.hostId);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        })
+        .finally(() => (store.state.loading = false));
+    },
+
+    async createNewEvent(store) {
+      await axios
+        .post("/events", store.state.createdEvent)
+        .then((response) => {
+          console.log(response);
         })
         .catch((err) => {
           console.log(err.response);
         });
     },
 
-    createNewEvent(store) {
-      axios.post('/events',
-        store.state.createdEvent, 
-      ).then(response => {
-        this.isSuccess = true;
-        console.log(response);
-      });
-    }
-
-  /*  createNewEvent() {
-      const event = { name: "New Event test" };
-      axios.post("https://geshdo-events-dev-default-rtdb.europe-west1.firebasedatabase.app/events", event)
-        .then(response => this.eventId = response.data.id)
-        .catch(error => {
-          this.errorMessage = error.message;
-          console.error("There was en error!", error);
+    async joinNewEvent(store) {
+      await axios
+        .post("/users", store.state.joinedUsers)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log(err.response);
         });
-      }*/
-    
+    },
+
+    async fetchWhoAmI(store) {
+      await axios
+        .post("/whoami")
+        .then((res) => {
+          if (res.data.email !== null) {
+            console.log(res.data);
+            store.commit("setCurrLoggedInUser", res.data);
+          } else {
+            console.log("user is not logged in");
+          }
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    },
+
+    async deleteEvent({ commit }, id) {
+      await axios
+        .delete("/events/" + id)
+        .then((res) => {
+          console.log(res.data);
+          commit("setDeleteSuccess");
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    },
+
+    async updateEvent(store) {
+      await axios
+        .put("/events/" + store.state.specEvent.id, store.state.updatedEvent)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    },
+
+    async fetchFilteredEvents(store, accessTypes) {
+      await axios
+        .post("/filter-events", accessTypes)
+        .then((res) => {
+          console.log(res.data);
+          store.commit("setEvents", res.data);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    },
+
+    async guestJoinEvent(store, guestName) {
+      await axios
+        .post("/addGuestToEvent/"+store.state.specEvent.id, [guestName])
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    },
   },
 
   modules: {},

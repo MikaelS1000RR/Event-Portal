@@ -9,6 +9,7 @@
     radial-gradient(at top right, rgb(81, 3, 145), transparent),
     radial-gradient(at bottom left, #4110d4, transparent);
   --buttonPurple: rgba(107, 21, 206, 0.548);
+  --buttonPurpleSecondary:  rgba(137, 97, 182, 0.808);
 }
 
 body {

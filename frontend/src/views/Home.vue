@@ -2,6 +2,7 @@
   <div class="home">
     <div class="event-list-wrapper">
      <EventList/>
+     
     </div>
   </div>
 </template>
@@ -16,14 +17,11 @@ export default {
   },
 
 
-  methods: {
-    getEvents() {
-      return this.$store.dispatch("fetchEvents");
-    },
+ 
 
-    getSpecEvent() {
-      return this.$store.dispatch("fetchSpecEvent");
-    },
+  methods: {
+   
+
   },
 };
 </script>

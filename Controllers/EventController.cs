@@ -50,9 +50,36 @@ namespace Event_Portal.Controllers
     {
       FirebaseResponse res = client.Get(@"events");
       Dictionary<string, Event> data = JsonConvert.DeserializeObject<Dictionary<string, Event>>(res.Body.ToString());
-      var list = data.Select(x => x.Value);
+      var list = data.Select(x => x.Value).Where(x => x.Access != "internal");
 
       return list;
+
+    }
+   
+    [HttpPost]
+    [Route("/filter-events")]
+
+    public IEnumerable<Event> GetFilteredEvents([FromBody] string[] accessTypes)
+    {
+      FirebaseResponse res = client.Get(@"events");
+      Dictionary<string, Event> data = JsonConvert.DeserializeObject<Dictionary<string, Event>>(res.Body.ToString());
+      var emptyList = new List<Event>();
+
+    
+       if(accessTypes.Contains("public") && accessTypes.Contains("private") ){
+         var publicEvents = data.Select(x => x.Value).Where(x => x.Access !="internal");
+        return publicEvents;
+      }
+       else if(accessTypes.Contains("private")){
+
+        var privateEvents = data.Select(x => x.Value).Where(x => x.Access =="private");
+        return privateEvents;
+      }
+      else if(accessTypes.Contains("public")){
+         var publicEvents = data.Select(x => x.Value).Where(x => x.Access =="public");
+        return publicEvents;
+      }
+      return emptyList;
 
     }
 
@@ -112,34 +139,7 @@ namespace Event_Portal.Controllers
 
       if(hostUser != null)
       {
-        /* var response = await client.PushTaskAsync("events", myEvent);
-
-         var eventsList = GetEvents();
-         var lastPushedEvent = eventsList.ElementAt(eventsList.Count() - 1);
-         hostUser.CreatedEvents.Add(lastPushedEvent);
-
-         var rs = await client.SetTaskAsync("users/" + myEvent.HostId, hostUser);
-
-
-
-           // Push the last created event to CreatedEvents 
-
-         FirebaseResponse resEvent = client.Get(@"events");
-         User createdEvent = JsonConvert.DeserializeObject<User>(res.Body.ToString());
-
-         Event result = response.ResultAs<Event>();  
-
-
-
-
-         Console.WriteLine("Pushed new event");
-
-      //Adding event to host user's created events list
-        hostUser.CreatedEvents.Add(result);
-
-         return lastPushedEvent;*/
-
-
+    
          //Saving event
         var response = await client.SetTaskAsync("events/" + myEvent.Id, myEvent);
         Event result = response.ResultAs<Event>();
@@ -237,9 +237,12 @@ namespace Event_Portal.Controllers
 
     // Create new Method here
 
-    [HttpPost("/addUserToEvent/{userId}/{eventId}")]
+    [HttpPost]
+    [Route("/addUserToEvent/{userId}/{eventId}")]
     public async Task<Event> AddUserToEvent(String userId, String eventId)
     {
+
+     
 
       var existingUser = await client.GetTaskAsync("users/" + userId);
       var existingEvent = await client.GetTaskAsync("events/" + eventId);
@@ -250,6 +253,35 @@ namespace Event_Portal.Controllers
 
 
       myEvent.JoinedUsers.Add(user);
+      var rs = await client.SetTaskAsync("events/" + eventId, myEvent);
+
+
+
+      return myEvent;
+
+
+
+    }
+
+    [HttpPost]
+    [Route("/addGuestToEvent/{eventId}")]
+    public async Task<Event> Join (String eventId, [FromBody] string [] userName)
+    {
+      
+      Guest guest = new Guest
+      {
+        Id = Guid.NewGuid(),
+        GuestName  = userName[0]
+
+
+      };
+
+      var existingEvent = await client.GetTaskAsync("events/" + eventId);
+
+      Event myEvent = existingEvent.ResultAs<Event>();
+
+
+      myEvent.JoinedGuests.Add(guest);
       var rs = await client.SetTaskAsync("events/" + eventId, myEvent);
 
 
