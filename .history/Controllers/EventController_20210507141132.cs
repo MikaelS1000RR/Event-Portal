@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Event_Portal.Controllers
 {
 
-  [Authorize]
+[Authorize]
   [ApiController]
   [Route("/events")]
 

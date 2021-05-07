@@ -59,9 +59,6 @@ namespace Event_Portal
 })
     .AddJwtBearer(jwtOptions =>
     {
-
-      jwtOptions.Authority = @"https://login.microsoftonline.com/geshdo.com";
-
       jwtOptions.TokenValidationParameters = new TokenValidationParameters
       {
         ValidateIssuer = true,
