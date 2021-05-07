@@ -21,6 +21,7 @@ export default new Vuex.Store({
     accessTypes: [],
     allEvents: [],
     loading: false,
+    
   },
   mutations: {
     setEvents(state, events) {
@@ -52,8 +53,6 @@ export default new Vuex.Store({
     setDeleteSuccess(state) {
       state.deleteSuccess = true;
     },
-
-  
 
     setPublicAccess(state) {
       console.log("setting public");
@@ -215,7 +214,19 @@ export default new Vuex.Store({
 
     async guestJoinEvent(store, guestName) {
       await axios
-        .post("/addGuestToEvent/"+store.state.specEvent.id, [guestName])
+        .post("/addGuestToEvent/" + store.state.specEvent.id, [guestName])
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    },
+
+    async login(store, loginCredentials) {
+      console.log("login creds in actions are", loginCredentials);
+      await axios
+        .post("/login", loginCredentials)
         .then((response) => {
           console.log(response);
         })

@@ -9,7 +9,7 @@
         <h1>Login</h1>
          </v-card-title>
          <v-card-text>
-         <v-form @submit.prevent="login">
+         <v-form>
            <v-text-field 
            
            label="Email" 
@@ -59,11 +59,13 @@ export default {
   },
   methods: {
     async login() {
-      let login={
+      let loginCredentials={
         email:this.email,
         password:this.password
       }
-    console.log(login);
+    //console.log(loginCredentials);
+    await this.$store.dispatch("login", loginCredentials)
+
     }
   }
   
