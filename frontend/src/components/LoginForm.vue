@@ -9,10 +9,10 @@
         <h1>Login</h1>
          </v-card-title>
          <v-card-text>
-         <v-form @submit.prevent="pressed">
+         <v-form @submit.prevent="login">
            <v-text-field 
            
-           label="Username" 
+           label="Email" 
            prepend-icon="mdi-account-circle"
 
             v-model="email"
@@ -31,7 +31,7 @@
          <v-card-actions>
          <v-btn :color="type==='guest' ? 'secondary' : '#a64dff'">Register</v-btn>
          <v-spacer></v-spacer>
-         <v-btn type="submit" :color="type==='guest' ? 'secondary' : '#9933FF'">Login</v-btn>
+         <v-btn type="submit" :color="type==='guest' ? 'secondary' : '#9933FF'" @click="login">Login</v-btn>
          <div class="error" v-if="error">{{error.message}}</div>
         
          </v-card-actions>
@@ -61,16 +61,12 @@ export default {
     }
   },
   methods: {
-    async pressed() {
-      try {
-
-     const val = await firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-      console.log(val);
-      this.$router.replace({name: "secret"})
-
-      } catch(err) {
-        console.log(err)
-      } 
+    async login() {
+      let login={
+        email:this.email,
+        password:this.password
+      }
+    console.log(login);
     }
   }
   

@@ -90,7 +90,7 @@ export default {
   },
 
   login(){
-    console.log('logging in');
+    this.$router.push("/login")
   },
 
   register(){
