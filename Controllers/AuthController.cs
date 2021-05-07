@@ -181,7 +181,7 @@ namespace Event_Portal.Controllers
    
 
 
-        response = Ok(new { token = tokenStr });
+        response = Ok(new { token = tokenStr, Email=currentUser.Email, Id=Id  });
 
 
         }
