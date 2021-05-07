@@ -217,8 +217,8 @@ namespace Event_Portal.Controllers
 
     // POST User into Event
     [Authorize]
-    [HttpPost]
-    [Route("/addEventToUser/{eventId}/{userId}")]
+    [HttpPost
+    [Route(("/addEventToUser/{eventId}/{userId}")]
 
     public async Task<User> AddEventToUser(String eventId, String userId)
     {
@@ -237,7 +237,13 @@ namespace Event_Portal.Controllers
             user.JoinedEvents.Add(myEvent);
             var rs = await client.SetTaskAsync("users/" + userId, user);
 
+
             return user;
+
+
+     
+
+
 
     }
 
@@ -262,7 +268,9 @@ namespace Event_Portal.Controllers
       var rs = await client.SetTaskAsync("events/" + eventId, myEvent);
 
 
+
       return myEvent;
+
 
 
     }

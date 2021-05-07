@@ -262,7 +262,9 @@ namespace Event_Portal.Controllers
       var rs = await client.SetTaskAsync("events/" + eventId, myEvent);
 
 
+
       return myEvent;
+
 
 
     }

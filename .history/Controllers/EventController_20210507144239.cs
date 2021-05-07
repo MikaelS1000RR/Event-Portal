@@ -237,6 +237,7 @@ namespace Event_Portal.Controllers
             user.JoinedEvents.Add(myEvent);
             var rs = await client.SetTaskAsync("users/" + userId, user);
 
+
             return user;
 
     }
@@ -262,7 +263,9 @@ namespace Event_Portal.Controllers
       var rs = await client.SetTaskAsync("events/" + eventId, myEvent);
 
 
+
       return myEvent;
+
 
 
     }

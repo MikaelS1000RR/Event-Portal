@@ -11,7 +11,6 @@ using FireSharp.Config;
 using FireSharp.Response;
 using FireSharp.Interfaces;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Event_Portal.Controllers
 {
@@ -58,7 +57,6 @@ namespace Event_Portal.Controllers
     }    
 
     // GET /users/{id}
-    
     [HttpGet("{id}")]
     public async Task<SecureUserDto> GetUser(String id) 
     {
@@ -73,9 +71,8 @@ namespace Event_Portal.Controllers
       return result;
     }
 
-
+      
     // PUT /users/{id}
-    [Authorize]
     [HttpPut("{id}")]
     public async Task<UpdateUserDto> UpdateUser(String id, UpdateUserDto userDto)
     {
@@ -101,7 +98,6 @@ namespace Event_Portal.Controllers
     }
 
     // DELETE /users/{id}
-    [Authorize]
     [HttpDelete("{id}")]
     public  async Task<String> DeleteUser(String id) {
 

@@ -200,7 +200,7 @@ namespace Event_Portal.Controllers
 
 
 
-    [Authorize]
+
     [HttpPost]
     [Route("/logout")]
 
@@ -214,7 +214,7 @@ namespace Event_Portal.Controllers
       return "You've been logged out ";
     }
 
-    
+
     [HttpPost]
     [Route("/whoami")]
 

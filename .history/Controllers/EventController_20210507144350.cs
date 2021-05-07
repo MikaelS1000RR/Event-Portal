@@ -265,6 +265,7 @@ namespace Event_Portal.Controllers
       return myEvent;
 
 
+
     }
 
     [HttpPost]

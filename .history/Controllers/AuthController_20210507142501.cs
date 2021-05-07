@@ -98,6 +98,23 @@ namespace Event_Portal.Controllers
 
     }
 
+
+   /* public IActionResult getToken()
+    {
+      var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("geshdosecretkey@3"));
+      var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
+
+      var tokenOptions = new JwtSecurityToken(
+        issuer: "https://login.microsoftonline.com/cd20e4c9-f82c-4d3e-9224-90f2bc4be1a0/v2.0",
+        audience: "1a602afd-b047-4730-892f-715f551f9c97",
+        claims: new List<Claim>()
+      );
+
+      var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+      return Ok(new { Token = tokenString });
+    }
+*/
+
     [HttpPost]
     [Route("/login")]
     public IActionResult GetLogin(Login login)
@@ -194,13 +211,12 @@ namespace Event_Portal.Controllers
         return response;
 
       }
+    
 
 
 
 
 
-
-    [Authorize]
     [HttpPost]
     [Route("/logout")]
 
@@ -214,7 +230,7 @@ namespace Event_Portal.Controllers
       return "You've been logged out ";
     }
 
-    
+
     [HttpPost]
     [Route("/whoami")]
 

@@ -101,7 +101,6 @@ namespace Event_Portal.Controllers
     }
 
     // DELETE /users/{id}
-    [Authorize]
     [HttpDelete("{id}")]
     public  async Task<String> DeleteUser(String id) {
 

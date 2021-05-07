@@ -73,9 +73,8 @@ namespace Event_Portal.Controllers
       return result;
     }
 
-
+      
     // PUT /users/{id}
-    [Authorize]
     [HttpPut("{id}")]
     public async Task<UpdateUserDto> UpdateUser(String id, UpdateUserDto userDto)
     {
@@ -101,7 +100,6 @@ namespace Event_Portal.Controllers
     }
 
     // DELETE /users/{id}
-    [Authorize]
     [HttpDelete("{id}")]
     public  async Task<String> DeleteUser(String id) {
 
