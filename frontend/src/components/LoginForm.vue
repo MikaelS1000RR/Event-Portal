@@ -63,8 +63,10 @@ export default {
         email:this.email,
         password:this.password
       }
-    //console.log(loginCredentials);
     await this.$store.dispatch("login", loginCredentials)
+    
+    this.$router.push("/")
+
 
     }
   }

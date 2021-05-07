@@ -38,6 +38,7 @@ export default new Vuex.Store({
 
     setCurrLoggedInUser(state, user) {
       state.currLoggedInUser = user;
+       console.log("curr logged in user in state is",state.currLoggedInUser);
     },
 
     setCreatedEvent(state, event) {
@@ -223,12 +224,12 @@ export default new Vuex.Store({
         });
     },
 
-    async login(store, loginCredentials) {
-      console.log("login creds in actions are", loginCredentials);
+    async login({commit}, loginCredentials) {
       await axios
         .post("/login", loginCredentials)
         .then((response) => {
           console.log(response);
+            commit("setCurrLoggedInUser", response.data);
         })
         .catch((err) => {
           console.log(err.response);

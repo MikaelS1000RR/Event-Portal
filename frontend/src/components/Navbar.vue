@@ -56,10 +56,10 @@
       <img class="logoImg" src="../assets/Geshdo-logo.png" @click="homeRedirect">
        </div>
           <v-spacer></v-spacer>
-          <div v-if="isLoggedIn" class="hamburger">
+          <div v-show="loggedIn" class="hamburger">
      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
      </div>
-     <div class="login-navbar" v-if="!isLoggedIn">
+     <div class="login-navbar" v-show="!loggedIn">
             <button class="login btn" @click="login">Log in</button>
             <button class="register btn" @click="register">Register</button>
      </div>
@@ -74,7 +74,7 @@
 export default {
   data(){
     return{
-        isLoggedIn:false,
+       // isLoggedIn:false,
         drawer:null,
         items: [
           { title: 'Home', icon: 'mdi-view-dashboard' },
@@ -98,11 +98,21 @@ export default {
   }
  },
 
- created(){
+ /*created(){
+   console.log('logged in user in navbar is', this.$store.state.currLoggedInUser.id);
    if (this.$store.state.currLoggedInUser.id !== undefined){
      this.isLoggedIn=true;
    }
- }
+ },*/
+
+  computed:{
+    loggedIn:{
+      get(){
+         return this.$store.state.currLoggedInUser.id !== undefined ? true: false
+      }
+     
+    }
+  }
 }
 </script>
 
