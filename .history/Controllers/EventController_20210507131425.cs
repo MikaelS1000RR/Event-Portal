@@ -11,12 +11,10 @@ using FireSharp.Config;
 using FireSharp.Response;
 using FireSharp.Interfaces;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Event_Portal.Controllers
 {
 
-  [Authorize]
   [ApiController]
   [Route("/events")]
 
@@ -41,8 +39,6 @@ namespace Event_Portal.Controllers
 
 
       client = new FireSharp.FirebaseClient(config);
-
-      
     }
 
 

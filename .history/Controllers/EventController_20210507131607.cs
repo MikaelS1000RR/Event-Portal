@@ -41,8 +41,6 @@ namespace Event_Portal.Controllers
 
 
       client = new FireSharp.FirebaseClient(config);
-
-      
     }
 
 
