@@ -101,14 +101,14 @@ export default new Vuex.Store({
         });
     },
 
-    async fetchSpecUser(store, id) {
+    async fetchSpecUser({commit}, id) {
       store.state.loading = true;
       console.log("id in fetch user is", id);
       await axios
         .get("/users/" + id)
         .then((res) => {
           console.log(res.data);
-          store.commit("setSpecUser", res.data);
+          commit("setSpecUser", res.data);
         })
         .catch((err) => {
           console.log(err.response);
@@ -116,14 +116,14 @@ export default new Vuex.Store({
         .finally(() => (store.state.loading = false));
     },
 
-    async fetchSpecEvent(store, id) {
+    async fetchSpecEvent(store, id, {commit}) {
       store.state.loading = true;
       console.log("loading in store is", store.state.loading);
       await axios
         .get("/events/" + id)
         .then((res) => {
           console.log(res.data);
-          store.commit("setSpecEvent", res.data);
+          commit("setSpecEvent", res.data);
 
           if (res.data.access === "private") {
             store.commit("setPrivateAccess");
@@ -162,13 +162,13 @@ export default new Vuex.Store({
         });
     },
 
-    async fetchWhoAmI(store) {
+    async fetchWhoAmI({commit}) {
       await axios
         .post("/whoami")
         .then((res) => {
           if (res.data.email !== null) {
             console.log(res.data);
-            store.commit("setCurrLoggedInUser", res.data);
+            commit("setCurrLoggedInUser", res.data);
           } else {
             console.log("user is not logged in");
           }
@@ -201,12 +201,12 @@ export default new Vuex.Store({
         });
     },
 
-    async fetchFilteredEvents(store, accessTypes) {
+    async fetchFilteredEvents({commit }, accessTypes) {
       await axios
         .post("/filter-events", accessTypes)
         .then((res) => {
           console.log(res.data);
-          store.commit("setEvents", res.data);
+         commit("setEvents", res.data);
         })
         .catch((err) => {
           console.log(err.response);

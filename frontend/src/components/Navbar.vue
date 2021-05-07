@@ -97,14 +97,6 @@ export default {
     console.log('registering');
   }
  },
-
- /*created(){
-   console.log('logged in user in navbar is', this.$store.state.currLoggedInUser.id);
-   if (this.$store.state.currLoggedInUser.id !== undefined){
-     this.isLoggedIn=true;
-   }
- },*/
-
   computed:{
     loggedIn:{
       get(){
