@@ -235,6 +235,18 @@ export default new Vuex.Store({
           console.log(err.response);
         });
     },
+
+    async logout({ commit }) {
+      await axios
+        .post("/login")
+        .then((response) => {
+          console.log(response);
+          commit("setCurrLoggedInUser", undefined);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    }
   },
 
   modules: {},

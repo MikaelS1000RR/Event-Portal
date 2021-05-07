@@ -95,6 +95,10 @@ export default {
 
   register(){
     console.log('registering');
+  },
+
+  async logout(){
+    this.$store.dispacth("logout")
   }
  },
   computed:{
