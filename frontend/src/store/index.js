@@ -142,7 +142,11 @@ export default new Vuex.Store({
 
     async createNewEvent(store) {
       await axios
-        .post("/events", store.state.createdEvent)
+        .post("/events", store.state.createdEvent, {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token')
+          }
+        })
         .then((response) => {
           console.log(response);
         })
@@ -229,7 +233,8 @@ export default new Vuex.Store({
         .post("/login", loginCredentials)
         .then((response) => {
           console.log(response);
-            commit("setCurrLoggedInUser", response.data);
+          commit("setCurrLoggedInUser", response.data);
+          localStorage.setItem('token', response.data.token)
         })
         .catch((err) => {
           console.log(err.response);
