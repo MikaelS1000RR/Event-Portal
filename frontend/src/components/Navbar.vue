@@ -37,8 +37,22 @@
             <v-list-item-title>Joined events</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item  
+           <v-list-item  
          link
+            @click="$router.push('/create-event')"
+        >
+          <v-list-item-icon>
+            <v-icon>mdi-plus</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Add event</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item  
+         link 
+      
+
         >
           <v-list-item-icon>
             <v-icon>mdi-logout</v-icon>
@@ -92,6 +106,7 @@ export default {
   login(){
     this.$router.push("/login")
   },
+
 
   register(){
     console.log('registering');
