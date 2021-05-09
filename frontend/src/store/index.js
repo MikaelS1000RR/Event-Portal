@@ -101,14 +101,14 @@ export default new Vuex.Store({
         });
     },
 
-    async fetchSpecUser({commit}, id) {
+    async fetchSpecUser(store, id) {
       store.state.loading = true;
       console.log("id in fetch user is", id);
       await axios
         .get("/users/" + id)
         .then((res) => {
           console.log(res.data);
-          commit("setSpecUser", res.data);
+          store.commit("setSpecUser", res.data);
         })
         .catch((err) => {
           console.log(err.response);
@@ -116,14 +116,14 @@ export default new Vuex.Store({
         .finally(() => (store.state.loading = false));
     },
 
-    async fetchSpecEvent(store, id, {commit}) {
+    async fetchSpecEvent(store, id) {
       store.state.loading = true;
       console.log("loading in store is", store.state.loading);
       await axios
         .get("/events/" + id)
         .then((res) => {
           console.log(res.data);
-          commit("setSpecEvent", res.data);
+          store.commit("setSpecEvent", res.data);
 
           if (res.data.access === "private") {
             store.commit("setPrivateAccess");
