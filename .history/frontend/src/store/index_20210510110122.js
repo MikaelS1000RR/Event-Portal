@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
-import { getToken } from '@/config/auth.js';
 
 Vue.use(Vuex);
 
@@ -12,6 +11,7 @@ export default new Vuex.Store({
     specEvent: "",
     specUser: "",
     createdEvent: {},
+    //joinedUsers: {},
     currLoggedInUser: {},
     deleteSuccess: false,
     publicAccess: false,
@@ -144,8 +144,7 @@ export default new Vuex.Store({
       await axios
         .post("/events", store.state.createdEvent, {
           headers: {
-            Authorization: `Bearer ${await getToken()}`,
-           'Content-type': 'application/json; charset=UTF-8'
+            Authorization: 'Bearer ' + localStorage.getItem('token'),
           }
         })
         .then((response) => {
@@ -188,9 +187,8 @@ export default new Vuex.Store({
     async deleteEvent({ commit }, id) {
       await axios
         .delete("/events/" + id, {
-            headers: {
-            Authorization: `Bearer ${await getToken()}`,
-           'Content-type': 'application/json; charset=UTF-8'
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token')
           }
         })
          
@@ -206,9 +204,8 @@ export default new Vuex.Store({
     async updateEvent(store) {
       await axios
         .put("/events/" + store.state.specEvent.id, store.state.updatedEvent, {
-         headers: {
-            Authorization: `Bearer ${await getToken()}`,
-           'Content-type': 'application/json; charset=UTF-8'
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token')
           }
         })
         .then((res) => {

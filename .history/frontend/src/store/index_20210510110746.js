@@ -12,6 +12,7 @@ export default new Vuex.Store({
     specEvent: "",
     specUser: "",
     createdEvent: {},
+    //joinedUsers: {},
     currLoggedInUser: {},
     deleteSuccess: false,
     publicAccess: false,
@@ -206,9 +207,8 @@ export default new Vuex.Store({
     async updateEvent(store) {
       await axios
         .put("/events/" + store.state.specEvent.id, store.state.updatedEvent, {
-         headers: {
-            Authorization: `Bearer ${await getToken()}`,
-           'Content-type': 'application/json; charset=UTF-8'
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token')
           }
         })
         .then((res) => {

@@ -12,6 +12,7 @@ export default new Vuex.Store({
     specEvent: "",
     specUser: "",
     createdEvent: {},
+    //joinedUsers: {},
     currLoggedInUser: {},
     deleteSuccess: false,
     publicAccess: false,
