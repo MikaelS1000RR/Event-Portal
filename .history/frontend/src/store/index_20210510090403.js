@@ -155,8 +155,6 @@ export default new Vuex.Store({
         });
     },
 
-
-    // ??? Check later
     async joinNewEvent(store) {
       await axios
         .post("/users", store.state.joinedUsers)
@@ -186,12 +184,7 @@ export default new Vuex.Store({
 
     async deleteEvent({ commit }, id) {
       await axios
-        .delete("/events/" + id, {
-          headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('token')
-          }
-        })
-         
+        .delete("/events/" + id)
         .then((res) => {
           console.log(res.data);
           commit("setDeleteSuccess");
@@ -203,11 +196,7 @@ export default new Vuex.Store({
 
     async updateEvent(store) {
       await axios
-        .put("/events/" + store.state.specEvent.id, store.state.updatedEvent, {
-          headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('token')
-          }
-        })
+        .put("/events/" + store.state.specEvent.id, store.state.updatedEvent)
         .then((res) => {
           console.log(res.data);
         })
@@ -254,11 +243,7 @@ export default new Vuex.Store({
 
     async logout({ commit }) {
       await axios
-        .post("/login", {
-          headers: {
-            Authorization: 'Bearer ' + localStorage.getItem('token')
-          }
-        })
+        .post("/login")
         .then((response) => {
           console.log(response);
           commit("setCurrLoggedInUser", undefined);
