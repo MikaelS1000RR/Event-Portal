@@ -37,7 +37,7 @@ namespace Event_Portal
             });
 
 
-              services.AddAuthentication(options =>
+                    services.AddAuthentication(options =>
               {
               options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
               })
