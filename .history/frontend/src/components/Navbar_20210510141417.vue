@@ -115,8 +115,6 @@ export default {
   register(){
     auth.getAccount();
     console.log('registering',  auth.getAccount());
-    this.$store.dispatch("getAccountName", auth.getAccount().name);
-   
   },
 
   async logout(){

@@ -115,7 +115,7 @@ export default {
   register(){
     auth.getAccount();
     console.log('registering',  auth.getAccount());
-    this.$store.dispatch("getAccountName", auth.getAccount().name);
+    this.$store.dispacth("getAccountName", auth.getAccount().name);
    
   },
 

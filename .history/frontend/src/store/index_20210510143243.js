@@ -88,8 +88,7 @@ export default new Vuex.Store({
     },
 
     setAccountName(state, accountName) {
-      state.accountName = accountName;
-      console.log(state.accountName);
+      
     }
   },
 
@@ -273,8 +272,9 @@ export default new Vuex.Store({
         });
     },
 
-    async getAccountName({ commit }, accountName) {
-      commit("setAccountName", accountName);
+    async getAccountName({ commit }) {
+      await axios
+      .get("/users")
     }
 
   },

@@ -107,16 +107,14 @@ export default {
   },
 
   async login(){
-   await auth.loginRedirect().then(console.log(auth.getAccount));
-
+   await auth.loginRedirect();
+    
   },
 
 
   register(){
     auth.getAccount();
     console.log('registering',  auth.getAccount());
-    this.$store.dispatch("getAccountName", auth.getAccount().name);
-   
   },
 
   async logout(){

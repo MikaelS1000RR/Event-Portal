@@ -87,10 +87,7 @@ export default new Vuex.Store({
       state.allEvents = allEvents;
     },
 
-    setAccountName(state, accountName) {
-      state.accountName = accountName;
-      console.log(state.accountName);
-    }
+    setSpec
   },
 
   actions: {
@@ -273,8 +270,9 @@ export default new Vuex.Store({
         });
     },
 
-    async getAccountName({ commit }, accountName) {
-      commit("setAccountName", accountName);
+    async getAccountName({ commit }) {
+      await axios
+      .get("/users")
     }
 
   },
