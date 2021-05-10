@@ -154,6 +154,13 @@ namespace Event_Portal.Controllers
           Console.WriteLine("Welcome " + currentUser.Email);
          
 
+
+   
+
+
+        response = Ok(new { token = tokenStr, Email=currentUser.Email, Id=Id  });
+
+
         }
         else
         {

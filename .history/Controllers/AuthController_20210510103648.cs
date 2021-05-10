@@ -154,6 +154,10 @@ namespace Event_Portal.Controllers
           Console.WriteLine("Welcome " + currentUser.Email);
          
 
+
+  
+
+
         }
         else
         {
