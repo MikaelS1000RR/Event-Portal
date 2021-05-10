@@ -85,9 +85,6 @@
 </template>
 
 <script>
-
-import { auth } from '/config/auth.js'
-
 export default {
   data(){
     return{
@@ -107,8 +104,7 @@ export default {
   },
 
   login(){
-    auth.loginRedirect();
-
+    this.$router.push("/login")
   },
 
 

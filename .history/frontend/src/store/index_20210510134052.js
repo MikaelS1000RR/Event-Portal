@@ -265,15 +265,11 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err.response);
         });
-    },
+    }
 
-     async getRegistration() {
-       await axios.get("http://localhost:5001/api/registration", {
-          headers: {
-           Authorization: `Bearer ${await getToken()}`
-           }
-    })
-  }
+    async getRegistration = async () => {
+    return api.get(`${this.url}/registration`);
+  };
   },
 
   modules: {},

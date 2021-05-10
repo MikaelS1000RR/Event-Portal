@@ -268,12 +268,8 @@ export default new Vuex.Store({
     },
 
      async getRegistration() {
-       await axios.get("http://localhost:5001/api/registration", {
-          headers: {
-           Authorization: `Bearer ${await getToken()}`
-           }
-    })
-  }
+    return api.get(`${this.url}/registration`);
+  };
   },
 
   modules: {},

@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import CreateEvent from '../views/CreateEvent.vue'
 import Details from '../views/Details.vue'
-
+import LoginPage from '../views/LoginPage'
 import UpdateEvent from '../views/UpdateEvent.vue'
 
 Vue.use(VueRouter)
@@ -18,6 +18,12 @@ const routes = [
     path: '/create-event',
     name: 'CreateEvent',
     component: CreateEvent
+  },
+
+  {
+    path: '/login',
+    name: 'LoginPage',
+    component: LoginPage
   },
 
   {

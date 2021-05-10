@@ -107,8 +107,8 @@ export default {
   },
 
   login(){
-    auth.loginRedirect();
-
+       auth.loginRedirect();
+    this.$router.push("/login")
   },
 
 

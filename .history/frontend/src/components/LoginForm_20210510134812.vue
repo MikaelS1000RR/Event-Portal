@@ -44,7 +44,7 @@
 </template>
 
 <script>
-
+import { auth } from '/config/auth.js'
 
 export default {
 
@@ -63,7 +63,8 @@ export default {
         email:this.email,
         password:this.password
       }
-    await this.$store.dispatch("login", loginCredentials)
+   // await this.$store.dispatch("login", loginCredentials)
+   await this.$store.dispatch("getRegistration")
     
     this.$router.push("/")
 
