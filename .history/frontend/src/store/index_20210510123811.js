@@ -202,11 +202,7 @@ export default new Vuex.Store({
 
     async updateEvent(store) {
       await axios
-        .put("/events/" + store.state.specEvent.id, store.state.updatedEvent, {
-          headers: {
-           Authorization: `Bearer ${await getToken()}`
-           }
-        })
+        .put("/events/" + store.state.specEvent.id, store.state.updatedEvent)
         .then((res) => {
           console.log(res.data);
         })
@@ -253,11 +249,7 @@ export default new Vuex.Store({
 
     async logout({ commit }) {
       await axios
-        .post("/login", {
-            headers: {
-           Authorization: `Bearer ${await getToken()}`
-           }
-        })
+        .post("/login")
         .then((response) => {
           console.log(response);
           commit("setCurrLoggedInUser", undefined);
