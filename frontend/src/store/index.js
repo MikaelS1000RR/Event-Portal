@@ -12,7 +12,6 @@ export default new Vuex.Store({
     specEvent: "",
     specUser: "",
     createdEvent: {},
-    currLoggedInUser: {},
     deleteSuccess: false,
     publicAccess: false,
     privateAccess: false,
@@ -94,6 +93,31 @@ export default new Vuex.Store({
   },
 
   actions: {
+
+    async joinEvent(store) {
+      console.log(typeof store.state.account.name);
+
+      await axios
+        .post(
+          "/addUserToEvent/" + store.state.specEvent.id, [store.state.account.name],
+          {
+            headers: {
+              Authorization: `Bearer ${await getToken()}`,
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    },
+
+
+
+
     async fetchEvents({ commit }) {
       await axios
         .get("/events")
@@ -162,18 +186,6 @@ export default new Vuex.Store({
     },
 
 
-    // ??? Check
-    async joinNewEvent(store) {
-      await axios
-        .post("/users", store.state.joinedUsers)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
-    },
-
     async fetchWhoAmI({commit}) {
       await axios
         .post("/whoami")
@@ -208,11 +220,16 @@ export default new Vuex.Store({
 
     async updateEvent(store) {
       await axios
-        .put("/events/" + store.state.specEvent.id, store.state.updatedEvent, {
-          headers: {
-           Authorization: `Bearer ${await getToken()}`
-           }
-        })
+        .put(
+          "/events/" + store.state.specEvent.id,
+          [store.state.updatedEvent],
+          {
+            headers: {
+              Authorization: `Bearer ${await getToken()}`,
+              "Content-Type": "application/json",
+            },
+          }
+        )
         .then((res) => {
           console.log(res.data);
         })

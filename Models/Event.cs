@@ -29,7 +29,7 @@ namespace Event_Portal.Models
 
     public String HostName { get; init; }
 
-    public List<User> JoinedUsers { get; init; } = new();
+    public List<string> JoinedUsers { get; init; } = new();
     public List<Guest> JoinedGuests { get; init; } = new();
 
   

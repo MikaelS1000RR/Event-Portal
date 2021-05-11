@@ -332,11 +332,14 @@ export default {
       this.$router.push("/update-event/" + this.currEvent.id);
     },
 
-    joinEvent() {
-      console.log(this.$store.state.currLoggedInUser.id);
-      if (this.$store.state.currLoggedInUser.id === undefined) {
-        this.guestLoginPopup = true;
+    async joinEvent() {
+      if(this.$store.state.account===undefined){
+        this.guestLoginPopup=true
       }
+      else{
+        await this.$store.dispatch("joinEvent")
+      }
+       
     },
 
     getTime(eventDate) {
