@@ -68,7 +68,7 @@
               v-on="on"
               src="../assets/DetailedImg/setting.png"
               alt=""
-              v-show="$store.state.account.homeAccountIdentifier === currEvent.hostId"
+              v-show="ifHost"
             />
           </template>
           <v-list>
@@ -225,7 +225,7 @@
         </div>
       </div>
       <div class="btnJoin">
-        <v-btn class="joinBut" elevation="11" x-large @click="joinEvent" v-show="$store.state.account.homeAccountIdentifier !== currEvent.hostId">
+        <v-btn class="joinBut" elevation="11" x-large @click="joinEvent" v-show="!ifHost" >
           Join
         </v-btn>
       </div>
@@ -366,6 +366,7 @@ export default {
   },
 
   computed: {
+
     currEvent() {
       return this.$store.state.specEvent;
     },
@@ -376,11 +377,12 @@ export default {
       return this.$route.params.id;
     },
     ifHost() {
-      let userIsHost =
-        this.hostUser.id === this.$store.state.currLoggedInUser.id
-          ? true
-          : false;
-      return userIsHost;
+    if(this.$store.state.account !== undefined && this.$store.state.account.homeAccountIdentifier === this.currEvent.hostId){
+      return true
+    }
+    else{
+      return false
+    }
     },
 
     getJoined() {
