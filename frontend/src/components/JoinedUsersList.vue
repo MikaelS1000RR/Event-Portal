@@ -55,10 +55,10 @@ export default {
       const length = joinedUsers.length + joinedGuests.length;
 
       const names = joinedUsers
-        .map((user) => user.firstName)
+        .map((user) => user.substr(0, user.indexOf(" ")))
         .concat(joinedGuests.map((guest) => guest.guestName));
 
-      const surnames = joinedUsers.map((user) => user.lastName);
+      const surnames = joinedUsers.map((user) => user.split(" ").pop());
 
       const colorsLength = this.colors.length;
       let i = -1;
