@@ -89,7 +89,7 @@
      </div>
      <div class="login-navbar" v-show="!loggedIn">
             <button class="login btn" @click="login">Log in</button>
-            <button class="register btn" @click="register">Register</button>
+           
      </div>
  
      </v-toolbar>
@@ -127,13 +127,6 @@ export default {
   },
 
 
-  register(){
-    auth.getAccount();
-    console.log('registering',  auth.getAccount());
-    this.$store.dispatch("getAccountName", auth.getAccount().name);
-   
-  },
-
   async logout(){
     this.$store.dispacth("logout")
   }
@@ -149,9 +142,15 @@ export default {
 
     getName:{
       get(){
-        const userName=auth.getAccount().name
+        if(this.loggedIn){
+            const userName=auth.getAccount().name
         this.$store.commit("setAccount", auth.getAccount());
         return userName.substr(0, userName.indexOf(' '))
+        }
+        else{
+          return ''
+        }
+      
       }
     }
   }

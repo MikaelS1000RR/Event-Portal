@@ -77,7 +77,7 @@ export default new Vuex.Store({
 
     setUpdatedEvent(state, event) {
       state.updatedEvent = event;
-      console.log("updated event in store is", state.updatedEvent);
+   
     },
     setAccessTypes(state, accessTypes) {
       state.accessTypes = accessTypes;
@@ -89,7 +89,7 @@ export default new Vuex.Store({
 
     setAccount(state, account) {
       state.account = account;
-      console.log('account in state is',state.account);
+     
     }
   },
 
