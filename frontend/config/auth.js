@@ -1,14 +1,12 @@
-
-
-import { UserAgentApplication } from 'msal'
+import { UserAgentApplication } from 'msal';
 
 const config = {
   auth: {
-    clientId: process.env.VUE_APP_CLIENT_ID, //Application client id
+    clientId: process.env.VUE_APP_CLIENT_ID,
     authority: `${process.env.VUE_APP_AUTHORITY_BASE}/${process.env.VUE_APP_TENANT_ID}`,
     redirectUri: window.location.origin,
-    postLogoutRedirectUri: window.location.origin,
-  },
+    postLogoutRedirectUri: window.location.origin
+  }
 };
 
 const tokenConfig = {

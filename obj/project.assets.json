@@ -684,19 +684,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\annat\\.nuget\\packages\\": {}
+    "C:\\Users\\Mikael\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\LIAProjekt\\EventProject\\Event-Portal\\Event_Portal.csproj",
+      "projectUniqueName": "C:\\Users\\Mikael\\Documents\\GitHub\\Event-Portal\\Event_Portal.csproj",
       "projectName": "Event_Portal",
-      "projectPath": "C:\\LIAProjekt\\EventProject\\Event-Portal\\Event_Portal.csproj",
-      "packagesPath": "C:\\Users\\annat\\.nuget\\packages\\",
-      "outputPath": "C:\\LIAProjekt\\EventProject\\Event-Portal\\obj\\",
+      "projectPath": "C:\\Users\\Mikael\\Documents\\GitHub\\Event-Portal\\Event_Portal.csproj",
+      "packagesPath": "C:\\Users\\Mikael\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Mikael\\Documents\\GitHub\\Event-Portal\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\annat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Mikael\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
