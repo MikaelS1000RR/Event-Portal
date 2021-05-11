@@ -15,6 +15,20 @@
       <v-divider></v-divider>
 
       <v-list dense>
+
+         <v-list-item  
+        
+        >
+          <v-list-item-icon>
+            <v-icon></v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title class="user-name">Welcome, {{getName}}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+
         <v-list-item  
          link
         >
@@ -127,9 +141,17 @@ export default {
   computed:{
     loggedIn:{
       get(){
-         return this.$store.state.currLoggedInUser.id !== undefined ? true: false
+        console.log(auth.getAccount());
+         return auth.getAccount() === null ? false:true
       }
      
+    },
+
+    getName:{
+      get(){
+        const userName=auth.getAccount().name
+        return userName.substr(0, userName.indexOf(' '))
+      }
     }
   }
 }
@@ -153,6 +175,9 @@ export default {
 }
 
 
+.user-name{
+  
+}
 
 .logoImg:hover{
   cursor: pointer;

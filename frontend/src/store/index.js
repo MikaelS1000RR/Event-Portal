@@ -21,7 +21,7 @@ export default new Vuex.Store({
     accessTypes: [],
     allEvents: [],
     loading: false,
-    accountName: ""
+    accountName: undefined
     
   },
   mutations: {
@@ -274,6 +274,7 @@ export default new Vuex.Store({
     },
 
     async getAccountName({ commit }, accountName) {
+      
       commit("setAccountName", accountName);
     }
 
