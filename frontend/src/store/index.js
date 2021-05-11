@@ -21,7 +21,7 @@ export default new Vuex.Store({
     accessTypes: [],
     allEvents: [],
     loading: false,
-    accountName: undefined
+    account: undefined
     
   },
   mutations: {
@@ -87,9 +87,9 @@ export default new Vuex.Store({
       state.allEvents = allEvents;
     },
 
-    setAccountName(state, accountName) {
-      state.accountName = accountName;
-      console.log(state.accountName);
+    setAccount(state, account) {
+      state.account = account;
+      console.log('account in state is',state.account);
     }
   },
 
@@ -273,9 +273,9 @@ export default new Vuex.Store({
         });
     },
 
-    async getAccountName({ commit }, accountName) {
+    async getAccountName({ commit }, account) {
       
-      commit("setAccountName", accountName);
+      commit("setAccount", account);
     }
 
   },

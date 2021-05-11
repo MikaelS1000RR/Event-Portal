@@ -64,7 +64,7 @@ export default {
   async  filterEvents(){
     console.log(this.value);
    
-    if(this.value.includes("private") && this.$store.state.currLoggedInUser.id === undefined){
+    if(this.value.includes("private") && this.$store.state.account === undefined){
       this.value=['public']
       this.dialog=true;
     }

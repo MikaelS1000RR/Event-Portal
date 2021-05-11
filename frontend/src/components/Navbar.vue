@@ -150,6 +150,7 @@ export default {
     getName:{
       get(){
         const userName=auth.getAccount().name
+        this.$store.commit("setAccount", auth.getAccount());
         return userName.substr(0, userName.indexOf(' '))
       }
     }
@@ -175,9 +176,7 @@ export default {
 }
 
 
-.user-name{
-  
-}
+
 
 .logoImg:hover{
   cursor: pointer;
