@@ -4,12 +4,11 @@ import { UserAgentApplication } from 'msal'
 
 const config = {
   auth: {
-     clientId: "1a602afd-b047-4730-892f-715f551f9c97",
-    authority: "https://login.microsoftonline.com/geshdo.onmicrosoft.com",
+    clientId: process.env.VUE_APP_CLIENT_ID, //Application client id
+    authority: `${process.env.VUE_APP_AUTHORITY_BASE}/${process.env.VUE_APP_TENANT_ID}`,
     redirectUri: window.location.origin,
-    postLogoutRedirectUri: window.location.origin
-  
-  }
+    postLogoutRedirectUri: window.location.origin,
+  },
 };
 
 const tokenConfig = {
