@@ -65,6 +65,7 @@
         </v-list-item>
         <v-list-item  
          link 
+         @click="logout"
       
 
         >
@@ -127,8 +128,8 @@ export default {
   },
 
 
-  async logout(){
-    this.$store.dispacth("logout")
+logout(){
+    auth.logout()
   }
  },
   computed:{

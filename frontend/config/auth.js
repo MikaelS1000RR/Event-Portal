@@ -21,6 +21,7 @@ auth.handleRedirectCallback(error => {
   }
 });
 
+
 export const getToken = async () => {
   const token = await auth
     .acquireTokenSilent(tokenConfig)
