@@ -138,7 +138,7 @@ export default new Vuex.Store({
           } else if (res.data.access === "internal") {
             store.commit("setInternalAccess");
           }
-          store.dispatch("fetchSpecUser", res.data.hostId);
+         // store.dispatch("fetchSpecUser", res.data.hostId);
         })
         .catch((err) => {
           console.log(err.response);

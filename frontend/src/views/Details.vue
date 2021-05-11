@@ -173,7 +173,7 @@
                 src="../assets/DetailedImg/user.png"
                 alt=""
               />
-              <p>{{ hostUser.firstName }} {{ hostUser.lastName }}</p>
+              <p>{{ hostUser}} </p>
             </li>
 
             <li>
@@ -369,7 +369,7 @@ export default {
       return this.$store.state.specEvent;
     },
     hostUser() {
-      return this.$store.state.specUser;
+      return this.$store.state.specEvent.hostName;
     },
     id() {
       return this.$route.params.id;

@@ -116,7 +116,8 @@ export default {
       privateAccess: false,
       internalAccess: false,
       access: "public",
-      hostId: "061eb70c-7055-4d07-a584-b3c20cd59d73",
+      hostId: this.$store.state.account.homeAccountIdentifier,
+      hostName: this.$store.state.account.name,
      dialog: false,
      
     };
@@ -134,9 +135,6 @@ export default {
       const startDateTime = `${this.startTimeAndDate}:59.3528866+02:00`;
       const endDateTime = `${this.endTimeAndDate}:59.3528866+02:00`;
 
-      console.log(startDateTime);
-      console.log(endDateTime);
-
       const createdEvent = {
         name: this.eventName,
         location: this.location,
@@ -145,6 +143,7 @@ export default {
         description: this.description,
         access: this.access,
         hostId: this.hostId,
+        hostName: this.hostName
       };
 
       console.log("event is form is", createdEvent);

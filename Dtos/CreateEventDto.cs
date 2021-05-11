@@ -23,6 +23,10 @@ namespace Event_Portal.Dtos
     [Required]
     public string Location { get; init; }
 
+    
+    [Required]
+    public string HostName { get; init; }
+
     [Required]
     public DateTimeOffset StartDateTime { get; init; }
 

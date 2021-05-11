@@ -136,18 +136,19 @@ namespace Event_Portal.Controllers
         HostId = eventDto.HostId,
         Location = eventDto.Location,
         StartDateTime = eventDto.StartDateTime,
+        HostName=eventDto.HostName,
         EndDateTime = eventDto.EndDateTime,
       };
 
 
-      FirebaseResponse res = client.Get(@"users/" + myEvent.HostId);
-      User hostUser = JsonConvert.DeserializeObject<User>(res.Body.ToString());
+     // FirebaseResponse res = client.Get(@"users/" + myEvent.HostId);
+     // User hostUser = JsonConvert.DeserializeObject<User>(res.Body.ToString());
 
 
      
 
-      if(hostUser != null)
-      {
+     // if(hostUser != null)
+     // {
     
          //Saving event
         var response = await client.SetTaskAsync("events/" + myEvent.Id, myEvent);
@@ -157,20 +158,20 @@ namespace Event_Portal.Controllers
 
 
        //Pushing event to user
-        hostUser.CreatedEvents.Add(result);
+      //  hostUser.CreatedEvents.Add(result);
       //Saving updated user
-        var rs = await client.SetTaskAsync("users/" + myEvent.HostId, hostUser);
+       // var rs = await client.SetTaskAsync("users/" + myEvent.HostId, hostUser);
 
          Console.WriteLine("Pushed new event");
 
         return result;
 
-      } 
+      //} 
       
-      else { 
-        Console.WriteLine("Wrong hostID");
-         return null;
-      }
+     // else { 
+      //  Console.WriteLine("Wrong hostID");
+       //  return null;
+      //}
 
       
 
