@@ -68,6 +68,7 @@
               v-on="on"
               src="../assets/DetailedImg/setting.png"
               alt=""
+              v-show="$store.state.account.homeAccountIdentifier === currEvent.hostId"
             />
           </template>
           <v-list>
@@ -224,7 +225,7 @@
         </div>
       </div>
       <div class="btnJoin">
-        <v-btn class="joinBut" elevation="11" x-large @click="joinEvent">
+        <v-btn class="joinBut" elevation="11" x-large @click="joinEvent" v-show="$store.state.account.homeAccountIdentifier !== currEvent.hostId">
           Join
         </v-btn>
       </div>
