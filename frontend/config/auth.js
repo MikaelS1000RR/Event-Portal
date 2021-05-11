@@ -4,8 +4,8 @@ import { UserAgentApplication } from 'msal'
 
 const config = {
   auth: {
-     clientId: process.env.VUE_APP_CLIENT_ID,
-    authority: `${process.env.VUE_APP_AUTHORITY_BASE}/${process.env.VUE_APP_TENANT_ID}`,
+     clientId: "1a602afd-b047-4730-892f-715f551f9c97",
+    authority: "https://login.microsoftonline.com/geshdo.onmicrosoft.com",
     redirectUri: window.location.origin,
     postLogoutRedirectUri: window.location.origin
   
