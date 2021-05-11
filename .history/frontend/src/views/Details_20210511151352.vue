@@ -44,9 +44,7 @@
 
             <v-card-actions class="guest-actions">
              
-             <h3>
-               Please log in into your Gesdho account
-             </h3>
+             <h3></h3>
               
             </v-card-actions>
           </v-form>
