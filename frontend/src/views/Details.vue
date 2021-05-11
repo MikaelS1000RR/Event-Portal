@@ -68,6 +68,7 @@
               v-on="on"
               src="../assets/DetailedImg/setting.png"
               alt=""
+              v-show="$store.state.account !==undefined"
             />
           </template>
           <v-list>
@@ -258,7 +259,7 @@ export default {
     afterDelete(val) {
       if (!val) return;
 
-      setTimeout(() => this.redirect(), 3000);
+      setTimeout(() => this.redirect(), 2000);
     },
 
     isJoined(val) {
@@ -333,7 +334,7 @@ export default {
 
     joinEvent() {
       console.log(this.$store.state.currLoggedInUser.id);
-      if (this.$store.state.currLoggedInUser.id === undefined) {
+      if (this.$store.state.account === undefined) {
         this.guestLoginPopup = true;
       }
     },

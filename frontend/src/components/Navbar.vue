@@ -79,18 +79,21 @@
       </v-list>
     </v-navigation-drawer>
 
-     <v-toolbar color="black" dark fixed app >
-       <div class="logo hide">
+     <v-toolbar class="nav" color="black" dark fixed app >
+      
+       <!--<div class="logo hide">
+
       <img class="logoImg" src="../assets/Geshdo-logo.png" @click="homeRedirect">
        </div>
           <v-spacer></v-spacer>
-          <div v-show="loggedIn" class="hamburger">
+          <div class="hamburger">
      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
      </div>
-     <div class="login-navbar" v-show="!loggedIn">
+     <div class="login-navbar" >
             <button class="login btn" @click="login">Log in</button>
             <button class="register btn" @click="register">Register</button>
      </div>
+     -->
  
      </v-toolbar>
   
@@ -175,6 +178,10 @@ export default {
   justify-content: center;
 }
 
+
+.nav{
+  height:30px;
+}
 
 
 
