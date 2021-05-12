@@ -122,8 +122,18 @@
 
         <v-dialog v-model="afterDelete" hide-overlay persistent width="300">
           <v-card color="primary" dark>
-            <v-card-text v-if="$store.state.deleteSuccess">
+            <v-card-text v-if="$store.state.success">
               Event has been deleted
+            </v-card-text>
+            <v-card-text v-else>
+              Something went wrong
+            </v-card-text>
+          </v-card>
+        </v-dialog>
+        <v-dialog v-model="afterJoin" hide-overlay persistent width="300">
+          <v-card color="primary" dark>
+            <v-card-text v-if="$store.state.success">
+             You joined event
             </v-card-text>
             <v-card-text v-else>
               Something went wrong
@@ -254,6 +264,7 @@ export default {
       afterJoin: false,
       name: "Anonymous",
       dialog2: false,
+      afterJoin:false
     };
   },
 
@@ -261,7 +272,12 @@ export default {
     afterDelete(val) {
       if (!val) return;
 
-      setTimeout(() => this.redirect(), 3000);
+      setTimeout(() => this.redirect(), 1500);
+    },
+    afterJoin(val) {
+      if (!val) return;
+
+      setTimeout(() => this.redirect(), 1500);
     },
 
     isJoined(val) {
@@ -311,6 +327,8 @@ export default {
 
     redirect() {
       this.afterDelete = false;
+      this.afterJoin=false;
+      this.$store.commit("setSuccess", false)
       this.$router.push("/");
     },
 
@@ -321,7 +339,7 @@ export default {
     async deleteEvent() {
       this.dialog = false;
       await this.$store.dispatch("deleteEvent", this.currEvent.id);
-      if (this.$store.state.deleteSuccess) {
+      if (this.$store.state.success) {
         this.afterDelete = true;
       }
     },
@@ -340,6 +358,9 @@ export default {
       }
       else{
         await this.$store.dispatch("joinEvent")
+        if(this.$store.state.success){
+              this.afterJoin=true;
+        }
       }
        
     },
