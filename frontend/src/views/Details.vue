@@ -224,8 +224,11 @@
         </div>
       </div>
       <div class="btnJoin">
-        <v-btn class="joinBut" elevation="11" x-large @click="joinEvent" v-show="!ifHost" >
+        <v-btn class="joinBut" elevation="11" x-large @click="joinEvent" v-show="!ifHost && !ifJoined" >
           Join
+        </v-btn>
+        <v-btn class="joinBut" elevation="11" disabled x-large v-show="!ifHost && ifJoined" >
+          Joined
         </v-btn>
       </div>
     </v-card>
@@ -380,6 +383,15 @@ export default {
     },
     ifHost() {
     if(this.$store.state.account !== undefined && this.$store.state.account.homeAccountIdentifier === this.currEvent.hostId){
+      return true
+    }
+    else{
+      return false
+    }
+    },
+
+    ifJoined(){
+       if(this.$store.state.account !== undefined &&  this.currEvent.joinedUsers.includes(this.$store.state.account.name)){
       return true
     }
     else{
