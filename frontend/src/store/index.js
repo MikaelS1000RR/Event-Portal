@@ -12,7 +12,7 @@ export default new Vuex.Store({
     specEvent: "",
     specUser: "",
     createdEvent: {},
-    deleteSuccess: false,
+    success: false,
     publicAccess: false,
     privateAccess: false,
     internalAccess: false,
@@ -30,7 +30,6 @@ export default new Vuex.Store({
     },
 
     setSpecEvent(state, event) {
-      console.log("specific event is set");
       state.specEvent = event;
     },
     setSpecUser(state, user) {
@@ -52,8 +51,8 @@ export default new Vuex.Store({
       console.log("User is joining", state.joinedUsers);
     },
 
-    setDeleteSuccess(state) {
-      state.deleteSuccess = true;
+    setSuccess(state, bool) {
+      state.success = bool;
     },
 
     setPublicAccess(state) {
@@ -110,6 +109,7 @@ export default new Vuex.Store({
         )
         .then((res) => {
           console.log(res.data);
+          store.commit("setSuccess", true);
         })
         .catch((err) => {
           console.log(err.response);
@@ -134,7 +134,6 @@ export default new Vuex.Store({
 
     async fetchSpecUser(store, id) {
       store.state.loading = true;
-      console.log("id in fetch user is", id);
       await axios
         .get("/users/" + id)
         .then((res) => {
@@ -163,7 +162,7 @@ export default new Vuex.Store({
           } else if (res.data.access === "internal") {
             store.commit("setInternalAccess");
           }
-         // store.dispatch("fetchSpecUser", res.data.hostId);
+         
         })
         .catch((err) => {
           console.log(err.response);
@@ -187,22 +186,6 @@ export default new Vuex.Store({
     },
 
 
-    async fetchWhoAmI({commit}) {
-      await axios
-        .post("/whoami")
-        .then((res) => {
-          if (res.data.email !== null) {
-            console.log(res.data);
-            commit("setCurrLoggedInUser", res.data);
-          } else {
-            console.log("user is not logged in");
-          }
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
-    },
-
     async deleteEvent({ commit }, id) {
       await axios
         .delete("/events/" + id, {
@@ -212,7 +195,7 @@ export default new Vuex.Store({
         })
         .then((res) => {
           console.log(res.data);
-          commit("setDeleteSuccess");
+          commit("setSuccess", true);
         })
         .catch((err) => {
           console.log(err.response);
@@ -223,7 +206,7 @@ export default new Vuex.Store({
       await axios
         .put(
           "/events/" + store.state.specEvent.id,
-          [store.state.updatedEvent],
+          store.state.updatedEvent,
           {
             headers: {
               Authorization: `Bearer ${await getToken()}`,

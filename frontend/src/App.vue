@@ -30,7 +30,6 @@ export default {
 
  async created(){
   await this.$store.dispatch('fetchEvents')
-   await  this.$store.dispatch("fetchWhoAmI");
  },
   data: () => ({
     //
