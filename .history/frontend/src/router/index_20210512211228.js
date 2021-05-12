@@ -4,7 +4,7 @@ import Home from '../views/Home.vue'
 import CreateEvent from '../views/CreateEvent.vue'
 import Details from '../views/Details.vue'
 import MyCreatedEvents from '../views/MyCreatedEvents.vue'
-import JoinedEvents from '../views/JoinedEvents.vue'
+import JoinedEvents from '../views/''
 import UpdateEvent from '../views/UpdateEvent.vue'
 
 Vue.use(VueRouter)
@@ -36,11 +36,6 @@ const routes = [
     path: '/my-events',
     name: 'MyCreatedEvents',
     component: MyCreatedEvents
-  },
-  {
-    path: '/joined-events',
-    name: 'JoinedEvents',
-    component: JoinedEvents
   }
 ]
 

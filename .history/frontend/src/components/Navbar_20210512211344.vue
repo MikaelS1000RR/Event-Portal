@@ -25,7 +25,7 @@
             <v-list-item-title>My events</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link @click="$router.push('/joined-events')">
+        <v-list-item link @click="">
           <v-list-item-icon>
             <v-icon>mdi-calendar-star</v-icon>
           </v-list-item-icon>

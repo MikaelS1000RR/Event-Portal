@@ -36,11 +36,6 @@ const routes = [
     path: '/my-events',
     name: 'MyCreatedEvents',
     component: MyCreatedEvents
-  },
-  {
-    path: '/joined-events',
-    name: 'JoinedEvents',
-    component: JoinedEvents
   }
 ]
 
