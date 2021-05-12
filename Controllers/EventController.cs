@@ -192,7 +192,9 @@ namespace Event_Portal.Controllers
         Description=eventDto.Description,
         Access=eventDto.Access,
         StartDateTime = eventDto.StartDateTime,
-        EndDateTime = eventDto.EndDateTime,
+        EndDateTime = eventDto.EndDateTime
+
+
       };
 
       var response = await client.UpdateTaskAsync("events/" + id, updatedEvent);
