@@ -157,7 +157,8 @@ export default {
 
 .v-list-item--dense,
 .v-list--dense .v-list-item {
-  padding-top: 3vh;
+  padding-top: 2vh;
+  padding-bottom:2vh;
 }
 
 .v-application .black {
