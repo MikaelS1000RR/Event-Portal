@@ -44,7 +44,7 @@ export default {
     },
 
     async created() {
-      await this.$store.dispatch('fetchEvents');
+      await this.$store.const dispatch = useDispatch(function)
     }
 
   

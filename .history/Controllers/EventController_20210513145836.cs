@@ -72,7 +72,7 @@ namespace Event_Portal.Controllers
 
     
        if(accessTypes.Contains("public") && accessTypes.Contains("private") ){
-        var publicEvents = data.Select(x => x.Value).Where(x => x.Access =="private" || x.Access == "public");
+        var publicEvents = data.Select(x => x.Value);
         return publicEvents;
       }
        else if(accessTypes.Contains("private")){
