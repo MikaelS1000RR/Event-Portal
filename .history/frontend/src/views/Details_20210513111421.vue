@@ -223,11 +223,11 @@
         </div>
 
         <div class="event-desc">
-            <p class="description-title">Description</p>
           <div class="description">
-          <p>{{ currEvent.description }}</p>
+         
           </div>
 
+          <p>{{ currEvent.description }}</p>
         </div>
       </div>
       <div class="btnJoin">
@@ -582,8 +582,7 @@ li > p,
 }
 
 .description {
-  font-weight: 500px;
-
+  font-weight: 500;
 }
 
 .joinBut {
@@ -627,7 +626,6 @@ li > p,
   .event-desc,
   .event-info {
     height: 70vh;
-
   }
 
   li > p,
@@ -747,24 +745,7 @@ li > p,
     font-size: 2.5vw;
   }
 }
-@media only screen and (min-width: 500px) {
-  .description {
-    overflow-y: scroll;
-    height: 50vh;
-    
-
-  }
-
-  .description-title {
-   padding-top: 5vh;
-    font-size: 2vh !important;
-  }
-
-  .event-desc {
-    margin-top: -10vh;
-    
-   
-  }
+@media only screen and (min-width: 340px) {
 }
 
 .alert {

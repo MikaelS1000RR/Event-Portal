@@ -750,19 +750,19 @@ li > p,
 @media only screen and (min-width: 500px) {
   .description {
     overflow-y: scroll;
-    height: 50vh;
+    height: 40vh;
     
 
   }
 
   .description-title {
-   padding-top: 5vh;
+   padding-bottom: 5vh;
     font-size: 2vh !important;
   }
 
   .event-desc {
     margin-top: -10vh;
-    
+    height: 30%;
    
   }
 }

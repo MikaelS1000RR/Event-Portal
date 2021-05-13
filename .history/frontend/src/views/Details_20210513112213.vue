@@ -223,8 +223,8 @@
         </div>
 
         <div class="event-desc">
-            <p class="description-title">Description</p>
           <div class="description">
+            <p>Description</p>
           <p>{{ currEvent.description }}</p>
           </div>
 
@@ -627,7 +627,6 @@ li > p,
   .event-desc,
   .event-info {
     height: 70vh;
-
   }
 
   li > p,
@@ -749,21 +748,7 @@ li > p,
 }
 @media only screen and (min-width: 500px) {
   .description {
-    overflow-y: scroll;
-    height: 50vh;
-    
-
-  }
-
-  .description-title {
-   padding-top: 5vh;
-    font-size: 2vh !important;
-  }
-
-  .event-desc {
-    margin-top: -10vh;
-    
-   
+    overflow-y: scroll
   }
 }
 

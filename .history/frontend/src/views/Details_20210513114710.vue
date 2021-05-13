@@ -627,7 +627,6 @@ li > p,
   .event-desc,
   .event-info {
     height: 70vh;
-
   }
 
   li > p,
@@ -762,7 +761,6 @@ li > p,
 
   .event-desc {
     margin-top: -10vh;
-    
    
   }
 }
