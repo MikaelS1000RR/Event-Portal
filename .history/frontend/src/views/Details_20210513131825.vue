@@ -678,9 +678,7 @@ li > p,
     width: 5%;
   }
   .joinBut {
-    width: 15vh !important;
-    height: 4vh !important;
-    font-size: 1.5vh !important;
+    width: 20vh;
   }
 
   ul > li {

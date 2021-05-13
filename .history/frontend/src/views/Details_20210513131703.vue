@@ -677,11 +677,7 @@ li > p,
   .settings {
     width: 5%;
   }
-  .joinBut {
-    width: 15vh !important;
-    height: 4vh !important;
-    font-size: 1.5vh !important;
-  }
+  .v-b
 
   ul > li {
     margin-top: 5vw;
