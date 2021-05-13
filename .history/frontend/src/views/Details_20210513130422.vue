@@ -614,12 +614,6 @@ li > p,
   transform: scale(1.1);
 }
 
-@media only screen and (max-width: 1220px) {
-    .btnJoin {
-      padding-top: 60px;
-    }
-}
-
 @media only screen and (max-width: 930px) {
   .v-btn:not(.v-btn--round).v-size--x-large[data-v-14d957f8] {
     font-size: 1.5vw;
@@ -628,6 +622,12 @@ li > p,
   .v-btn:not(.v-btn--round).v-size--x-large[data-v-14d957f8] {
     width: 12vw;
     height: 4vw;
+  }
+
+  .event-desc,
+  .event-info {
+    height: 70vh;
+
   }
 
   li > p,
@@ -747,7 +747,7 @@ li > p,
     font-size: 2.5vw;
   }
 }
-@media only screen and (min-width: 375px) {
+@media only screen and (min-width: 3700px) {
   .description {
     overflow-y: scroll;
     height: 50vh;

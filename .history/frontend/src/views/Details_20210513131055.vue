@@ -630,6 +630,12 @@ li > p,
     height: 4vw;
   }
 
+  .event-desc,
+  .event-info {
+    height: 70vh;
+
+  }
+
   li > p,
   .event-desc > p,
   .people-count {
