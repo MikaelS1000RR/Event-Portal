@@ -179,6 +179,7 @@ export default new Vuex.Store({
         })
         .then((response) => {
           console.log(response);
+        store.commit("setSuccess", true)
         })
         .catch((err) => {
           console.log(err.response);

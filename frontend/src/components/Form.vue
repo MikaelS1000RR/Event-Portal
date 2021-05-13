@@ -42,9 +42,14 @@
         color="primary"
         dark
       >
-        <v-card-text>
+        <v-card-text v-if="$store.state.success">
           Event has been created
         </v-card-text>
+        <v-card-text v-else>
+         Something went wrong
+        </v-card-text>
+
+
         
       </v-card>
     </v-dialog>
@@ -103,6 +108,7 @@ import HelpCircle from "../components/HelpCircle.vue";
 export default {
   components: {
     HelpCircle,
+  
   },
   data() {
     return {
@@ -150,11 +156,13 @@ export default {
 
       this.$store.commit("setCreatedEvent", createdEvent);
       await this.$store.dispatch("createNewEvent");
+     
       
     },
 
     redirect() {
       this.afterCreate = false;
+      this.$store.commit("setSuccess", false)
       this.$router.push("/");
     },
     disablePublicAndInternal() {
