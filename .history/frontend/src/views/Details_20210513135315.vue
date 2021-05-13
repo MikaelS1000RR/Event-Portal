@@ -619,8 +619,7 @@ li > p,
       padding-top: 100px;
     }
 
-    .description {
-      height: 50vh;
+    .event-desc {
       overflow-y: scroll !important;
     }
 }

@@ -618,11 +618,6 @@ li > p,
   .btnJoin {
       padding-top: 100px;
     }
-
-    .description {
-      height: 50vh;
-      overflow-y: scroll !important;
-    }
 }
 
 @media only screen and (max-width: 1220px) {

@@ -614,17 +614,6 @@ li > p,
   transform: scale(1.1);
 }
 
-@media only screen and (max-width: 1500px) {
-  .btnJoin {
-      padding-top: 100px;
-    }
-
-    .description {
-      height: 50vh;
-      overflow-y: scroll !important;
-    }
-}
-
 @media only screen and (max-width: 1220px) {
     .btnJoin {
       padding-top: 60px;
@@ -721,7 +710,7 @@ li > p,
   }
 }
 
-@media only screen and (max-width: 375px) {
+@media only screen and (min-width: 375px) {
   .description {
     overflow-y: scroll;
     height: 50vh;

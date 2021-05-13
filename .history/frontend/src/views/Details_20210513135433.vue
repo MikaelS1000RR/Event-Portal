@@ -620,7 +620,7 @@ li > p,
     }
 
     .description {
-      height: 50vh;
+      height: 40vh;
       overflow-y: scroll !important;
     }
 }
