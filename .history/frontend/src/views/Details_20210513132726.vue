@@ -736,25 +736,14 @@ li > p,
 
   }
 
-  ul > li {
-    flex-direction: column;
-  }
-
   .description-title {
    padding-top: 2vh;
     font-size: 2vh !important;
   }
 
   .description {
-    font-size: 1.5vh !important;
+    font-size: 1.4vh !important;
   }
- 
- .event-name {
-   font-size: 1.2vh;
-   text-align: center;
-   justify-items: center;
-   
- }
 
   .event-desc {
     margin-top: -10vh;

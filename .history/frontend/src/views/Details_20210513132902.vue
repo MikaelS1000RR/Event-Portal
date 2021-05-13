@@ -736,9 +736,6 @@ li > p,
 
   }
 
-  ul > li {
-    flex-direction: column;
-  }
 
   .description-title {
    padding-top: 2vh;
@@ -748,13 +745,6 @@ li > p,
   .description {
     font-size: 1.5vh !important;
   }
- 
- .event-name {
-   font-size: 1.2vh;
-   text-align: center;
-   justify-items: center;
-   
- }
 
   .event-desc {
     margin-top: -10vh;

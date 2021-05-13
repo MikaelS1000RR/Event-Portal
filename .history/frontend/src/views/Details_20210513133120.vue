@@ -752,8 +752,7 @@ li > p,
  .event-name {
    font-size: 1.2vh;
    text-align: center;
-   justify-items: center;
-   
+   justi
  }
 
   .event-desc {
