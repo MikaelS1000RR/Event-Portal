@@ -33,7 +33,7 @@ export default {
 
 
        
-         const joinedEvents = this.$store.state.allEvents.filter 
+         const joinedEvents = this.$store.state.AllEvents.filter 
         (event => event.joinedUsers.includes(this.$store.state.account.name));
 
         console.log(joinedEvents);
@@ -43,7 +43,11 @@ export default {
       }
     },
 
-  
+    created() {
+
+     this.$store.dispatch('fetchEvents');
+
+    }
 
 
   

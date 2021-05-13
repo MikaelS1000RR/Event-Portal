@@ -26,7 +26,7 @@ export default {
   computed: {
      events(){
       
-       const myEvents = this.$store.state.allEvents.filter
+       const myEvents = this.$store.state.events.filter
         (event => event.hostId === this.$store.state.account.homeAccountIdentifier);
 
         console.log(myEvents);

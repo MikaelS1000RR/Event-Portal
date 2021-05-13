@@ -6,8 +6,6 @@
       <EventItem v-for="event of events" :key="event.id" :event="event" />
 
   </div>
-
-  </div>
 </template>
 
 <script>
@@ -33,7 +31,7 @@ export default {
 
 
        
-         const joinedEvents = this.$store.state.allEvents.filter 
+         const joinedEvents = this.$store.state.events.filter 
         (event => event.joinedUsers.includes(this.$store.state.account.name));
 
         console.log(joinedEvents);
@@ -43,7 +41,11 @@ export default {
       }
     },
 
-  
+    created() {
+
+     this.$store.dispatch('fetchEvents');
+
+    }
 
 
   
