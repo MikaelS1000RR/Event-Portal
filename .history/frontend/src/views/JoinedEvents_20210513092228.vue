@@ -2,7 +2,7 @@
   <div class="joined-events-container">
 
 <div class="event-list" >
-      <EventItem v-for="event of events" :key="event.id" :event="event" />
+      <EventItem v-for="event of events" :key="event.id" :event="users" />
     </div>
 
 
@@ -27,7 +27,7 @@ export default {
      events(){
       
        const joinedEvents = this.$store.state.events.filter
-        (event => event.joinedUsers.includes(this.$store.state.account.name));
+        (users => users.joinedUsers === this.$store.state.account.homeAccountIdentifier);
 
         console.log(joinedEvents);
 

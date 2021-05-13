@@ -26,8 +26,8 @@ export default {
   computed: {
      events(){
       
-       const joinedEvents = this.$store.state.events.filter
-        (event => event.joinedUsers.includes(this.$store.state.account.name));
+       const joinedEvents = this.$store.state.users.filter
+        (user => event.hostId === this.$store.state.account.homeAccountIdentifier);
 
         console.log(joinedEvents);
 
@@ -38,6 +38,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
 </style>

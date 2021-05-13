@@ -27,7 +27,7 @@ export default {
      events(){
       
        const joinedEvents = this.$store.state.events.filter
-        (event => event.joinedUsers.includes(this.$store.state.account.name));
+        (event => event.joinedUsers === this.$store.state.account.name);
 
         console.log(joinedEvents);
 

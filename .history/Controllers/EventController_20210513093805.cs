@@ -54,7 +54,7 @@ namespace Event_Portal.Controllers
     {
       FirebaseResponse res = client.Get(@"events");
       Dictionary<string, Event> data = JsonConvert.DeserializeObject<Dictionary<string, Event>>(res.Body.ToString());
-      var list = data.Select(x => x.Value);
+      var list = data.Select(x => x.Value)
 
       return list;
 
