@@ -28,11 +28,11 @@ export default {
 
     computed: {
 
-     joinedEvents() {
+      async joinedEvents() {
 
 
        
-         const joinedEvents = this.$store.state.events.filter 
+         const joinedEvents = await this.$store.state.events.filter 
         (event => event.joinedUsers.includes(this.$store.state.account.name));
 
         console.log(joinedEvents);
@@ -42,6 +42,7 @@ export default {
       }
     },
 
+ 
 
   
 

@@ -2,7 +2,7 @@
   <div class="joined-events-container">
 
 <div class="event-list" >
-      <EventItem v-for="event of joinedEvents" :key="event.id" :event="event" />
+      <EventItem v-for="event of events" :key="event.id" :event="event" />
     </div>
 
 
@@ -15,36 +15,26 @@ import EventItem from "../components/EventItem.vue";
 export default {
 
  data() {
-
     return {
-
+      
 
     }
   },
   components: {
     EventItem,
   },
-
-
-    computed: {
-
-     joinedEvents() {
-
-
+  async created() {
+      
+       const joinedEvents = 
        
-         const joinedEvents = this.$store.state.events.filter 
+       await this.$store.state.events.filter 
         (event => event.joinedUsers.includes(this.$store.state.account.name));
 
         console.log(joinedEvents);
 
-          return joinedEvents;
-
-      }
-    },
-
-
-  
-
+         return joinedEvents;
+    
+    }
   }
 
 

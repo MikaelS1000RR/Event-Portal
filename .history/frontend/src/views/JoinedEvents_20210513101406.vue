@@ -2,7 +2,7 @@
   <div class="joined-events-container">
 
 <div class="event-list" >
-      <EventItem v-for="event of joinedEvents" :key="event.id" :event="event" />
+      <EventItem v-for="event of filterJoinedEvents" :key="event.id" :event="event" />
     </div>
 
 
@@ -28,20 +28,29 @@ export default {
 
     computed: {
 
-     joinedEvents() {
+      async joinedEvents() {
 
 
        
-         const joinedEvents = this.$store.state.events.filter 
+         const bobNogger = await this.$store.state.events.filter 
         (event => event.joinedUsers.includes(this.$store.state.account.name));
 
-        console.log(joinedEvents);
+        console.log();
 
-          return joinedEvents;
+          return bob;
 
       }
     },
 
+ async created() {
+      
+
+
+ await this.$store.dispatch("fetchEvents");
+
+ console.log(this.$store.state.events);
+
+    },
 
   
 

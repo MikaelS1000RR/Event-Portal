@@ -24,27 +24,30 @@ export default {
   components: {
     EventItem,
   },
+ created() {
+      
 
+ this.$store.dispatch('fetchEvents');
+
+    },
 
     computed: {
 
-     joinedEvents() {
+      async joinedEvents() {
 
 
        
-         const joinedEvents = this.$store.state.events.filter 
+      await const bob = this.$store.state.events.filter 
         (event => event.joinedUsers.includes(this.$store.state.account.name));
 
         console.log(joinedEvents);
 
-          return joinedEvents;
-
-      }
-    },
+          return bob;
 
 
-  
 
+    }
+    }
   }
 
 

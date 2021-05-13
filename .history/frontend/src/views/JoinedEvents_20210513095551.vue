@@ -17,34 +17,30 @@ export default {
  data() {
 
     return {
-
+      joinedEvents: []
 
     }
   },
   components: {
     EventItem,
   },
+  async created() {
+      
 
+      this.
 
-    computed: {
-
-     joinedEvents() {
-
-
+       const joinedEvents = 
        
-         const joinedEvents = this.$store.state.events.filter 
+       await this.$store.state.events.filter 
         (event => event.joinedUsers.includes(this.$store.state.account.name));
 
         console.log(joinedEvents);
 
-          return joinedEvents;
-
-      }
-    },
+    this.joinedEvents = joinedEvents;
 
 
-  
-
+    
+    }
   }
 
 
