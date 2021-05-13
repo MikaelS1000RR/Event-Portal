@@ -583,14 +583,14 @@ li > p,
 
 .description {
     height: 50vh;
-      overflow-y: scroll;
+      overflow-y: scroll ;
 
 }
 
 .description-title {
 
    padding-top: 2vh;
-    font-size: 3vh;
+    font-size: 2vh ;
   
 }
 

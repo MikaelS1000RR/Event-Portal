@@ -590,7 +590,7 @@ li > p,
 .description-title {
 
    padding-top: 2vh;
-    font-size: 3vh;
+    font-size: 2vh ;
   
 }
 

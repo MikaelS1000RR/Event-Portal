@@ -583,15 +583,15 @@ li > p,
 
 .description {
     height: 50vh;
-      overflow-y: scroll;
+      overflow-y: scroll !important;
 
 }
 
 .description-title {
-
+  .description-title {
    padding-top: 2vh;
-    font-size: 3vh;
-  
+    font-size: 2vh !important;
+  }
 }
 
 .joinBut {
