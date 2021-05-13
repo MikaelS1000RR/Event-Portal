@@ -753,12 +753,12 @@ li > p,
   }
 
   .description-title {
-   padding-top: 2vh;
+   padding-top: 5vh;
     font-size: 2vh !important;
   }
 
   .description {
-    font-size: 1.5vh !important;
+    font-size: 1vh;
   }
 
   .event-desc {

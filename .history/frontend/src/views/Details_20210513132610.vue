@@ -753,7 +753,7 @@ li > p,
   }
 
   .description-title {
-   padding-top: 2vh;
+   padding-top: 3vh;
     font-size: 2vh !important;
   }
 
