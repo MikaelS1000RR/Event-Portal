@@ -4,9 +4,9 @@
 
   <div class="gehsdo-logo" :style="{backgroundImage: `url(${GeshdoT})`}"> 
 
+<EventItem v-for="event of events" :key="event.id" :event="event" />
 <div class="bob">
 
-<EventItem v-for="event of events" :key="event.id" :event="event" />
 </div>
 
  
@@ -81,17 +81,20 @@ async created() {
 }
 
 .gehsdo-logo {
-  height: 50%;
-  width: 70%;
+  height: 70%;
+  width: 80%;
   display: flex;
    align-items: center;
   justify-content: center;
   margin-left: 10vw;
 
-
   background-size: 90%;
 
-  
+   -webkit-transform: rotate(90deg); /* Safari and Chrome */
+    -moz-transform: rotate(90deg);   /* Firefox */
+    -ms-transform: rotate(90deg);   /* IE 9 */
+    -o-transform: rotate(90deg);   /* Opera */
+    transform: rotate(90deg);
 
 }
 

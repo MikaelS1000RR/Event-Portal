@@ -81,13 +81,12 @@ async created() {
 }
 
 .gehsdo-logo {
-  height: 50%;
-  width: 70%;
+  height: 70%;
+  width: 75%;
   display: flex;
    align-items: center;
   justify-content: center;
   margin-left: 10vw;
-
 
   background-size: 90%;
 

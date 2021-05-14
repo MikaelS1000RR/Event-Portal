@@ -2,11 +2,11 @@
 
 <div class="container">
 
+<EventItem v-for="event of events" :key="event.id" :event="event" />
   <div class="gehsdo-logo" :style="{backgroundImage: `url(${GeshdoT})`}"> 
 
 <div class="bob">
 
-<EventItem v-for="event of events" :key="event.id" :event="event" />
 </div>
 
  
@@ -78,16 +78,16 @@ async created() {
   justify-content: center;
 
 
+
 }
 
 .gehsdo-logo {
-  height: 50%;
-  width: 70%;
+  height: 70%;
+  width: 80%;
   display: flex;
    align-items: center;
   justify-content: center;
   margin-left: 10vw;
-
 
   background-size: 90%;
 
