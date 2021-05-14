@@ -527,6 +527,8 @@ export default {
   justify-content: center;
 }
 
+
+
 .theme--light.v-list {
   background-color: rgba(0, 0, 0, 0.5) !important;
   color: white;
