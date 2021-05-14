@@ -1,0 +1,58 @@
+<template>
+  <div class="myCreated-Events-container" >
+
+
+     <div class="event-list" >
+      <EventItem v-for="event of events" :key="event.id" :event="event" />
+    </div>
+
+  </div>
+</template>
+
+<script>
+import EventItem from "../components/EventItem.vue";
+
+export default {
+
+  data() {
+    return {
+      
+
+    }
+  },
+  components: {
+    EventItem,
+  },
+
+  computed: {
+     events(){
+      
+       const myEvents = this.$store.state.allEvents.filter
+        (event => event.hostId === this.$store.state.account.homeAccountIdentifier);
+
+        console.log(myEvents);
+
+         return myEvents;
+     },
+     
+    
+
+    
+},
+
+async created() {
+      await this.$store.dispatch('fetchEvents');
+    }
+ 
+
+
+}
+</script>
+
+<style scoped>
+
+body {
+  background-image: url("GeshdoT.png");
+}
+
+</style>
