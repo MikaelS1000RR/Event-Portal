@@ -2,7 +2,7 @@
 
 <div class="container">
 
-  <div class="gehsdo-logo"> 
+  <div class="gehsdo-logo" :style="{backgroundImage: `url(${GeshdoT})`}"> 
 
 <div class="bob">
 
