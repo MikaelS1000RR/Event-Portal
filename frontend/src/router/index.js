@@ -7,42 +7,44 @@ import MyCreatedEvents from '../views/MyCreatedEvents.vue'
 import JoinedEvents from '../views/JoinedEvents.vue'
 import UpdateEvent from '../views/UpdateEvent.vue'
 
+
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    name: "Home",
+    component: Home,
   },
-{
-    path: '/create-event',
-    name: 'CreateEvent',
-    component: CreateEvent
+  {
+    path: "/create-event",
+    name: "CreateEvent",
+    component: CreateEvent,
   },
 
   {
-    path: '/details/:id',
-    name: 'Details',
-    component: Details
+    path: "/details/:id",
+    name: "Details",
+    component: Details,
   },
   {
-    path: '/update-event/:id',
-    name: 'Update-event',
-    component: UpdateEvent
+    path: "/update-event/:id",
+    name: "Update-event",
+    component: UpdateEvent,
   },
 
   {
-    path: '/my-events',
-    name: 'MyCreatedEvents',
-    component: MyCreatedEvents
+    path: "/my-events",
+    name: "MyCreatedEvents",
+    component: MyCreatedEvents,
   },
   {
-    path: '/joined-events',
-    name: 'JoinedEvents',
-    component: JoinedEvents
-  }
-]
+    path: "/joined-events",
+    name: "JoinedEvents",
+    component: JoinedEvents,
+  },
+ 
+];
 
 const router = new VueRouter({
   mode: 'history',

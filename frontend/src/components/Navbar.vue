@@ -1,14 +1,25 @@
 <template>
   <div class="navbar-wrapper">
+
+
+    <v-dialog v-model="dialogWrongKey" hide-overlay width="300">
+          <v-card color="primary" dark>
+            <v-card-text>
+              Wrong key
+            </v-card-text>
+           
+          </v-card>
+        </v-dialog>
+
+
+
+
+
     <v-navigation-drawer v-model="drawer" absolute temporary dark>
       <v-divider></v-divider>
 
       <v-list dense>
         <v-list-item>
-          <v-list-item-icon>
-            <v-icon></v-icon>
-          </v-list-item-icon>
-
           <v-list-item-content>
             <v-list-item-title class="user-name"
               >Welcome, {{ getName }}</v-list-item-title
@@ -16,12 +27,12 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link @click="$router.push('/my-events')"> 
+        <v-list-item link @click="$router.push('/my-events')">
           <v-list-item-icon>
             <v-icon>mdi-view-dashboard</v-icon>
           </v-list-item-icon>
 
-          <v-list-item-content >
+          <v-list-item-content>
             <v-list-item-title>My events</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -43,6 +54,29 @@
             <v-list-item-title>Add event</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
+        <v-list-item link @click="invite = !invite">
+          <v-list-item-icon>
+            <v-icon>mdi-key</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title class="invite-key"
+              >Join internal event</v-list-item-title
+            >
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item v-show="invite" v-on:keyup.enter="getInternalEvent">
+          <input
+            type="text"
+            placeholder="Paste invite key"
+            class="key-input"
+            v-model="inviteKey"
+          />
+          <p v-show="wrongKey">Wrong key</p>
+        </v-list-item>
+
         <v-list-item link @click="logout">
           <v-list-item-icon>
             <v-icon>mdi-logout</v-icon>
@@ -86,6 +120,9 @@ export default {
         { title: "Home", icon: "mdi-view-dashboard" },
         { title: "About", icon: "mdi-forum" },
       ],
+      invite: false,
+      inviteKey: "",
+      dialogWrongKey:false
     };
   },
 
@@ -101,6 +138,24 @@ export default {
 
     logout() {
       auth.logout();
+    },
+    getInternalEvent() {
+      
+      
+      let internalEvent=this.$store.state.allEvents.filter((x)=> {
+        return x.id===this.inviteKey
+      })
+
+     if(internalEvent[0]===undefined){
+      this.dialogWrongKey=true;
+     }
+     else{
+       this.$router.push("/details/" + this.inviteKey)
+     }
+      
+      this.inviteKey=''
+     
+      
     },
   },
   computed: {
@@ -144,10 +199,32 @@ export default {
   cursor: pointer;
 }
 
+.v-dialog > .v-card > .v-card__text {
+  padding: 2vh 3vw 2vh 3vw;
+  display: flex;
+
+  justify-content: center;
+}
+
+.v-application .primary {
+  background-color: var(--buttonPurpleSecondary) !important;
+}
+
+.v-dialog > .v-card > .v-card__title {
+  font-size: 1.1em !important;
+  font-family: "Montserrat", sans-serif !important;
+}
+
 .hamburger,
 .login-navbar {
   margin-right: 5vw;
   margin-top: 1vw;
+}
+
+.key-input {
+  border: 1px solid;
+  padding: 3px;
+  border-radius: 7px;
 }
 
 .v-btn--icon.v-size--default .v-icon,
@@ -158,13 +235,15 @@ export default {
 .v-list-item--dense,
 .v-list--dense .v-list-item {
   padding-top: 2vh;
-  padding-bottom:2vh;
+  padding-bottom: 2vh;
 }
 
 .v-application .black {
   background-color: #1e1e1e !important;
   height: 75px !important;
 }
+
+
 
 .login-navbar {
   display: flex;

@@ -71,6 +71,28 @@
             <v-list-item-title class="dropdown-item" @click="editEvent"
               >Edit
             </v-list-item-title>
+              <v-dialog v-model="dialogId" width="500">
+              <template v-slot:activator="{ on, attrs }">
+            <v-list-item-title v-show="currEvent.access==='internal'"    class="dropdown-item"    v-bind="attrs"
+                  v-on="on"
+              >
+              
+              
+              
+              Invite key
+            </v-list-item-title>
+       </template>
+
+              <v-card>
+                <v-card-title class="headline grey lighten-2 get-id">
+                 <p>key : {{currEvent.id}}</p>
+                </v-card-title>
+
+                    </v-card>
+            </v-dialog>
+
+
+
 
             <v-dialog v-model="dialog" width="500">
               <template v-slot:activator="{ on, attrs }">
@@ -261,7 +283,8 @@ export default {
       afterJoin: false,
       name: "Anonymous",
       dialog2: false,
-      afterJoin:false
+      afterJoin:false,
+      dialogId:false
     };
   },
 
@@ -514,6 +537,11 @@ export default {
 
 .v-list-item__title {
   padding: 0 1.5vw 1vh 1.5vw;
+}
+
+.get-id{
+  display: flex;
+  justify-content: center;
 }
 
 .event-name {
