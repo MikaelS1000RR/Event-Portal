@@ -29,7 +29,6 @@
 <script>
 import EventItem from "../components/EventItem.vue";
  import GeshdoT from "../assets/GeshdoT.png"
- 
 
 export default {
 
@@ -82,13 +81,13 @@ async created() {
 
 .gehsdo-logo {
   height: 70%;
-  width: 80%;
+  width: 100%;
   display: flex;
    align-items: center;
   justify-content: center;
   margin-left: 10vw;
 
-  background-size: 90%;
+  background-size: 85%;
 
 }
 

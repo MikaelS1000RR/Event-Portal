@@ -1,13 +1,9 @@
 <template>
 
-<div class="container">
+  <div class="bob">
+  <div class="patrick" :style="{backgroundImage: `url(${GeshdoT})`}"> 
 
-  <div class="gehsdo-logo" :style="{backgroundImage: `url(${GeshdoT})`}"> 
 
-<div class="bob">
-
-<EventItem v-for="event of events" :key="event.id" :event="event" />
-</div>
 
  
 
@@ -22,14 +18,12 @@
 
 
     </div>
-</div>
       
 </template>
 
 <script>
 import EventItem from "../components/EventItem.vue";
  import GeshdoT from "../assets/GeshdoT.png"
- 
 
 export default {
 
@@ -69,8 +63,14 @@ async created() {
 </script>
 
 <style scoped>
+.myCreated-Events-container {
+ display: flex;
+  align-items: center;
+  justify-content: center;
 
-.container {
+}
+
+.bob {
 
   height: 100%;
   display: flex;
@@ -80,23 +80,16 @@ async created() {
 
 }
 
-.gehsdo-logo {
-  height: 70%;
-  width: 80%;
+.patrick {
+  height: 100%;
+  width: 100%;
   display: flex;
    align-items: center;
   justify-content: center;
-  margin-left: 10vw;
-
-  background-size: 90%;
+  margin-left: 30vw;
+  margin-top: 30vw;
 
 }
-
-.bob {
-  margin-right: 20vh;
-}
-
-
 
 
 

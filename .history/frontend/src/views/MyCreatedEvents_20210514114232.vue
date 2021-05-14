@@ -3,11 +3,8 @@
 <div class="container">
 
   <div class="gehsdo-logo" :style="{backgroundImage: `url(${GeshdoT})`}"> 
+<EventItem class="bob" v-for="event of events" :key="event.id" :event="event" />
 
-<div class="bob">
-
-<EventItem v-for="event of events" :key="event.id" :event="event" />
-</div>
 
  
 
@@ -29,7 +26,6 @@
 <script>
 import EventItem from "../components/EventItem.vue";
  import GeshdoT from "../assets/GeshdoT.png"
- 
 
 export default {
 
@@ -81,23 +77,19 @@ async created() {
 }
 
 .gehsdo-logo {
-  height: 70%;
-  width: 80%;
+  height: 50%;
+  width: 100%;
   display: flex;
    align-items: center;
   justify-content: center;
-  margin-left: 10vw;
-
-  background-size: 90%;
+  margin-left: 25vw;
+  margin-top: 5vw;
 
 }
 
 .bob {
-  margin-right: 20vh;
+   margin-right: 5vh;
 }
-
-
-
 
 
   /*background-image: url("../assets/GeshdoT.png"); */

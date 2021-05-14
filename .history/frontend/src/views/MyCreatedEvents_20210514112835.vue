@@ -1,35 +1,29 @@
 <template>
 
-<div class="container">
+  <div class="bob">
+  <div class="patrick" :style="{backgroundImage: `url(${GeshdoT})`}"> 
 
-  <div class="gehsdo-logo" :style="{backgroundImage: `url(${GeshdoT})`}"> 
 
-<div class="bob">
 
-<EventItem v-for="event of events" :key="event.id" :event="event" />
-</div>
+  <div class="myCreated-Events-container" >
 
- 
-
-<!-- 
-  :style="{backgroundImage: `url(${GeshdoT})`}" 
+<!-- :style="{backgroundImage: `url(${GeshdoT})`}" 
 
      <div class="event-list" >
       <EventItem v-for="event of events" :key="event.id" :event="event" />
-    </div> 
-    
-    -->
+    </div>-->
 
+  
 
+  </div>
+  </div>
     </div>
-</div>
       
 </template>
 
 <script>
 import EventItem from "../components/EventItem.vue";
  import GeshdoT from "../assets/GeshdoT.png"
- 
 
 export default {
 
@@ -69,8 +63,14 @@ async created() {
 </script>
 
 <style scoped>
+.myCreated-Events-container {
+ display: flex;
+  align-items: center;
+  justify-content: center;
 
-.container {
+}
+
+.bob {
 
   height: 100%;
   display: flex;
@@ -80,23 +80,15 @@ async created() {
 
 }
 
-.gehsdo-logo {
-  height: 70%;
-  width: 80%;
+.patrick {
+  height: 100%;
+  width: 100%;
   display: flex;
    align-items: center;
   justify-content: center;
-  margin-left: 10vw;
 
-  background-size: 90%;
 
 }
-
-.bob {
-  margin-right: 20vh;
-}
-
-
 
 
 
