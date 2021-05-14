@@ -241,6 +241,8 @@ export default {
   color: white;
 }
 
+
+
 .detailedImg {
   width: 8%;
   padding-right: 1vh;
@@ -248,7 +250,8 @@ export default {
 
 .event-desc {
   display: grid;
-  width: 50vw;
+  width: 50%;
+  height:100%;
   grid-auto-rows: 15% 85%;
 
   padding-top: 2.6vw;
@@ -288,6 +291,7 @@ textarea:focus {
 }
 .my-12 {
   width: 90vw;
+  
 
   background-color: white;
   display: flex;
@@ -334,13 +338,19 @@ li > label {
 
 @media only screen and (max-width: 1360px) {
 
+.event-desc{
+  width:85%;
+}
 .my-12{
   flex-direction: column;
+}
+textarea{
+  height:5vw;
 }
 
 .hide{
   display: inline;
-  padding-top:15px;
+ 
 }
 
 .hide-on-small{
@@ -364,7 +374,7 @@ ul > li{
   
 }
 .event-desc{
-  padding-bottom: 150px;
+  padding-bottom: 100px;
 }
 
 .detailedImg{
