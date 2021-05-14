@@ -1,19 +1,12 @@
 <template>
   <div class="navbar-wrapper">
-
-
     <v-dialog v-model="dialogWrongKey" hide-overlay width="300">
-          <v-card color="primary" dark>
-            <v-card-text>
-              Wrong key
-            </v-card-text>
-           
-          </v-card>
-        </v-dialog>
-
-
-
-
+      <v-card color="primary" dark>
+        <v-card-text>
+          Wrong key
+        </v-card-text>
+      </v-card>
+    </v-dialog>
 
     <v-navigation-drawer v-model="drawer" absolute temporary dark>
       <v-divider></v-divider>
@@ -74,7 +67,7 @@
             class="key-input"
             v-model="inviteKey"
           />
-          <p v-show="wrongKey">Wrong key</p>
+         
         </v-list-item>
 
         <v-list-item link @click="logout">
@@ -122,7 +115,7 @@ export default {
       ],
       invite: false,
       inviteKey: "",
-      dialogWrongKey:false
+      dialogWrongKey: false,
     };
   },
 
@@ -140,22 +133,19 @@ export default {
       auth.logout();
     },
     getInternalEvent() {
-      
-      
-      let internalEvent=this.$store.state.allEvents.filter((x)=> {
-        return x.id===this.inviteKey
-      })
+      let internalEvent = this.$store.state.allEvents.filter((x) => {
+        return x.id === this.inviteKey;
+      });
 
-     if(internalEvent[0]===undefined){
-      this.dialogWrongKey=true;
-     }
-     else{
-       this.$router.push("/details/" + this.inviteKey)
-     }
-      
-      this.inviteKey=''
-     
-      
+      if (internalEvent[0] !== undefined && internalEvent[0].access==="internal") {
+       this.$router.push("/details/" + this.inviteKey);
+      this.$router.go(0)
+      } else {
+        
+         this.dialogWrongKey = true;
+      }
+
+      this.inviteKey = "";
     },
   },
   computed: {
@@ -242,8 +232,6 @@ export default {
   background-color: #1e1e1e !important;
   height: 75px !important;
 }
-
-
 
 .login-navbar {
   display: flex;

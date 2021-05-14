@@ -419,9 +419,6 @@ export default {
     hostUser() {
       return this.$store.state.specEvent.hostName;
     },
-    id() {
-      return this.$route.params.id;
-    },
     ifHost() {
     if(this.$store.state.account !== undefined && this.$store.state.account.homeAccountIdentifier === this.currEvent.hostId){
       return true
@@ -472,8 +469,8 @@ export default {
     },
   },
   async created() {
-    console.log("before fech", this.$store.state.loading);
-    await this.$store.dispatch("fetchSpecEvent", this.id);
+    
+    await this.$store.dispatch("fetchSpecEvent", this.$route.params.id);
   },
 };
 </script>

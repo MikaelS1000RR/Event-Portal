@@ -148,7 +148,7 @@ export default new Vuex.Store({
 
     async fetchSpecEvent(store, id) {
       store.state.loading = true;
-      console.log("loading in store is", store.state.loading);
+    
       await axios
         .get("/events/" + id)
         .then((res) => {
