@@ -1,33 +1,29 @@
 <template>
 
 <div class="container">
+<v-carousel v-model="model">
+    <v-carousel-item
+      v-for="(event, i) in events"
+      :key="event.id"
+    >
 
-  <div class="gehsdo-logo"> 
 
-<div class="bob">
+     <EventItem2  :key="event.id" :event="event" />
 
-<EventItem v-for="event of events" :key="event.id" :event="event" />
-</div>
+      </v-carousel-item>
+  </v-carousel>
+
+
+
+
 
  
-
-<!-- 
-  :style="{backgroundImage: `url(${GeshdoT})`}" 
-
-     <div class="event-list" >
-      <EventItem v-for="event of events" :key="event.id" :event="event" />
-    </div> 
-    
-    -->
-
-
-    </div>
 </div>
       
 </template>
 
 <script>
-import EventItem from "../components/EventItem.vue";
+import EventItem2 from "../components/EventItem2.vue";
 
  
 
@@ -40,7 +36,7 @@ export default {
     }
   },
   components: {
-    EventItem,
+    EventItem2,
   },
 
   computed: {
@@ -80,24 +76,6 @@ async created() {
 
 }
 
-.gehsdo-logo {
-  height: 50%;
-  width: 70%;
-  display: flex;
-   align-items: center;
-  justify-content: center;
-  margin-left: 10vw;
-
-
-  background-size: 90%;
-
-  
-
-}
-
-.bob {
-  margin-right: 20vh;
-}
 
 
 
