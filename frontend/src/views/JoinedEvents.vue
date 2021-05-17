@@ -5,7 +5,7 @@
     <div class="event-list">
       <EventItem v-for="event of events" :key="event.id" :event="event" />
 
-    </div>
+  </div>
 
   </div>
 </template>
@@ -25,8 +25,6 @@ export default {
   components: {
     EventItem,
   },
-
-  
 
 
     computed: {
