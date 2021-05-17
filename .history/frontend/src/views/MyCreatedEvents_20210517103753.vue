@@ -39,7 +39,7 @@ export default {
 
   computed: {
     events(){
-
+        const myEve
         return this.$store.state.filteredEventsByLetter; 
      },
     

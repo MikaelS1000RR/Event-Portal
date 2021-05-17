@@ -26,11 +26,7 @@ export default new Vuex.Store({
   },
   mutations: {
 
-    setFilteredEventsByLetter(state, events) {
-      state.filteredEventsByLetter = events;
-      console.log(state.filteredEventsByLetter)
-    },
-
+    
     setEvents(state, events) {
       state.events = events;
     },

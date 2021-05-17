@@ -16,7 +16,7 @@ export default new Vuex.Store({
     publicAccess: false,
     privateAccess: false,
     internalAccess: false,
-    filteredEventsByLetter: [],
+    fil
     updatedEvent: {},
     accessTypes: [],
     allEvents: [],
@@ -25,12 +25,6 @@ export default new Vuex.Store({
     
   },
   mutations: {
-
-    setFilteredEventsByLetter(state, events) {
-      state.filteredEventsByLetter = events;
-      console.log(state.filteredEventsByLetter)
-    },
-
     setEvents(state, events) {
       state.events = events;
     },

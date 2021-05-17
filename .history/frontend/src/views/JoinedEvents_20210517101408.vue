@@ -26,8 +26,6 @@ export default {
     EventItem,
   },
 
-  
-
 
     computed: {
 
