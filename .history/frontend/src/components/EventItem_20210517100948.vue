@@ -1,6 +1,6 @@
 <template>
   <div class="event-card" @click="redirect">
-    <v-card :loading="loading" class="mx-auto my-12" max-width="375">
+    <v-card :loading="loading" class="mx-auto my-12" max-width="">
 
       <div class="access">
         <p>{{event.access}}</p>
