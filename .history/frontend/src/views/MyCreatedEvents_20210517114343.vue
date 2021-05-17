@@ -1,21 +1,19 @@
 <template>
-      <div class="searchbar">
   <div class="container">
-    <div>
-
+    <div></div>
+      <div class="searchbar">
         <input
         class="inp"
           type="text"
           placeholder="Search events... 🔍"
           v-model="searchQuery"
         />
-      </div>
 
       <div class="event-list">
         <EventItem v-for="event of events" :key="event.id" :event="event" />
       </div>
+      </div>
 
-    </div>
 
 
 

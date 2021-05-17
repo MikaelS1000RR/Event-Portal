@@ -1,6 +1,6 @@
 <template>
-      <div class="searchbar">
   <div class="container">
+      <div class="searchbar">
     <div>
 
         <input
@@ -10,12 +10,12 @@
           v-model="searchQuery"
         />
       </div>
+    </div>
 
       <div class="event-list">
         <EventItem v-for="event of events" :key="event.id" :event="event" />
       </div>
 
-    </div>
 
 
 

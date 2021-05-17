@@ -1,8 +1,9 @@
 <template>
-      <div class="searchbar">
   <div class="container">
     <div>
-
+      
+    </div>
+      <div class="searchbar">
         <input
         class="inp"
           type="text"
@@ -15,7 +16,6 @@
         <EventItem v-for="event of events" :key="event.id" :event="event" />
       </div>
 
-    </div>
 
 
 
