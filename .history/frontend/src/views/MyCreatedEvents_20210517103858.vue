@@ -3,7 +3,7 @@
 <div class="container">
 
   <div class="gehsdo-logo"> 
-  <Searchbar />
+
 
 
 <div class="bob">

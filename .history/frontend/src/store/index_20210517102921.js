@@ -28,7 +28,7 @@ export default new Vuex.Store({
 
     setFilteredEventsByLetter(state, events) {
       state.filteredEventsByLetter = events;
-      console.log(state.filteredEventsByLetter)
+      console.log(eve)
     },
 
     setEvents(state, events) {

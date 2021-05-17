@@ -3,8 +3,8 @@
 <div class="container">
 
   <div class="gehsdo-logo"> 
-  <Searchbar />
 
+  
 
 <div class="bob">
 
@@ -18,7 +18,6 @@
 
 <script>
 import EventItem from "../components/EventItem.vue";
-import Searchbar from "../components/Searchbar.vue";
 
  
 
@@ -34,13 +33,26 @@ export default {
   },
   components: {
     EventItem,
-    Searchbar
   },
 
   computed: {
     events(){
+      
+      let myEvents = this.$store.state.allEvents.filter
+      (event => event.hostId === this.$store.state.account.homeAccountIdentifier);
 
-        return this.$store.state.filteredEventsByLetter; 
+      console.log(myEvents);
+
+      if(this.searchQuery !== "") {
+        
+        myEvents =  myEvents.filter
+        (event => event.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
+    
+            console.log(myEvents);
+        } 
+        
+       
+          return myEvents;
      },
     
 },

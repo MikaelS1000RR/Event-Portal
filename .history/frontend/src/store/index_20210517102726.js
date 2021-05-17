@@ -27,9 +27,8 @@ export default new Vuex.Store({
   mutations: {
 
     setFilteredEventsByLetter(state, events) {
-      state.filteredEventsByLetter = events;
-      console.log(state.filteredEventsByLetter)
-    },
+      state.fil
+    }
 
     setEvents(state, events) {
       state.events = events;

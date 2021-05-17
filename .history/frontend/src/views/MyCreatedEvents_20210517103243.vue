@@ -2,8 +2,8 @@
 
 <div class="container">
 
-  <div class="gehsdo-logo"> 
   <Searchbar />
+  <div class="gehsdo-logo"> 
 
 
 <div class="bob">
@@ -39,7 +39,7 @@ export default {
 
   computed: {
     events(){
-
+    
         return this.$store.state.filteredEventsByLetter; 
      },
     
