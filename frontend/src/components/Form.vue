@@ -90,10 +90,6 @@
         </p>
       </div>
 
-      <p class="input-file-wrapper">
-        <label for="upload">Upload your photo</label>
-        <input type="file" name="" id="upload" />
-      </p>
 
       <p>
         <button type="submit" class="btn btn-primary">Create</button>
@@ -266,7 +262,6 @@ button:focus {
 
 form {
   display: grid;
-  grid-template-columns: 2fr 1fr;
   grid-gap: 20px;
 }
 form p {
