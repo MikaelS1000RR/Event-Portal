@@ -5,7 +5,7 @@
   <div class="gehsdo-logo"> 
 
    <div class="searchbar">
-     <input type="text" placeholder="Search events..."  v-model="searchQuery"/>
+     <input type="text" placeholder="Search events..." />
    </div>
 
 <div class="bob">
@@ -21,59 +21,38 @@
 <script>
 import EventItem from "../components/EventItem.vue";
 
+const searchQuery = ref("")
  
 
 export default {
-  
+
   data() {
     return {
 
-      searchQuery: ""
-      
-      }
-
+    }
   },
   components: {
     EventItem,
   },
 
   computed: {
-    events(){
+     events(){
       
-      let myEvents = this.$store.state.allEvents.filter
-      (event => event.hostId === this.$store.state.account.homeAccountIdentifier);
+       const myEvents = this.$store.state.allEvents.filter
+        (event => event.hostId === this.$store.state.account.homeAccountIdentifier);
 
-      console.log(myEvents);
+        console.log(myEvents);
 
-      if(this.searchQuery !== "") {
-        
-        myEvents =  myEvents.filter
-        (event => event.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
-    
-            console.log(myEvents);
-        } 
-        
-       
-          return myEvents;
+         return myEvents;
      },
-
-
-    
-   
+     
     
 
     
 },
 
-
-
-
 async created() {
       await this.$store.dispatch('fetchEvents');
-
-
-      return { searchedEvents, seatch }
-
     }
  
 

@@ -4,11 +4,9 @@
 
   <div class="gehsdo-logo"> 
 
-   <div class="searchbar">
-     <input type="text" placeholder="Search events..."  v-model="searchQuery"/>
-   </div>
 
 <div class="bob">
+ 
 
 <EventItem v-for="event of events" :key="event.id" :event="event" />
 </div>
@@ -40,15 +38,15 @@ export default {
   computed: {
     events(){
       
-      let myEvents = this.$store.state.allEvents.filter
+      const myEvents = this.$store.state.allEvents.filter
       (event => event.hostId === this.$store.state.account.homeAccountIdentifier);
 
       console.log(myEvents);
 
-      if(this.searchQuery !== "") {
+      if(searchQuery !== "") {
         
-        myEvents =  myEvents.filter
-        (event => event.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
+        myEvents = this.$store.state.allEvents.filter
+        (event => event.name.includes(this.searchQuery));
     
             console.log(myEvents);
         } 

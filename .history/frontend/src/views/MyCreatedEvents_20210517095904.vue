@@ -47,8 +47,8 @@ export default {
 
       if(this.searchQuery !== "") {
         
-        myEvents =  myEvents.filter
-        (event => event.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
+        myEvents = .filter
+        (event => event.name.includes(this.searchQuery));
     
             console.log(myEvents);
         } 

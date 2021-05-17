@@ -40,25 +40,20 @@ export default {
   computed: {
     events(){
       
-      let myEvents = this.$store.state.allEvents.filter
-      (event => event.hostId === this.$store.state.account.homeAccountIdentifier);
+      const myEvents = this.$store.state.allEvents.filter
+        (event => event.hostId === this.$store.state.account.homeAccountIdentifier);
 
-      console.log(myEvents);
+        console.log(myEvents);
 
-      if(this.searchQuery !== "") {
-        
-        myEvents =  myEvents.filter
-        (event => event.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
-    
-            console.log(myEvents);
-        } 
-        
-       
-          return myEvents;
+         return myEvents;
      },
 
+    search() {
+
+      
 
     
+  }
    
     
 

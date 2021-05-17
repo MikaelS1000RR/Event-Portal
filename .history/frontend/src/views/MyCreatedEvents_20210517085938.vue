@@ -24,13 +24,12 @@ import EventItem from "../components/EventItem.vue";
  
 
 export default {
-  
+
   data() {
     return {
 
-      searchQuery: ""
-      
-      }
+    }
+const searchQuery = ref("");
 
   },
   components: {
@@ -38,42 +37,27 @@ export default {
   },
 
   computed: {
-    events(){
+     events(){
       
-      let myEvents = this.$store.state.allEvents.filter
-      (event => event.hostId === this.$store.state.account.homeAccountIdentifier);
+       const myEvents = this.$store.state.allEvents.filter
+        (event => event.hostId === this.$store.state.account.homeAccountIdentifier);
 
-      console.log(myEvents);
+        console.log(myEvents);
 
-      if(this.searchQuery !== "") {
-        
-        myEvents =  myEvents.filter
-        (event => event.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
-    
-            console.log(myEvents);
-        } 
-        
-       
-          return myEvents;
+         return myEvents;
      },
 
-
-    
-   
+     search() {
+       
+     }
+     
     
 
     
 },
 
-
-
-
 async created() {
       await this.$store.dispatch('fetchEvents');
-
-
-      return { searchedEvents, seatch }
-
     }
  
 
