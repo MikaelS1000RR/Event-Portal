@@ -1,8 +1,6 @@
 <template>
       <div class="searchbar">
-
   <div class="container">
-
     <div>
 
         <input
@@ -19,8 +17,10 @@
 
     </div>
 
-  </div>
 
+
+  </div>
+  
 </template>
 
 <script>
@@ -60,7 +60,7 @@ export default {
   async created() {
     await this.$store.dispatch("fetchEvents");
 
-
+    return { searchedEvents, seatch };
   },
 };
 </script>
@@ -96,5 +96,5 @@ input[type=text]:focus {
 }
 
 
-
+/*background-image: url("../assets/GeshdoT.png"); */
 </style>

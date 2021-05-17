@@ -60,7 +60,7 @@ export default {
   async created() {
     await this.$store.dispatch("fetchEvents");
 
-
+    return { searchedEvents, seatch };
   },
 };
 </script>

@@ -33,7 +33,7 @@ export default {
 
       searchQuery: "",
 
-    };
+    }
   },
   components: {
     EventItem,
@@ -58,14 +58,17 @@ export default {
 
           return joinedEvents;
 
-      },
+      }
     },
 
     async created() {
       await this.$store.dispatch('fetchEvents');
+    }
+
+  
 
 
-    }  
+  
 
   }
 
@@ -73,33 +76,5 @@ export default {
 </script>
 
 <style scoped>
-
-
-.container {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-
-
-input[type=text] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: 3px solid #ccc;
-  border-radius: 10px;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  outline: none;
-  color: whitesmoke;
-}
-
-input[type=text]:focus {
-  border: 3px solid rgb(98, 65, 177);
-} 
 
 </style>

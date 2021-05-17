@@ -1,5 +1,5 @@
 <template>
-      <div class="searchbar">
+ <div class="searchbar">
 
   <div class="container">
 
@@ -20,49 +20,56 @@
     </div>
 
   </div>
-
 </template>
 
 <script>
 import EventItem from "../components/EventItem.vue";
 
 export default {
-  data() {
+
+ data() {
+
     return {
+
       searchQuery: "",
+
     };
   },
   components: {
     EventItem,
   },
 
-  computed: {
-    events() {
-      let myEvents = this.$store.state.allEvents.filter(
-        (event) =>
-          event.hostId === this.$store.state.account.homeAccountIdentifier
-      );
 
-      console.log(myEvents);
+    computed: {
 
-      if (this.searchQuery !== "") {
-        myEvents = myEvents.filter((event) =>
-          event.name.toLowerCase().includes(this.searchQuery.toLowerCase())
-        );
+       events() {
+        let joinedEvents = this.$store.state.allEvents.filter 
+        (event => event.joinedUsers.includes(this.$store.state.account.name));
 
-        console.log(myEvents);
-      }
+            console.log(joinedEvents);
 
-      return myEvents;
+             if(this.searchQuery !== "") {
+             joinedEvents = joinedEvents.filter((event) =>
+             event.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+             );
+
+            console.log(joinedEvents);
+        }
+
+          return joinedEvents;
+
+      },
     },
-  },
 
-  async created() {
-    await this.$store.dispatch("fetchEvents");
+    async created() {
+      await this.$store.dispatch('fetchEvents');
 
 
-  },
-};
+    }  
+
+  }
+
+
 </script>
 
 <style scoped>
@@ -94,7 +101,5 @@ input[type=text] {
 input[type=text]:focus {
   border: 3px solid rgb(98, 65, 177);
 }
-
-
 
 </style>
