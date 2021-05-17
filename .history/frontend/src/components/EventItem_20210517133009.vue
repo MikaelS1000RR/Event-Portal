@@ -50,7 +50,7 @@ export default {
 }
 
 .v-sheet.v-card {
-  border: 1px solid rgba(125, 10, 241, 0.625);
+  border: 2px solid rgba(125, 10, 241, 0.625);
   border-radius: 15px;
   
 }
@@ -68,8 +68,7 @@ export default {
 }
 
 .access {
-  background-color: whitesmoke;
-  
+  background-color: rgb(29, 20, 75);
   height: 2.5vh;
   
 }

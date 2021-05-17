@@ -3,9 +3,7 @@
     <v-card :loading="loading" class="mx-auto my-12" max-width="375">
 
       <div class="access">
-        <p>{{event.access.charAt(0).toUpperCase() + event.access.slice(1)}}</p>
-
-
+        <p>{{event.access}}</p>
        
       </div>
       <v-img class="event-img" height="200px" :src="event.imgUrl">
@@ -68,9 +66,8 @@ export default {
 }
 
 .access {
-  background-color: whitesmoke;
-  
-  height: 2.5vh;
+  background-color: white;
+  height: 3.5vh;
   
 }
 
