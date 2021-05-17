@@ -1,21 +1,19 @@
 <template>
   <div class="container">
+    <div class="gehsdo-logo">
+
+      <div class="bob">
       <div class="searchbar">
         <input
         class="inp"
           type="text"
-          placeholder="Search events... 🔍"
+          placeholder="Search events..."
           v-model="searchQuery"
         />
-
-      <div class="event-list">
+      </div>
         <EventItem v-for="event of events" :key="event.id" :event="event" />
       </div>
-      </div>
-
-
-
-
+    </div>
   </div>
 </template>
 
@@ -69,27 +67,24 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
 }
 
+.gehsdo-logo {
+  height: 50%;
+  width: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10vw;
 
-
-input[type=text] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: 3px solid #ccc;
-  border-radius: 10px;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  outline: none;
-  color: whitesmoke;
+  background-size: 90%;
 }
 
-input[type=text]:focus {
-  border: 3px solid rgb(98, 65, 177);
+.bob {
+  margin-right: 20vh;
 }
+
+.imp
 
 
 /*background-image: url("../assets/GeshdoT.png"); */

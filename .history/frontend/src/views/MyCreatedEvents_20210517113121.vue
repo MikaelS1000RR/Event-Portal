@@ -4,7 +4,7 @@
         <input
         class="inp"
           type="text"
-          placeholder="Search events... 🔍"
+          placeholder="Search events..."
           v-model="searchQuery"
         />
 
@@ -74,21 +74,11 @@ export default {
 
 
 
-input[type=text] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: 3px solid #ccc;
-  border-radius: 10px;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  outline: none;
-  color: whitesmoke;
-}
 
-input[type=text]:focus {
-  border: 3px solid rgb(98, 65, 177);
+.inp {
+  color:white;
+  font-size: 25px;
+  align-text: center;
 }
 
 

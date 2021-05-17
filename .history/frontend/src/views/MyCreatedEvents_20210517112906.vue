@@ -4,18 +4,18 @@
         <input
         class="inp"
           type="text"
-          placeholder="Search events... 🔍"
+          placeholder="Search events..."
           v-model="searchQuery"
         />
+      </div>
+    <div class="gehsdo-logo">
 
-      <div class="event-list">
+
+      <div class="bob">
         <EventItem v-for="event of events" :key="event.id" :event="event" />
       </div>
-      </div>
 
-
-
-
+  </div>
   </div>
 </template>
 
@@ -69,26 +69,18 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
 }
 
 
 
-input[type=text] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: 3px solid #ccc;
-  border-radius: 10px;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
-  outline: none;
-  color: whitesmoke;
+.bob {
+  margin-right: 20vh;
 }
 
-input[type=text]:focus {
-  border: 3px solid rgb(98, 65, 177);
+.inp {
+  color:white;
+  font-size: 25px;
+  text-align: center;
 }
 
 

@@ -4,7 +4,7 @@
         <input
         class="inp"
           type="text"
-          placeholder="Search events... 🔍"
+          placeholder="Search events...                                 🔍"
           v-model="searchQuery"
         />
 

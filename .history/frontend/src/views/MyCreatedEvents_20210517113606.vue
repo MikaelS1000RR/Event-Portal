@@ -80,15 +80,14 @@ input[type=text] {
   margin: 8px 0;
   box-sizing: border-box;
   border: 3px solid #ccc;
-  border-radius: 10px;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
   outline: none;
   color: whitesmoke;
 }
 
 input[type=text]:focus {
-  border: 3px solid rgb(98, 65, 177);
+  border: 3px solid #555;
 }
 
 
