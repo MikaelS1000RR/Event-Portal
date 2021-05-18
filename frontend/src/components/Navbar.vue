@@ -67,7 +67,6 @@
             class="key-input"
             v-model="inviteKey"
           />
-         
         </v-list-item>
 
         <v-list-item link @click="logout">
@@ -107,7 +106,6 @@ import { auth } from "/config/auth.js";
 export default {
   data() {
     return {
-      
       drawer: null,
       items: [
         { title: "Home", icon: "mdi-view-dashboard" },
@@ -135,16 +133,22 @@ export default {
     getInternalEvent() {
       let internalEvent = this.$store.state.allEvents.filter((x) => {
         return x.id === this.inviteKey;
-      }); 
+      });
 
-      console.log(internalEvent[0]);
+      console.log(typeof internalEvent);
+      console.log(typeof internalEvent[0]);
 
-      if (internalEvent[0] !== undefined && internalEvent[0].access==="internal") {
-       this.$router.push("/details/" + this.inviteKey);
-      this.$router.go(0)
-      } else {
+      if (internalEvent.length !== 0) {
+      
+
         
-         this.dialogWrongKey = true;
+        this.$router.push("/details/" + this.inviteKey);
+        this.$router.go(0);
+        
+      }
+
+      if (internalEvent.length === 0) {
+        this.dialogWrongKey = true;
       }
 
       this.inviteKey = "";
@@ -170,11 +174,9 @@ export default {
       },
     },
   },
-     async created() {
-      await this.$store.dispatch('fetchEvents');
-
-
-    }  
+  async created() {
+    await this.$store.dispatch("fetchEvents");
+  },
 };
 </script>
 
