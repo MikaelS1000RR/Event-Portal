@@ -8,9 +8,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     events: [],
-    users: [],
+  
     specEvent: "",
-    specUser: "",
+
     createdEvent: {},
     success: false,
     publicAccess: false,
@@ -30,9 +30,6 @@ export default new Vuex.Store({
 
     setSpecEvent(state, event) {
       state.specEvent = event;
-    },
-    setSpecUser(state, user) {
-      state.specUser = user;
     },
 
     setCurrLoggedInUser(state, user) {
@@ -126,19 +123,6 @@ export default new Vuex.Store({
         });
     },
 
-    async fetchSpecUser(store, id) {
-      store.state.loading = true;
-      await axios
-        .get("/users/" + id)
-        .then((res) => {
-          console.log(res.data);
-          store.commit("setSpecUser", res.data);
-        })
-        .catch((err) => {
-          console.log(err.response);
-        })
-        .finally(() => (store.state.loading = false));
-    },
 
     async fetchSpecEvent(store, id) {
       store.state.loading = true;
