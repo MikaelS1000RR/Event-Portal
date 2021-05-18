@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
-import { getToken } from '/config/auth.js'
+import { getToken } from "/config/auth.js";
 
 Vue.use(Vuex);
 
@@ -21,8 +21,7 @@ export default new Vuex.Store({
     accessTypes: [],
     allEvents: [],
     loading: false,
-    account: undefined
-    
+    account: undefined,
   },
   mutations: {
     setEvents(state, events) {
@@ -38,7 +37,7 @@ export default new Vuex.Store({
 
     setCurrLoggedInUser(state, user) {
       state.currLoggedInUser = user;
-       console.log("curr logged in user in state is",state.currLoggedInUser);
+      console.log("curr logged in user in state is", state.currLoggedInUser);
     },
 
     setCreatedEvent(state, event) {
@@ -76,7 +75,6 @@ export default new Vuex.Store({
 
     setUpdatedEvent(state, event) {
       state.updatedEvent = event;
-   
     },
     setAccessTypes(state, accessTypes) {
       state.accessTypes = accessTypes;
@@ -88,18 +86,17 @@ export default new Vuex.Store({
 
     setAccount(state, account) {
       state.account = account;
-     
-    }
+    },
   },
 
   actions: {
-
     async joinEvent(store) {
       console.log(typeof store.state.account.name);
 
       await axios
         .post(
-          "/addUserToEvent/" + store.state.specEvent.id, [store.state.account.name],
+          "/addUserToEvent/" + store.state.specEvent.id,
+          [store.state.account.name],
           {
             headers: {
               Authorization: `Bearer ${await getToken()}`,
@@ -115,9 +112,6 @@ export default new Vuex.Store({
           console.log(err.response);
         });
     },
-
-
-
 
     async fetchEvents({ commit }) {
       await axios
@@ -148,7 +142,7 @@ export default new Vuex.Store({
 
     async fetchSpecEvent(store, id) {
       store.state.loading = true;
-    
+
       await axios
         .get("/events/" + id)
         .then((res) => {
@@ -162,7 +156,6 @@ export default new Vuex.Store({
           } else if (res.data.access === "internal") {
             store.commit("setInternalAccess");
           }
-         
         })
         .catch((err) => {
           console.log(err.response);
@@ -173,26 +166,25 @@ export default new Vuex.Store({
     async createNewEvent(store) {
       await axios
         .post("/events", store.state.createdEvent, {
-           headers: {
-           Authorization: `Bearer ${await getToken()}`
-           }
+          headers: {
+            Authorization: `Bearer ${await getToken()}`,
+          },
         })
         .then((response) => {
           console.log(response);
-        store.commit("setSuccess", true)
+          store.commit("setSuccess", true);
         })
         .catch((err) => {
           console.log(err.response);
         });
     },
 
-
     async deleteEvent({ commit }, id) {
       await axios
         .delete("/events/" + id, {
-            headers: {
-           Authorization: `Bearer ${await getToken()}`
-           }
+          headers: {
+            Authorization: `Bearer ${await getToken()}`,
+          },
         })
         .then((res) => {
           console.log(res.data);
@@ -205,16 +197,12 @@ export default new Vuex.Store({
 
     async updateEvent(store) {
       await axios
-        .put(
-          "/events/" + store.state.specEvent.id,
-          store.state.updatedEvent,
-          {
-            headers: {
-              Authorization: `Bearer ${await getToken()}`,
-              "Content-Type": "application/json",
-            },
-          }
-        )
+        .put("/events/" + store.state.specEvent.id, store.state.updatedEvent, {
+          headers: {
+            Authorization: `Bearer ${await getToken()}`,
+            "Content-Type": "application/json",
+          },
+        })
         .then((res) => {
           console.log(res.data);
         })
@@ -223,12 +211,12 @@ export default new Vuex.Store({
         });
     },
 
-    async fetchFilteredEvents({commit }, accessTypes) {
+    async fetchFilteredEvents({ commit }, accessTypes) {
       await axios
         .post("/filter-events", accessTypes)
         .then((res) => {
           console.log(res.data);
-         commit("setEvents", res.data);
+          commit("setEvents", res.data);
         })
         .catch((err) => {
           console.log(err.response);
@@ -246,13 +234,13 @@ export default new Vuex.Store({
         });
     },
 
-    async login({commit}, loginCredentials) {
+    async login({ commit }, loginCredentials) {
       await axios
         .post("/login", loginCredentials)
         .then((response) => {
           console.log(response);
           commit("setCurrLoggedInUser", response.data);
-          localStorage.setItem('token', response.data.token)
+          localStorage.setItem("token", response.data.token);
         })
         .catch((err) => {
           console.log(err.response);
@@ -262,9 +250,9 @@ export default new Vuex.Store({
     async logout({ commit }) {
       await axios
         .post("/login", {
-            headers: {
-           Authorization: `Bearer ${await getToken()}`
-           }
+          headers: {
+            Authorization: `Bearer ${await getToken()}`,
+          },
         })
         .then((response) => {
           console.log(response);
@@ -276,10 +264,8 @@ export default new Vuex.Store({
     },
 
     async getAccountName({ commit }, account) {
-      
       commit("setAccount", account);
-    }
-
+    },
   },
 
   modules: {},

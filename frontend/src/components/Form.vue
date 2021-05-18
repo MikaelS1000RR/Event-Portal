@@ -32,27 +32,16 @@
           <HelpCircle />
         </div>
 
-           <v-dialog
-      v-model="dialog"
-      hide-overlay
-      persistent
-      width="300"
-    >
-      <v-card
-        color="primary"
-        dark
-      >
-        <v-card-text v-if="$store.state.success">
-          Event has been created
-        </v-card-text>
-        <v-card-text v-else>
-         Something went wrong
-        </v-card-text>
-
-
-        
-      </v-card>
-    </v-dialog>
+        <v-dialog v-model="dialog" hide-overlay persistent width="300">
+          <v-card color="primary" dark>
+            <v-card-text v-if="$store.state.success">
+              Event has been created
+            </v-card-text>
+            <v-card-text v-else>
+              Something went wrong
+            </v-card-text>
+          </v-card>
+        </v-dialog>
 
         <p class="checkbox">
           <img class="door" src="../assets/CreateEventImg/door.png" />
@@ -90,7 +79,6 @@
         </p>
       </div>
 
-
       <p>
         <button type="submit" class="btn btn-primary">Create</button>
       </p>
@@ -104,7 +92,6 @@ import HelpCircle from "../components/HelpCircle.vue";
 export default {
   components: {
     HelpCircle,
-  
   },
   data() {
     return {
@@ -120,20 +107,18 @@ export default {
       access: "public",
       hostId: this.$store.state.account.homeAccountIdentifier,
       hostName: this.$store.state.account.name,
-     dialog: false,
-     
+      dialog: false,
     };
   },
   watch: {
-      dialog (val) {
-        if (!val) return
+    dialog(val) {
+      if (!val) return;
 
-        setTimeout(() => this.redirect(), 3000)
-      },
+      setTimeout(() => this.redirect(), 3000);
     },
+  },
   methods: {
     async onCreateEvent() {
-        this.dialog=true;
       const startDateTime = `${this.startTimeAndDate}:59.3528866+02:00`;
       const endDateTime = `${this.endTimeAndDate}:59.3528866+02:00`;
 
@@ -145,20 +130,19 @@ export default {
         description: this.description,
         access: this.access,
         hostId: this.hostId,
-        hostName: this.hostName
+        hostName: this.hostName,
       };
 
       console.log("event is form is", createdEvent);
 
       this.$store.commit("setCreatedEvent", createdEvent);
       await this.$store.dispatch("createNewEvent");
-     
-      
+      this.dialog = true;
     },
 
     redirect() {
       this.afterCreate = false;
-      this.$store.commit("setSuccess", false)
+      this.$store.commit("setSuccess", false);
       this.$router.push("/");
     },
     disablePublicAndInternal() {
@@ -190,7 +174,6 @@ export default {
 body {
   padding-top: 1rem;
 }
-
 
 .v-dialog > .v-card > .v-card__text {
   padding: 2vh 3vw 2vh 3vw;
