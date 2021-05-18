@@ -168,6 +168,11 @@ export default {
       },
     },
   },
+     async created() {
+      await this.$store.dispatch('fetchEvents');
+
+
+    }  
 };
 </script>
 
