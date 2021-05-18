@@ -107,7 +107,7 @@ import { auth } from "/config/auth.js";
 export default {
   data() {
     return {
-      // isLoggedIn:false,
+      
       drawer: null,
       items: [
         { title: "Home", icon: "mdi-view-dashboard" },
@@ -135,7 +135,9 @@ export default {
     getInternalEvent() {
       let internalEvent = this.$store.state.allEvents.filter((x) => {
         return x.id === this.inviteKey;
-      });
+      }); 
+
+      console.log(internalEvent[0]);
 
       if (internalEvent[0] !== undefined && internalEvent[0].access==="internal") {
        this.$router.push("/details/" + this.inviteKey);

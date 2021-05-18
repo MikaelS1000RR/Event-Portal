@@ -43,14 +43,16 @@
           </v-card>
         </v-dialog>
 
-
-
-        <v-dialog v-model="notAllInputsFilled" hide-overlay persistent width="300">
+        <v-dialog
+          v-model="notAllInputsFilled"
+          hide-overlay
+          persistent
+          width="300"
+        >
           <v-card color="primary" dark>
             <v-card-text>
               Please fill in all the fields
             </v-card-text>
-           
           </v-card>
         </v-dialog>
 
@@ -98,7 +100,6 @@
 </template>
 
 <script>
-
 import HelpCircle from "../components/HelpCircle.vue";
 export default {
   components: {
@@ -119,7 +120,7 @@ export default {
       hostId: this.$store.state.account.homeAccountIdentifier,
       hostName: this.$store.state.account.name,
       dialog: false,
-      notAllInputsFilled:false
+      notAllInputsFilled: false,
     };
   },
   watch: {
@@ -131,43 +132,41 @@ export default {
     notAllInputsFilled(val) {
       if (!val) return;
 
-      setTimeout(() => this.notAllInputsFilled=false, 1500);
+      setTimeout(() => (this.notAllInputsFilled = false), 1500);
     },
-
-
   },
-
 
   methods: {
     async onCreateEvent() {
-      if(this.eventName==="" || this.location==="" || this.startTimeAndDate===""|| this.endTimeAndDate==="" || this.description===""){
-         this.notAllInputsFilled=true;
-       
-         
-      }
-      else{
+      if (
+        this.eventName === "" ||
+        this.location === "" ||
+        this.startTimeAndDate === "" ||
+        this.endTimeAndDate === "" ||
+        this.description === ""
+      ) {
+        this.notAllInputsFilled = true;
+      } else {
         const startDateTime = `${this.startTimeAndDate}:59.3528866+02:00`;
-      const endDateTime = `${this.endTimeAndDate}:59.3528866+02:00`;
+        const endDateTime = `${this.endTimeAndDate}:59.3528866+02:00`;
 
-      const createdEvent = {
-        name: this.eventName,
-        location: this.location,
-        startDateTime: startDateTime,
-        endDateTime: endDateTime,
-        description: this.description,
-        access: this.access,
-        hostId: this.hostId,
-        hostName: this.hostName,
-      };
+        const createdEvent = {
+          name: this.eventName,
+          location: this.location,
+          startDateTime: startDateTime,
+          endDateTime: endDateTime,
+          description: this.description,
+          access: this.access,
+          hostId: this.hostId,
+          hostName: this.hostName,
+        };
 
-      console.log("event is form is", createdEvent);
+        console.log("event is form is", createdEvent);
 
-      this.$store.commit("setCreatedEvent", createdEvent);
-      await this.$store.dispatch("createNewEvent");
-      this.dialog = true;
+        this.$store.commit("setCreatedEvent", createdEvent);
+        await this.$store.dispatch("createNewEvent");
+        this.dialog = true;
       }
-     
-      
     },
 
     redirect() {
