@@ -43,6 +43,17 @@
           </v-card>
         </v-dialog>
 
+
+
+        <v-dialog v-model="notAllInputsFilled" hide-overlay persistent width="300">
+          <v-card color="primary" dark>
+            <v-card-text>
+              Please fill in all the fields
+            </v-card-text>
+           
+          </v-card>
+        </v-dialog>
+
         <p class="checkbox">
           <img class="door" src="../assets/CreateEventImg/door.png" />
           <label for="public">Public</label>
@@ -87,7 +98,7 @@
 </template>
 
 <script>
-// import axios from 'axios';
+
 import HelpCircle from "../components/HelpCircle.vue";
 export default {
   components: {
@@ -108,18 +119,34 @@ export default {
       hostId: this.$store.state.account.homeAccountIdentifier,
       hostName: this.$store.state.account.name,
       dialog: false,
+      notAllInputsFilled:false
     };
   },
   watch: {
     dialog(val) {
       if (!val) return;
 
-      setTimeout(() => this.redirect(), 3000);
+      setTimeout(() => this.redirect(), 1500);
     },
+    notAllInputsFilled(val) {
+      if (!val) return;
+
+      setTimeout(() => this.notAllInputsFilled=false, 1500);
+    },
+
+
   },
+
+
   methods: {
     async onCreateEvent() {
-      const startDateTime = `${this.startTimeAndDate}:59.3528866+02:00`;
+      if(this.eventName==="" || this.location==="" || this.startTimeAndDate===""|| this.endTimeAndDate==="" || this.description===""){
+         this.notAllInputsFilled=true;
+       
+         
+      }
+      else{
+        const startDateTime = `${this.startTimeAndDate}:59.3528866+02:00`;
       const endDateTime = `${this.endTimeAndDate}:59.3528866+02:00`;
 
       const createdEvent = {
@@ -138,6 +165,9 @@ export default {
       this.$store.commit("setCreatedEvent", createdEvent);
       await this.$store.dispatch("createNewEvent");
       this.dialog = true;
+      }
+     
+      
     },
 
     redirect() {
