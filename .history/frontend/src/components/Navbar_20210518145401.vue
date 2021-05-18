@@ -134,7 +134,7 @@ export default {
       let internalEvent = this.$store.state.allEvents.filter((x) => {
        return x.access === "internal";
       }).filter((y) => {
-        return y.id === this.inviteKey.trim()
+        return y.id === this.inviteKey.trim
       });
 
       console.log(internalEvent);
@@ -142,7 +142,7 @@ export default {
 
       if (internalEvent.length !== 0) {
       
-        this.$router.push("/details/" + this.inviteKey.trim());
+        this.$router.push("/details/" + this.inviteKey);
         this.$router.go(0);
         
       }

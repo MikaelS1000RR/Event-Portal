@@ -142,7 +142,7 @@ export default {
 
       if (internalEvent.length !== 0) {
       
-        this.$router.push("/details/" + this.inviteKey.trim());
+        this.$router.push("/details/" + this.inviteKey.trim);
         this.$router.go(0);
         
       }
