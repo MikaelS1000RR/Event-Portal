@@ -50,7 +50,7 @@ export default {
           event.name.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
 
-
+        console.log(myEvents);
       }
 
       return myEvents;

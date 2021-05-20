@@ -160,7 +160,9 @@ export default {
           hostId: this.hostId,
           hostName: this.hostName,
         };
-        
+
+        console.log("event is form is", createdEvent);
+
         this.$store.commit("setCreatedEvent", createdEvent);
         await this.$store.dispatch("createNewEvent");
         this.dialog = true;

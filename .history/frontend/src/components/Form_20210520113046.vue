@@ -160,7 +160,7 @@ export default {
           hostId: this.hostId,
           hostName: this.hostName,
         };
-        
+
         this.$store.commit("setCreatedEvent", createdEvent);
         await this.$store.dispatch("createNewEvent");
         this.dialog = true;

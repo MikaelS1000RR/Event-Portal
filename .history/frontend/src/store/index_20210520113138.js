@@ -35,16 +35,17 @@ export default new Vuex.Store({
     setCurrLoggedInUser(state, user) {
       state.currLoggedInUser = user;
 
+  
     },
 
     setCreatedEvent(state, event) {
       state.createdEvent = event;
-
+      console.log("in process of setting commit", state.createdEvent);
     },
 
     setJoinedUser(state, user) {
       state.joinedUsers = user;
-
+      console.log("User is joining", state.joinedUsers);
     },
 
     setSuccess(state, bool) {
@@ -52,19 +53,19 @@ export default new Vuex.Store({
     },
 
     setPublicAccess(state) {
-     
+      console.log("setting public");
       state.publicAccess = true;
       state.privateAccess = false;
       state.internalAccess = false;
     },
     setPrivateAccess(state) {
-      
+      console.log("setting private");
       state.privateAccess = true;
       state.publicAccess = false;
       state.internalAccess = false;
     },
     setInternalAccess(state) {
-      
+      console.log("setting internal");
       state.internalAccess = true;
       state.privateAccess = false;
       state.publicAccess = false;
@@ -88,7 +89,7 @@ export default new Vuex.Store({
 
   actions: {
     async joinEvent(store) {
-    
+      console.log(typeof store.state.account.name);
 
       await axios
         .post(
@@ -102,7 +103,7 @@ export default new Vuex.Store({
           }
         )
         .then((res) => {
-
+          console.log(res.data);
           store.commit("setSuccess", true);
         })
         .catch((err) => {
@@ -114,7 +115,7 @@ export default new Vuex.Store({
       await axios
         .get("/events")
         .then((res) => {
-
+          console.log(res.data);
           commit("setAllEvents", res.data);
         })
 
@@ -130,7 +131,7 @@ export default new Vuex.Store({
       await axios
         .get("/events/" + id)
         .then((res) => {
-
+          console.log(res.data);
           store.commit("setSpecEvent", res.data);
 
           if (res.data.access === "private") {
@@ -155,7 +156,7 @@ export default new Vuex.Store({
           },
         })
         .then((response) => {
-
+          console.log(response);
           store.commit("setSuccess", true);
         })
         .catch((err) => {
@@ -171,7 +172,7 @@ export default new Vuex.Store({
           },
         })
         .then((res) => {
-
+          console.log(res.data);
           commit("setSuccess", true);
         })
         .catch((err) => {
@@ -187,6 +188,9 @@ export default new Vuex.Store({
             "Content-Type": "application/json",
           },
         })
+        .then((res) => {
+          console.log(res.data);
+        })
         .catch((err) => {
           console.log(err.response);
         });
@@ -196,7 +200,7 @@ export default new Vuex.Store({
       await axios
         .post("/filter-events", accessTypes)
         .then((res) => {
-
+          console.log(res.data);
           commit("setEvents", res.data);
         })
         .catch((err) => {
@@ -207,6 +211,9 @@ export default new Vuex.Store({
     async guestJoinEvent(store, guestName) {
       await axios
         .post("/addGuestToEvent/" + store.state.specEvent.id, [guestName])
+        .then((response) => {
+          console.log(response);
+        })
         .catch((err) => {
           console.log(err.response);
         });
@@ -216,7 +223,7 @@ export default new Vuex.Store({
       await axios
         .post("/login", loginCredentials)
         .then((response) => {
-
+          console.log(response);
           commit("setCurrLoggedInUser", response.data);
           localStorage.setItem("token", response.data.token);
         })
@@ -233,7 +240,7 @@ export default new Vuex.Store({
           },
         })
         .then((response) => {
-
+          console.log(response);
           commit("setCurrLoggedInUser", undefined);
         })
         .catch((err) => {

@@ -61,8 +61,8 @@ export default {
     
   },
   methods:{
-  async filterEvents(){
-
+  async  filterEvents(){
+    
     if(this.value.includes("private") && this.$store.state.account === undefined){
       this.value=['public']
       this.dialog=true;

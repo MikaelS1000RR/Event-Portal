@@ -28,6 +28,7 @@
 
 <script>
 export default {
+  //props:['show', 'names', 'surnames'],
   data() {
     return {
       colors: [

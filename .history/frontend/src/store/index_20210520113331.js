@@ -187,6 +187,9 @@ export default new Vuex.Store({
             "Content-Type": "application/json",
           },
         })
+        .then((res) => {
+
+        })
         .catch((err) => {
           console.log(err.response);
         });
@@ -207,6 +210,9 @@ export default new Vuex.Store({
     async guestJoinEvent(store, guestName) {
       await axios
         .post("/addGuestToEvent/" + store.state.specEvent.id, [guestName])
+        .then((response) => {
+
+        })
         .catch((err) => {
           console.log(err.response);
         });
@@ -233,7 +239,7 @@ export default new Vuex.Store({
           },
         })
         .then((response) => {
-
+          console.log(response);
           commit("setCurrLoggedInUser", undefined);
         })
         .catch((err) => {

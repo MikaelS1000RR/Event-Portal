@@ -207,6 +207,9 @@ export default new Vuex.Store({
     async guestJoinEvent(store, guestName) {
       await axios
         .post("/addGuestToEvent/" + store.state.specEvent.id, [guestName])
+        .then((response) => {
+
+        })
         .catch((err) => {
           console.log(err.response);
         });

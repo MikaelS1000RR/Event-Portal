@@ -137,7 +137,7 @@ export default {
         return y.id === this.inviteKey.trim()
       });
 
-
+      console.log(internalEvent);
       
 
       if (internalEvent.length !== 0) {
@@ -157,7 +157,7 @@ export default {
   computed: {
     loggedIn: {
       get() {
-
+        console.log(auth.getAccount());
         return auth.getAccount() === null ? false : true;
       },
     },
