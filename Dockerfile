@@ -1,44 +1,21 @@
-# build .NET app:
-FROM mcr.microsoft.com/dotnet/sdk:5.0 as buildnet
-
-WORKDIR /src
-
-COPY NetApi/.vscode/Event_Portal.csproj .
-RUN dotnet restore
-
-COPY NetApi/.vscode .
-RUN dotnet build -c Release
-
-# RUN dotnet test ...
-
-RUN dotnet publish -c Release -o /dist
-
-
-# build Vue app:
-FROM node:alpine as buildvue
-
-WORKDIR /src
-
-COPY frontend/package.json .
-RUN npm install
-
-# webpack build
-COPY frontend .
-RUN npm run build
-
-
-# Copy results from both places into production container:
-FROM mcr.microsoft.com/dotnet/aspnet:5.0
-
+FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
-
-ENV ASPNETCORE_ENVIRONMENT Production
-ENV ASPNETCORE_URLS http://+:5000
 EXPOSE 5000
 
-# copy .net content
-COPY --from=buildnet /dist .
-# copy vue content into .net's static files folder:
-COPY --from=buildvue /src/dist /app/wwwroot
+ENV ASPNETCORE_URLS=http://*:5000
 
-CMD ["dotnet", "NetApi.dll"]
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+WORKDIR /src
+COPY ["NetApi/.vscode/Event_Portal.csproj", "NetApi/.vscode/"]
+RUN dotnet restore "NetApi\.vscode\Event_Portal.csproj"
+COPY . .
+WORKDIR "/src/NetApi/.vscode"
+RUN dotnet build "Event_Portal.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "Event_Portal.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Event_Portal.dll"]
