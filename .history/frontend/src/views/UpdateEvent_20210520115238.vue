@@ -201,7 +201,7 @@ export default {
       await this.$store.dispatch("updateEvent");
 
       this.$router.push("/details/" + this.$store.state.specEvent.id);
- 
+      this.
       }
       else{
          this.badRequest=true;
