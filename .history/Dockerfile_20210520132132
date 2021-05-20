@@ -1,5 +1,5 @@
 # build .NET app:
-FROM mcr.microsoft.com/dotnet/sdk:5.0 as buildnet
+FROM mcr.microsoft.com/dotnet/core/sdk:5.0-alpine as buildnet
 
 WORKDIR /src
 
@@ -23,12 +23,12 @@ COPY frontend/package.json .
 RUN npm install
 
 # webpack build
-COPY frontend .
+COPY vueapp .
 RUN npm run build
 
 
 # Copy results from both places into production container:
-FROM mcr.microsoft.com/dotnet/aspnet:5.0
+FROM mcr.microsoft.com/dotnet/core/aspnet:5.0-alpine
 
 WORKDIR /app
 
