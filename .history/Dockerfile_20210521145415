@@ -33,8 +33,8 @@ FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
 
 ENV ASPNETCORE_ENVIRONMENT Production
-# ENV ASPNETCORE_URLS http://+:5000
-# EXPOSE 5000 
+/* ENV ASPNETCORE_URLS http://+:5000
+EXPOSE 5000
 
 # copy .net content
 COPY --from=buildnet /dist .
