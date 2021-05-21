@@ -68,10 +68,6 @@ namespace Event_Portal
 
             app.UseRouting();
 
-      app.UseDefaultFiles();
-      
-      app.UseStaticFiles();
-
             app.UseAuthentication();
 
             app.UseAuthorization();
