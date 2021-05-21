@@ -1,0 +1,98 @@
+<template>
+
+<div class="container"></div>
+  <div class="patrick" :style="{backgroundImage: `url(${GeshdoT})`}"> 
+
+
+
+ 
+
+<!-- 
+  :style="{backgroundImage: `url(${GeshdoT})`}" 
+
+     <div class="event-list" >
+      <EventItem v-for="event of events" :key="event.id" :event="event" />
+    </div> 
+    
+    -->
+
+
+    </div>
+      
+</template>
+
+<script>
+import EventItem from "../components/EventItem.vue";
+ import GeshdoT from "../assets/GeshdoT.png"
+
+export default {
+
+  data() {
+    return {
+       GeshdoT,
+
+    }
+  },
+  components: {
+    EventItem,
+  },
+
+  computed: {
+     events(){
+      
+       const myEvents = this.$store.state.allEvents.filter
+        (event => event.hostId === this.$store.state.account.homeAccountIdentifier);
+
+        console.log(myEvents);
+
+         return myEvents;
+     },
+     
+    
+
+    
+},
+
+async created() {
+      await this.$store.dispatch('fetchEvents');
+    }
+ 
+
+
+}
+</script>
+
+<style scoped>
+.myCreated-Events-container {
+ display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.bob {
+
+  height: 100%;
+  display: flex;
+   align-items: center;
+  justify-content: center;
+
+
+}
+
+.patrick {
+  height: 100%;
+  width: 100%;
+  display: flex;
+   align-items: center;
+  justify-content: center;
+  margin-left: 30vw;
+  margin-top: 30vw;
+
+}
+
+
+
+  /*background-image: url("../assets/GeshdoT.png"); */
+
+</style>
