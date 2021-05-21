@@ -3,3 +3,6 @@ steps:
   args: ['build', '-t', 'gcr.io/geshdo-events-dev/geshdo-events-dev:$SHORT_SHA', '.']
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/geshdo-events-dev/geshdo-events-dev:$SHORT_SHA']
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['beta', 'run', 'deploy', 'geshdo-events-dev', '--region=europe-west3', '--platform=managed', '--image=gcr.io/geshdo-events-dev/geshdo-events-dev:$SHORT_SHA']
+
