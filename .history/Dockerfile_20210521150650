@@ -34,7 +34,7 @@ WORKDIR /app
 
 ENV ASPNETCORE_ENVIRONMENT Production
 ENV ASPNETCORE_URLS http://+:8080
-EXPOSE 8080 
+EXPOSE 8000 
 
 # copy .net content
 COPY --from=buildnet /dist .
